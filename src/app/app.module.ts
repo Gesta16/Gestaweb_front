@@ -10,7 +10,7 @@ import { SuperadminModule } from './superadmin/superadmin.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
