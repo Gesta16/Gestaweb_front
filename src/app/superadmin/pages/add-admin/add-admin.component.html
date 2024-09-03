@@ -1,50 +1,58 @@
 <!-- Diseño de la vista para 'añadir un Admin' -->
 <div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+    <div class="bg-white rounded-lg w-[90%] md:w-[70%] lg:w-[45%] p-6">
+        <h2 class="text-xl font-bold mb-4 text-center mt-4">Formulario de Registro</h2>
 
-    <h2 class="text-xl font-bold mb-4">Formulario de Registro</h2>
-    <div class="bg-white rounded-lg shadow-lg w-[50%] p-3">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
 
-        <div class="grid grid-cols-2 gap-4 mt-4">
-
+            <!-- IPS -->
+            <div class="mb-4">
+                <label for="tipoDocumento" class="ml-[15%] block text-sm font-medium text-gray-700">Nombre IPS</label>
+                <select id="tipoDocumento" name="tipoDocumento"
+                    class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    <option value="" disabled selected>Seleccione</option>
+                </select>
+            </div>
+            
             <!-- Tipo de documento -->
             <div class="mb-4">
-                <label for="email" class="ml-[15%] block text-sm font-medium text-gray-700">Tipo de documento</label>
-                <input type="email" id="email" name="email"
+                <label for="tipoDocumento" class="ml-[15%] block text-sm font-medium text-gray-700">Tipo documento</label>
+                <input type="text" id="tipoDocumento" name="tipoDocumento"
                     class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
             </div>
 
             <!-- N° documento -->
             <div class="mb-4">
-                <label for="password" class="ml-[15%] block text-sm font-medium text-gray-700">N° documento</label>
-                <input type="password" id="password" name="password"
+                <label for="numeroDocumento" class="ml-[15%] block text-sm font-medium text-gray-700">N° documento</label>
+                <input type="text" id="numeroDocumento" name="numeroDocumento"
                     class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
             </div>
 
             <!-- Nombre -->
             <div class="mb-4">
-                <label for="password" class="ml-[15%] block text-sm font-medium text-gray-700">Nombre</label>
-                <input type="password" id="password" name="password"
+                <label for="nombre" class="ml-[15%] block text-sm font-medium text-gray-700">Nombre</label>
+                <input type="text" id="nombre" name="nombre"
                     class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
             </div>
 
             <!-- Apellido -->
             <div class="mb-4">
-                <label for="password" class="ml-[15%] block text-sm font-medium text-gray-700">Apellido</label>
-                <input type="password" id="password" name="password"
+                <label for="apellido" class="ml-[15%] block text-sm font-medium text-gray-700">Apellido</label>
+                <input type="text" id="apellido" name="apellido"
                     class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
             </div>
 
             <!-- Email -->
             <div class="mb-4">
-                <label for="password" class="ml-[15%] block text-sm font-medium text-gray-700">E-mail</label>
-                <input type="password" id="password" name="password"
+                <label for="email" class="ml-[15%] block text-sm font-medium text-gray-700">E-mail</label>
+                <input type="email" id="email" name="email"
                     class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
             </div>
 
             <!-- Teléfono -->
             <div class="mb-4">
-                <label for="password" class="ml-[15%] block text-sm font-medium text-gray-700">Teléfono</label>
-                <input type="password" id="password" name="password"
+                <label for="telefono" class="ml-[15%] block text-sm font-medium text-gray-700">Teléfono</label>
+                <input type="text" id="telefono" name="telefono"
                     class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
             </div>
 
@@ -55,12 +63,12 @@
                     class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
             </div>
         </div>
+
         <!-- Botones -->
-        <div class="flex justify-end">
-            <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2"
-                [routerLink]="['/list-admin']">Cancelar </button>
-            <button type="submit"
-                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Guardar</button>
+        <div class="flex justify-end mt-6">
+            <button type="button" class="bg-[#80BA27] hover:bg-[#7cb02d] text-white font-bold py-2 px-4 rounded mr-2"
+                (click)="cerrar()">Cancelar</button>
+            <button type="submit" class="bg-[#00ACC9] hover:bg-[#0194ad] text-white font-bold py-2 px-4 rounded">Guardar</button>
         </div>
     </div>
 </div>

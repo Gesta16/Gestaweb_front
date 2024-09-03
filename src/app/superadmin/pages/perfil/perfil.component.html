@@ -1,2 +1,59 @@
 <!-- Diseño del perfil -->
-<p>perfil works!</p>
+<div class="fixed inset-0 flex items-center justify-center ">
+    <div class="bg-white rounded-lg w-[90%] md:w-[70%] lg:w-[45%] p-6 border shadow-lg">
+        <h2 class="text-xl font-bold mb-4 text-center mt-4">Perfil</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+
+            <!-- N° documento -->
+            <div class="mb-4">
+                <label for="numeroDocumento" class="ml-[15%] block text-sm font-medium text-gray-700">N° documento</label>
+                <input type="text" id="numeroDocumento" name="numeroDocumento"
+                    class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <!-- Nombre -->
+            <div class="mb-4">
+                <label for="nombre" class="ml-[15%] block text-sm font-medium text-gray-700">Nombre</label>
+                <input type="text" id="nombre" name="nombre"
+                    class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <!-- Apellido -->
+            <div class="mb-4">
+                <label for="apellido" class="ml-[15%] block text-sm font-medium text-gray-700">Apellido</label>
+                <input type="text" id="apellido" name="apellido"
+                    class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <!-- Email -->
+            <div class="mb-4">
+                <label for="email" class="ml-[15%] block text-sm font-medium text-gray-700">E-mail</label>
+                <input type="email" id="email" name="email"
+                    class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <!-- Teléfono -->
+            <div class="mb-4">
+                <label for="telefono" class="ml-[15%] block text-sm font-medium text-gray-700">Teléfono</label>
+                <input type="text" id="telefono" name="telefono"
+                    class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <!-- Contraseña -->
+            <div class="mb-4">
+                <label for="password" class="ml-[15%] block text-sm font-medium text-gray-700">Contraseña</label>
+                <input type="password" id="password" name="password"
+                    class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="flex justify-end mt-6">
+            <button type="button" class="bg-[#80BA27] hover:bg-[#7cb02d] text-white font-bold py-2 px-4 rounded mr-2"
+                >Cancelar</button>
+            <button type="submit" class="bg-[#00ACC9] hover:bg-[#0194ad] text-white font-bold py-2 px-4 rounded">Editar</button>
+        </div>
+    </div>
+</div>
+

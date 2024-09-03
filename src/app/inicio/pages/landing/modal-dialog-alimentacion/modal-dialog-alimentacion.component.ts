@@ -7,7 +7,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
   standalone: true,
   imports: [],
   templateUrl: './modal-dialog-alimentacion.component.html',
-  styleUrl: './modal-dialog-alimentacion.component.scss'
+  styleUrl: './modal-dialog-alimentacion.component.css'
 })
 export class ModalDialogAlimentacionComponent {
   constructor(public _matDialogRef: MatDialogRef<ModalDialogAlimentacionComponent>, @Inject(MAT_DIALOG_DATA) public data:any){

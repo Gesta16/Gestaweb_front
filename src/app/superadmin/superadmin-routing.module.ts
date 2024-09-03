@@ -16,7 +16,7 @@ const routes:Routes = [
       {path: 'dashboard', component:DashboardComponent, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'list-admin', component: ListAdminComponent, data: { title: 'Administradores', icon: 'fa-solid fa-chart-pie', showInMenu: true}},
       {path: 'list-superadmin', component: ListSuperadminComponent,data: { title: 'Superadmin', icon: 'fa-solid fa-chart-pie', showInMenu: true}},
-      {path: 'Perfil-superadmin', component: PerfilComponent,data: { title: 'Perfil', icon: 'fa-solid fa-user', showInMenu: true}},
+      {path: 'perfil-superadmin', component: PerfilComponent,data: { title: 'Perfil', icon: 'fa-solid fa-user', showInMenu: true}},
       {path: 'add-admin', component:AddAdminComponent}, // Sirve para ver la vista para crear un admin
     ]
   }
