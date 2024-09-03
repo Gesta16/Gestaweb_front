@@ -7,8 +7,6 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrl: './add-super-admin.component.scss'
 })
 export class AddSuperAdminComponent {
-
-
   constructor(public dialogRef: MatDialogRef<AddSuperAdminComponent>) {}
 
   close(): void {

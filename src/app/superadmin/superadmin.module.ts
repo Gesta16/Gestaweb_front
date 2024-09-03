@@ -11,6 +11,9 @@ import { ListSuperadminComponent } from './pages/list-superadmin/list-superadmin
 import { ListIpsComponent } from './pages/list-ips/list-ips.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { AddAdminComponent } from './pages/add-admin/add-admin.component';
+import { AddIpsComponent } from './pages/add-ips/add-ips.component';
+import { ListOperadoresComponent } from './pages/list-operadores/list-operadores.component';
+import { AddOperadoresComponent } from './pages/add-operadores/add-operadores.component';
 
 
 
@@ -23,6 +26,9 @@ import { AddAdminComponent } from './pages/add-admin/add-admin.component';
     ListIpsComponent,
     PerfilComponent,
     AddAdminComponent,
+    AddIpsComponent,
+    ListOperadoresComponent,
+    AddOperadoresComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,51 @@
+<!-- Diseño de modal para registrar ips -->
+
+<div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+    <div class="bg-white rounded-lg shadow-lg w-96 p-6">
+      <h2 class="text-xl font-bold mb-4">Formulario de Registro</h2>
+      
+      <form>
+        <!-- Código de habilitación -->
+        <div class="mb-4">
+          <label for="codigo" class="block text-sm font-medium text-gray-700">Código de habilitación</label>
+          <input type="text" id="codigo" name="codigo" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+  
+        <!-- Nombre IPS -->
+        <div class="mb-4">
+          <label for="nombre_ips" class="block text-sm font-medium text-gray-700">Nombre IPS</label>
+          <input type="text" id="nombre_ips" name="nombre_ips" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+  
+        <!-- Departamento -->
+        <div class="mb-4">
+          <label for="departamento" class="block text-sm font-medium text-gray-700">Departamento</label>
+          <input type="tel" id="departamento" name="departamento" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+  
+        <!-- Municipio -->
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium text-gray-700">Municipio</label>
+          <input type="email" id="email" name="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+  
+        <!-- Dirección -->
+        <div class="mb-4">
+          <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección</label>
+          <input type="direccion" id="direccion" name="direccion" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        
+        <!-- Teléfono -->
+        <div class="mb-4">
+          <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+          <input type="telefono" id="telefono" name="telefono" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+  
+        <!-- Botones -->
+        <div class="flex justify-end">
+          <button type="button" class="bg-[#80BA27] hover:bg-[#7cb02d] text-white font-bold py-2 px-4 rounded mr-2" (click)="cerrar()">Cancelar</button>
+          <button type="submit" class="bg-[#00ACC9] hover:bg-[#0194ad] text-white font-bold py-2 px-4 rounded">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
