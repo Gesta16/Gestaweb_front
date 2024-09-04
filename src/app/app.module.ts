@@ -7,10 +7,13 @@ import { AuthModule } from './auth/auth.module';
 import { InicioModule } from './inicio/inicio.module';
 import { OperarioModule } from './operario/operario.module';
 import { SuperadminModule } from './superadmin/superadmin.module';
+import { MenuComponent } from './menu/menu.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
