@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { AddSuperAdminComponent } from './pages/add-super-admin/add-super-admin.component';
+
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ListSuperadminComponent } from './pages/list-superadmin/list-superadmin.component';
 import { ListAdminComponent } from './pages/list-admin/list-admin.component';
 import { ListIpsComponent } from './pages/list-ips/list-ips.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
-import { AddAdminComponent } from './pages/add-admin/add-admin.component';
 import { ListOperadoresComponent } from './pages/list-operadores/list-operadores.component';
 
 const routes:Routes = [

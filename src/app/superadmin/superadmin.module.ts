@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 
-import { AddSuperAdminComponent } from './pages/add-super-admin/add-super-admin.component';
 import { SuperadminRoutingModule } from './superadmin-routing.module';
+import { AddSuperAdminComponent } from './pages/add-super-admin/add-super-admin.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ListAdminComponent } from './pages/list-admin/list-admin.component';
 import { ListSuperadminComponent } from './pages/list-superadmin/list-superadmin.component';

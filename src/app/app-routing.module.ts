@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: () => import('./superadmin/superadmin.module').then(m => m.SuperadminModule)
   },
   {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  },
+  {
     path: 'operario',
     loadChildren:() => import('./operario/operario.module').then(m => m.OperarioModule)
   },
