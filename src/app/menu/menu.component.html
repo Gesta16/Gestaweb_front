@@ -1,7 +1,7 @@
 <!-- Diseño del menú -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<nav class="sidebar relative h-screen flex flex-col shadow-xl p-4 bg-white" [ngClass]="{ 'w-56': isExpanded, 'w-24': !isExpanded }"
+<nav class="sidebar relative h-screen flex flex-col shadow-xl p-4 bg-white" [ngClass]="{ 'w-56': isExpanded, 'w-24': !isExpanded }" *ngIf="isAuthenticated"
     style="background-image: url('assets/images/menu/menu4.jpg'); background-repeat: no-repeat; background-size: cover;">
 
     <!-- Capa de color que va encima de la imagen -->
