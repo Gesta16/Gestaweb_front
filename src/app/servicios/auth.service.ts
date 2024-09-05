@@ -18,4 +18,8 @@ export class AuthService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<LoginResponse>(this.url+"/login", request, { headers });
   }
+
+  isAuthenticated(): boolean {
+    return !!sessionStorage.getItem('token');
+  }
 }
