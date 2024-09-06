@@ -5,90 +5,99 @@
     <h4 class="text-lg md:text-xl font-semibold mt-2 relative">Perfil SuperAdministrador</h4>
 </div>
 
-<span id="blackOverlay" class="w-full h-[30%] absolute bg-[#54BFEF] opacity-30 z-0"></span>
+<div class="bg-[#d8f5fd] w-[80rem] h-[30rem] p-4 mt-[8%] ml-[10%] rounded-lg flex items-center space-x-6">
+    <div class="absolute ml-[10%] w-[80rem] h-[30rem] flex items-center space-x-6">
+        <div class="bg-white rounded-lg w-[90%] md:w-[60%] lg:w-[30%] p-2 border shadow-lg ">
 
-<div class="fixed inset-0 flex items-center justify-center min-h-screen space-x-6 p-4">
-    <div class="bg-white rounded-lg w-[90%] md:w-[60%] lg:w-[30%] p-2 border shadow-lg z-10">
-        
-        <!-- Diseño de Información personal -->
-        <h2 class="text-xl font-bold mb-4 text-center mt-4">Información personal</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-[50px]">
+            <!-- Diseño de Información personal -->
+            <h2 class="text-xl font-bold mb-4 text-center mt-4">Información personal</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-[50px]">
 
-            <!-- Tipo de documento -->
-            <div class="mb-4">
-                <label for="tipoDocumento" class="ml-[15%] block text-sm font-medium text-gray-700">Tipo de documento</label>
-                <input type="text" id="tipoDocumento" name="tipoDocumento"
-                    class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" disabled>
-            </div>
-            
-            <!-- N° documento -->
-            <div class="mb-4">
-                <label for="numeroDocumento" class="ml-[15%] block text-sm font-medium text-gray-700">N° documento</label>
-                <input type="text" id="numeroDocumento" name="numeroDocumento"
-                    class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" disabled>
-            </div>
+                <!-- Tipo de documento -->
+                <div class="mb-4">
+                    <label for="tipoDocumento" class="ml-[15%] block text-sm font-medium text-gray-700">Tipo de
+                        documento</label>
+                    <input type="text" id="tipoDocumento" name="tipoDocumento"
+                        class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                        disabled>
+                </div>
 
-            <!-- Nombre -->
-            <div class="mb-4">
-                <label for="nombre" class="ml-[15%] block text-sm font-medium text-gray-700">Nombre</label>
-                <input type="text" id="nombre" name="nombre"
-                    class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-            </div>
+                <!-- N° documento -->
+                <div class="mb-4">
+                    <label for="numeroDocumento" class="ml-[15%] block text-sm font-medium text-gray-700">N°
+                        documento</label>
+                    <input type="text" id="numeroDocumento" name="numeroDocumento"
+                        class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                        disabled>
+                </div>
 
-            <!-- Apellido -->
-            <div class="mb-4">
-                <label for="apellido" class="ml-[15%] block text-sm font-medium text-gray-700">Apellido</label>
-                <input type="text" id="apellido" name="apellido"
-                    class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-            </div>
+                <!-- Nombre -->
+                <div class="mb-4">
+                    <label for="nombre" class="ml-[15%] block text-sm font-medium text-gray-700">Nombre</label>
+                    <input type="text" id="nombre" name="nombre"
+                        class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
 
-            <!-- Email -->
-            <div class="mb-4">
-                <label for="email" class="ml-[15%] block text-sm font-medium text-gray-700">E-mail</label>
-                <input type="email" id="email" name="email"
-                    class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-            </div>
+                <!-- Apellido -->
+                <div class="mb-4">
+                    <label for="apellido" class="ml-[15%] block text-sm font-medium text-gray-700">Apellido</label>
+                    <input type="text" id="apellido" name="apellido"
+                        class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
 
-            <!-- Teléfono -->
-            <div class="mb-4">
-                <label for="telefono" class="ml-[15%] block text-sm font-medium text-gray-700">Teléfono</label>
-                <input type="text" id="telefono" name="telefono"
-                    class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <!-- Email -->
+                <div class="mb-4">
+                    <label for="email" class="ml-[15%] block text-sm font-medium text-gray-700">E-mail</label>
+                    <input type="email" id="email" name="email"
+                        class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Teléfono -->
+                <div class="mb-4">
+                    <label for="telefono" class="ml-[15%] block text-sm font-medium text-gray-700">Teléfono</label>
+                    <input type="text" id="telefono" name="telefono"
+                        class="mx-auto mt-1 block w-[70%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Diseño de Restablecer contraseña -->
-    <div class="bg-white rounded-lg w-[30%] md:w-[30%] lg:w-[25%] p-2 border shadow-lg z-10">
-        <h2 class="text-xl font-bold mb-4 text-center mt-4">Restablecer Contraseña</h2>
+        <!-- Diseño de Restablecer contraseña -->
+        <div class="bg-white rounded-lg w-[30%] md:w-[30%] lg:w-[25%] p-2 border shadow-lg z-10">
+            <h2 class="text-xl font-bold mb-4 text-center mt-4">Restablecer Contraseña</h2>
 
-        <div class="mt-[11%]">
-            <!-- Contraseña -->
-            <div class="mb-[32px]">
-                <label for="password" class="ml-[25%] block text-sm font-medium text-gray-700">Contraseña</label>
-                <input type="password" id="password" name="password"
-                    class="mx-auto mt-1 block w-[50%] py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" disabled>
-            </div>
-            
-            <!-- Nueva contraseña -->
-            <div class="mb-[30px]">
-                <label for="nuevaContraseña" class="ml-[25%] block text-sm font-medium text-gray-700">Nueva contraseña</label>
-                <input type="password" id="nuevaContraseña" name="nuevaContraseña"
-                    class="mx-auto mt-1 block w-[50%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" disabled>
-            </div>
+            <div class="mt-[11%]">
+                <!-- Contraseña -->
+                <div class="mb-[32px]">
+                    <label for="password" class="ml-[25%] block text-sm font-medium text-gray-700">Contraseña</label>
+                    <input type="password" id="password" name="password"
+                        class="mx-auto mt-1 block w-[50%] py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                        disabled>
+                </div>
 
-            <!-- Confirmar contraseña -->
-            <div class="mb-4">
-                <label for="confContraseña" class="ml-[25%] block text-sm font-medium text-gray-700">Confirmar contraseña</label>
-                <input type="password" id="confContraseña" name="confContraseña"
-                    class="mx-auto mt-1 block w-[50%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" disabled>
+                <!-- Nueva contraseña -->
+                <div class="mb-[30px]">
+                    <label for="nuevaContraseña" class="ml-[25%] block text-sm font-medium text-gray-700">Nueva
+                        contraseña</label>
+                    <input type="password" id="nuevaContraseña" name="nuevaContraseña"
+                        class="mx-auto mt-1 block w-[50%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                        disabled>
+                </div>
+
+                <!-- Confirmar contraseña -->
+                <div class="mb-4">
+                    <label for="confContraseña" class="ml-[25%] block text-sm font-medium text-gray-700">Confirmar
+                        contraseña</label>
+                    <input type="password" id="confContraseña" name="confContraseña"
+                        class="mx-auto mt-1 block w-[50%] px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                        disabled>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Botones -->
-    <div class="absolute mt-[30%] transform -translate-y-[-50px] lg:mt-[20%]">
-        <button type="submit" class="bg-[#00ACC9] hover:bg-[#0194ad] text-white font-bold py-2 px-4 rounded">Editar</button>
+    <div class="absolute mt-[30%] transform -translate-y-[-50px] lg:mt-[24%] pl-[28%]">
+        <button type="submit"
+            class="bg-[#00ACC9] hover:bg-[#0194ad] text-white font-bold py-2 px-4 rounded">Editar</button>
     </div>
-    
 </div>

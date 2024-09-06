@@ -50,16 +50,16 @@ export class LoginComponent {
         if (this.currentRolId) {
           switch (this.currentRolId) {
             case '1':
-              this.router.navigate(['landing']);
+              this.router.navigate(['dashboard']);
               break;
             case '2':
-              this.router.navigate(['landing']);
+              this.router.navigate(['dashboard']);
               break;
             case '3':
-              this.router.navigate(['landing']);
+              this.router.navigate(['dashboard']);
               break;
             case '4':
-              this.router.navigate(['landinghome']);
+              this.router.navigate(['dashboard']);
               break;
             default:
               this.router.navigate(['home']);
