@@ -33,7 +33,7 @@ import { AddOperadoresComponent } from './pages/add-operadores/add-operadores.co
   imports: [
     CommonModule,
     RouterModule,
-    SuperadminRoutingModule
+    SuperadminRoutingModule,
   ]
 })
 export class SuperadminModule { }
