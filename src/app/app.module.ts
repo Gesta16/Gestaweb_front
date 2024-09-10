@@ -8,6 +8,7 @@ import { InicioModule } from './inicio/inicio.module';
 import { OperarioModule } from './operario/operario.module';
 import { SuperadminModule } from './superadmin/superadmin.module';
 import { AdminModule } from './admin/admin.module';
+import { SharedModule } from './shared.module';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -16,7 +17,7 @@ import { MenuComponent } from './menu/menu.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +28,7 @@ import { MenuComponent } from './menu/menu.component';
     OperarioModule,
     SuperadminModule,
     AdminModule,
+    SharedModule,
   ],
   providers: [
     provideClientHydration(),
