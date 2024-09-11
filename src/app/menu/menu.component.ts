@@ -16,11 +16,12 @@ export class MenuComponent {
   currentRolId: string | null = "";
   user: User | null = null;
   currentRolName: string | null = "";
-  isAuthenticated: boolean = true;
+  isAuthenticated: boolean = false;
+  
 
   constructor(
-    private authService:AuthService
-  ) {}
+    private authService: AuthService
+  ) { }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
@@ -29,21 +30,32 @@ export class MenuComponent {
 
   toggleSidebar() {
     this.isExpanded = !this.isExpanded;
+    if (typeof window !== 'undefined' && localStorage) {
+      localStorage.setItem('isMenuExpanded', this.isExpanded.toString());
+    }
   }
 
   ngOnInit() {
     this.checkIfMobile();
     this.validateToken();
-    if(typeof window !== "undefined"){
-      this.isAuthenticated = this.authService.isAuthenticated();
 
+    if (typeof window !== 'undefined' && localStorage) {
+      const savedState = localStorage.getItem('isMenuExpanded');
+      if (savedState !== null) {
+        this.isExpanded = savedState === 'true';
+      }
+    }
+
+    if (typeof window !== "undefined") {
+      this.isExpanded = true;
+      this.isAuthenticated = this.authService.isAuthenticated();
     }
   }
 
   validateToken(): void {
-    if(typeof window !== "undefined"){
+    if (typeof window !== "undefined") {
       this.token = sessionStorage.getItem("token");
-  
+
       if (this.token) {
         const identityJSON = sessionStorage.getItem('identity');
         if (identityJSON) {
@@ -54,8 +66,11 @@ export class MenuComponent {
           console.log(this.currentRolName);
         }
       }
-
+      this.isAuthenticated = true;
+    } else {
+      this.isAuthenticated = false;
     }
+
   }
 
   checkIfMobile(): boolean {

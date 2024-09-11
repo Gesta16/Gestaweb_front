@@ -30,7 +30,7 @@
     height: 0;
     border-top: 30px solid transparent; /* Tamaño del triángulo */
     border-bottom: 32px solid transparent; /* Tamaño del triángulo */
-    border-left: 20px solid #877363; /* Color del triángulo */
+    border-left: 20px solid #ea7c89; /* Color del triángulo */
 }
 /* Fin de los estilos del tirangulo */
 
@@ -85,5 +85,23 @@
     border-top: 30px solid transparent; /* Tamaño del triángulo */
     border-bottom: 32px solid transparent; /* Tamaño del triángulo */
     border-left: 20px solid #2E6B9C; /* Color del triángulo */
+}
+/* Fin de los estilos del tirangulo */
+
+/* Inicio de los estilos del tirangulo6 */
+.custom-triangle6 {
+    position: relative;
+}
+
+.custom-triangle6::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: -20px; /* Posición del triangulo */
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent; /* Tamaño del triángulo */
+    border-bottom: 32px solid transparent; /* Tamaño del triángulo */
+    border-left: 20px solid #E5AE41; /* Color del triángulo */
 }
 /* Fin de los estilos del tirangulo */

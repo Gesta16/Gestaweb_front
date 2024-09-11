@@ -1,9 +1,26 @@
-<div class="relative p-2 text-center bg-[#E8F6FD]  h-[7%] mt-[4rem]">
-    <!-- Imagen en la esquina superior izquierda -->
-    <img src="../../../../assets/images/inicio/log_ucc.png" alt="Imagen"
-        class="absolute w-[12%] h-[100%]  ml-8 mt-[-8px]">
-    <!-- Título ajustado verticalmente -->
-    <div class="text-center text-sky-500 font-bold mt-2 text-sm sm:text-base">
-        {{ subtitle }}
+<div class="w-full bg-[#00ACC9] h-[5rem] mr-[80%] z-30 fixed top-0 left-0">
+    <div class="relative p-2 text-center ml-[-1.5%] h-full flex ">
+        <!-- Imagen en la esquina superior izquierda -->
+        <img src="../../../../assets/images/header/ucc_white.png" alt="Imagen"
+            class="absolute ml-8 mt-[-8px] w-[11%] h-[78%]">
+
+        <!-- Input de buscar -->
+        <div class="relative ml-[19%] max-w-full md:max-w-md mt-4 md:mt-[10px] lg:max-w-xs">
+            <span class="absolute left-[85%] top-5 transform -translate-y-1/2 text-gray-500">
+                <i class="fa-solid fa-magnifying-glass" style="color: #00ACC9; "></i>
+            </span>
+            <input type="text" class="w-full h-10 pl-5 pr-5 rounded-xl focus:outline-none ">
+        </div>
+
+        <div class="ml-[55%] flex items-center space-x-12">
+            <i class="fa-regular fa-bell fa-xl cursor-pointer" style="color: #ffffff;"></i>
+            <button
+                class="h-10 bg-white text-[#00ACC9] py-2 px-4 rounded-xl hover:bg-[#f6f6f6] focus:outline-none">
+                Cerrar sesión
+            </button>
+        </div>
     </div>
+</div>
+<div class="text-center font-bold mt-2 text-sm sm:text-base">
+    {{ subtitle }}
 </div>

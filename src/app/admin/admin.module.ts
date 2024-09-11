@@ -7,7 +7,7 @@ import { PerfilAdminComponent } from './pages/perfil-admin/perfil-admin.componen
 import { ListUsuariosComponent } from './pages/list-usuarios/list-usuarios.component';
 import { RutaGestanteComponent } from './pages/ruta-gestante/ruta-gestante.component';
 
-
+import { SharedModule } from '../shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import { RutaGestanteComponent } from './pages/ruta-gestante/ruta-gestante.compo
   imports: [
     CommonModule,
     RouterModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    SharedModule
   ]
 })
 export class AdminModule { }
