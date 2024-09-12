@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent {
+  isEditing: boolean = false;
+
+  toggleEdit() {
+    this.isEditing = !this.isEditing;
+  }
 
 }
