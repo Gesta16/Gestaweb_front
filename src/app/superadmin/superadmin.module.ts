@@ -41,6 +41,7 @@ import { AdminService } from '../servicios/admin.service';
     CommonModule,
     FormsModule,
     RouterModule,
+    SharedModule,
     SuperadminRoutingModule,
     MatDialogModule
   ],
