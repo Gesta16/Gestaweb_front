@@ -1,45 +1,99 @@
-<!-- Diseño de la modal para 'añadir un operador' -->
+<!-- Diseño del modal para 'añadir un operador' -->
 <div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-    <div class="bg-white rounded-lg shadow-lg w-96 p-6">
-      <h2 class="text-xl font-bold mb-4 text-center">Formulario de Registro</h2>
-      
-      <form>
+  <div class="bg-white rounded-lg shadow-lg w-[90%] md:w-[70%] lg:w-[45%] p-6">
+    <h2 class="text-xl font-bold mb-4 text-center">Formulario de Registro de Operador</h2>
+    
+    <form (ngSubmit)="onSubmit()">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        
+        <!-- ID Operador -->
+        <div class="mb-4">
+          <label for="id_operador" class="ml-[15%] block text-sm font-medium text-gray-700">ID Operador</label>
+          <input type="text" id="id_operador" name="id_operador" [(ngModel)]="operador.id_operador"
+            class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+        </div>
+
+        <!-- ID Admin -->
+        <div class="mb-4">
+          <label for="id_admin" class="ml-[15%] block text-sm font-medium text-gray-700">ID Admin</label>
+          <select type="text" id="id_admin" name="id_admin" [(ngModel)]="operador.id_admin"
+            class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+            <option *ngFor="let admin of listAdmin" [value]="admin.id_admin">
+              {{admin.nom_admin}}
+            </option>
+          </select>
+        </div>
+
+        <!-- Código IPS -->
+        <div class="mb-4">
+          <label for="cod_ips" class="ml-[15%] block text-sm font-medium text-gray-700">Código IPS</label>
+          <select id="cod_ips" name="cod_ips" [(ngModel)]="operador.cod_ips"
+            class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+            <option *ngFor="let ips of listIps" [value]="ips.cod_ips">
+              {{ips.nom_ips}}
+            </option>
+          </select>
+        </div>
+
         <!-- Nombre -->
         <div class="mb-4">
-          <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-          <input type="text" id="nombre" name="nombre" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+          <label for="nom_operador" class="ml-[15%] block text-sm font-medium text-gray-700">Nombre</label>
+          <input type="text" id="nom_operador" name="nom_operador" [(ngModel)]="operador.nom_operador"
+            class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
         </div>
-  
+
         <!-- Apellido -->
         <div class="mb-4">
-          <label for="apellido" class="block text-sm font-medium text-gray-700">Apellido</label>
-          <input type="text" id="apellido" name="apellido" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+          <label for="ape_operador" class="ml-[15%] block text-sm font-medium text-gray-700">Apellido</label>
+          <input type="text" id="ape_operador" name="ape_operador" [(ngModel)]="operador.ape_operador"
+            class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
         </div>
-  
+
         <!-- Teléfono -->
         <div class="mb-4">
-          <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
-          <input type="tel" id="telefono" name="telefono" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+          <label for="tel_operador" class="ml-[15%] block text-sm font-medium text-gray-700">Teléfono</label>
+          <input type="tel" id="tel_operador" name="tel_operador" [(ngModel)]="operador.tel_operador"
+            class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
         </div>
-  
+
         <!-- Email -->
         <div class="mb-4">
-          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-          <input type="email" id="email" name="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+          <label for="email_operador" class="ml-[15%] block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="email_operador" name="email_operador" [(ngModel)]="operador.email_operador"
+            class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
         </div>
-  
-        <!-- Contraseña -->
+
+        <!-- Especialidad -->
         <div class="mb-4">
-          <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-          <input type="password" id="password" name="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+          <label for="esp_operador" class="ml-[15%] block text-sm font-medium text-gray-700">Especialidad</label>
+          <input type="text" id="esp_operador" name="esp_operador" [(ngModel)]="operador.esp_operador"
+            class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
         </div>
-  
-        <!-- Botones -->
-        <div class="flex justify-end">
-          <button type="button" class="bg-[#80BA27] hover:bg-[#7cb02d] text-white font-bold py-2 px-4 rounded mr-2" (click)="close()">Cancelar</button>
-          <button type="submit" class="bg-[#00ACC9] hover:bg-[#0194ad] text-white font-bold py-2 px-4 rounded">Guardar</button>
+
+        <!-- Tipo de documento -->
+        <div class="mb-4">
+          <label for="tipoDocumento" class="ml-[15%] block text-sm font-medium text-gray-700">Tipo de documento</label>
+          <select id="tipoDocumento" name="tipoDocumento" [(ngModel)]="operador.cod_documento"
+            class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+            <option *ngFor="let tipo of listTipoDocumentos" [value]="tipo.cod_documento">
+              {{ tipo.nom_documento }}
+            </option>
+          </select>
         </div>
-      </form>
-    </div>
+
+        <!-- Documento -->
+        <div class="mb-4">
+          <label for="documento_operador" class="ml-[15%] block text-sm font-medium text-gray-700">Documento</label>
+          <input type="text" id="documento_operador" name="documento_operador" [(ngModel)]="operador.documento_operador"
+            class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="flex justify-end mt-6">
+        <button type="button" class="bg-[#80BA27] hover:bg-[#7cb02d] text-white font-bold py-2 px-4 rounded mr-2" (click)="cerrar()">Cancelar</button>
+        <button type="submit" class="bg-[#00ACC9] hover:bg-[#0194ad] text-white font-bold py-2 px-4 rounded">Guardar</button>
+      </div>
+    </form>
   </div>
-  
+</div>

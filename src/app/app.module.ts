@@ -12,6 +12,8 @@ import { AdminModule } from './admin/admin.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { MenuComponent } from './menu/menu.component';
     OperarioModule,
     SuperadminModule,
     AdminModule,
+    ReactiveFormsModule,
   ],
   providers: [
     provideClientHydration(),

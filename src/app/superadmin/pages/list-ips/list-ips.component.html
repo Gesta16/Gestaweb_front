@@ -45,24 +45,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 h-[-20rem]">
+                <tr *ngFor="let ips of ips" class="border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 h-[-20rem]">
                     <td class="px-6 py-4">213254162541</td>
-                    <td class="px-6 py-4">IPS1</td>
-                    <td class="px-6 py-4">Santander</td>
+                    <td>{{ ips.nom_ips }}</td>
+                    <td>{{ getDepartamentoNombre(ips.cod_departamento) }}</td>
                     <td class="px-6 py-4">Bucaramanga</td>
-                    <td class="px-6 py-4">dir ejemplo 13</td>
-                    <td class="px-8 py-4">6402659</td>
-                    <td class="px-12 py-4">
-                        <i class="fa-solid fa-toggle-off fa-xl" style="color: #000000;"></i>
-                    </td>
-                </tr>
-                <tr class="border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 h-[-20rem]">
-                    <td class="px-6 py-4">213254162541</td>
-                    <td class="px-6 py-4">IPS2</td>
-                    <td class="px-6 py-4">Santander</td>
-                    <td class="px-6 py-4">Bucaramanga</td>
-                    <td class="px-6 py-4">dir ejemplo 13</td>
-                    <td class="px-8 py-4">6402659</td>
+                    <td>{{ ips.dir_ips }}</td>
+                    <td>{{ ips.tel_ips }}</td>
                     <td class="px-12 py-4">
                         <i class="fa-solid fa-toggle-off fa-xl" style="color: #000000;"></i>
                     </td>

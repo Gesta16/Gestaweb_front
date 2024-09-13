@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 
@@ -14,6 +15,10 @@ import { AddAdminComponent } from './pages/add-admin/add-admin.component';
 import { AddIpsComponent } from './pages/add-ips/add-ips.component';
 import { ListOperadoresComponent } from './pages/list-operadores/list-operadores.component';
 import { AddOperadoresComponent } from './pages/add-operadores/add-operadores.component';
+
+import { SuperAdminService } from '../servicios/super-admin.service';
+import { AdminService } from '../servicios/admin.service'; 
+
 
 
 
@@ -32,8 +37,14 @@ import { AddOperadoresComponent } from './pages/add-operadores/add-operadores.co
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule,
-    SuperadminRoutingModule
+    SuperadminRoutingModule,
+    MatDialogModule
+  ],
+  providers: [
+    SuperAdminService,
+    AdminService 
   ]
 })
 export class SuperadminModule { }
