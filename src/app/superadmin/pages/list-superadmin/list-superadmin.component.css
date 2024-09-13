@@ -1,0 +1,13 @@
+/* Añade bordes redondeados solo al encabezado de la tabla */
+.rounded-thead {
+    border-radius: 0..6rem; 
+    overflow: hidden;
+}
+
+.rounded-thead th:first-child {
+    border-top-left-radius: 0.6rem;
+}
+
+.rounded-thead th:last-child {
+    border-top-right-radius: 0.6rem;
+}

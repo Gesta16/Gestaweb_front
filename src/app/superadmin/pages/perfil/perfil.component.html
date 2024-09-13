@@ -1,0 +1,119 @@
+<!-- Diseño del perfil -->
+<app-header></app-header>
+
+<div class="flex ml-[40%] px-[65px] mt-[8rem]">
+    <p class="font-bold text-3xl">Perfil</p>
+</div>
+
+<div class="w-[80rem] h-[30rem] p-4 mt-[4%] ml-[10%] rounded-lg flex items-center space-x-6">
+    <div class="absolute ml-[10%] w-[80rem] h-[30rem] flex items-center space-x-6">
+
+        <!-- Contenedor con imagen y nombre -->
+        <div class="bg-white rounded-lg w-[30%] h-full p-4 border shadow-lg flex flex-col items-center">
+            <!-- Imagen circular -->
+            <div class="w-[35%] h-[28%] bg-gray-200 rounded-full mb-12 mt-8">
+                <img src="../../../../assets/images/perfil/super.png" alt="Perfil"
+                    class="w-full h-full object-cover rounded-full">
+            </div>
+
+            <!-- Nombre -->
+            <h2 class="text-xl font-bold text-center">Nombre del usuario</h2>
+            <h2 class="text-xl font-bold text-center mt-2">Apellidos del usuario</h2>
+        </div>
+
+        <!-- Diseño de Información personal -->
+        <div class="bg-white rounded-lg w-[35%] h-full p-4 border shadow-lg flex flex-col justify-center">
+            <h2 class="text-xl font-bold mb-11 text-center mt-[-8%]">Información personal</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
+
+                <!-- Tipo de documento -->
+                <div class="mb-4">
+                    <label for="tipoDocumento" class="ml-[7%] text-sm font-medium text-gray-700">Tipo de
+                        documento</label>
+                    <input type="text" id="tipoDocumento" name="tipoDocumento"
+                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
+                        disabled>
+                </div>
+
+                <!-- N° documento -->
+                <div class="mb-4">
+                    <label for="numeroDocumento" class="ml-[7%] text-sm font-medium text-gray-700">N°
+                        documento</label>
+                    <input type="text" id="numeroDocumento" name="numeroDocumento"
+                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
+                        disabled>
+                </div>
+
+                <!-- Nombre -->
+                <div class="mb-4">
+                    <label for="nombre" class="ml-[7%] text-sm font-medium text-gray-700">Nombre</label>
+                    <input type="text" id="nombre" name="nombre"
+                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
+                </div>
+
+                <!-- Apellido -->
+                <div class="mb-4">
+                    <label for="apellido" class="ml-[7%] text-sm font-medium text-gray-700">Apellido</label>
+                    <input type="text" id="apellido" name="apellido"
+                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
+                </div>
+
+                <!-- Email -->
+                <div class="mb-4">
+                    <label for="email" class="ml-[7%] text-sm font-medium text-gray-700">E-mail</label>
+                    <input type="email" id="email" name="email"
+                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
+                </div>
+
+                <!-- Teléfono -->
+                <div class="mb-4">
+                    <label for="telefono" class="ml-[7%] text-sm font-medium text-gray-700">Teléfono</label>
+                    <input type="text" id="telefono" name="telefono"
+                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
+                </div>
+
+                <!-- Mostrar campos de contraseña solo cuando isEditing es verdadero -->
+                <div *ngIf="isEditing" class="col-span-2 grid grid-cols-2 gap-4"> 
+                    <!-- Nueva contraseña -->
+                    <div class="mb-0">
+                        <label for="newPassword" class="ml-[7%] text-sm font-medium text-gray-700">Nueva
+                            Contraseña</label>
+                        <input type="password" id="newPassword" name="newPassword"
+                            class="block w-[92%] mx-auto mt-2 px-3 ml-[6%] py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
+                    </div>
+
+                    <!-- Confirmar nueva contraseña -->
+                    <div class="mb-0">
+                        <label for="confirmPassword" class="ml-[3%] text-sm font-medium text-gray-700">Confirmar
+                            Contraseña</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword"
+                            class="block w-[92%] mx-auto ml-[2%] mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="absolute mt-[30%] transform -translate-y-[-50px] lg:mt-[25%] pl-[24%] space-x-7">
+        <!-- Mostrar botón Cancelar solo cuando se está editando -->
+        <button *ngIf="isEditing" (click)="toggleEdit()"
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            Cancelar
+        </button>
+
+        <!-- Mostrar los botones según el estado de edición -->
+        <button *ngIf="isEditing; else editButton" (click)="toggleEdit()"
+            class="bg-[#00ACC9] hover:bg-[#0194ad] text-white font-bold py-2 px-4 rounded">
+            Guardar
+        </button>
+
+        <!-- Botón de Editar -->
+        <ng-template #editButton>
+            <button (click)="toggleEdit()"
+                class="bg-[#00ACC9] hover:bg-[#0194ad] text-white font-bold py-2 px-4 rounded mr-[-90px] -translate-x-[-70px]">
+                Editar
+            </button>
+        </ng-template>
+    </div>
+</div>
