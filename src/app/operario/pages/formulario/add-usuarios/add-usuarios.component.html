@@ -1,5 +1,9 @@
-<p class="text-lg md:text-xl text-center font-semibold mb-4 mt-[6rem] uppercase">Datos de la afiliada</p>
+<!-- Llamado del encabezado -->
+<app-header></app-header>
 
+<p class="text-lg md:text-xl text-center font-semibold mb-6 mt-[12rem] uppercase">Datos de la afiliada</p>
+
+<!-- Diseño del formulario -->
 <div class="flex flex-wrap mt-5">
     <div class="w-3/6 justify-center mx-auto">
         <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer">
@@ -26,97 +30,112 @@
                     <!-- Primer Tab -->
                     <div [ngClass]="{'hidden': openTab !== 1, 'block': openTab === 1}">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                           
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Departamento de residencia</label>
-                                <select id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                     <option value="">Seleccione...</option>
                                 </select>
                             </div>
-                            
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Municipio de residencia</label>
-                                <select id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                     <option value="">Seleccione...</option>
                                 </select>
                             </div>
-                            
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Régimen</label>
-                                <select id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                     <option value="">Seleccione...</option>
                                 </select>
                             </div>
-                            
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Fecha de diagnóstico</label>
-                                <input type="date" id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <input type="date" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                             </div>
-                            
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Fecha de ingreso</label>
-                                <input type="date" id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <input type="date" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                             </div>
-                            
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Población diferencial</label>
-                                <select id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                     <option value="">Seleccione...</option>
                                 </select>
                             </div>
-                            
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Tipo de documento</label>
-                                <select id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                     <option value="">Seleccione...</option>
                                 </select>
                             </div>
-                            
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Número de documento</label>
-                                <input type="text" id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <input type="text" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                             </div>
-                            
+
                         </div>
                     </div>
 
                     <!-- Segundo Tab -->
                     <div [ngClass]="{'hidden': openTab !== 2, 'block': openTab === 2}">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                           
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Nombres</label>
-                                <input type="text" id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <input type="text" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                             </div>
 
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Apellidos</label>
-                                <input type="text" id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <input type="text" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                             </div>
-                                                       
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Fecha de nacimiento</label>
-                                <input type="date" id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <input type="date" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                             </div>
-                            
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Edad</label>
-                                <input type="tel" id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <input type="tel" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                             </div>
-                            
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Teléfono</label>
-                                <input type="tel" id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <input type="tel" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                             </div>
-                                                  
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Celular</label>
-                                <input type="tel" id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <input type="tel" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                             </div>
-                            
+
                             <div class="flex flex-col text-xs">
                                 <label for="" class=" font-medium mb-1">Dirección</label>
-                                <input type="tel" id="" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <input type="tel" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                             </div>
 
                             <div class="mt-4 flex justify-center">
@@ -125,7 +144,7 @@
                                     Guardar
                                 </button>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -133,8 +152,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
