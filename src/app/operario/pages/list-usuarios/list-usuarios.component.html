@@ -1,12 +1,13 @@
-<!-- Este archivo contiene la lista de operadores -->
+<!-- Este archivo contiene la lista de usuarios (Mujeres gestantes) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <app-header></app-header>
 
-<div class="flex ml-[40%] px-[65px] mt-[8rem] space-x-[45%]">
-    <p class="font-bold text-3xl">Operadores</p>
-    <button (click)="abrirModal()"
+<div class="flex ml-[40%] px-[65px] mt-[8rem] space-x-[49%]">
+    <p class="font-bold text-3xl">Gestantes</p>
+    <button [routerLink]="['/ruta-gestante']"
         class="mt-[3rem] h-10 bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none flex items-center">
         Crear
     </button>
@@ -18,16 +19,16 @@
         <table
             class="w-full text-sm text-center rtl:text-right text-gray-700 dark:text-gray-600 rounded-lg overflow-hidden">
             <thead
-                class="text-xs text-gray-700 uppercase bg-[#44BDD4] dark:bg-gray-700 rounded shadow-sm">
+                class="text-xs text-gray-700 uppercase bg-[#44BDD4] dark:bg-gray-700 dark:text-gray-400 rounded shadow-sm">
                 <tr>
                     <th scope="col" class="px-6 py-0">Tipo de documento</th>
                     <th scope="col" class="px-6 py-3">N° documento</th>
                     <th scope="col" class="px-6 py-3">Nombre</th>
                     <th scope="col" class="px-6 py-3">Apellido</th>
+                    <th scope="col" class="px-6 py-3">Edad</th>
                     <th scope="col" class="px-6 py-3">Teléfono</th>
                     <th scope="col" class="px-6 py-3">Correo electrónico</th>
                     <th scope="col" class="px-6 py-3">Ver</th>
-                    <th scope="col" class="px-6 py-3">Desactivar</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,13 +37,11 @@
                     <td class="px-6 py-4">123456789</td>
                     <td class="px-6 py-4">Sofia</td>
                     <td class="px-6 py-4">Lopez</td>
+                    <td class="px-6 py-4">25</td>
                     <td class="px-6 py-4">3214567899</td>
                     <td class="px-8 py-4">sofia-gmail.com</td>
                     <td class="px-7 py-4">
                         <i class="fa-solid fa-eye fa-lg" style="color: #000000;"></i>
-                    </td>
-                    <td class="px-12 py-4">
-                        <i class="fa-solid fa-toggle-off fa-xl" style="color: #000000;"></i>
                     </td>
                 </tr>
                 <tr class=" border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -50,13 +49,11 @@
                     <td class="px-6 py-4">123456789</td>
                     <td class="px-6 py-4">Sofia</td>
                     <td class="px-6 py-4">Lopez</td>
+                    <td class="px-6 py-4">28</td>
                     <td class="px-6 py-4">3214567899</td>
                     <td class="px-8 py-4">sofia-gmail.com</td>
                     <td class="px-7 py-4">
                         <i class="fa-solid fa-eye fa-lg" style="color: #000000;"></i>
-                    </td>
-                    <td class="px-12 py-4">
-                        <i class="fa-solid fa-toggle-off fa-xl" style="color: #000000;"></i>
                     </td>
                 </tr>
             </tbody>

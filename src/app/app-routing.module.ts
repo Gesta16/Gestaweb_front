@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'operario',
     loadChildren:() => import('./operario/operario.module').then(m => m.OperarioModule)
   },
+  {
+    path: 'usuario',
+    loadChildren:() => import('./usuario/usuario.module').then(m => m.UsuarioModule)
+  },
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', redirectTo: 'landing' }

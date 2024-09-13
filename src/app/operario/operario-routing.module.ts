@@ -9,6 +9,8 @@ import { Ruta4Component } from './pages/formulario/ruta-4/ruta-4.component';
 import { Ruta5Component } from './pages/formulario/ruta-5/ruta-5.component';
 import { Ruta6Component } from './pages/formulario/ruta-6/ruta-6.component';
 
+import { ListUsuariosComponent } from '../operario/pages/list-usuarios/list-usuarios.component';
+import { RutaGestanteComponent } from '../operario/pages/ruta-gestante/ruta-gestante.component';
 
 const routes:Routes = [
   {
@@ -20,6 +22,9 @@ const routes:Routes = [
       {path: 'ruta-4', component:Ruta4Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'ruta-5', component:Ruta5Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'ruta-6', component:Ruta6Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
+      {path: 'list-usuarios', component:ListUsuariosComponent, data: { title: 'Usuarios', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
+      {path: 'ruta-gestante', component:RutaGestanteComponent},
+      
     ]
   }
 ]

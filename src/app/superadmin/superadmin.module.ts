@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 
+import { SharedModule } from '../shared.module';
+
 import { SuperadminRoutingModule } from './superadmin-routing.module';
 import { AddSuperAdminComponent } from './pages/add-super-admin/add-super-admin.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -34,6 +36,7 @@ import { AddOperadoresComponent } from './pages/add-operadores/add-operadores.co
     CommonModule,
     RouterModule,
     SuperadminRoutingModule,
+    SharedModule,
   ]
 })
 export class SuperadminModule { }
