@@ -2,20 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { AdminRoutingModule } from './admin-routing.module';
-import { PerfilAdminComponent } from './pages/perfil-admin/perfil-admin.component';
-
 import { SharedModule } from '../shared.module';
+import { UsuarioRoutingModule } from './usuario-routing.module';
+
+import { RutaSeguimientoComponent } from './pages/ruta-seguimiento/ruta-seguimiento.component';
+
+
 
 @NgModule({
   declarations: [
-    PerfilAdminComponent,
+    RutaSeguimientoComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
-    AdminRoutingModule,
+    UsuarioRoutingModule,
     SharedModule
   ]
 })
-export class AdminModule { }
+export class UsuarioModule { }

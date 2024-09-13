@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 
+import { SharedModule } from '../shared.module';
+
 import { SuperadminRoutingModule } from './superadmin-routing.module';
 import { AddSuperAdminComponent } from './pages/add-super-admin/add-super-admin.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -44,7 +46,8 @@ import { AdminService } from '../servicios/admin.service';
   ],
   providers: [
     SuperAdminService,
-    AdminService 
+    AdminService,
+    SharedModule,
   ]
 })
 export class SuperadminModule { }
