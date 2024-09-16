@@ -2,25 +2,31 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Encabezado -->
 <app-header></app-header>
 
-<div class="flex ml-[38%] px-[65px] mt-[8rem] space-x-[40%]">
-    <p class="font-bold text-3xl">Administradores</p>
-    <button (click)="abrirModal()"
-        class="mt-[3rem] h-10 bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none flex items-center">
-        Crear
-    </button>
+<!-- Título y botón de crear -->
+<div class="container mx-auto px-4 mt-[8rem]">
+    <div class="flex md:items-center md:justify-center relative">
+        <h1 class="font-bold text-3xl mb-2 md:mb-0">Administradores</h1>
+        <div class="relative left-[19rem] mt-[5rem]">
+            <button (click)="abrirModal()"
+                class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none">
+                Crear
+            </button>
+        </div>
+    </div>
 </div>
 
-<!-- Estructura y estilo tabla -->
-<div class="w-[80rem] h-[30rem] p-8 mt-8 mx-auto rounded-lg">
-    <div class="relative overflow-x-auto p-8 text-center mt-4">
+<!-- Estilo de la tabla -->
+<div class="w-full max-w-[80rem] mx-auto h-[30rem] p-8 rounded-lg relative">
+    <div class="relative overflow-x-auto p-8 text-center lg:-ml-[3%]">
         <table
             class="w-full text-sm text-center rtl:text-right text-gray-700 rounded-lg overflow-hidden">
             <thead
                 class="text-xs text-gray-700 uppercase bg-[#44BDD4] dark:bg-gray-700 rounded shadow-sm">
                 <tr>
-                    <th scope="col" class="px-6 py-0">Tipo de documento</th>
+                    <th scope="col" class="px-6 py-3">Tipo de documento</th>
                     <th scope="col" class="px-6 py-3">N° documento</th>
                     <th scope="col" class="px-6 py-3">Nombre</th>
                     <th scope="col" class="px-6 py-3">Apellido</th>
