@@ -2,25 +2,29 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Encabezado -->
 <app-header></app-header>
 
-<div class="flex ml-[43%] px-[65px] mt-[8rem] space-x-[57%]">
-    <p class="font-bold text-3xl">IPS</p>
-    <button (click)="abrirModal()"
-        class="mt-[3rem] h-10 bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none flex items-center">
-        Crear
-    </button>
+<!-- Título y botón de crear -->
+<div class="container mx-auto px-4 mt-[8rem]">
+    <div class="flex md:items-center md:justify-center relative">
+        <h1 class="font-bold text-3xl mb-2 md:mb-0">Listado de IPS</h1>
+        <div class="relative left-[20rem] mt-[5rem]">
+            <button (click)="abrirModal()"
+                class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none">
+                Crear
+            </button>
+        </div>
+    </div>
 </div>
 
-<!-- Estructura y estilo tabla -->
-<div class="w-[80rem] h-[30rem] p-8 mt-[2%] ml-[10%] rounded-lg">
-    <div class="relative overflow-x-auto p-8 text-center mt-[1rem]">
-        <table
-            class="w-full text-sm text-center rtl:text-right text-gray-700 rounded-lg overflow-hidden">
-            <thead
-                class="text-xs text-gray-700 uppercase bg-[#44BDD4] dark:bg-gray-700 rounded shadow-sm">
+<!-- Estilo de la tabla -->
+<div class="w-full max-w-[80rem] mx-auto h-[30rem] p-8 rounded-lg relative">
+    <div class="relative overflow-x-auto p-8 text-center lg:-ml-[3%]">
+        <table class="w-full text-sm text-center rtl:text-right text-gray-700 rounded-lg overflow-hidden">
+            <thead class="text-xs text-gray-700 uppercase bg-[#44BDD4] dark:bg-gray-700 rounded shadow-sm">
                 <tr>
-                    <th scope="col" class="px-6 py-0">Código de habilitación</th>
+                    <th scope="col" class="px-6 py-3">Código de habilitación</th>
                     <th scope="col" class="px-6 py-3">Nombre IPS</th>
                     <th scope="col" class="px-6 py-3">Departamento</th>
                     <th scope="col" class="px-6 py-3">Municipio</th>
@@ -30,24 +34,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 h-[-20rem]">
+                <tr *ngFor="let ips of ips"
+                    class="border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 h-[-20rem]">
                     <td class="px-6 py-4">213254162541</td>
-                    <td class="px-6 py-4">IPS1</td>
-                    <td class="px-6 py-4">Santander</td>
+                    <td>{{ ips.nom_ips }}</td>
+                    <td>{{ getDepartamentoNombre(ips.cod_departamento) }}</td>
                     <td class="px-6 py-4">Bucaramanga</td>
-                    <td class="px-6 py-4">dir ejemplo 13</td>
-                    <td class="px-8 py-4">6402659</td>
-                    <td class="px-12 py-4">
-                        <i class="fa-solid fa-toggle-off fa-xl" style="color: #000000;"></i>
-                    </td>
-                </tr>
-                <tr class="border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 h-[-20rem]">
-                    <td class="px-6 py-4">213254162541</td>
-                    <td class="px-6 py-4">IPS2</td>
-                    <td class="px-6 py-4">Santander</td>
-                    <td class="px-6 py-4">Bucaramanga</td>
-                    <td class="px-6 py-4">dir ejemplo 13</td>
-                    <td class="px-8 py-4">6402659</td>
+                    <td>{{ ips.dir_ips }}</td>
+                    <td>{{ ips.tel_ips }}</td>
                     <td class="px-12 py-4">
                         <i class="fa-solid fa-toggle-off fa-xl" style="color: #000000;"></i>
                     </td>
