@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SuperAdminService } from '../../../servicios/super-admin.service';
-import { TipoDocumentoService } from '../../../servicios/tipo-documento.service'; // Asegúrate de la ruta correcta
-import { TipoDocumento } from '../../../modelos/tipo-documento.model'; // Asegúrate de la ruta correcta
+import { TipoDocumentoService } from '../../../servicios/tipo-documento.service';
+import { TipoDocumento } from '../../../modelos/tipo-documento.model';
 import { AddSuperAdminComponent } from '../add-super-admin/add-super-admin.component';
 
 @Component({
@@ -12,17 +12,21 @@ import { AddSuperAdminComponent } from '../add-super-admin/add-super-admin.compo
 })
 export class ListSuperadminComponent implements OnInit {
   superAdmins: any[] = [];
-  tiposDocumento: TipoDocumento[] = []; // Lista para tipos de documento
+  tiposDocumento: TipoDocumento[] = [];
+  paginatedSuperAdmins: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 4;
+  totalPages: number = 1;
 
   constructor(
     private superAdminService: SuperAdminService,
-    private tipoDocumentoService: TipoDocumentoService, // Servicio para Tipo Documento
+    private tipoDocumentoService: TipoDocumentoService,
     private _matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.loadSuperAdmins();
-    this.loadTiposDocumento(); // Carga los tipos de documento
+    this.loadTiposDocumento();
   }
 
   abrirModal(): void {
@@ -33,7 +37,6 @@ export class ListSuperadminComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Si el diálogo se cerró con éxito, recargar la lista
         this.loadSuperAdmins();
       }
     });
@@ -43,6 +46,7 @@ export class ListSuperadminComponent implements OnInit {
     this.superAdminService.getSuperAdmins().subscribe(
       (response: any) => {
         this.superAdmins = response.superAdmin;
+        this.updatePagination();
       },
       (error: any) => {
         console.error('Error al obtener SuperAdmins:', error);
@@ -64,5 +68,20 @@ export class ListSuperadminComponent implements OnInit {
   getTipoDocumentoNombre(cod_documento: number): string {
     const tipo = this.tiposDocumento.find(td => td.cod_documento === cod_documento);
     return tipo ? tipo.nom_documento : 'Desconocido';
+  }
+
+  private updatePagination(): void {
+    this.totalPages = Math.ceil(this.superAdmins.length / this.itemsPerPage);
+    this.paginatedSuperAdmins = this.superAdmins.slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);
+  }
+
+  changePage(page: number): void {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.updatePagination();
+  }
+
+  get totalPagesArray(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 }

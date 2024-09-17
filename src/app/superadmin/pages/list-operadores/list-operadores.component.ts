@@ -13,19 +13,23 @@ import { TipoDocumento } from '../../../modelos/tipo-documento.model';
 export class ListOperadoresComponent implements OnInit {
   title = 'modal';
   isSmallScreen: boolean = false;
-  operadores: any[] = []; 
-  tiposDocumento: TipoDocumento[] = []; 
+  operadores: any[] = [];
+  tiposDocumento: TipoDocumento[] = [];
+  paginatedOperadores: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 4;
+  totalPages: number = 1;
 
   constructor(
-    private operadorService: OperadorService, 
+    private operadorService: OperadorService,
     private tipoDocumentoService: TipoDocumentoService,
     private _matDialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.checkScreenSize();
-    this.loadOperadores(); 
-    this.loadTiposDocumento(); 
+    this.loadOperadores();
+    this.loadTiposDocumento();
   }
 
   private checkScreenSize() {
@@ -49,7 +53,7 @@ export class ListOperadoresComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadOperadores(); 
+        this.loadOperadores();
       }
     });
   }
@@ -57,7 +61,8 @@ export class ListOperadoresComponent implements OnInit {
   private loadOperadores(): void {
     this.operadorService.getOperadores().subscribe(
       (response: any) => {
-        this.operadores = response.operador; 
+        this.operadores = response.operador;
+        this.updatePagination();
       },
       (error: any) => {
         console.error('Error al obtener Operadores:', error);
@@ -79,5 +84,20 @@ export class ListOperadoresComponent implements OnInit {
   getTipoDocumentoNombre(cod_documento: number): string {
     const tipo = this.tiposDocumento.find(td => td.cod_documento === cod_documento);
     return tipo ? tipo.nom_documento : 'Desconocido';
+  }
+
+  private updatePagination(): void {
+    this.totalPages = Math.ceil(this.operadores.length / this.itemsPerPage);
+    this.paginatedOperadores = this.operadores.slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);
+  }
+
+  changePage(page: number): void {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.updatePagination();
+  }
+
+  get totalPagesArray(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 }

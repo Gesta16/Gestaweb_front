@@ -16,6 +16,9 @@ import { MenuComponent } from './menu/menu.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     UsuarioModule,
     SharedModule,
+    MatPaginatorModule,
+    MatTableModule
   ],
   providers: [
     provideClientHydration(),

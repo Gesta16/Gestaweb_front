@@ -4,11 +4,13 @@ export class Operador {
     cod_ips: number;
     nom_operador: string;
     ape_operador: string;
-    tel_operador: number;
-    email_operador: number;
+    tel_operador: string;
+    email_operador: string;
     esp_operador: string;
     cod_documento: number;
-    documento_operador: number;
+    documento_operador: string;
+    cod_departamento: number;
+    cod_municipio: number;
 
     constructor(
         id_operador: number,
@@ -16,11 +18,13 @@ export class Operador {
         cod_ips: number,
         nom_operador: string,
         ape_operador: string,
-        tel_operador: number,
-        email_operador: number,
+        tel_operador: string,
+        email_operador: string,
         esp_operador: string,
         cod_documento: number,
-        documento_operador: number,
+        documento_operador: string,
+        cod_departamento: number,
+        cod_municipio: number,
     ){
         this.id_operador = id_operador;
         this.id_admin = id_admin;
@@ -32,6 +36,8 @@ export class Operador {
         this.esp_operador = esp_operador;
         this.cod_documento = cod_documento;
         this.documento_operador = documento_operador;
+        this.cod_departamento = cod_departamento;
+        this.cod_municipio = cod_municipio;
     }
 }
 

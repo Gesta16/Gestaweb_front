@@ -1,9 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminService } from '../../../servicios/admin.service'; 
-import { TipoDocumentoService } from '../../../servicios/tipo-documento.service'; // Asegúrate de la ruta correcta
+import { TipoDocumentoService } from '../../../servicios/tipo-documento.service';
 import { AddAdminComponent } from '../add-admin/add-admin.component';
-import { TipoDocumento } from '../../../modelos/tipo-documento.model'; // Asegúrate de la ruta correcta
+import { TipoDocumento } from '../../../modelos/tipo-documento.model';
 
 @Component({
   selector: 'app-list-admin',
@@ -13,19 +13,23 @@ import { TipoDocumento } from '../../../modelos/tipo-documento.model'; // Asegú
 export class ListAdminComponent implements OnInit {
   title = 'modal';
   isSmallScreen: boolean = false;
-  admins: any[] = []; 
-  tiposDocumento: TipoDocumento[] = []; // Lista para tipos de documento
+  admins: any[] = [];
+  tiposDocumento: TipoDocumento[] = [];
+  paginatedAdmins: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 4;
+  totalPages: number = 1;
 
   constructor(
-    private adminService: AdminService, // Servicio para Admins
-    private tipoDocumentoService: TipoDocumentoService, // Servicio para Tipo Documento
+    private adminService: AdminService,
+    private tipoDocumentoService: TipoDocumentoService,
     private _matDialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.checkScreenSize();
-    this.loadAdmins(); 
-    this.loadTiposDocumento(); // Carga los tipos de documento
+    this.loadAdmins();
+    this.loadTiposDocumento();
   }
 
   private checkScreenSize() {
@@ -49,7 +53,7 @@ export class ListAdminComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadAdmins(); 
+        this.loadAdmins();
       }
     });
   }
@@ -57,7 +61,8 @@ export class ListAdminComponent implements OnInit {
   private loadAdmins(): void {
     this.adminService.getAdmins().subscribe(
       (response: any) => {
-        this.admins = response.admin; 
+        this.admins = response.admin;
+        this.updatePagination();
       },
       (error: any) => {
         console.error('Error al obtener Admins:', error);
@@ -79,5 +84,20 @@ export class ListAdminComponent implements OnInit {
   getTipoDocumentoNombre(cod_documento: number): string {
     const tipo = this.tiposDocumento.find(td => td.cod_documento === cod_documento);
     return tipo ? tipo.nom_documento : 'Desconocido';
+  }
+
+  private updatePagination(): void {
+    this.totalPages = Math.ceil(this.admins.length / this.itemsPerPage);
+    this.paginatedAdmins = this.admins.slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);
+  }
+
+  changePage(page: number): void {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.updatePagination();
+  }
+
+  get totalPagesArray(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 }

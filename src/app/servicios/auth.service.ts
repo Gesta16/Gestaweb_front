@@ -22,4 +22,12 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!sessionStorage.getItem('token');
   }
+
+  getUser(): any {
+    if (typeof window !== 'undefined') {
+      const identityJSON = sessionStorage.getItem('identity');
+      return identityJSON ? JSON.parse(identityJSON) : null;
+    }
+    return null;
+  }
 }
