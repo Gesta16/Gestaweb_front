@@ -19,7 +19,8 @@ import { ListOperadoresComponent } from './pages/list-operadores/list-operadores
 import { AddOperadoresComponent } from './pages/add-operadores/add-operadores.component';
 
 import { SuperAdminService } from '../servicios/super-admin.service';
-import { AdminService } from '../servicios/admin.service'; 
+import { AdminService } from '../servicios/admin.service';
+import { EditIpsComponent } from './pages/edit-ips/edit-ips.component';
 
 
 
@@ -36,6 +37,7 @@ import { AdminService } from '../servicios/admin.service';
     AddIpsComponent,
     ListOperadoresComponent,
     AddOperadoresComponent,
+    EditIpsComponent,
   ],
   imports: [
     CommonModule,

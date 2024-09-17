@@ -1,28 +1,27 @@
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IpsService } from '../../../servicios/ips.service';
-import { Ips } from '../../../modelos/ips.model'; 
+import { Ips } from '../../../modelos/ips.model';
 import { DepartamentoService } from '../../../servicios/departamento.service';
-import { Departamento } from '../../../modelos/departamento.model'; 
+import { Departamento } from '../../../modelos/departamento.model';
 import { RegimenService } from '../../../servicios/regimen.service';
-import { Regimen } from '../../../modelos/regimen.model'; 
+import { Regimen } from '../../../modelos/regimen.model';
 import { MunicipioService } from '../../../servicios/municipio.service';
-import { Municipio } from '../../../modelos/municipio.model'; 
-
+import { Municipio } from '../../../modelos/municipio.model';
 
 @Component({
-  selector: 'app-add-ips',
-  templateUrl: './add-ips.component.html',
-  styleUrls: ['./add-ips.component.scss']
+  selector: 'app-edit-ips',
+  templateUrl: './edit-ips.component.html',
+  styleUrls: ['./edit-ips.component.css']
 })
-export class AddIpsComponent {
+export class EditIpsComponent implements OnInit {
   ips: Ips = {
-    cod_ips: 0, 
-    cod_regimen: 0, 
-    cod_departamento: 0, 
+    cod_ips: 0,
+    cod_regimen: 0,
+    cod_departamento: 0,
     nom_ips: '',
     dir_ips: '',
-    tel_ips: '', 
+    tel_ips: '',
     email_ips: '',
     nit_ips: '',
     cod_municipio: 0,
@@ -33,24 +32,26 @@ export class AddIpsComponent {
   listMunicipios: Municipio[] = [];
 
   constructor(
-    public _matDialogRef: MatDialogRef<AddIpsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    public _matDialogRef: MatDialogRef<EditIpsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { ips: Ips },
     private ipsService: IpsService,
     private departamentoService: DepartamentoService,
     private regimenService: RegimenService,
-    private municipioService: MunicipioService,
+    private municipioService: MunicipioService
   ) {}
 
   ngOnInit(): void {
+    this.ips = { ...this.data.ips }; // Cargar los datos del IPS a editar
     this.getDepartamentos();
     this.getRegimenes();
-    this.getMunicipios();
+    this.getMunicipios(this.ips.cod_departamento); // Cargar municipios del departamento actual
   }
 
   onDepartamentoChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const departamentoId = +target.value;
-    this.getMunicipios(departamentoId); 
+    this.ips.cod_departamento = departamentoId; // Actualizar el departamento en el IPS
+    this.getMunicipios(departamentoId); // Actualizar la lista de municipios
   }
 
   getDepartamentos(): void {
@@ -93,19 +94,19 @@ export class AddIpsComponent {
         }
       },
       (error: any) => {
-        console.error('Error al obtener los datos de IPS:', error);
+        console.error('Error al obtener los datos de Regímenes:', error);
       }
     );
   }
 
   onSubmit(): void {
-    this.ipsService.createIps(this.ips).subscribe(
+    console.log('Datos a enviar:', this.ips); 
+    this.ipsService.updateIps(this.ips).subscribe(
       response => {
-       
         this._matDialogRef.close(true);
       },
       error => {
-        console.error('Error al crear IPS:', error);
+        console.error('Error al actualizar IPS:', error);
       }
     );
   }

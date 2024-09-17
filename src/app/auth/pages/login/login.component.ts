@@ -29,9 +29,10 @@ export class LoginComponent {
   ) { }
 
   ngOnInit(): void {
-    this.validateToken();
+    if (typeof window !== 'undefined') {
+      this.validateToken();
+    }
   }
-
   validateToken(): void {
     if(typeof window !== "undefined"){
       if (!this.token) {

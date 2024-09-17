@@ -1,25 +1,25 @@
 <!-- Diseño de modal para registrar IPS -->
 <div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
   <div class="bg-white rounded-lg w-[90%] md:w-[70%] lg:w-[45%] p-6">
-      <h2 class="text-xl font-bold mb-4 text-center mt-4">Formulario de Registro</h2>
+      <h2 class="text-xl font-bold mb-4 text-center mt-4">Formulario de Registro de IPS</h2>
 
       <form (ngSubmit)="onSubmit()">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
 
               <!-- Código IPS -->
-            <div class="mb-4">
+            <!-- <div class="mb-4">
                 <label for="cod_ips" class="ml-[15%] block text-sm font-medium text-gray-700">Código IPS</label>
                 <input id="cod_ips" name="cod_ips" [(ngModel)]="ips.cod_ips"
                 class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
-                    <!-- <option *ngFor="let ips of listIps" [value]="ips.cod_ips">
+                    <option *ngFor="let ips of listIps" [value]="ips.cod_ips">
                         {{ips.nom_ips}}
-                    </option> -->
-                <!-- </select> -->
-            </div>
+                    </option>
+                </select>
+            </div> -->
 
               <!-- Régimen -->
               <div class="mb-4">
-                  <label for="cod_regimen" class="ml-[15%] block text-sm font-medium text-gray-700">Código Régimen</label>
+                  <label for="cod_regimen" class="ml-[15%] block text-sm font-medium text-gray-700">Régimen</label>
                   <select type="text" id="cod_regimen" name="cod_regimen" [(ngModel)]="ips.cod_regimen"
                       class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
                     <option *ngFor="let regimen of listRegimenes" [value]="regimen.cod_regimen">
@@ -29,15 +29,26 @@
               </div>
 
               <!-- Departamento -->
-              <div class="mb-4">
-                <label for="cod_departamento" class="ml-[15%] block text-sm font-medium text-gray-700">Departamento</label>
-                <select type="text" id="cod_departamento" name="cod_departamento" [(ngModel)]="ips.cod_departamento"
-                    class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
-                    <option *ngFor="let departamento of listDepartamentos" [value]="departamento.cod_departamento">
-                        {{departamento.nom_departamento}}
-                    </option>
-                </select>
-            </div>
+          <div class="mb-4">
+            <label for="cod_departamento" class="ml-[15%] block text-sm font-medium text-gray-700">Departamento</label>
+            <select id="cod_departamento" name="cod_departamento" [(ngModel)]="ips.cod_departamento" (change)="onDepartamentoChange($event)"
+                class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                <option *ngFor="let departamento of listDepartamentos" [value]="departamento.cod_departamento">
+                    {{departamento.nom_departamento}}
+                </option>
+            </select>
+          </div>
+
+          <!-- Municipio -->
+          <div class="mb-4">
+            <label for="cod_municipio" class="ml-[15%] block text-sm font-medium text-gray-700">Municipio</label>
+            <select id="cod_municipio" name="cod_municipio" [(ngModel)]="ips.cod_municipio"
+                class="mx-auto mt-1 block w-[70%] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                <option *ngFor="let municipio of listMunicipios" [value]="municipio.cod_municipio">
+                    {{municipio.nom_municipio}}
+                </option>
+            </select>
+          </div>
 
               <!-- Nombre IPS -->
               <div class="mb-4">

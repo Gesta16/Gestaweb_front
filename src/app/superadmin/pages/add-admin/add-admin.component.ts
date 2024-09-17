@@ -23,9 +23,9 @@ export class AddAdminComponent implements OnInit {
     nom_admin: '',
     ape_admin: '',
     email_admin: '',
-    tel_admin: 0,
+    tel_admin: '',
     cod_documento: 0,
-    documento_admin: 0,
+    documento_admin: '',
     cod_departamento: 0,
     cod_municipio: 0,
     

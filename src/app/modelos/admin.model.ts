@@ -2,25 +2,25 @@ export class Admin {
     id_admin: number;
     cod_ips: number; 
     nom_admin: string; 
-    ape_admin?: string; 
-    tel_admin?: number; 
-    email_admin?: string;
-    cod_documento?: number;
-    documento_admin?: number;
-    cod_departamento?: number;
-    cod_municipio?: number;
+    ape_admin: string; 
+    tel_admin: string; 
+    email_admin: string;
+    cod_documento: number;
+    documento_admin: string;
+    cod_departamento: number;
+    cod_municipio: number;
 
     constructor(
     id_admin: number,
       cod_ips: number,
       nom_admin: string,
       ape_admin: string,
-      tel_admin: number,
-      email_admin?: string,
-      cod_documento?: number,
-      documento_admin?: number,
-      cod_departamento?: number,
-      cod_municipio?: number,
+      tel_admin: string,
+      email_admin: string,
+      cod_documento: number,
+      documento_admin: string,
+      cod_departamento: number,
+      cod_municipio: number,
     ) {
         this.id_admin = id_admin;
         this.cod_ips = cod_ips;

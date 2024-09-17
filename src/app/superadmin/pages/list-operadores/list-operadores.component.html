@@ -15,10 +15,8 @@
 <!-- Estructura y estilo tabla -->
 <div class="w-[80rem] h-[30rem] p-8 mt-[2%] ml-[10%] rounded-lg">
     <div class="relative overflow-x-auto p-8 text-center mt-[1rem]">
-        <table
-            class="w-full text-sm text-center rtl:text-right text-gray-700 dark:text-gray-600 rounded-lg overflow-hidden">
-            <thead
-                class="text-xs text-gray-700 uppercase bg-[#44BDD4] dark:bg-gray-700 rounded shadow-sm">
+        <table class="w-full text-sm text-center rtl:text-right text-gray-700 dark:text-gray-600 rounded-lg overflow-hidden">
+            <thead class="text-xs text-gray-700 uppercase bg-[#44BDD4] dark:bg-gray-700 rounded shadow-sm">
                 <tr>
                     <th scope="col" class="px-6 py-0">Tipo de documento</th>
                     <th scope="col" class="px-6 py-3">N° documento</th>
@@ -26,21 +24,17 @@
                     <th scope="col" class="px-6 py-3">Apellido</th>
                     <th scope="col" class="px-6 py-3">Teléfono</th>
                     <th scope="col" class="px-6 py-3">Correo electrónico</th>
-                    <th scope="col" class="px-6 py-3">Editar</th>
                     <th scope="col" class="px-6 py-3">Desactivar</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let operador of operadores" class="border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 h-[-20rem]">
+                <tr *ngFor="let operador of paginatedOperadores" class="border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 h-[-20rem]">
                     <td>{{ getTipoDocumentoNombre(operador.cod_documento) }}</td>
                     <td>{{ operador.documento_operador }}</td>
                     <td>{{ operador.nom_operador }}</td>
                     <td>{{ operador.ape_operador }}</td>
                     <td>{{ operador.tel_operador }}</td>
                     <td>{{ operador.email_operador }}</td>
-                    <td class="px-7 py-4">
-                        <i class="fa-solid fa-pencil fa-lg" style="color: #000000;"></i>
-                    </td>
                     <td class="px-12 py-4">
                         <i class="fa-solid fa-toggle-off fa-xl" style="color: #000000;"></i>
                     </td>
@@ -48,35 +42,21 @@
             </tbody>
         </table>
     </div>
-    <nav class="flex items-center flex-column flex-wrap md:flex-row justify-center pt-4 mt-6"
-        aria-label="Table navigation">
+    <nav class="flex items-center flex-column flex-wrap md:flex-row justify-center pt-4 mt-6" aria-label="Table navigation">
         <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
-            <li>
-                <a href="#"
-                    class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-cyan-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Anterior</a>
+            <li *ngIf="currentPage > 1">
+                <a (click)="changePage(currentPage - 1)"
+                    class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-cyan-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Anterior</a>
             </li>
-            <li>
-                <a href="#" aria-current="page"
-                    class="flex items-center justify-center px-3 h-8 text-black border border-gray-300 bg-[#E8f7fd] hover:bg-cyan-500 hover:text-white dark:border-gray-700 dark:bg-gray-700 dark:text-white">1</a>
+            <li *ngFor="let page of totalPagesArray">
+                <a (click)="changePage(page)"
+                    [ngClass]="{'bg-[#E8f7fd] text-black': page === currentPage, 'text-gray-500 bg-white': page !== currentPage}"
+                    class="flex items-center justify-center px-3 h-8 leading-tight border border-gray-300 hover:bg-cyan-500 hover:text-white dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    {{ page }}
+                </a>
             </li>
-            <li>
-                <a href="#"
-                    class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">3</a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-            </li>
-            <li>
-                <a href="#"
+            <li *ngIf="currentPage < totalPages">
+                <a (click)="changePage(currentPage + 1)"
                     class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-cyan-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Siguiente</a>
             </li>
         </ul>

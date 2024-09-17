@@ -17,8 +17,8 @@
             </div>
 
             <!-- Nombre -->
-            <h2 class="text-xl font-bold text-center">Nombre del usuario</h2>
-            <h2 class="text-xl font-bold text-center mt-2">Apellidos del usuario</h2>
+            <h2 class="text-xl font-bold text-center">{{ user?.userable?.nom_superadmin || 'Nombre no disponible' }}</h2>
+            <h2 class="text-xl font-bold text-center mt-2">{{ user?.userable?.ape_superadmin || 'Apellido no disponible' }}</h2>
         </div>
 
         <!-- Diseño de Información personal -->
@@ -28,71 +28,70 @@
 
                 <!-- Tipo de documento -->
                 <div class="mb-4">
-                    <label for="tipoDocumento" class="ml-[7%] text-sm font-medium text-gray-700">Tipo de
-                        documento</label>
+                    <label for="tipoDocumento" class="ml-[7%] text-sm font-medium text-gray-700">Tipo de documento</label>
                     <input type="text" id="tipoDocumento" name="tipoDocumento"
                         class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
-                        disabled>
+                        [value]="user?.userable?.cod_documento || ''" [disabled]="!isEditing">
                 </div>
 
                 <!-- N° documento -->
                 <div class="mb-4">
-                    <label for="numeroDocumento" class="ml-[7%] text-sm font-medium text-gray-700">N°
-                        documento</label>
+                    <label for="numeroDocumento" class="ml-[7%] text-sm font-medium text-gray-700">N° documento</label>
                     <input type="text" id="numeroDocumento" name="numeroDocumento"
                         class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
-                        disabled>
+                        [value]="user?.documento || ''" [disabled]="!isEditing">
                 </div>
 
                 <!-- Nombre -->
                 <div class="mb-4">
                     <label for="nombre" class="ml-[7%] text-sm font-medium text-gray-700">Nombre</label>
                     <input type="text" id="nombre" name="nombre"
-                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
+                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
+                        [value]="user?.userable?.nom_superadmin || ''" [disabled]="!isEditing">
                 </div>
 
                 <!-- Apellido -->
                 <div class="mb-4">
                     <label for="apellido" class="ml-[7%] text-sm font-medium text-gray-700">Apellido</label>
                     <input type="text" id="apellido" name="apellido"
-                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
+                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
+                        [value]="user?.userable?.ape_superadmin || ''" [disabled]="!isEditing">
                 </div>
 
                 <!-- Email -->
                 <div class="mb-4">
                     <label for="email" class="ml-[7%] text-sm font-medium text-gray-700">E-mail</label>
                     <input type="email" id="email" name="email"
-                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
+                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
+                        [value]="user?.userable?.email_superadmin || ''" [disabled]="!isEditing">
                 </div>
 
                 <!-- Teléfono -->
                 <div class="mb-4">
                     <label for="telefono" class="ml-[7%] text-sm font-medium text-gray-700">Teléfono</label>
                     <input type="text" id="telefono" name="telefono"
-                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
+                        class="block w-[90%] mx-auto mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
+                        [value]="user?.userable?.tel_superadmin || ''" [disabled]="!isEditing">
                 </div>
 
                 <!-- Mostrar campos de contraseña solo cuando isEditing es verdadero -->
                 <div *ngIf="isEditing" class="col-span-2 grid grid-cols-2 gap-4"> 
                     <!-- Nueva contraseña -->
                     <div class="mb-0">
-                        <label for="newPassword" class="ml-[7%] text-sm font-medium text-gray-700">Nueva
-                            Contraseña</label>
+                        <label for="newPassword" class="ml-[7%] text-sm font-medium text-gray-700">Nueva Contraseña</label>
                         <input type="password" id="newPassword" name="newPassword"
                             class="block w-[92%] mx-auto mt-2 px-3 ml-[6%] py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
                     </div>
 
                     <!-- Confirmar nueva contraseña -->
                     <div class="mb-0">
-                        <label for="confirmPassword" class="ml-[3%] text-sm font-medium text-gray-700">Confirmar
-                            Contraseña</label>
+                        <label for="confirmPassword" class="ml-[3%] text-sm font-medium text-gray-700">Confirmar Contraseña</label>
                         <input type="password" id="confirmPassword" name="confirmPassword"
                             class="block w-[92%] mx-auto ml-[2%] mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="absolute mt-[30%] transform -translate-y-[-50px] lg:mt-[25%] pl-[24%] space-x-7">

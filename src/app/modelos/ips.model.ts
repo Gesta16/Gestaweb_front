@@ -1,22 +1,24 @@
 export class Ips {
-    cod_ips: number; // bigint en Laravel
-    cod_regimen: number; // int en Laravel
-    cod_departamento: number; // int en Laravel
-    nom_ips: string; // varchar en Laravel
-    dir_ips?: string; // varchar (opcional) en Laravel
-    tel_ips?: string; // int (opcional) en Laravel
-    email_ips?: string; // varchar (opcional) en Laravel
-    nit_ips?: string; // varchar (opcional) en Laravel
+    cod_ips: number;
+    cod_regimen: number; 
+    cod_departamento: number; 
+    nom_ips: string; 
+    dir_ips: string; 
+    tel_ips: string; 
+    email_ips: string;
+    nit_ips: string; 
+    cod_municipio: number;
   
     constructor(
       cod_ips: number,
       cod_regimen: number,
       cod_departamento: number,
       nom_ips: string,
-      dir_ips?: string,
-      tel_ips?: string,
-      email_ips?: string,
-      nit_ips?: string
+      dir_ips: string,
+      tel_ips: string,
+      email_ips: string,
+      nit_ips: string,
+      cod_municipio: number
     ) {
       this.cod_ips = cod_ips;
       this.cod_regimen = cod_regimen;
@@ -26,6 +28,7 @@ export class Ips {
       this.tel_ips = tel_ips;
       this.email_ips = email_ips;
       this.nit_ips = nit_ips;
+      this.cod_municipio = cod_municipio;
     }
   }
   
