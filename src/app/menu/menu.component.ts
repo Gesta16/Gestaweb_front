@@ -47,7 +47,6 @@ export class MenuComponent {
     }
 
     if (typeof window !== "undefined") {
-      this.isExpanded = true;
       this.isAuthenticated = this.authService.isAuthenticated();
     }
   }

@@ -15,7 +15,7 @@
             </ng-container>
         </div>
         <ng-template #burgerIcon>
-            <svg xmlns="http://www.w3.org/2000/svg" style="width: 25px; height: 25px; margin-top:9rem;"
+            <svg xmlns="http://www.w3.org/2000/svg" style="width: 25px; height: 25px; margin-top:9rem; margin-right: 20px;"
                 viewBox="0 0 448 512">
                 <path
                     d="M16 132h416c8.8 0 16-7.2 16-16V116c0-8.8-7.2-16-16-16H16c-8.8 0-16 7.2-16 16v4c0 8.8 7.2 16 16 16zm0 128h416c8.8 0 16-7.2 16-16v-4c0-8.8-7.2-16-16-16H16c-8.8 0-16 7.2-16 16v4c0 8.8 7.2 16 16 16zm416 112H16c-8.8 0-16 7.2-16 16v4c0 8.8 7.2 16 16 16h416c8.8 0 16-7.2 16-16v-4c0-8.8-7.2-16-16-16z" />
@@ -25,16 +25,16 @@
     
     <li class="group h-12 flex items-center z-20 mt-[10rem] hover:bg-[#00ACC9] rounded-[5px] hover:text-white ">
         <a href="dashboard"
-            class="appearance-none no-underline flex items-center w-full h-full p-2 rounded-md ">
-            <i class="fa-solid fa-chart-pie text-center text-xl min-w-[60px] "></i>
+            class="appearance-none no-underline flex items-center w-full h-full p-1.5 rounded-md ">
+            <i class="fa-solid fa-chart-pie text-center text-xl min-w-[60px] pr-[20px]"></i>
             <span class="text nav-text text-base ">Dashboard</span>
         </a>
     </li>
 
     <li class="group h-12 flex items-center z-20 mt-[2rem] hover:bg-[#00ACC9] rounded-[5px] hover:text-white">
         <a href="list-superadmin"
-            class="appearance-none no-underline flex items-center w-full h-full p-2 rounded-md">
-            <i class="fa-solid fa-user-tie text-center text-xl min-w-[60px]"></i>
+            class="appearance-none no-underline flex items-center w-full h-full p-1.5 rounded-md">
+            <i class="fa-solid fa-user-tie text-center text-xl min-w-[60px] pr-[20px]"></i>
             <span class="text nav-text text-base ">Superadmin</span>
         </a>
     </li>
@@ -42,35 +42,51 @@
     
     <li class="group h-12 flex items-center z-20 mt-[2rem] hover:bg-[#00ACC9] rounded-[5px] hover:text-white">
         <a href="list-admin"
-            class="appearance-none no-underline flex items-center w-full h-full p-2 rounded-md">
+            class="appearance-none no-underline flex items-center w-full h-full p-1.5 rounded-md">
             
-            <i class="fa-solid fa-users text-center text-xl min-w-[60px]"></i>
+            <i class="fa-solid fa-users text-center text-xl min-w-[60px] pr-[20px]"></i>
             <span class="text nav-text text-base ">Administradores</span>
         </a>
     </li>
     
     <li class="group h-12 flex items-center z-20 mt-[2rem] hover:bg-[#00ACC9] rounded-[5px] hover:text-white">
         <a href="list-operadores"
-            class="appearance-none no-underline flex items-center w-full h-full p-2 rounded-md">
-            <i class="fa-solid fa-stethoscope text-center text-xl min-w-[60px]"></i>
+            class="appearance-none no-underline flex items-center w-full h-full p-1.5 rounded-md">
+            <i class="fa-solid fa-stethoscope text-center text-xl min-w-[60px] pr-[20px]"></i>
             <span class="text nav-text text-base ">Operadores</span>
         </a>
     </li>
     
     <li class="group h-12 flex items-center z-20 mt-[2rem] hover:bg-[#00ACC9] rounded-[5px] hover:text-white">
         <a href="list-ips"
-            class="appearance-none no-underline flex items-center w-full h-full p-2 rounded-md">
+            class="appearance-none no-underline flex items-center w-full h-full p-1.5 rounded-md">
             
-            <i class="fa-solid fa-hospital text-center text-xl min-w-[60px]"></i>
+            <i class="fa-solid fa-hospital text-center text-xl min-w-[60px] pr-[20px]"></i>
             <span class="text nav-text text-base ">IPS</span>
         </a>
     </li>
     
     
     <li class="group h-12 flex items-center z-20 mt-[2rem] hover:bg-[#00ACC9] rounded-[5px] hover:text-white">
+        <a href="list-usuarios"
+            class="appearance-none no-underline flex items-center w-full h-full p-1.5 rounded-md">
+            <i class="fa-solid fa-users text-center text-xl min-w-[60px] pr-[20px]"></i>
+            <span class="text nav-text text-base ">Usuarios</span>
+        </a>
+    </li>
+    
+    <li class="group h-12 flex items-center z-20 mt-[2rem] hover:bg-[#00ACC9] rounded-[5px] hover:text-white">
+        <a href="ruta-seguimiento"
+            class="appearance-none no-underline flex items-center w-full h-full p-1.5 rounded-md">
+            <i class="fa-solid fa-route text-center text-xl min-w-[60px] pr-[20px]"></i>
+            <span class="text nav-text text-base ">Ruta seguimiento</span>
+        </a>
+    </li>
+    
+    <li class="group h-12 flex items-center z-20 mt-[2rem] hover:bg-[#00ACC9] rounded-[5px] hover:text-white">
         <a href="perfil-superadmin"
-            class="appearance-none no-underline flex items-center w-full h-full p-2 rounded-md">
-            <i class="fa-solid fa-user text-center text-xl min-w-[60px]"></i>
+            class="appearance-none no-underline flex items-center w-full h-full p-1.5 rounded-md">
+            <i class="fa-solid fa-user text-center text-xl min-w-[60px] pr-[20px]"></i>
             <span class="text nav-text text-base ">Perfil</span>
         </a>
     </li>
@@ -79,8 +95,8 @@
         <ul class="space-y-4">
             <li *ngFor="let item of menuItems" class="flex items-center">
                 <a [routerLink]="item.route"
-                    class="flex items-center w-full h-12 p-2 rounded-md transition-all duration-300 hover:bg-blue-500">
-                    <i class="{{item.icon}} text-xl"></i>
+                    class="flex items-center w-full h-12 p-1.5 rounded-md transition-all duration-300 hover:bg-blue-500">
+                    <i class="{{item.icon}} text-xl pr-[20px]"></i>
                     <span class="ml-4 text-white" *ngIf="isExpanded">{{ item.name }}</span>
                 </a>
             </li>
