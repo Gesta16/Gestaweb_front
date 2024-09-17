@@ -1,0 +1,284 @@
+<!-- Llamado del encabezado -->
+<app-header></app-header>
+
+<p class="text-lg md:text-xl text-center font-semibold mb-4 mt-[12rem] uppercase">Posparto</p>
+
+<!-- Diseño del formulario -->
+<div class="flex flex-wrap mt-5 uppercase">
+    <div class="w-3/6 justify-center mx-auto">
+        <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer">
+            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                   (click)="toggleTabs(1)"
+                   [ngClass]="{'text-[#00acc9] bg-white': openTab !== 1, 'text-white bg-[#00acc9]': openTab === 1}">
+                    Datos recién nacido
+                </a>
+            </li>
+            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                   (click)="toggleTabs(2)"
+                   [ngClass]="{'text-[#00acc9] bg-white': openTab !== 2, 'text-white bg-[#00acc9]': openTab === 2}">
+                    Tamización neonatal
+                </a>
+            </li>
+            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                   (click)="toggleTabs(3)"
+                   [ngClass]="{'text-[#00acc9] bg-white': openTab !== 3, 'text-white bg-[#00acc9]': openTab === 3}">
+                    Estudio de hipotiroidismo
+                </a>
+            </li>
+            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                   (click)="toggleTabs(4)"
+                   [ngClass]="{'text-[#00acc9] bg-white': openTab !== 4, 'text-white bg-[#00acc9]': openTab === 4}">
+                    Ruta PYMS
+                </a>
+            </li>
+        </ul>
+
+
+        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+            <div class="px-4 py-5 flex-auto">
+                <div class="tab-content tab-space">
+                    <!-- Datos recién nacido -->
+                    <div [ngClass]="{'hidden': openTab !== 1, 'block': openTab === 1}">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Tipo de embarazo</label>
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                    <option value="">Seleccione...</option>
+                                    <option value="">Único</option>
+                                    <option value="">Múltiple</option>
+                                </select>
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">N° recién nacido</label>
+                                <input type="date" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Sexo</label>
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                    <option value="">Seleccione...</option>
+                                    <option value="">Masculino</option>
+                                    <option value="">Femenino</option>
+                                </select>
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Peso al nacer</label>
+                                <input type="tel" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Talla al nacer en cm</label>
+                                <input type="tel" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">¿Está en plan canguro?</label>
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                    <option value="">Seleccione...</option>
+                                    <option value="">Sí</option>
+                                    <option value="">No</option>
+                                </select>
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">IPS atención plan canguro</label>
+                                <input type="text" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Tamización neonatal -->
+                    <div [ngClass]="{'hidden': openTab !== 2, 'block': openTab === 2}">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Hemoclasificación (grupo / Rh)</label>
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                    <option value="">Seleccione...</option>
+                                </select>
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Fecha TSH</label>
+                                <input type="date" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Resultado TSH</label>
+                                <input type="tel" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Prueba no treponémica recién nacido</label>
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                    <option value="">Seleccione...</option>
+                                </select>
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Fecha prueba no treponémica recién nacido</label>
+                                <input type="date" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Tamizaje auditivo</label>
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                    <option value="">Seleccione...</option>
+                                    <option value="">Positivo</option>
+                                    <option value="">Negativo</option>
+                                </select>
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Tamizaje cardiopatías congénitas</label>
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                    <option value="">Seleccione...</option>
+                                    <option value="">Positivo</option>
+                                    <option value="">Negativo</option>
+                                </select>
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Tamizaje visual</label>
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                    <option value="">Seleccione...</option>
+                                    <option value="">Positivo</option>
+                                    <option value="">Negativo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Estudio de hipotiroidismo congénito -->
+                    <div [ngClass]="{'hidden': openTab !== 3, 'block': openTab === 3}">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">TSH de seguimiento</label>
+                                <input type="tel" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Fecha resultado TSH de seguimiento</label>
+                                <input type="date" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">T4 libre</label>
+                                <input type="text" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Fecha resultado T4 libre</label>
+                                <input type="date" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Evento confirmado</label>
+                                <select id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                    <option value="">Seleccione...</option>
+                                    <option value="">Sí</option>
+                                    <option value="">No</option>
+                                </select>
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Fecha primera consulta pediatría</label>
+                                <input type="date" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Ruta PYMS -->
+                    <div [ngClass]="{'hidden': openTab !== 4, 'block': openTab === 4}">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Fecha vacunación BCG</label>
+                                <input type="date" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Fecha vacunación hepatitis</label>
+                                <input type="date" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Fecha de consulta de seguimiento a recién nacido</label>
+                                <input type="date" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+
+
+                            <div class="flex flex-col text-xs">
+                                <label for="" class="font-medium mb-1">Fecha de entrega de carnet</label>
+                                <input type="date" id=""
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="mt-8 flex justify-center">
+                        <button
+                            class="px-6 py-2 text-sm w-auto max-w-xs font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

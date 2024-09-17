@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './add-usuarios.component.css'
 })
 export class AddUsuariosComponent {
-
+  openTab = 1;
+  toggleTabs($tabNumber: number) {
+    this.openTab = $tabNumber;
+  }
 }
