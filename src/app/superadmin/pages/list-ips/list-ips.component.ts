@@ -19,7 +19,7 @@ export class ListIpsComponent implements OnInit {
   departamentos: Departamento[] = [];
   paginatedIps: any[] = [];
   currentPage: number = 1;
-  itemsPerPage: number = 4;
+  itemsPerPage: number = 15;
   totalPages: number = 1;
 
   constructor(

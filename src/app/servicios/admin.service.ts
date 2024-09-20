@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Admin } from '../modelos/admin.model'; 
-import { Departamento } from '../modelos/departamento.model';
 
 @Injectable({
   providedIn: 'root'

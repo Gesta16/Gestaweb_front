@@ -3,7 +3,6 @@
 
 <p class="text-lg md:text-xl text-center font-semibold mb-6 mt-[12rem] uppercase">Datos de la afiliada</p>
 
-<!-- Diseño del formulario -->
 <div class="flex flex-wrap mt-5">
     <div class="w-3/6 justify-center mx-auto">
         <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer">
@@ -30,116 +29,130 @@
                     <!-- Primer Tab -->
                     <div [ngClass]="{'hidden': openTab !== 1, 'block': openTab === 1}">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Departamento de residencia</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                    <option value="">Seleccione...</option>
+                                <label for="departamento" class="font-medium mb-1">Departamento de residencia</label>
+                                <select id="cod_departamento" name="cod_departamento" [(ngModel)]="usuario.cod_departamento" (change)="onDepartamentoChange($event)"
+                                    class="mx-auto mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                                    <option *ngFor="let departamento of listDepartamentos" [value]="departamento.cod_departamento">
+                                        {{departamento.nom_departamento}}
+                                    </option>
                                 </select>
                             </div>
 
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Municipio de residencia</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                    <option value="">Seleccione...</option>
+                                <label for="municipio" class="font-medium mb-1">Municipio de residencia</label>
+                                <select id="cod_municipio" name="cod_municipio" [(ngModel)]="usuario.cod_municipio"
+                                    class="mx-auto mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                                    <option *ngFor="let municipio of listMunicipios" [value]="municipio.cod_municipio">
+                                        {{municipio.nom_municipio}}
+                                    </option>
                                 </select>
                             </div>
 
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Régimen</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                    <option value="">Seleccione...</option>
+                                <label for="ips" class="font-medium mb-1">IPS</label>
+                                <select id="cod_ips" name="cod_ips" [(ngModel)]="usuario.cod_ips"
+                                    class="mx-auto mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                                    <option *ngFor="let ips of listIps" [value]="ips.cod_ips">
+                                        {{ips.nom_ips}}
+                                    </option>
                                 </select>
                             </div>
 
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Fecha de diagnóstico</label>
-                                <input type="date" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <label for="fec_diag" class="font-medium mb-1">Fecha de diagnóstico</label>
+                                <input type="date" id="fec_diag" [(ngModel)]="usuario.fec_diag_usuario"
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase w-full">
                             </div>
 
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Fecha de ingreso</label>
-                                <input type="date" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <label for="fec_ingreso" class="font-medium mb-1">Fecha de ingreso</label>
+                                <input type="date" id="fec_ingreso" [(ngModel)]="usuario.fec_ingreso"
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase w-full">
                             </div>
 
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Población diferencial</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                    <option value="">Seleccione...</option>
+                                <label for="poblacion" class="font-medium mb-1">Población diferencial</label>
+                                <select id="cod_poblacion" name="cod_poblacion" [(ngModel)]="usuario.cod_poblacion" 
+                                    class="mx-auto mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                                    <option *ngFor="let poblacion of listPoblacionDiferencial" [value]="poblacion.cod_poblacion">
+                                        {{poblacion.nom_poblacion}}
+                                    </option>
                                 </select>
                             </div>
 
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Tipo de documento</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                    <option value="">Seleccione...</option>
+                                <label for="tipo_doc" class="font-medium mb-1">Tipo de documento</label>
+                                <select id="tipoDocumento" name="tipoDocumento" [(ngModel)]="usuario.cod_documento"
+                                    class="mx-auto mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                                    <option *ngFor="let tipoDocumento of listTipoDocumentos" [value]="tipoDocumento.cod_documento">
+                                        {{ tipoDocumento.nom_documento }}
+                                    </option>
                                 </select>
                             </div>
 
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Número de documento</label>
-                                <input type="text" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <label for="numero_doc" class="font-medium mb-1">Número de documento</label>
+                                <input type="text" id="numero_doc" [(ngModel)]="usuario.documento_usuario"
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase w-full">
                             </div>
-
                         </div>
                     </div>
 
                     <!-- Segundo Tab -->
                     <div [ngClass]="{'hidden': openTab !== 2, 'block': openTab === 2}">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Nombres</label>
-                                <input type="text" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <label for="nombre" class="font-medium mb-1">Nombres</label>
+                                <input type="text" id="nombre" [(ngModel)]="usuario.nom_usuario"
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase w-full">
                             </div>
 
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Apellidos</label>
-                                <input type="text" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <label for="apellido" class="font-medium mb-1">Apellidos</label>
+                                <input type="text" id="apellido" [(ngModel)]="usuario.ape_usuario"
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase w-full">
                             </div>
 
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Fecha de nacimiento</label>
-                                <input type="date" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <label for="fec_nac" class="font-medium mb-1">Fecha de nacimiento</label>
+                                <input type="date" id="fec_nac" [(ngModel)]="usuario.fec_nacimiento"
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] w-full">
                             </div>
 
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Edad</label>
-                                <input type="tel" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <label for="edad" class="font-medium mb-1">Edad</label>
+                                <input type="tel" id="edad" [(ngModel)]="usuario.edad_usuario"
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] w-full">
                             </div>
 
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Teléfono</label>
-                                <input type="tel" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <label for="telefono" class="font-medium mb-1">Teléfono</label>
+                                <input type="tel" id="telefono" [(ngModel)]="usuario.tel_usuario"
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] w-full">
                             </div>
 
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Celular</label>
-                                <input type="tel" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <label for="celular" class="font-medium mb-1">Celular</label>
+                                <input type="tel" id="celular" [(ngModel)]="usuario.cel_usuario"
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] w-full">
                             </div>
 
                             <div class="flex flex-col text-xs">
-                                <label for="" class=" font-medium mb-1">Dirección</label>
-                                <input type="tel" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                <label for="direccion" class="font-medium mb-1">Dirección</label>
+                                <input type="text" id="direccion" [(ngModel)]="usuario.dir_usuario"
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] w-full">
+                            </div>
+
+                            <div class="flex flex-col text-xs">
+                                <label for="email" class="font-medium mb-1">Email</label>
+                                <input type="email" id="email" [(ngModel)]="usuario.email_usuario"
+                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] w-full">
                             </div>
 
                             <div class="mt-4 flex justify-center">
                                 <button
+                                    (click)="guardarUsuario()"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>

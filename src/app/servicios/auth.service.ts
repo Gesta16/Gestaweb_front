@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
+  isMenuExpanded: boolean = false; 
+
   constructor(private http: HttpClient) { }
 
   url = environment.apiUrl + 'auth';
@@ -29,5 +31,16 @@ export class AuthService {
       return identityJSON ? JSON.parse(identityJSON) : null;
     }
     return null;
+  }
+
+  logout(): void {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('identity');
+    sessionStorage.removeItem('currentRolName');
+    this.isMenuExpanded = false;  // Cerrar el menú durante el logout
+  }
+
+  toggleMenu(): void {
+    this.isMenuExpanded = !this.isMenuExpanded;
   }
 }

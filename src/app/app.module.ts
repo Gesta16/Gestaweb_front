@@ -14,7 +14,7 @@ import { SharedModule } from './shared.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -38,7 +38,8 @@ import { MatTableModule } from '@angular/material/table';
     UsuarioModule,
     SharedModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule,
   ],
   providers: [
     provideClientHydration(),

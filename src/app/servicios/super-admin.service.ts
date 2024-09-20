@@ -27,5 +27,19 @@ export class SuperAdminService {
 
     return this.http.post(this.apiUrl, superAdmin, { headers });
   }
+
+  updateSuperAdmin(superAdmin: any, id: number): Observable<any> {
+    const token = sessionStorage.getItem('token'); // Obtén el token del almacenamiento de sesión
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación.');
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/${id}`, superAdmin, { headers });
+  }
   
 }

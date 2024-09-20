@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms'; 
 
 import { SharedModule } from '../shared.module';
 
@@ -30,7 +31,8 @@ import { RutaGestanteComponent } from '../operario/pages/ruta-gestante/ruta-gest
     CommonModule,
     RouterModule,
     OperarioRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ]
 })
 export class OperarioModule { }

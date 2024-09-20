@@ -1,8 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminService } from '../../../servicios/admin.service'; 
-import { TipoDocumentoService } from '../../../servicios/tipo-documento.service';
 import { AddAdminComponent } from '../add-admin/add-admin.component';
+import { TipoDocumentoService } from '../../../servicios/tipo-documento.service';
 import { TipoDocumento } from '../../../modelos/tipo-documento.model';
 
 @Component({
@@ -17,7 +17,7 @@ export class ListAdminComponent implements OnInit {
   tiposDocumento: TipoDocumento[] = [];
   paginatedAdmins: any[] = [];
   currentPage: number = 1;
-  itemsPerPage: number = 4;
+  itemsPerPage: number = 15;
   totalPages: number = 1;
 
   constructor(

@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { User } from '../modelos/user.model';
 import { AuthService } from '../servicios/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from '../servicios/auth.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit {
   isExpanded = false;
   menuItems: any[] = [];
   isMobile: boolean = false;
@@ -20,7 +20,7 @@ export class MenuComponent {
   
 
   constructor(
-    private authService: AuthService
+    public authService: AuthService  // Usamos el AuthService para manejar el estado del menú
   ) { }
 
   @HostListener('window:resize', ['$event'])
@@ -33,6 +33,7 @@ export class MenuComponent {
     if (typeof window !== 'undefined' && localStorage) {
       localStorage.setItem('isMenuExpanded', this.isExpanded.toString());
     }
+    this.authService.toggleMenu();  // Alterna el estado del menú desde AuthService
   }
 
   ngOnInit() {
@@ -42,7 +43,7 @@ export class MenuComponent {
     if (typeof window !== 'undefined' && localStorage) {
       const savedState = localStorage.getItem('isMenuExpanded');
       if (savedState !== null) {
-        this.isExpanded = savedState === 'true';
+        this.authService.isMenuExpanded = savedState === 'true';  // Sincroniza con el estado guardado
       }
     }
 
@@ -69,7 +70,6 @@ export class MenuComponent {
     } else {
       this.isAuthenticated = false;
     }
-
   }
 
   checkIfMobile(): boolean {
