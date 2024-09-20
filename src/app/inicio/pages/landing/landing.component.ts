@@ -1,24 +1,30 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { ModalDialogAlimentacionComponent } from './modal-dialog-alimentacion/modal-dialog-alimentacion.component';
 import { ModalDialogEjercicioComponent } from './modal-dialog-ejercicio/modal-dialog-ejercicio.component';
 import { ModalDialogCrecimientoBebeComponent } from './modal-dialog-crecimiento-bebe/modal-dialog-crecimiento-bebe.component';
-import { CommonModule } from '@angular/common';
+import { MenuService } from '../../../servicios/menu.service';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
-  styleUrl: './landing.component.scss'
+  styleUrls: ['./landing.component.scss'] // Corregido a styleUrls
 })
 export class LandingComponent implements OnInit {
   title = 'modal';
   isSmallScreen: boolean = false;
 
-  constructor(private _matDialog: MatDialog) {}
+  constructor(
+    private _matDialog: MatDialog,
+    private menuService: MenuService,
+    private cdr: ChangeDetectorRef // Inyección de ChangeDetectorRef
+  ) {    this.toggleSidebar();
+  }
 
   ngOnInit() {
     this.checkScreenSize();
+    this.cdr.detectChanges(); // Asegúrate de que los cambios se detecten
   }
 
   private checkScreenSize() {
@@ -48,6 +54,10 @@ export class LandingComponent implements OnInit {
     });
   }
 
+  toggleSidebar() {
+      this.menuService.setMenuVisible(false);
+  }
+
   abrirModalEjercicio(): void {
     this._matDialog.open(ModalDialogEjercicioComponent, {
       enterAnimationDuration: '0ms',
@@ -61,4 +71,5 @@ export class LandingComponent implements OnInit {
       exitAnimationDuration: '0ms'
     });
   }
+  
 }

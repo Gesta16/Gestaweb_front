@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginRequest, LoginResponse } from '../../../modelos/login';
 import { User } from '../../../modelos/user.model';
+import { MenuService } from '../../../servicios/menu.service';
 
 @Component({
   selector: 'app-login',
@@ -25,8 +26,10 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private router: Router
-  ) { }
+    private router: Router,
+    private menuService: MenuService,
+  ) {     this.toggleSidebar();
+  }
 
   ngOnInit(): void {
     if (typeof window !== 'undefined') {
@@ -77,7 +80,7 @@ export class LoginComponent {
 
   login() {
     if (this.isSubmitting) {
-      return;
+        return;
     }
     this.isSubmitting = true;
 
@@ -85,45 +88,47 @@ export class LoginComponent {
     const password = this.loginForm.get('password')?.value ?? '';
 
     if (!documento) {
-      alert("El campo de usuario es requerido");
-      this.isSubmitting = false;
-      return;
+        alert("El campo de usuario es requerido");
+        this.isSubmitting = false;
+        return;
     }
     if (!password) {
-      alert("El campo de contraseña es requerido");
-      this.isSubmitting = false;
-      return;
+        alert("El campo de contraseña es requerido");
+        this.isSubmitting = false;
+        return;
     }
 
     const loginRequest = new LoginRequest(documento, password);
 
     this.authService.login(loginRequest).subscribe(
-      (data: any) => {
-        this.reply = data;
+        (data: any) => {
+            this.reply = data;
 
-        if (this.reply) {
-          sessionStorage.setItem('token', this.reply.access_token);
-          sessionStorage.setItem('identity', JSON.stringify(this.reply.user));
-          sessionStorage.setItem('currentRolName', this.getRoleName(this.reply.user.rol_id));
-          this.token = this.reply.access_token;
-          console.log(this.token);
-          console.log('rol login', this.currentRolId);
-          alert('Ingreso exitoso!');
-          // Redirigir después de login exitoso
-          this.router.navigate(['/landing']);
-          location.reload();
-        } else {
-          alert('Documento o contraseña incorrecta');
+            if (this.reply) {
+                sessionStorage.setItem('token', this.reply.access_token);
+                sessionStorage.setItem('identity', JSON.stringify(this.reply.user));
+                sessionStorage.setItem('currentRolName', this.getRoleName(this.reply.user.rol_id));
+                this.token = this.reply.access_token;
+
+                // Hacer visible el menú después del inicio de sesión
+                this.menuService.setMenuVisible(true);
+
+                alert('Ingreso exitoso!');
+                this.router.navigate(['/landing']);
+                location.reload();
+            } else {
+                alert('Documento o contraseña incorrecta');
+            }
+            this.isSubmitting = false;
+        },
+        error => {
+            console.error('Login failed', error);
+            alert('Documento o contraseña incorrecta');
+            this.isSubmitting = false;
         }
-        this.isSubmitting = false;
-      },
-      error => {
-        console.error('Login failed', error);
-        alert('Documento o contraseña incorrecta');
-        this.isSubmitting = false;
-      }
     );
-  }
+}
+
 
   getRoleName(rol_id: number | undefined | null): string {
     switch (rol_id) {
@@ -138,4 +143,11 @@ export class LoginComponent {
     }
   }
 
+  toggleSidebar() {
+      this.menuService.setMenuVisible(false);
+  }
+
+  volver() {
+    this.router.navigate(['/home']);
+  }
 }
