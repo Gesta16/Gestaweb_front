@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { User } from '../modelos/user.model';
 import { AuthService } from '../servicios/auth.service';
+import { MenuService } from '../servicios/menu.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,7 +9,8 @@ import { AuthService } from '../servicios/auth.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  isExpanded = false;
+  isVisible = true;
+  isExpanded = true;
   menuItems: any[] = [];
   isMobile: boolean = false;
   token: string | null = null;
@@ -20,7 +22,8 @@ export class MenuComponent implements OnInit {
   
 
   constructor(
-    public authService: AuthService  // Usamos el AuthService para manejar el estado del menú
+    public authService: AuthService,
+    private menuService: MenuService // Usamos el AuthService para manejar el estado del menú
   ) { }
 
   @HostListener('window:resize', ['$event'])
@@ -29,16 +32,18 @@ export class MenuComponent implements OnInit {
   }
 
   toggleSidebar() {
-    this.isExpanded = !this.isExpanded;
-    if (typeof window !== 'undefined' && localStorage) {
-      localStorage.setItem('isMenuExpanded', this.isExpanded.toString());
-    }
-    this.authService.toggleMenu();  // Alterna el estado del menú desde AuthService
-  }
+    this.isExpanded = !this.isExpanded; // Alterna el estado
+    this.menuService.setMenuVisible(true); // Asegúrate de que el menú siga visible
+}
+
 
   ngOnInit() {
     this.checkIfMobile();
     this.validateToken();
+
+    this.menuService.menuVisible$.subscribe(visible => {
+      this.isVisible = visible; // Actualiza la visibilidad del menú
+    });
 
     if (typeof window !== 'undefined' && localStorage) {
       const savedState = localStorage.getItem('isMenuExpanded');
