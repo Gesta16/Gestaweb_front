@@ -11,14 +11,13 @@
   <!-- Contenedor del formulario con transparencia oscura -->
   <div class="relative bg-gray-200 backdrop-filter bg-opacity-20 rounded-xl overflow-hidden w-[90%] max-w-[500px] min-h-[580px] p-6 sm:p-8 md:p-10">
 
-    <!-- Icono de flechita -->
-
     <div class="absolute top-0 h-full transition-all duration-600 ease-in-out left-0 w-full z-20">
-      <i class="fa-solid fa-arrow-left text-white z-20 buttonVolver text-xl"  (click)="volver()"></i>
+      <!-- Icono de flechita -->
+      <i class="fa-solid fa-arrow-left text-white z-20 buttonVolver text-xl cursor-pointer" (click)="volver()"></i>
 
       <!-- Formulario -->
       <form [formGroup]="loginForm" (ngSubmit)="login()" class="flex items-center justify-center flex-col h-full">
-        <h2 class="text-3xl sm:text-4xl font-bold text-white mt-[-10rem]">Iniciar Sesión</h2>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mt-[-8rem]">Iniciar Sesión</h2>
         <a class="text-sm sm:text-sm text-gray-300 text-center mb-4 w-[80%] mt-[10px]">
           Accede a tu cuenta completando los campos a continuación y continúa disfrutando de nuestros servicios.
         </a>
