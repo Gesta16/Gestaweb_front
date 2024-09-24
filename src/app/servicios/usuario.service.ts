@@ -7,7 +7,7 @@ import { Usuario } from '../modelos/usuario.model';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiUrl = 'http://127.0.0.1:8000/api/usuario'; // URL de tu API Laravel
+  private apiUrl = 'http://127.0.0.1:8000/api/usuario'; 
 
   constructor(private http: HttpClient) { }
 
@@ -29,5 +29,8 @@ export class UsuarioService {
     return this.http.post(this.apiUrl, usuario, { headers });
   }
   
+  getUsuarioById(id: number): Observable<{ estado: string; usuario: Usuario }> {
+    return this.http.get<{ estado: string; usuario: Usuario }>(`${this.apiUrl}/${id}`);
+  }
   
 }

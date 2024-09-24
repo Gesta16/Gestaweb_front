@@ -44,8 +44,12 @@
                     <td class="px-6 py-4">{{ usuario.tel_usuario }}</td>
                     <td class="px-8 py-4">{{ usuario.email_usuario }}</td>
                     <td class="px-7 py-4">
-                        <i class="fa-solid fa-eye fa-lg" style="color: #000000;"></i>
+                        <button (click)="abrirModalVer(usuario)"
+                                class="flex items-center ml-[25%] h-10 bg-transparent text-black font-bold py-2 px-4 rounded-xl hover:bg-gray-100 focus:outline-none">
+                            <i class="fa-solid fa-eye fa-lg" style="color: #000000;"></i>
+                        </button>
                     </td>
+                    
                 </tr>
             </tbody>
         </table>

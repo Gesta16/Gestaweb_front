@@ -41,10 +41,10 @@ export class EditIpsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.ips = { ...this.data.ips }; // Cargar los datos del IPS a editar
+    this.ips = { ...this.data.ips }; 
     this.getDepartamentos();
     this.getRegimenes();
-    this.getMunicipios(this.ips.cod_departamento); // Cargar municipios del departamento actual
+    this.getMunicipios(this.ips.cod_departamento); 
   }
 
   onDepartamentoChange(event: Event): void {

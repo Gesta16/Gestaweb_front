@@ -1,0 +1,125 @@
+<!-- Diseño de modal para ver usuario -->
+<div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+    <div class="bg-white rounded-lg w-[90%] md:w-[70%] lg:w-[65%] p-6">
+        <h2 class="text-xl font-bold mb-4 text-center">Detalles del Usuario</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
+            <!-- Código de documento -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Tipo de Documento:</label>
+                <input type="text" [value]="getTipoDocumentoNombre(usuario?.cod_documento)" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Número de documento -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Documento:</label>
+                <input type="text" [value]="usuario?.documento_usuario" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Nombre -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Nombre:</label>
+                <input type="text" [value]="usuario?.nom_usuario" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Apellido -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Apellido:</label>
+                <input type="text" [value]="usuario?.ape_usuario" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Correo electrónico -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Correo Electrónico:</label>
+                <input type="text" [value]="usuario?.email_usuario" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Teléfono -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Teléfono:</label>
+                <input type="text" [value]="usuario?.tel_usuario" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Celular -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Celular:</label>
+                <input type="text" [value]="usuario?.cel_usuario" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Fecha de nacimiento -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Fecha de Nacimiento:</label>
+                <input type="text" [value]="usuario?.fec_nacimiento | date:'dd/MM/yyyy'" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Edad -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Edad:</label>
+                <input type="text" [value]="usuario?.edad_usuario" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Dirección -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Dirección:</label>
+                <input type="text" [value]="usuario?.dir_usuario" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Fecha de diagnóstico -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Fecha de Diagnóstico:</label>
+                <input type="text" [value]="usuario?.fec_diag_usuario | date:'dd/MM/yyyy'" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Fecha de ingreso -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Fecha de Ingreso:</label>
+                <input type="text" [value]="usuario?.fec_ingreso | date:'dd/MM/yyyy'" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Código de departamento -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Departamento:</label>
+                <input type="text" [value]="getDepartamento(usuario?.cod_departamento)" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Código de municipio -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Municipio:</label>
+                <input type="text" [value]="getMunicipio(usuario?.cod_municipio)" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Código de IPS -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">IPS:</label>
+                <input type="text" [value]="getIps(usuario?.cod_ips)" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Código de población -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Población:</label>
+                <input type="text" [value]="getPoblacionDiferencial(usuario?.cod_poblacion)" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+        </div>
+
+        <div class="flex justify-end mt-6">
+            <button (click)="cerrar()" 
+                    class="bg-[#80BA27] hover:bg-[#7cb02d] text-white font-bold py-2 px-4 rounded">Cerrar</button>
+        </div>
+    </div>
+</div>
