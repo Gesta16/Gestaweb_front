@@ -1,10 +1,13 @@
 <!-- Diseño del menú -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<nav class="sidebar relative h-screen flex flex-col shadow-xl p-4 bg-white overflow-hidden" [ngClass]="{ 'w-56': isExpanded, 'w-[37%]': !isExpanded }" *ngIf="isVisible">
-
+<nav class="sidebar relative h-screen flex flex-col shadow-xl p-4 bg-white overflow-hidden" 
+    [ngClass]="{ 'w-56': isExpanded, 'w-20': !isExpanded }" 
+    *ngIf="isVisible">
+    
+    <!-- Encabezado y botón de colapso -->
     <header class="relative z-20">
-        <div class="toggle absolute top-4  right-[-8px] h-[40px] w-[40px] flex items-center justify-center rounded-r-xl text-white text-xl transition-all duration-300 cursor-pointer"
+        <div class="toggle absolute top-4 right-[-8px] h-[40px] w-[40px] flex items-center justify-center rounded-r-xl text-white text-xl transition-all duration-300 cursor-pointer"
             (click)="toggleSidebar()">
             <ng-container *ngIf="isExpanded; else burgerIcon">
                 <svg xmlns="http://www.w3.org/2000/svg" style="width: 25px; height: 25px; margin-top:9rem;"
