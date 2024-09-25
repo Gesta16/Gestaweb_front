@@ -2,14 +2,14 @@
 <app-header></app-header>
 
 <!-- Título -->
-<div class="flex justify-center lg:mr-[4%] lg:mt-[9rem] pt-44 md:pt-0">
+<div class="flex justify-center lg:mr-[4%] lg:mt-[9rem] pt-48 md:pt-0">
     <p class="font-bold text-3xl">Perfil</p>
 </div>
 
 <!-- Contenedor principal -->
 <div class="w-full max-w-[80rem] mx-auto p-4 mt-8 flex flex-col lg:flex-row items-start justify-center space-y-6 lg:space-y-0 lg:space-x-6">
     <!-- Contenedor con imagen y nombre -->
-    <div class="bg-white rounded-lg w-full lg:w-[30%] h-[26rem] p-4 border shadow-lg flex flex-col items-center overflow-y-auto">
+    <div class="bg-white rounded-lg w-full lg:w-[30%] h-auto sm:h-[26rem] p-4 border shadow-lg flex flex-col items-center">
         <!-- Imagen circular -->
         <div class="w-32 h-32 bg-gray-200 rounded-full mb-6 mt-8">
             <img src="../../../../assets/images/perfil/super.png" alt="Perfil"
@@ -22,7 +22,7 @@
     </div>
 
     <!-- Diseño de Información personal -->
-    <div class="bg-white rounded-lg w-full lg:w-[35%] h-[26rem] p-4 border shadow-lg flex flex-col justify-center">
+    <div class="bg-white rounded-lg w-full lg:w-[35%] h-auto sm:h-[26rem] p-4 border shadow-lg flex flex-col justify-center">
         <h2 class="text-xl font-bold mb-11 text-center">Información personal</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
 
@@ -75,16 +75,16 @@
             </div>
 
             <!-- Mostrar campos de contraseña solo cuando isEditing es verdadero -->
-            <div *ngIf="isEditing" class="col-span-2 grid grid-cols-2 gap-4"> 
+            <div *ngIf="isEditing" class="md:col-span-2 grid md:grid-cols-2 gap-4"> 
                 <!-- Nueva contraseña -->
-                <div class="mb-0">
+                <div class="mb-1">
                     <label for="newPassword" class="text-sm font-medium text-gray-700">Nueva Contraseña</label>
                     <input type="password" id="newPassword" name="newPassword"
                         class="block w-full mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
                 </div>
 
                 <!-- Confirmar nueva contraseña -->
-                <div class="mb-0">
+                <div class="mb-1">
                     <label for="confirmPassword" class="text-sm font-medium text-gray-700">Confirmar Contraseña</label>
                     <input type="password" id="confirmPassword" name="confirmPassword"
                         class="block w-full mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]">
@@ -95,7 +95,7 @@
 </div>
 
 <!-- Botones -->
-<div class="flex justify-center space-x-4 mt-4 mr-[3rem]">
+<div class="flex justify-center space-x-4 mt-4">
     <!-- Mostrar botón Cancelar solo cuando se está editando -->
     <button *ngIf="isEditing" (click)="toggleEdit()"
         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">

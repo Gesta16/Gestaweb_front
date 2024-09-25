@@ -1,33 +1,33 @@
 <!-- Este archivo contiene la ruta de seguimiento de la gestante (inf_personal y inf_bb)-->
 <app-header></app-header>
 
-<div class="flex ml-[34%] px-[65px] mt-[12rem]">
-    <p class="font-semibold text-4xl">Ruta de seguimiento</p>
+<div class="flex flex-col px-[65px] mt-[8rem] items-center pt-20 md:pt-0">
+    <p class="font-semibold text-4xl text-center">Ruta de seguimiento</p>
 </div>
-<div class="flex ml-[33%] px-[65px] mt-[1%] text-gray-700">
-    <p class="font-semibold text-lg">Seleccione la información que desea consultar</p>
+<div class="flex px-[65px] mt-[1%] text-gray-700 flex flex-col items-center">
+    <p class="font-semibold text-lg text-center">Seleccione la información que desea consultar</p>
 </div>
 
 <!-- Contenedor gris-->
-<div class="w-[70rem] h-[20rem] p-8 rounded-lg mt-[5%] md:ml-auto md:mr-[17%]">
+<div class="w-full max-w-[70rem] p-4 md:p-8 rounded-lg mx-auto mt-8">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto max-w-5xl mt-[4%]">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mx-auto max-w-5xl ml-6">
 
         <!-- Ruta 1 -->
-        <div class="relative flex items-center bg-[#ea7c89] rounded-xl shadow-lg overflow-visible h-[10rem] w-[25rem] ">
+        <div class="relative flex flex-col md:flex-row items-center bg-[#ea7c89] rounded-xl shadow-lg overflow-visible h-auto md:h-[10rem] w-full md:w-[25rem]">
 
             <!-- Contenido del número -->
             <div
-                class="relative bg-[#ea7c89] text-white text-xl font-semibold p-4 rounded-l-xl custom-triangle z-30 w-[17%] shadow-lg">
+                class="relative bg-[#ea7c89] text-white text-xl font-semibold p-4 rounded-t-xl md:rounded-l-xl md:rounded-tr-none custom-triangle z-30 w-full md:w-[17%] shadow-lg">
                 <p class="text-center text-[37px]">01</p>
-                <div class="h-[2px] mx-auto bg-white border-0 rounded md:my-3"></div>
+                <div class="h-0.5 mx-auto bg-white my-2"></div>
             </div>
 
             <!-- Superposición translúcida -->
-            <div class="absolute top-[-12px] left-[18%] z-20 w-[24rem]">
-                <div class="p-6 bg-white bg-opacity-75 shadow-lg rounded-2xl relative">
+            <div class="w-full md:w-[24rem] md:absolute md:top-[-12px] md:left-[18%] z-20">
+                <div class="p-6 bg-white bg-opacity-75 shadow-lg rounded-b-xl md:rounded-2xl relative">
                     <h3 class="text-lg font-semibold text-gray-800 font-serif">Información mamá</h3>
-                    <p class="text-gray-600 text-sm w-[74%]">
+                    <p class="text-gray-600 text-sm w-full md:w-[74%]">
                         Gestiona tu información personal para 
                         llevar un seguimiento más completo durante el embarazo
                     </p>
@@ -39,27 +39,27 @@
             </div>
 
             <!-- Icono -->
-            <div class="ml-[79%] relative z-20 p-6 mt-[-15px]">
+            <div class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
                 <i class="fas fa-id-card fa-2xl text-gray-400"></i>
             </div>
 
         </div>
 
         <!-- Ruta 2 -->
-        <div class="relative flex items-center bg-[#E2713E] rounded-xl shadow-lg overflow-visible h-[10rem] w-[25rem]">
+        <div class="relative flex flex-col md:flex-row items-center bg-[#E2713E] rounded-xl shadow-lg overflow-visible h-auto md:h-[10rem] w-full md:w-[25rem]">
 
             <!-- Contenido del número -->
             <div
-                class="relative bg-[#E2713E] text-white text-xl font-semibold p-4 rounded-l-xl custom-triangle2 z-30 w-[17%] shadow-lg">
+                class="relative bg-[#E2713E] text-white text-xl font-semibold p-4 rounded-t-xl md:rounded-l-xl md:rounded-tr-none custom-triangle2 z-30 w-full md:w-[17%] shadow-lg">
                 <p class="text-center text-[37px]">02</p>
-                <div class="h-[2px] mx-auto bg-white border-0 rounded md:my-3"></div>
+                <div class="h-0.5 mx-auto bg-white my-2"></div>
             </div>
 
             <!-- Superposición translúcida -->
-            <div class="absolute top-[-12px] left-[18%] z-20 w-[24rem]">
-                <div class="p-6 bg-white bg-opacity-75 rounded-2xl relative shadow-lg">
+            <div class="w-full md:w-[24rem] md:absolute md:top-[-12px] md:left-[18%] z-20">
+                <div class="p-6 bg-white bg-opacity-75 rounded-b-xl md:rounded-2xl relative shadow-lg">
                     <h3 class="text-lg font-semibold text-gray-800 font-serif">Información bebé</h3>
-                    <p class="text-gray-600 text-sm w-[74%]">
+                    <p class="text-gray-600 text-sm w-full md:w-[74%]">
                         Gestiona la información de tu bebé para llevar 
                         un seguimiento más detallado de su desarrollo
                     </p>
@@ -71,7 +71,7 @@
             </div>
 
             <!-- Icono -->
-            <div class="ml-[79%] relative z-20 p-6 mt-[-15px]">
+            <div class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
                 <i class="fas fa-baby-carriage fa-2xl text-gray-400"></i>
             </div>
         </div>
