@@ -100,6 +100,22 @@ export class AddUsuariosComponent {
     });
   }
 
+  calcularEdad(): void {
+    if (this.usuario.fec_nacimiento) {
+        const hoy = new Date();
+        const fechaNacimiento = new Date(this.usuario.fec_nacimiento);
+        let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+        const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+        if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+            edad--;
+        }
+        this.usuario.edad_usuario = edad.toString();
+    } else {
+        this.usuario.edad_usuario = '';
+    }
+}
+
+
   getDepartamentos(): void {
     this.departamentoService.getDepartamentos().subscribe(
       (data: { estado: string; departamento: Departamento[] }) => {

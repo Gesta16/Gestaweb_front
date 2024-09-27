@@ -3,6 +3,7 @@ import { UsuarioService } from '../../../servicios/usuario.service'; // Asegúra
 import { Usuario } from '../../../modelos/usuario.model'; 
 import { TipoDocumentoService } from '../../../servicios/tipo-documento.service';
 import { TipoDocumento } from '../../../modelos/tipo-documento.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-usuarios',
@@ -10,6 +11,7 @@ import { TipoDocumento } from '../../../modelos/tipo-documento.model';
   styleUrls: ['./list-usuarios.component.css']
 })
 export class ListUsuariosComponent implements OnInit {
+  selectedUserId: number | null = null;
   title = 'Gestión de Usuarios';
   isSmallScreen: boolean = false;
   usuarios: Usuario[] = [];
@@ -21,7 +23,8 @@ export class ListUsuariosComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private tipoDocumentoService: TipoDocumentoService
+    private tipoDocumentoService: TipoDocumentoService,
+    private router:Router
   ) {}
 
   ngOnInit() {
@@ -56,10 +59,17 @@ export class ListUsuariosComponent implements OnInit {
   //   });
   // }
 
+  verUsuario(id: number): void {
+    this.selectedUserId = id;
+    console.log('ID del usuario seleccionado:', this.selectedUserId);
+    
+    this.router.navigate(['/ruta-gestante', this.selectedUserId]);
+  }
+
   private loadUsuarios(): void {
     this.usuarioService.getUsuarios().subscribe(
       (response: any) => {
-        this.usuarios = response.usuarios; // Asegúrate de que el campo coincide con tu API
+        this.usuarios = response.usuarios; 
         this.updatePagination();
       },
       (error: any) => {

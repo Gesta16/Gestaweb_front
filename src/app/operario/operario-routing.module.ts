@@ -18,12 +18,15 @@ const routes:Routes = [
     children: [
       {path: 'add-usuarios', component:AddUsuariosComponent, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'ruta-2', component:Ruta2Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
+      { path: 'ruta-2/:id', component: Ruta2Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'ruta-3', component:Ruta3Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'ruta-4', component:Ruta4Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'ruta-5', component:Ruta5Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'ruta-6', component:Ruta6Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'list-usuarios', component:ListUsuariosComponent, data: { title: 'Usuarios', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'ruta-gestante', component:RutaGestanteComponent},
+      { path: 'ruta-gestante/:id', component: RutaGestanteComponent }, 
+
       
     ]
   }
