@@ -1,6 +1,6 @@
 <!-- Este archivo contiene la lista de usuarios (Mujeres gestantes) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Encabezado -->
 <app-header></app-header>
@@ -12,7 +12,8 @@
         <div class="flex justify-between items-center h-full p-4">
             <h1 class="font-bold text-3xl" style="margin-left: 30px;">Gestantes</h1>
             <button [routerLink]="['/ruta-gestante']"
-                class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none" style="margin-right: 30px;">
+                class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none"
+                style="margin-right: 30px;">
                 Crear
             </button>
         </div>
@@ -43,19 +44,17 @@
                     <td class="px-6 py-4">{{ usuario.tel_usuario }}</td>
                     <td class="px-8 py-4">{{ usuario.email_usuario }}</td>
                     <td class="px-7 py-4">
+
+
                         <button (click)="abrirModalVer(usuario)"
-                                class="bg-transparent border-none cursor-pointer p-0">
-                                <span class="iconify fa-lg" data-icon="fluent:form-24-filled"></span>
-
-
+                            class="flex items-center ml-[25%] h-10 bg-transparent text-black font-bold py-2 px-4 rounded-xl hover:bg-gray-100 focus:outline-none">
+                            <span class="iconify fa-lg" data-icon="fluent:form-24-filled"></span>
                         </button>
-                        <button (click)="verUsuario(usuario.id_usuario)" 
-                                class="bg-transparent border-none cursor-pointer p-0">
-                                <span class="iconify fa-lg" data-icon="game-icons:baby-bottle"></span>
 
-                        <button (click)="abrirModalVer(usuario)"
-                                class="flex items-center ml-[25%] h-10 bg-transparent text-black font-bold py-2 px-4 rounded-xl hover:bg-gray-100 focus:outline-none">
-                            <i class="fa-solid fa-eye fa-lg" style="color: #000000;"></i>
+
+                        <button (click)="verUsuario(usuario.id_usuario)"
+                            class="flex items-center ml-[25%] h-10 bg-transparent text-black font-bold py-2 px-4 rounded-xl hover:bg-gray-100 focus:outline-none">
+                            <span class="iconify fa-lg" data-icon="game-icons:baby-bottle"></span>
                         </button>
                     </td>
                 </tr>

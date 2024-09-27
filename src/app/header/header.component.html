@@ -2,7 +2,7 @@
     <div class="relative p-2 text-center h-full flex flex-col md:flex-row items-center">
         <!-- Imagen en la esquina superior izquierda -->
         <img src="../../../../assets/images/header/ucc_white.png" alt="Imagen"
-            class="h-12 md:h-16 w-auto">
+            class="absolute top-2 left-4 w-[20%] h-auto md:static md:w-[11%] md:left-8 md:top-[-8px]">
 
         <!-- Input de buscar -->
         <div class="relative w-xl md:max-w-md mt-4 md:mt-[10px] md:ml-14">
@@ -13,7 +13,7 @@
         </div>
 
         <!-- Botón y campana -->
-        <div class="flex items-center space-x-4 sm:space-x-6 mr-0 sm:mr-12 order-2 sm:order-none">
+        <div class="flex items-center space-x-4 md:space-x-10 mt-4 md:mt-0 md:ml-auto md:mr-16">
             <i class="fa-regular fa-bell fa-lg cursor-pointer text-white"></i>
             <button (click)="logout()"
                 class="h-10 bg-white text-[#00ACC9] py-2 px-4 rounded-xl hover:bg-[#f6f6f6] focus:outline-none">
