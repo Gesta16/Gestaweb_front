@@ -15,6 +15,7 @@ import { Ruta6Component } from './pages/formulario/ruta-6/ruta-6.component';
 
 import { ListUsuariosComponent } from '../operario/pages/list-usuarios/list-usuarios.component';
 import { RutaGestanteComponent } from '../operario/pages/ruta-gestante/ruta-gestante.component';
+import { VerUsuarioComponent } from './pages/ver-usuario/ver-usuario.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RutaGestanteComponent } from '../operario/pages/ruta-gestante/ruta-gest
     Ruta5Component,
     Ruta6Component,
     ListUsuariosComponent,
-    RutaGestanteComponent
+    RutaGestanteComponent,
+    VerUsuarioComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,11 @@
+.fixed {
+    z-index: 1000; /* Asegúrate de que este valor es mayor que el del botón de cerrar sesión */
+  }
+  
+  .bg-gray-900 {
+    pointer-events: auto; /* Permite eventos en el overlay */
+  }
+  
+  .titulo{
+    margin-bottom: 40px;
+  }
