@@ -14,13 +14,17 @@
     <div class="bg-white rounded-lg w-full lg:w-[30%] h-[26rem] p-4 border shadow-lg flex flex-col items-center overflow-y-auto">
         <!-- Imagen circular -->
         <div class="w-32 h-32 bg-gray-200 rounded-full mb-6 mt-8">
-            <img src="../../../../assets/images/perfil/super.png" alt="Perfil"
+            <img src="../../../../assets/images/perfil/default.png" alt=""
                 class="w-full h-full object-cover rounded-full">
         </div>
 
-        <!-- Nombre -->
-        <h2 class="text-xl font-bold text-center">{{ user?.userable?.nom_superadmin || 'Nombre no disponible' }}</h2>
-        <h2 class="text-xl font-bold text-center mt-2">{{ user?.userable?.ape_superadmin || 'Apellido no disponible' }}</h2>
+        <!-- Nombre y Apellido según el rol -->
+        <h2 class="text-xl font-bold text-center">
+            {{ user?.userable?.nom_superadmin || user?.userable?.nom_usuario || user?.userable?.nom_admin || user?.userable?.nom_operador || 'Nombre no disponible' }}
+        </h2>
+        <h2 class="text-xl font-bold text-center mt-2">
+            {{ user?.userable?.ape_superadmin || user?.userable?.ape_usuario || user?.userable?.ape_admin || user?.userable?.ape_operador || 'Apellido no disponible' }}
+        </h2>
     </div>
 
     <!-- Diseño de Información personal -->
@@ -44,20 +48,23 @@
                     [value]="user?.documento || ''" [disabled]="!isEditing">
             </div>
 
-            <!-- Nombre -->
-            <div class="mb-1">
-                <label for="nombre" class="text-sm font-medium text-gray-700">Nombre</label>
-                <input type="text" id="nombre" name="nombre"
-                    class="block w-full mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
-                    [value]="user?.userable?.nom_superadmin || ''" [disabled]="!isEditing">
-            </div>
+            <!-- Campos adicionales -->
+            <div *ngIf="user?.userable">
+                <!-- Nombre -->
+                <div class="mb-1">
+                    <label for="nombre" class="text-sm font-medium text-gray-700">Nombre</label>
+                    <input type="text" id="nombre" name="nombre"
+                        class="block w-full mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
+                        [value]="user?.userable?.nom_superadmin || user?.userable?.nom_usuario || user?.userable?.nom_admin || user?.userable?.nom_operador || ''" [disabled]="!isEditing">
+                </div>
 
-            <!-- Apellido -->
-            <div class="mb-1">
-                <label for="apellido" class="text-sm font-medium text-gray-700">Apellido</label>
-                <input type="text" id="apellido" name="apellido"
-                    class="block w-full mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
-                    [value]="user?.userable?.ape_superadmin || ''" [disabled]="!isEditing">
+                <!-- Apellido -->
+                <div class="mb-1">
+                    <label for="apellido" class="text-sm font-medium text-gray-700">Apellido</label>
+                    <input type="text" id="apellido" name="apellido"
+                        class="block w-full mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
+                        [value]="user?.userable?.ape_superadmin || user?.userable?.ape_usuario || user?.userable?.ape_admin || user?.userable?.ape_operador || ''" [disabled]="!isEditing">
+                </div>
             </div>
 
             <!-- Email -->
@@ -65,7 +72,7 @@
                 <label for="email" class="text-sm font-medium text-gray-700">E-mail</label>
                 <input type="email" id="email" name="email"
                     class="block w-full mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
-                    [value]="user?.userable?.email_superadmin || ''" [disabled]="!isEditing">
+                    [value]="user?.userable?.email_superadmin || user?.userable?.email_usuario || user?.userable?.email_admin || user?.userable?.email_operador || ''" [disabled]="!isEditing">
             </div>
 
             <!-- Teléfono -->
@@ -73,7 +80,7 @@
                 <label for="telefono" class="text-sm font-medium text-gray-700">Teléfono</label>
                 <input type="text" id="telefono" name="telefono"
                     class="block w-full mt-2 px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-[#00ACC9]"
-                    [value]="user?.userable?.tel_superadmin || ''" [disabled]="!isEditing">
+                    [value]="user?.userable?.tel_superadmin || user?.userable?.tel_usuario || user?.userable?.tel_admin || user?.userable?.tel_operador || ''" [disabled]="!isEditing">
             </div>
 
             <!-- Mostrar campos de contraseña solo cuando isEditing es verdadero -->

@@ -18,6 +18,20 @@
                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
             </div>
 
+            <!-- Código de departamento -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Departamento:</label>
+                <input type="text" [value]="getDepartamento(usuario?.cod_departamento)" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
+            <!-- Código de municipio -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Municipio:</label>
+                <input type="text" [value]="getMunicipio(usuario?.cod_municipio)" readonly
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
+            </div>
+
             <!-- Nombre -->
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Nombre:</label>
@@ -88,19 +102,7 @@
                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
             </div>
 
-            <!-- Código de departamento -->
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Departamento:</label>
-                <input type="text" [value]="getDepartamento(usuario?.cod_departamento)" readonly
-                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
-            </div>
-
-            <!-- Código de municipio -->
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Municipio:</label>
-                <input type="text" [value]="getMunicipio(usuario?.cod_municipio)" readonly
-                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
-            </div>
+            
 
             <!-- Código de IPS -->
             <div class="mb-4">

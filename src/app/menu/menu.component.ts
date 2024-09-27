@@ -14,71 +14,95 @@ export class MenuComponent implements OnInit {
   menuItems: any[] = [];
   isMobile: boolean = false;
   token: string | null = null;
-  role: string | null = null;
   currentRolId: string | null = "";
   user: User | null = null;
-  currentRolName: string | null = "";
   isAuthenticated: boolean = false;
-  
+
+  allMenuItems = [
+    { name: 'Dashboard', route: 'dashboard', icon: 'fa-solid fa-chart-pie', roles: ['superadmin', 'admin', 'operador', 'user'] },
+    { name: 'Superadmin', route: 'list-superadmin', icon: 'fa-solid fa-user-tie', roles: ['superadmin'] },
+    { name: 'Administradores', route: 'list-admin', icon: 'fa-solid fa-users', roles: ['superadmin', 'admin'] },
+    { name: 'Operadores', route: 'list-operadores', icon: 'fa-solid fa-stethoscope', roles: ['superadmin', 'admin'] },
+    { name: 'IPS', route: 'list-ips', icon: 'fa-solid fa-hospital', roles: ['superadmin', 'admin'] },
+    { name: 'Usuarios', route: 'list-usuarios', icon: 'fa-solid fa-users', roles: ['superadmin', 'admin', 'operador'] },
+    { name: 'Ruta seguimiento', route: 'ruta-seguimiento', icon: 'fa-solid fa-route', roles: ['user'] },
+    { name: 'Perfil', route: 'perfil-superadmin', icon: 'fa-solid fa-user', roles: ['superadmin', 'admin', 'operador', 'user'] },
+  ];
 
   constructor(
     public authService: AuthService,
-    private menuService: MenuService // Usamos el AuthService para manejar el estado del menú
+    private menuService: MenuService
   ) { }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    this.isMobile = window.innerWidth < 768;
+    this.isMobile = this.checkIfMobile();
   }
 
   toggleSidebar() {
-    this.isExpanded = !this.isExpanded; // Alterna el estado
-    this.menuService.setMenuVisible(true); // Asegúrate de que el menú siga visible
-}
-
-
-ngOnInit() {
-  this.checkIfMobile();
-  this.validateToken(); // Verifica el token y ajusta la autenticación
-
-  // Suscribirse a los cambios en la visibilidad del menú
-  this.menuService.menuVisible$.subscribe(visible => {
-      this.isVisible = visible; // Actualiza la visibilidad del menú
-  });
-
-  // Verificar el estado guardado de la expansión del menú
-  if (typeof window !== 'undefined' && localStorage) {
-      const savedState = localStorage.getItem('isMenuExpanded');
-      if (savedState !== null) {
-          this.authService.isMenuExpanded = savedState === 'true'; // Sincroniza con el estado guardado
-      }
+    this.isExpanded = !this.isExpanded;
+    this.menuService.setMenuVisible(true);
   }
 
-  // Establecer la autenticación solo después de validar el token
-  if (typeof window !== "undefined") {
-      this.isAuthenticated = this.authService.isAuthenticated();
-      this.isVisible = this.isAuthenticated; // Hacer que el menú sea visible solo si está autenticado
+  ngOnInit() {
+    this.checkIfMobile();
+    this.validateToken();
+    
+    this.menuItems = this.filterMenuItemsByRole(this.allMenuItems);
+    
+    this.menuService.menuVisible$.subscribe(visible => {
+      this.isVisible = visible;
+    });
   }
-}
-
 
   validateToken(): void {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
       this.token = sessionStorage.getItem("token");
-
+  
       if (this.token) {
         const identityJSON = sessionStorage.getItem('identity');
         if (identityJSON) {
           this.user = JSON.parse(identityJSON);
-          this.currentRolName = sessionStorage.getItem('currentRolName');
           this.currentRolId = this.user?.rol_id?.toString() || '';
-          console.log(this.user);
-          console.log(this.currentRolName);
         }
+        this.isAuthenticated = true;
+      } else {
+        this.isAuthenticated = false;
       }
-      this.isAuthenticated = true;
     } else {
-      this.isAuthenticated = false;
+      this.isAuthenticated = false; // O maneja la autenticación de otra forma
+    }
+  }
+  
+  filterMenuItemsByRole(menuItems: any[]) {
+    switch (this.currentRolId) {
+      case '1': // Superadmin
+        return menuItems.filter(item => 
+          item.route !== 'list-usuarios' && 
+          item.route !== 'ruta-seguimiento'
+        ); // Muestra todo menos Usuarios y Ruta seguimiento
+      case '2': // Admin
+        return menuItems.filter(item => 
+          item.route === 'dashboard' || 
+          item.route === 'list-admin' || 
+          item.route === 'list-operadores' || 
+          item.route === 'list-usuarios' || 
+          item.route === 'perfil-superadmin'
+        );
+      case '3': // Operador
+        return menuItems.filter(item => 
+          item.route === 'dashboard' || 
+          item.route === 'list-usuarios' || 
+          item.route === 'perfil-superadmin'
+        );
+      case '4': // Usuario
+        return menuItems.filter(item => 
+          item.route === 'dashboard' || 
+          item.route === 'ruta-seguimiento' || 
+          item.route === 'perfil-superadmin'
+        );
+      default:
+        return [];
     }
   }
 
@@ -86,6 +110,6 @@ ngOnInit() {
     if (typeof window !== 'undefined') {
       return window.innerWidth <= 768;
     }
-    return false;
+    return false; // Valor por defecto si no se puede acceder a window
   }
 }

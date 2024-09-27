@@ -5,26 +5,23 @@
 <!-- Encabezado -->
 <app-header></app-header>
 
-<!-- Título y botón de crear -->
-<div class="container mx-auto px-4 mt-[8rem]">
-    <div class="flex md:items-center md:justify-center relative">
-        <h1 class="font-bold text-3xl mb-2 md:mb-0">Operadores</h1>
-        <div class="relative left-[21rem] mt-[5rem]">
+<!-- Contenedor principal -->
+<div class="container mx-auto px-4 mt-[8rem]" style="width: 95%;">
+    <!-- Título -->
+    <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4" style="height: 80px;">
+        <div class="flex justify-between items-center h-full p-4">
+            <h1 class="font-bold text-3xl" style="margin-left: 30px;">Operadores</h1>
             <button (click)="abrirModal()"
-                class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none">
+                class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none" style="margin-right: 30px;">
                 Crear
             </button>
         </div>
     </div>
-</div>
 
-<!-- Estilo de la tabla -->
-<div class="w-full max-w-[80rem] mx-auto h-[30rem] p-8 rounded-lg relative">
-    <div class="relative overflow-x-auto p-8 text-center lg:-ml-[3%]">
-        <table
-            class="w-full text-sm text-center rtl:text-right text-gray-700 dark:text-gray-600 rounded-lg overflow-hidden">
-            <thead
-                class="text-xs text-gray-700 uppercase bg-[#44BDD4] dark:bg-gray-700 rounded shadow-sm">
+    <!-- Estilo de la tabla -->
+    <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4 espacio">
+        <table class="w-full text-sm text-center text-gray-700 rounded-lg overflow-hidden">
+            <thead class="text-xs text-gray-700 uppercase bg-[#44BDD4]">
                 <tr>
                     <th scope="col" class="px-6 py-3">Tipo de documento</th>
                     <th scope="col" class="px-6 py-3">N° documento</th>
@@ -36,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let operador of paginatedOperadores" class="border-b dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 h-[-20rem]">
+                <tr *ngFor="let operador of paginatedOperadores" class="border-b hover:bg-gray-50">
                     <td>{{ getTipoDocumentoNombre(operador.cod_documento) }}</td>
                     <td>{{ operador.documento_operador }}</td>
                     <td>{{ operador.nom_operador }}</td>
@@ -50,22 +47,24 @@
             </tbody>
         </table>
     </div>
-    <nav class="flex items-center flex-column flex-wrap md:flex-row justify-center pt-4 mt-6" aria-label="Table navigation">
-        <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+
+    <!-- Paginación -->
+    <nav class="flex items-center justify-center pt-4 mb-4" aria-label="Table navigation">
+        <ul class="inline-flex -space-x-px text-sm h-8">
             <li *ngIf="currentPage > 1">
                 <a (click)="changePage(currentPage - 1)"
-                    class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-cyan-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Anterior</a>
+                    class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-cyan-500">Anterior</a>
             </li>
             <li *ngFor="let page of totalPagesArray">
                 <a (click)="changePage(page)"
                     [ngClass]="{'bg-[#E8f7fd] text-black': page === currentPage, 'text-gray-500 bg-white': page !== currentPage}"
-                    class="flex items-center justify-center px-3 h-8 leading-tight border border-gray-300 hover:bg-cyan-500 hover:text-white dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                    class="flex items-center justify-center px-3 h-8 leading-tight border border-gray-300 hover:bg-cyan-500 hover:text-white">
                     {{ page }}
                 </a>
             </li>
             <li *ngIf="currentPage < totalPages">
                 <a (click)="changePage(currentPage + 1)"
-                    class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-cyan-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Siguiente</a>
+                    class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-cyan-500">Siguiente</a>
             </li>
         </ul>
     </nav>

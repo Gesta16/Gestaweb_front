@@ -1,0 +1,12 @@
+.fixed {
+    z-index: 1000;
+  }
+  
+  .bg-gray-900 {
+    pointer-events: auto; 
+  }
+
+  .titulo{
+    margin-bottom: 40px;
+  }
+  
