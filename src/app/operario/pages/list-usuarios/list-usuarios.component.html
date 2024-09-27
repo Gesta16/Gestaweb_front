@@ -44,9 +44,16 @@
                     <td class="px-6 py-4">{{ usuario.tel_usuario }}</td>
                     <td class="px-8 py-4">{{ usuario.email_usuario }}</td>
                     <td class="px-7 py-4">
+                        <button
+                                class="bg-transparent border-none cursor-pointer p-0">
+                                <span class="iconify fa-lg" data-icon="fluent:form-24-filled"></span>
+
+
+                        </button>
                         <button (click)="verUsuario(usuario.id_usuario)" 
                                 class="bg-transparent border-none cursor-pointer p-0">
-                            <i class="fa-solid fa-eye fa-lg" style="color: #000000;"></i>
+                                <span class="iconify fa-lg" data-icon="game-icons:baby-bottle"></span>
+
                         </button>
                     </td>
                 </tr>
