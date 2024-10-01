@@ -139,15 +139,27 @@ export class Ruta3Component {
   constructor(private itsService:ItsService ,private vdrlService: PruebaVDRLService, private rprService: PruebaRprService, private laboratorioIIISemestreservice: LaboratorioiiisemestreService, private laboratorioIISemestreservice: LaboratorioiisemestreService, private laboratorioISemestreservice: LaboratorioisemestreService, private route: ActivatedRoute, private hemoclasificacionService: HemoclasificacionService, private antibiogramaService: AntibiogramaService, private router: Router,) { }
 
   ngOnInit(): void {
-    this.cargarHemoclasificacion();
-    this.cargarAntibiograma();
-    this.cargarRPR();
-    this.cargarVDRL();
 
     this.route.paramMap.subscribe(params => {
       this.id = +params.get('id')!; // Obtiene el ID como número
       console.log('ID de la gestante:', this.id);
     });
+
+    if (this.id !== null && this.id > 0) { 
+      this.getPrimerLaboratorio();
+      this.getSegundoLaboratorio();
+      this.getTercerLaboratorio();
+      this.getIts();
+    } else {
+      console.log('No se proporcionó un ID válido, se asume que se va a crear un Control Prenatal.');
+    }
+
+    this.cargarHemoclasificacion();
+    this.cargarAntibiograma();
+    this.cargarRPR();
+    this.cargarVDRL();
+
+    
   }
   cargarHemoclasificacion(): void {
     this.hemoclasificacionService.getHemoclasificaciones().subscribe(response => {
@@ -219,6 +231,22 @@ export class Ruta3Component {
     });
   }
 
+  getPrimerLaboratorio(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.laboratorioISemestreservice.getLaboratorioISemestrebyId(this.id).subscribe(
+        (response) => {
+          this.laboratorioITrimestre = response.data;
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error al obtener el laboratorio del primer trimestre:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a crear un nuevo laboratorio del primer trimestre.');
+    }
+  }
+
   guardarSegundoLaboratorio(): void {
     if (this.id !== null) {
       this.laboratorioIITrimestre.id_usuario = this.id;
@@ -244,6 +272,22 @@ export class Ruta3Component {
         });
       }
     });
+  }
+
+  getSegundoLaboratorio(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.laboratorioIISemestreservice.getLaboratorioIISemestrebyId(this.id).subscribe(
+        (response) => {
+          this.laboratorioIITrimestre = response.data;
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error al obtener el laboratorio del segundo trimestre:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a crear un nuevo laboratorio del segundo trimestre.');
+    }
   }
 
   guardarTercerLaboratorio(): void {
@@ -273,6 +317,22 @@ export class Ruta3Component {
     });
   }
 
+  getTercerLaboratorio(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.laboratorioIIISemestreservice.getLaboratorioIIISemestrebyId(this.id).subscribe(
+        (response) => {
+          this.laboratorioIIITrimestre = response.data;
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error al obtener el laboratorio del tercer trimestre:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a crear un nuevo laboratorio del tercer trimestre.');
+    }
+  }
+
 
   guardarIts(): void {
     if (this.id !== null) {
@@ -299,6 +359,22 @@ export class Ruta3Component {
         });
       }
     });
+  }
+
+  getIts(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.itsService.getItsId(this.id).subscribe(
+        (response) => {
+          this.its = response.data;
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error al obtener its:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a crear un nuevo its.');
+    }
   }
 
   volver() {

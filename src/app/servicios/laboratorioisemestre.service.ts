@@ -29,5 +29,10 @@ export class LaboratorioisemestreService {
     });
   
     return this.http.post(this.apiUrl, consulta, { headers });
-  }}
+  }
+
+  getLaboratorioISemestrebyId(id: number): Observable<{ estado: string; data: LaboratorioITrimestre }> {
+    return this.http.get<{ estado: string; data: LaboratorioITrimestre }>(`${this.apiUrl}/${id}`);
+  }
+}
 

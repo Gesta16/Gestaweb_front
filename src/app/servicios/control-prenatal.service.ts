@@ -30,4 +30,8 @@ export class ControlPrenatalService {
   
     return this.http.post(this.apiUrl, control, { headers });
   }
+
+  getControlById(id: number): Observable<{ estado: string; Control: ControlPrenatal }> {
+    return this.http.get<{ estado: string; Control: ControlPrenatal }>(`${this.apiUrl}/${id}`);
+  }
 }  

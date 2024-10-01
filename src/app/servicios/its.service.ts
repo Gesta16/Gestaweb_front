@@ -30,4 +30,8 @@ export class ItsService {
     return this.http.post(this.apiUrl, consulta, { headers });
   }
 
+  getItsId(id: number): Observable<{ estado: string; data: Its }> {
+    return this.http.get<{ estado: string; data: Its }>(`${this.apiUrl}/${id}`);
+  }
+
  }

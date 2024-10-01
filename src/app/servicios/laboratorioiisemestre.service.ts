@@ -28,4 +28,10 @@ export class LaboratorioiisemestreService {
     });
   
     return this.http.post(this.apiUrl, consulta, { headers });
-  }}
+  }
+
+  getLaboratorioIISemestrebyId(id: number): Observable<{ estado: string; data: LaboratorioIITrimestre }> {
+    return this.http.get<{ estado: string; data: LaboratorioIITrimestre }>(`${this.apiUrl}/${id}`);
+  }
+
+}
