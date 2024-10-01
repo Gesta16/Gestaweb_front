@@ -23,4 +23,10 @@ export class RutaGestanteComponent {
       this.router.navigate(['/ruta-2', this.id]); // Navegar a la ruta con el ID
     }
   }
+
+  irAnalisisPrevencion() {
+    if (this.id !== null) {
+      this.router.navigate(['/ruta-3', this.id]); // Navegar a la ruta con el ID
+    }
+  }
 }
