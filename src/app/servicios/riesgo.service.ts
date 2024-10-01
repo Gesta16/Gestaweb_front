@@ -15,4 +15,6 @@ export class RiesgoService {
   
   getRiesgos(): Observable<{ estado: string; riesgo: Riesgo[] }> {
     return this.http.get<{ estado: string; riesgo: Riesgo[] }>(this.apiUrl);
-  }}
+  }
+
+}

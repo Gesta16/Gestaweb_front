@@ -11,12 +11,12 @@ export class SeguimientoPostObstetricoService {
 
   constructor(private http: HttpClient) { }
 
-  // Obtener todos los seguimientos
+  
   getSeguimientos(): Observable<{ estado: string; data: SeguimientoPostObstetrico[] }> {
     return this.http.get<{ estado: string; data: SeguimientoPostObstetrico[] }>(this.apiUrl);
   }
 
-  // Crear un nuevo seguimiento
+  
   crearSeguimiento(seguimiento: SeguimientoPostObstetrico): Observable<any> {
     return this.http.post(this.apiUrl, seguimiento);
   }

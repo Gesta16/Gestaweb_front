@@ -31,7 +31,7 @@
                     <th scope="col" class="px-6 py-3">Edad</th>
                     <th scope="col" class="px-6 py-3">Teléfono</th>
                     <th scope="col" class="px-6 py-3">Correo electrónico</th>
-                    <th scope="col" class="px-6 py-3">Ver</th>
+                    <th scope="col" class="px-6 py-3">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,20 +43,16 @@
                     <td class="px-6 py-4">{{ usuario.edad_usuario }}</td>
                     <td class="px-6 py-4">{{ usuario.tel_usuario }}</td>
                     <td class="px-8 py-4">{{ usuario.email_usuario }}</td>
-                    <td class="px-7 py-4">
-
-
+                    <td class="px-7 py-4 flex justify-center space-x-2">
                         <button (click)="abrirModalVer(usuario)"
-                            class="flex items-center ml-[25%] h-10 bg-transparent text-black font-bold py-2 px-4 rounded-xl hover:bg-gray-100 focus:outline-none">
+                            class="flex items-center h-10 bg-transparent text-black font-bold py-2 px-4 rounded-xl hover:bg-gray-100 focus:outline-none">
                             <span class="iconify fa-lg" data-icon="fluent:form-24-filled"></span>
                         </button>
-
-
                         <button (click)="verUsuario(usuario.id_usuario)"
-                            class="flex items-center ml-[25%] h-10 bg-transparent text-black font-bold py-2 px-4 rounded-xl hover:bg-gray-100 focus:outline-none">
+                            class="flex items-center h-10 bg-transparent text-black font-bold py-2 px-4 rounded-xl hover:bg-gray-100 focus:outline-none">
                             <span class="iconify fa-lg" data-icon="game-icons:baby-bottle"></span>
                         </button>
-                    </td>
+                    </td>                    
                 </tr>
             </tbody>
         </table>
