@@ -1,11 +1,22 @@
 <!-- Llamado del encabezado -->
 <app-header></app-header>
 
-<p class="text-lg md:text-xl text-center font-semibold mb-4 mt-[12rem] uppercase">Análisis y prevención</p>
+<div class="container mx-auto px-4 mt-[8rem]" style="width: 95%;">
+
+    <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4" style="height: 80px;">
+        <div class="flex justify-between items-center h-full p-4">
+            <h1 class="font-bold text-3xl" style="margin-left: 30px;">Análisis y prevención</h1>
+            <button (click)="volver()"
+                class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none"
+                style="margin-right: 30px;">
+                Volver
+            </button>
+        </div>
+    </div>
 
 <!-- Diseño del formulario -->
 <div class="flex flex-wrap mt-5 uppercase ">
-    <div class="w-3/6 justify-center mx-auto">
+    <div class="w-[70%] justify-center mx-auto">
         <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer">
             <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
                 <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"

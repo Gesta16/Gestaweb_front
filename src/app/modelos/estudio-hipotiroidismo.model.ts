@@ -1,5 +1,6 @@
 export class EstudioHipotiroidismo {
     cod_estudio: number;
+    id_usuario:number;
     tsh: string;
     fec_resultado: string;
     t4_libre: string;
@@ -9,6 +10,7 @@ export class EstudioHipotiroidismo {
 
     constructor(
         cod_estudio: number,
+        id_usuario:number,
         tsh: string,
         fec_resultado: string,
         t4_libre: string,
@@ -17,6 +19,7 @@ export class EstudioHipotiroidismo {
         fec_primera: string,
     ){
         this.cod_estudio = cod_estudio;
+        this.id_usuario = id_usuario;
         this.tsh = tsh;
         this.fec_resultado = fec_resultado;
         this.t4_libre = t4_libre;

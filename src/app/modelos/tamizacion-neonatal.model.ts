@@ -1,5 +1,6 @@
 export class TamizacionNeonatal {
     cod_tamizacion: number;
+    id_usuario:number;
     cod_hemoclasifi: number;
     fec_tsh: string;
     resul_tsh: string;
@@ -11,6 +12,7 @@ export class TamizacionNeonatal {
 
     constructor(
         cod_tamizacion: number,
+        id_usuario:number,
         cod_hemoclasifi: number,
         fec_tsh: string,
         resul_tsh: string,
@@ -21,6 +23,7 @@ export class TamizacionNeonatal {
         tamiza_visual: string,
     ){
         this.cod_tamizacion = cod_tamizacion;
+        this.id_usuario = id_usuario;
         this.cod_hemoclasifi = cod_hemoclasifi;
         this.fec_tsh = fec_tsh;
         this.resul_tsh = resul_tsh;

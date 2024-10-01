@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SeguimientoConsultaMensual } from '../modelos/seguimiento-consulta-mensual.model'; 
 
@@ -12,11 +12,22 @@ export class SeguimientoConsultaMensualService {
   constructor(private http: HttpClient) { }
 
   getSeguimientosConsulta(): Observable<{ estado: string; data: SeguimientoConsultaMensual[] }> {
-    return this.http.get<{ estado: string; data: SeguimientoConsultaMensual[] }>(this.apiUrl);
+    return this.http.get<{  estado: string; data: SeguimientoConsultaMensual[] }>(this.apiUrl);
   }
 
   crearSeguimientoConsulta(seguimiento: SeguimientoConsultaMensual): Observable<any> {
-    return this.http.post(this.apiUrl, seguimiento);
+
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación.');
+    }
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post(this.apiUrl, seguimiento,{headers});
   }
 
 }

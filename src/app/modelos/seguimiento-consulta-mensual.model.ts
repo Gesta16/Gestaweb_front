@@ -1,5 +1,6 @@
 export class SeguimientoConsultaMensual {
     cod_seguimiento: number;
+    id_usuario:number;
     cod_riesgo: number;
     cod_controles: number;
     cod_diagnostico: number;
@@ -16,6 +17,7 @@ export class SeguimientoConsultaMensual {
 
     constructor(
         cod_seguimiento: number,
+        id_usuario:number,
         cod_riesgo: number,
         cod_controles: number,
         cod_diagnostico: number,
@@ -31,6 +33,7 @@ export class SeguimientoConsultaMensual {
         ten_artd: number
     ) {
         this.cod_seguimiento = cod_seguimiento;
+        this.id_usuario = id_usuario;
         this.cod_riesgo = cod_riesgo;
         this.cod_controles = cod_controles;
         this.cod_diagnostico = cod_diagnostico;

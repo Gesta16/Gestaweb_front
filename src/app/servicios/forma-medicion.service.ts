@@ -11,8 +11,8 @@ export class FormaMedicionService {
 
   constructor(private http: HttpClient) { }
 
-  getFormasMedicion(): Observable<{ estado: string; 'Forma Medicion Edad Gestacional': FormaMedicion[] }> {
-    return this.http.get<{ estado: string; 'Forma Medicion Edad Gestacional': FormaMedicion[] }>(this.apiUrl);
+  getFormasMedicion(): Observable<{ estado: string; 'Forma_Medicion': FormaMedicion[] }> {
+    return this.http.get<{ estado: string; 'Forma_Medicion': FormaMedicion[] }>(this.apiUrl);
   }
   
 }

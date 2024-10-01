@@ -17,7 +17,16 @@ export class FinalizacionGestacionService {
   }
 
   crearFinalizacionGestacion(finalizacion: FinalizacionGestacion): Observable<any> {
-    return this.http.post(this.apiUrl, finalizacion);
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación.');
+    }
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post(this.apiUrl, finalizacion, {headers});
   }
 }
 

@@ -10,12 +10,13 @@ import { FinalizacionGestacion } from '../../../../modelos/finalizacion-gestacio
 import { LaboratorioIntrapartoService } from '../../../../servicios/laboratorio-intraparto.service';
 import { LaboratorioIntraparto } from '../../../../modelos/laboratorio-intraparto.model';
 import { SeguimientoPostObstetricoService } from '../../../../servicios/seguimiento-post-obstetrico.service';
-import { SeguimientoPostObstetrico } from '../../../../modelos/seguimiento-post-obstetrico.model'; 
+import { SeguimientoPostObstetrico } from '../../../../modelos/seguimiento-post-obstetrico.model';
 import { MortalidadPerinatalService } from '../../../../servicios/mortalidad-perinatal.service';
 import { MortalidadPerinatal } from '../../../../modelos/mortalidad-perinatal.model';
 import { MortalidadPrepartoService } from '../../../../servicios/mortalidad-preparto.service';
 import { MortalidadPreparto } from '../../../../modelos/mortalidad-preparto.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ruta-5',
@@ -32,8 +33,10 @@ export class Ruta5Component implements OnInit {
   laboratorioIntraparto: LaboratorioIntraparto;
   seguimiento: SeguimientoPostObstetrico;
   mortalidadPreparto: MortalidadPreparto;
+  id: number | null = null;
 
   constructor(
+    private route: ActivatedRoute,
     private terminacionGestacionService: TerminacionGestacionService,
     private metodoAnticonceptivoService: MetodoAnticonceptivoService,
     private pruebaVDRLService: PruebaVDRLService,
@@ -42,12 +45,12 @@ export class Ruta5Component implements OnInit {
     private seguimientoPostObstetricoServicio: SeguimientoPostObstetricoService,
     private mortalidadPerinatalService: MortalidadPerinatalService,
     private mortalidadPrepartoService: MortalidadPrepartoService,
-    private router: Router, 
+    private router: Router,
   ) {
-    this.finalizacionGestacion = new FinalizacionGestacion(0, 0, '');
-    this.laboratorioIntraparto = new LaboratorioIntraparto(0, 0, '', '', '', '', '', '', '');
-    this.seguimiento = new SeguimientoPostObstetrico(0, 0, '', '', ''); 
-    this.mortalidadPreparto = new MortalidadPreparto(0, 0, ''); 
+    this.finalizacionGestacion = new FinalizacionGestacion(0, 0, 0, '');
+    this.laboratorioIntraparto = new LaboratorioIntraparto(0, 0, 0, '', '', '', '', '', '', '');
+    this.seguimiento = new SeguimientoPostObstetrico(0, 0, 0, '', '', '');
+    this.mortalidadPreparto = new MortalidadPreparto(0, 0, 0, '');
   }
 
   ngOnInit() {
@@ -55,6 +58,11 @@ export class Ruta5Component implements OnInit {
     this.getMetodosAnticonceptivos();
     this.getPruebaVDRL();
     this.getMortalidadPerinatal();
+
+    this.route.paramMap.subscribe(params => {
+      this.id = +params.get('id')!; // Obtiene el ID como número
+      console.log('ID de la gestante:', this.id);
+    });
   }
 
   toggleTabs(tabNumber: number) {
@@ -102,46 +110,107 @@ export class Ruta5Component implements OnInit {
   }
 
   guardarFinalizacionGestacion() {
+
+    if (this.id !== null) {
+      this.finalizacionGestacion.id_usuario = this.id;
+    }
+
     this.finalizacionGestacionServicio.crearFinalizacionGestacion(this.finalizacionGestacion).subscribe(response => {
-      if (response.estado === 'Ok') {
-        console.log('Finalización de gestación guardada correctamente', response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Finalización de gestación guardada correctamente',
+          timer: 2000,
+          showConfirmButton: false
+        });
       }
-    }, error => {
+    , error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al guardar la finalización de gestación',
+      });
       console.error('Error al guardar la finalización de gestación', error.error);
     });
   }
 
   guardarLaboratorioIntraparto() {
+
+    if (this.id !== null) {
+      this.laboratorioIntraparto.id_usuario = this.id;
+    }
+
     this.laboratorioIntrapartoServicio.crearLaboratorio(this.laboratorioIntraparto).subscribe(response => {
-      if (response.estado === 'Ok') {
-        console.log('Registro de laboratorio intraparto guardado correctamente', response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Registro de laboratorio intraparto guardado correctamente',
+          timer: 2000,
+          showConfirmButton: false
+        });
       }
-    }, error => {
+    , error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al guardar el registro de laboratorio intraparto',
+      });
       console.error('Error al guardar el registro de laboratorio intraparto', error.error);
     });
   }
 
   guardarSeguimiento() {
+
+    if (this.id !== null) {
+      this.seguimiento.id_usuario = this.id;
+    }
+
     this.seguimientoPostObstetricoServicio.crearSeguimiento(this.seguimiento).subscribe(response => {
-      if (response.estado === 'Ok') {
-        console.log('Seguimiento guardado correctamente', response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Seguimiento guardado correctamente',
+          timer: 2000,
+          showConfirmButton: false
+        });
       }
-    }, error => {
+    , error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al guardar el seguimiento',
+      });
       console.error('Error al guardar el seguimiento', error.error);
     });
   }
 
   guardarMortalidadPreparto() {
+
+    if (this.id !== null) {
+      this.mortalidadPreparto.id_usuario = this.id;
+    }
+
     this.mortalidadPrepartoService.crearMortalidadPreparto(this.mortalidadPreparto).subscribe(response => {
-      if (response.estado === 'Ok') {
-        console.log('Mortalidad preparto guardada correctamente', response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Mortalidad preparto guardada correctamente',
+          timer: 2000,
+          showConfirmButton: false
+        });
       }
-    }, error => {
+    , error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al guardar la mortalidad preparto',
+      });
       console.error('Error al guardar la mortalidad preparto', error.error);
     });
   }
 
+
   volver() {
-    this.router.navigate(['/ruta-gestante']);
+    this.router.navigate(['/ruta-gestante', this.id]); // Navegar a la ruta con el ID
   }
 }

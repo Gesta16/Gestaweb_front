@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EstudioHipotiroidismo } from '../modelos/estudio-hipotiroidismo.model'; 
 
@@ -16,7 +16,16 @@ export class EstudioHipotiroidismoService {
   }
 
   crearEstudioHipotiroidismo(estudio: EstudioHipotiroidismo): Observable<any> {
-    return this.http.post(this.apiUrl, estudio);
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación.');
+    }
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post(this.apiUrl, estudio, {headers});
   }
 
 }

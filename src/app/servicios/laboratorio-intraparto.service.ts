@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LaboratorioIntraparto } from '../modelos/laboratorio-intraparto.model'; 
 
@@ -18,7 +18,16 @@ export class LaboratorioIntrapartoService {
 
   
   crearLaboratorio(laboratorio: LaboratorioIntraparto): Observable<any> {
-    return this.http.post(this.apiUrl, laboratorio);
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación.');
+    }
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post(this.apiUrl, laboratorio, {headers});
   }
 
 }

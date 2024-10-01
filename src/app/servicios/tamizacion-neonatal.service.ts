@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TamizacionNeonatal } from '../modelos/tamizacion-neonatal.model'; 
 
@@ -16,6 +16,16 @@ export class TamizacionNeonatalService {
   }
 
   crearTamizacion(tamizacion: TamizacionNeonatal): Observable<any> {
-    return this.http.post(this.apiUrl, tamizacion);
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación.');
+    }
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post(this.apiUrl, tamizacion, {headers});
   }
 }

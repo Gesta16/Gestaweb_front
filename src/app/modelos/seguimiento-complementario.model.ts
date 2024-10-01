@@ -1,5 +1,6 @@
 export class SeguimientoComplementario {
     cod_segcomplementario: number;
+    id_usuario:number;
     cod_sesiones: number;
     fec_nutricion: string; 
     fec_ginecologia: string; 
@@ -10,6 +11,7 @@ export class SeguimientoComplementario {
 
     constructor(
         cod_segcomplementario: number,
+        id_usuario:number,
         cod_sesiones: number,
         fec_nutricion: string,
         fec_ginecologia: string,
@@ -19,6 +21,7 @@ export class SeguimientoComplementario {
         cau_inasistencia: string
     ) {
         this.cod_segcomplementario = cod_segcomplementario;
+        this.id_usuario = id_usuario
         this.cod_sesiones = cod_sesiones;
         this.fec_nutricion = fec_nutricion;
         this.fec_ginecologia = fec_ginecologia;

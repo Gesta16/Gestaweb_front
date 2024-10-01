@@ -217,4 +217,8 @@ export class Ruta2Component {
     });
   }
 
+  volver() {
+    this.router.navigate(['/ruta-gestante', this.id]); // Navegar a la ruta con el ID
+  }
+
 }

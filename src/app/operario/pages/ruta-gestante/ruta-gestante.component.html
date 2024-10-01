@@ -38,7 +38,7 @@
                         Administra la información personal de la
                         gestante para un mejor seguimiento durante el embarazo
                     </p>
-                    <button [routerLink]="['/add-usuarios']"
+                    <button (click)="irUsuario()"
                         class="bg-[#E2713E] hover:bg-[#e75210] text-white text-[12px] py-1 px-2 rounded-[20px] font-semibold mt-2 z-20">
                         Ingresar
                     </button>
@@ -143,7 +143,7 @@
                         Seguimiento consulta mensual. Seguimientos complementarios.
                         Micronutrientes
                     </p>
-                    <button [routerLink]="['/ruta-4']"
+                    <button (click)="irSaludIntegral()"
                         class="bg-[#3eb6c6] hover:bg-[#0fb1c7] text-white text-[12px] py-1 px-2 rounded-[20px] font-semibold mt-2 z-20">
                         Ingresar
                     </button>
@@ -175,7 +175,7 @@
                         Finalización de la gestación. Laboratorio intraparto de la gestante.
                         Seguimiento gestante. Mortalidad perinatal
                     </p>
-                    <button [routerLink]="['/ruta-5']"
+                    <button (click)="irPreparto()"
                         class="bg-[#2E6B9C] hover:bg-[#14619e] text-white text-[12px] py-1 px-2 rounded-[20px] font-semibold mt-2 z-20">
                         Ingresar
                     </button>
@@ -207,7 +207,7 @@
                         Datos del recien nacido. Tamización neonatal.
                         Estudio hipotiroidismo congenito. Ruta PYMS
                     </p>
-                    <button [routerLink]="['/ruta-6']"
+                    <button (click)="irPosparto()"
                         class="bg-[#E5AE41] hover:bg-[#e7a625] text-white text-[12px] py-1 px-2 rounded-[20px] font-semibold mt-2 z-20">
                         Ingresar
                     </button>

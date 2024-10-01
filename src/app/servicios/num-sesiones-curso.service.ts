@@ -12,8 +12,8 @@ export class NumSesionesCursoService {
 
   constructor(private http: HttpClient) { }
 
-  getNumSesionesCurso(): Observable<{ estado: string; 'Sesiones Curso Paternidad Maternidad': NumSesionesCurso[] }> {
-    return this.http.get<{ estado: string; 'Sesiones Curso Paternidad Maternidad': NumSesionesCurso[] }>(this.apiUrl);
+  getNumSesionesCurso(): Observable<{ estado: string; 'Sesiones_Curso': NumSesionesCurso[] }> {
+    return this.http.get<{ estado: string; 'Sesiones_Curso': NumSesionesCurso[] }>(this.apiUrl);
   }
 
 }

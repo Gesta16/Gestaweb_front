@@ -12,8 +12,8 @@ export class DiagnosticoNutricionalService {
 
   constructor(private http: HttpClient) { }
 
-  getDiagnosticosNutricionales(): Observable<{ estado: string; 'diagnostico nutricional mes': DiagnosticoNutricional[] }> {
-    return this.http.get<{ estado: string; 'diagnostico nutricional mes': DiagnosticoNutricional[] }>(this.apiUrl);
+  getDiagnosticosNutricionales(): Observable<{ estado: string; 'diagnostico': DiagnosticoNutricional[] }> {
+    return this.http.get<{ estado: string; 'diagnostico': DiagnosticoNutricional[] }>(this.apiUrl);
   }
 
 }

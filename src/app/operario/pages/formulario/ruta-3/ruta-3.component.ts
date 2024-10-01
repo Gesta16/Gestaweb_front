@@ -17,6 +17,7 @@ import { PruebaVDRL } from '../../../../modelos/prueba-vdrl.model';
 import { PruebaRPR } from '../../../../modelos/prueba-rpr.model';
 import { Its } from '../../../../modelos/its.model';
 import { ItsService } from '../../../../servicios/its.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ruta-3',
@@ -135,7 +136,7 @@ export class Ruta3Component {
 
 
 
-  constructor(private itsService:ItsService ,private vdrlService: PruebaVDRLService, private rprService: PruebaRprService, private laboratorioIIISemestreservice: LaboratorioiiisemestreService, private laboratorioIISemestreservice: LaboratorioiisemestreService, private laboratorioISemestreservice: LaboratorioisemestreService, private route: ActivatedRoute, private hemoclasificacionService: HemoclasificacionService, private antibiogramaService: AntibiogramaService) { }
+  constructor(private itsService:ItsService ,private vdrlService: PruebaVDRLService, private rprService: PruebaRprService, private laboratorioIIISemestreservice: LaboratorioiiisemestreService, private laboratorioIISemestreservice: LaboratorioiisemestreService, private laboratorioISemestreservice: LaboratorioisemestreService, private route: ActivatedRoute, private hemoclasificacionService: HemoclasificacionService, private antibiogramaService: AntibiogramaService, private router: Router,) { }
 
   ngOnInit(): void {
     this.cargarHemoclasificacion();
@@ -298,5 +299,9 @@ export class Ruta3Component {
         });
       }
     });
+  }
+
+  volver() {
+    this.router.navigate(['/ruta-gestante', this.id]); // Navegar a la ruta con el ID
   }
 }

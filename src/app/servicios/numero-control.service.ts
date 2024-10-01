@@ -12,8 +12,8 @@ export class NumeroControlService {
 
   constructor(private http: HttpClient) { }
 
-  getNumerosControl(): Observable<{ estado: string; 'numero controles': NumeroControl[] }> {
-    return this.http.get<{ estado: string; 'numero controles': NumeroControl[] }>(this.apiUrl);
+  getNumerosControl(): Observable<{ estado: string; 'numero_controles': NumeroControl[] }> {
+    return this.http.get<{ estado: string; 'numero_controles': NumeroControl[] }>(this.apiUrl);
   }  
 
 }

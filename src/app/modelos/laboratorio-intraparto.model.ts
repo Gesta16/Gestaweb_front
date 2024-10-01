@@ -1,5 +1,6 @@
 export class LaboratorioIntraparto {
     cod_intraparto: number;
+    id_usuario:number;
     cod_vdrl: number;
     pru_sifilis: string;
     fec_sifilis: string;
@@ -11,6 +12,7 @@ export class LaboratorioIntraparto {
 
     constructor(
         cod_intraparto: number,
+        id_usuario:number,
         cod_vdrl: number,
         pru_sifilis: string,
         fec_sifilis: string,
@@ -21,6 +23,7 @@ export class LaboratorioIntraparto {
         fec_vih: string,
     ){
         this.cod_intraparto = cod_intraparto;
+        this.id_usuario = id_usuario;
         this.cod_vdrl = cod_vdrl;
         this.pru_sifilis = pru_sifilis;
         this.fec_sifilis = fec_sifilis;

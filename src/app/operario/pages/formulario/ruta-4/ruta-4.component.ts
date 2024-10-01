@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NumeroControlService } from '../../../../servicios/numero-control.service';
 import { NumeroControl } from '../../../../modelos/numero-control.model';
 import { RiesgoService } from '../../../../servicios/riesgo.service';
@@ -16,6 +16,7 @@ import { SeguimientoComplementarioService } from '../../../../servicios/seguimie
 import { SeguimientoComplementario } from '../../../../modelos/seguimiento-complementario.model';
 import { MicronutrientesService } from '../../../../servicios/micronutrientes.service';
 import { Micronutriente } from '../../../../modelos/micronutrientes.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ruta-4',
@@ -33,8 +34,10 @@ export class Ruta4Component {
   seguimientoConsulta: SeguimientoConsultaMensual;
   seguimientoComplementario: SeguimientoComplementario;
   micronutriente: Micronutriente;
+  id: number | null = null;
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private numeroControlService: NumeroControlService,
     private riesgoService: RiesgoService,
@@ -44,113 +47,160 @@ export class Ruta4Component {
     private seguimientoConsultaMensualService: SeguimientoConsultaMensualService,
     private seguimientoComplementarioService: SeguimientoComplementarioService,
     private micronutrientesService: MicronutrientesService
-  ) { 
-    this.seguimientoConsulta = new SeguimientoConsultaMensual(0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, 0, 0, 0);
-    
-    this.seguimientoComplementario = new SeguimientoComplementario(0, 0, '', '', '', '', '', '');
+  ) {
+    this.seguimientoConsulta = new SeguimientoConsultaMensual(0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, 0, 0, 0);
 
-    this.micronutriente = new Micronutriente(0, '', '', '', '');
+    this.seguimientoComplementario = new SeguimientoComplementario(0, 0, 0, '', '', '', '', '', '');
+
+    this.micronutriente = new Micronutriente(0, 0, '', '', '', '');
   }
 
   ngOnInit() {
-    this.getNumerosControl(); 
+    this.getNumerosControl();
     this.getRiesgos();
     this.getFormasMedicion();
     this.getDiagnosticosNutricionales();
     this.getNumSesionesCurso();
+
+    this.route.paramMap.subscribe(params => {
+      this.id = +params.get('id')!; // Obtiene el ID como número
+      console.log('ID de la gestante:', this.id);
+    });
   }
 
   toggleTabs($tabNumber: number) {
-  this.openTab = $tabNumber;
+    this.openTab = $tabNumber;
   }
 
   getNumerosControl() {
     this.numeroControlService.getNumerosControl().subscribe(response => {
       if (response.estado === 'Ok') {
-        this.numerosControl = response['numero controles']; 
-        // console.log(this.numerosControl); 
+        this.numerosControl = response['numero_controles'];
+        console.log(response);
       }
     }, error => {
       console.error('Error al obtener números de control', error);
     });
-  }  
+  }
 
   getRiesgos() {
     this.riesgoService.getRiesgos().subscribe(response => {
       if (response.estado === 'Ok') {
-        this.riesgo = response['riesgo']; 
+        this.riesgo = response['riesgo'];
         // console.log(this.riesgo); 
       }
     }, error => {
       console.error('Error al obtener los riegos', error);
     });
-  }  
+  }
 
   getFormasMedicion() {
     this.formaMedicionService.getFormasMedicion().subscribe(response => {
       if (response.estado === 'Ok') {
-        this.formaMedicion = response['Forma Medicion Edad Gestacional']; 
+        this.formaMedicion = response['Forma_Medicion'];
         // console.log(this.formaMedicion); 
       }
     }, error => {
       console.error('Error al obtener la forma de medición', error);
     });
-  } 
+  }
 
   getDiagnosticosNutricionales() {
     this.diagnosticoNutricionalService.getDiagnosticosNutricionales().subscribe(response => {
       if (response.estado === 'Ok') {
-        this.diagnostico = response['diagnostico nutricional mes']; 
+        this.diagnostico = response['diagnostico'];
         // console.log(this.diagnostico); 
       }
     }, error => {
       console.error('Error al obtener el diagnostico', error);
     });
-  } 
+  }
 
   getNumSesionesCurso() {
     this.numSesionesCursoService.getNumSesionesCurso().subscribe(response => {
       if (response.estado === 'Ok') {
-        this.numSesiones = response['Sesiones Curso Paternidad Maternidad']; 
+        this.numSesiones = response['Sesiones_Curso'];
         // console.log(this.numSesiones); 
       }
     }, error => {
       console.error('Error al obtener el numero de sesiones', error);
     });
-  } 
+  }
 
   guardarSeguimientoConsulta() {
+    if (this.id !== null) {
+      this.seguimientoConsulta.id_usuario = this.id;
+    }
+
     this.seguimientoConsultaMensualService.crearSeguimientoConsulta(this.seguimientoConsulta).subscribe(response => {
-      if (response.estado === 'Ok') {
-        console.log('Seguimiento de consulta mensual guardado correctamente', response);
-      }
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Seguimiento de consulta mensual guardado correctamente',
+          timer: 2000,
+          showConfirmButton: false
+        });
+      
     }, error => {
-      console.error('Error al guardar el seguimiento de consulta mensual', error.error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al guardar el seguimiento de consulta mensual',
+      });
     });
   }
+
 
   guardarSeguimientoComplementario() {
+    if (this.id !== null) {
+      this.seguimientoComplementario.id_usuario = this.id;
+    }
+
     this.seguimientoComplementarioService.crearSeguimientoComplementario(this.seguimientoComplementario).subscribe(response => {
-      if (response.estado === 'Ok') {
-        console.log('Seguimiento complementario guardado correctamente', response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Seguimiento complementario guardado correctamente',
+          timer: 2000,
+          showConfirmButton: false
+        });
       }
-    }, error => {
-      console.error('Error al guardar el seguimiento complementario', error.error);
+    , error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al guardar el seguimiento complementario',
+      });
     });
   }
+
 
   guardarMicronutriente() {
+    if (this.id !== null) {
+      this.micronutriente.id_usuario = this.id;
+    }
+
     this.micronutrientesService.crearMicronutriente(this.micronutriente).subscribe(response => {
-      if (response.estado === 'Ok') {
-        console.log('Micronutriente guardado correctamente', response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Micronutriente guardado correctamente',
+          timer: 2000,
+          showConfirmButton: false
+        });
       }
-    }, error => {
-      console.error('Error al guardar el micronutriente', error.error);
+    , error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al guardar el micronutriente',
+      });
     });
   }
 
+
   volver() {
-    this.router.navigate(['/ruta-gestante']);
+    this.router.navigate(['/ruta-gestante', this.id]); // Navegar a la ruta con el ID
   }
 
 }

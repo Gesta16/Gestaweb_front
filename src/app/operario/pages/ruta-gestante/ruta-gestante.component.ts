@@ -33,6 +33,31 @@ export class RutaGestanteComponent {
     };
   }
 
+  irSaludIntegral(){
+    if (this.id !== null) {
+      this.router.navigate(['/ruta-4', this.id]); // Navegar a la ruta con el ID
+    };
+  }
+
+  
+  irPreparto(){
+    if (this.id !== null) {
+      this.router.navigate(['/ruta-5', this.id]); // Navegar a la ruta con el ID
+    };
+  }
+
+  irPosparto(){
+    if (this.id !== null) {
+      this.router.navigate(['/ruta-6', this.id]); // Navegar a la ruta con el ID
+    };
+  }
+
+  irUsuario(){
+    if (this.id !== null) {
+      this.router.navigate(['/add-usuarios', this.id]); // Navegar a la ruta con el ID
+    };
+  }
+
   volver() {
     this.router.navigate(['/list-usuarios']);
   }
