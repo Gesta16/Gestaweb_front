@@ -9,7 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RutaGestanteComponent {
   id: number | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -22,5 +25,9 @@ export class RutaGestanteComponent {
     if (this.id !== null) {
       this.router.navigate(['/ruta-2', this.id]); // Navegar a la ruta con el ID
     }
+  }
+
+  volver() {
+    this.router.navigate(['/list-usuarios']);
   }
 }

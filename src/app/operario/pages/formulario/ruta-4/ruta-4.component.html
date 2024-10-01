@@ -1,259 +1,312 @@
 <!-- Llamado del encabezado -->
 <app-header></app-header>
 
-<p class="text-lg md:text-xl text-center font-semibold mb-4 mt-[12rem] uppercase">Salud integral</p>
+<div class="container mx-auto px-4 mt-[8rem]" style="width: 95%;">
 
-<!-- Diseño del formulario -->
-<div class="flex flex-wrap mt-5 uppercase ">
-    <div class="w-3/6 justify-center mx-auto">
-        <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer">
-            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
-                    (click)="toggleTabs(1)"
-                    [ngClass]="{'text-[#00acc9] bg-white': openTab !== 1, 'text-white bg-[#00acc9]': openTab === 1}">
-                    Seguimiento mensual
-                </a>
-            </li>
-            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
-                    (click)="toggleTabs(2)"
-                    [ngClass]="{'text-[#00acc9] bg-white': openTab !== 2, 'text-white bg-[#00acc9]': openTab === 2}">
-                    Sección 2
-                </a>
-            </li>
-            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
-                    (click)="toggleTabs(3)"
-                    [ngClass]="{'text-[#00acc9] bg-white': openTab !== 3, 'text-white bg-[#00acc9]': openTab === 3}">
-                    Seguimientos complementarios
-                </a>
-            </li>
-            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
-                    (click)="toggleTabs(4)"
-                    [ngClass]="{'text-[#00acc9] bg-white': openTab !== 4, 'text-white bg-[#00acc9]': openTab === 4}">
-                    Micronutrientes
-                </a>
-            </li>
-        </ul>
+    <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4" style="height: 80px;">
+        <div class="flex justify-between items-center h-full p-4">
+            <h1 class="font-bold text-3xl" style="margin-left: 30px;">Salud Integral</h1>
+            <button (click)="volver()"
+                class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none"
+                style="margin-right: 30px;">
+                Volver
+            </button>
+        </div>
+    </div>
 
-        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-            <div class="px-4 py-5 flex-auto">
-                <div class="tab-content tab-space">
-                    <!-- Seguimiento consulta mensual -->
-                    <div [ngClass]="{'hidden': openTab !== 1, 'block': openTab === 1}">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                           
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1 ">Fecha de consulta</label>
-                                <input type="date" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+    <!-- Diseño del formulario -->
+    <div class="flex flex-wrap mt-5 uppercase ">
+        <div class="w-[70%] justify-center mx-auto">
+            <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer">
+                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                        (click)="toggleTabs(1)"
+                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 1, 'text-white bg-[#00acc9]': openTab === 1}">
+                        Seguimiento mensual
+                    </a>
+                </li>
+                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                        (click)="toggleTabs(2)"
+                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 2, 'text-white bg-[#00acc9]': openTab === 2}">
+                        Sección 2
+                    </a>
+                </li>
+                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                        (click)="toggleTabs(3)"
+                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 3, 'text-white bg-[#00acc9]': openTab === 3}">
+                        Seguimientos complementarios
+                    </a>
+                </li>
+                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                        (click)="toggleTabs(4)"
+                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 4, 'text-white bg-[#00acc9]': openTab === 4}">
+                        Micronutrientes
+                    </a>
+                </li>
+            </ul>
+
+            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+                <div class="px-4 py-5 flex-auto">
+                    <div class="tab-content tab-space">
+                        <!-- Seguimiento consulta mensual -->
+                        <div [ngClass]="{'hidden': openTab !== 1, 'block': openTab === 1}">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="fecConsulta" class="font-medium mb-1">Fecha de consulta</label>
+                                    <input type="date" id="fecConsulta" [(ngModel)]="seguimientoConsulta.fec_consulta"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="codControles" class="font-medium mb-1">Número acumulado de controles
+                                        prenatales</label>
+                                    <select id="codControles" [(ngModel)]="seguimientoConsulta.cod_controles"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                        <option value="">Seleccione...</option>
+                                        <option *ngFor="let numero of numerosControl" [value]="numero.cod_controles">
+                                            {{ numero.num_control }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="edadGestacional" class="font-medium mb-1">Edad gestacional al momento de
+                                        la consulta</label>
+                                    <input type="tel" id="edadGestacional"
+                                        [(ngModel)]="seguimientoConsulta.edad_gestacional"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="altUterina" class="font-medium mb-1">Altura uterina (cms)</label>
+                                    <input type="tel" id="altUterina" [(ngModel)]="seguimientoConsulta.alt_uterina"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="trimGestacional" class="font-medium mb-1">Trimestre gestacional
+                                        actual</label>
+                                    <select id="trimGestacional" [(ngModel)]="seguimientoConsulta.trim_gestacional"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                        <option value="">Seleccione...</option>
+                                        <option value="1">Trimestre I: 1 a 13 sem</option>
+                                        <option value="2">Trimestre II: 14 a 27 sem</option>
+                                        <option value="3">Trimestre III: 28 a 42 sem</option>
+                                    </select>
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="codRiesgo" class="font-medium mb-1">Clasificación del riesgo según
+                                        escala</label>
+                                    <select id="codRiesgo" [(ngModel)]="seguimientoConsulta.cod_riesgo"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                        <option value="">Seleccione...</option>
+                                        <option *ngFor="let riesgo of riesgo" [value]="riesgo.cod_riesgo">
+                                            {{ riesgo.nom_riesgo }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="peso" class="font-medium mb-1">Peso [KG]</label>
+                                    <input type="tel" id="peso" [(ngModel)]="seguimientoConsulta.peso"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="talla" class="font-medium mb-1">Talla metros</label>
+                                    <input type="tel" id="talla" [(ngModel)]="seguimientoConsulta.talla"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                </div>
                             </div>
-
-                            <div class="flex flex-col text-xs ">
-                                <label for="" class="font-medium mb-1">Número acumulado de controles prenatales</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase  ">
-                                    <option value="">Seleccione...</option>
-                                </select>
-                            </div>
-
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1 ">Edad gestacional al momento de la consulta</label>
-                                <input type="tel" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                            </div>
-
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1 ">Altura uterina (cms)</label>
-                                <input type="tel" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                            </div>
-
-                            <div class="flex flex-col text-xs ">
-                                <label for="" class="font-medium mb-1">Trimestre gestacional actual</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase  ">
-                                    <option value="">Seleccione...</option>
-                                    <option value="">Trimestre I: 1 a 13 sem</option>
-                                    <option value="">Trimestre II: 14 a 27 sem</option>
-                                    <option value="">Trimestre III: 28 a 42 sem</option>
-                                </select>
-                            </div>
-
-                            <div class="flex flex-col text-xs ">
-                                <label for="" class="font-medium mb-1">Clasificación del riesgo según escala</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase  ">
-                                    <option value="">Seleccione...</option>
-                                </select>
-                            </div>
-
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1 ">Peso [KG]</label>
-                                <input type="tel" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                            </div>
-
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1 ">Talla metros</label>
-                                <input type="tel" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                            </div>
-
                         </div>
-                    </div>
 
-                    <!-- Sección 2 -->
-                    <div [ngClass]="{'hidden': openTab !== 2, 'block': openTab === 2}">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                           
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1 ">IMC</label>
-                                <input type="tel" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                        <!-- Sección 2 -->
+                        <div [ngClass]="{'hidden': openTab !== 2, 'block': openTab === 2}">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="imc" class="font-medium mb-1">IMC</label>
+                                    <input type="tel" id="imc" [(ngModel)]="seguimientoConsulta.imc"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="codDiagnostico" class="font-medium mb-1">Diagnóstico nutricional
+                                        consulta del mes</label>
+                                    <select id="codDiagnostico" [(ngModel)]="seguimientoConsulta.cod_diagnostico"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                        <option value="">Seleccione...</option>
+                                        <option *ngFor="let diagnostico of diagnostico"
+                                            [value]="diagnostico.cod_diagnostico">
+                                            {{ diagnostico.nom_diagnostico }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="tenArts" class="font-medium mb-1">Tensión arterial sistólica</label>
+                                    <input type="tel" id="tenArts" [(ngModel)]="seguimientoConsulta.ten_arts"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="tenArtd" class="font-medium mb-1">Tensión arterial diastólica</label>
+                                    <input type="tel" id="tenArtd" [(ngModel)]="seguimientoConsulta.ten_artd"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="codMedicion" class="font-medium mb-1">Forma de medición de edad
+                                        gestacional</label>
+                                    <select id="codMedicion" [(ngModel)]="seguimientoConsulta.cod_medicion"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                        <option value="">Seleccione...</option>
+                                        <option *ngFor="let forma of formaMedicion" [value]="forma.cod_medicion">
+                                            {{ forma.nom_forma }}
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
-
-                            <div class="flex flex-col text-xs ">
-                                <label for="" class="font-medium mb-1">Diagnóstico nutricional consulta del mes</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase  ">
-                                    <option value="">Seleccione...</option>
-                                </select>
+                            <div class="mt-8 flex justify-center">
+                                <button (click)="guardarSeguimientoConsulta()"
+                                    class="px-6 py-2 text-sm w-auto max-w-xs font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                                    Guardar
+                                </button>
                             </div>
-
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1 ">Tensión arterial sistólica</label>
-                                <input type="tel" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                            </div>
-
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1 ">Tensión arterial diastólica</label>
-                                <input type="tel" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                            </div>
-
-                            <div class="flex flex-col text-xs ">
-                                <label for="" class="font-medium mb-1">Forma de medición de edad gestacional</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase  ">
-                                    <option value="">Seleccione...</option>
-                                </select>
-                            </div>
-
                         </div>
-                    </div>
 
-                    <!-- Seguimientos complementarios -->
-                    <div [ngClass]="{'hidden': openTab !== 3, 'block': openTab === 3}">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                           
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1 ">Fecha de valoración de nutrición</label>
-                                <input type="date" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                            </div>
+                        <!-- Seguimientos complementarios -->
+                        <div [ngClass]="{'hidden': openTab !== 3, 'block': openTab === 3}">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1 ">Fecha de valoración de ginecología</label>
-                                <input type="date" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                            </div>
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1 ">Fecha de valoración de psicología</label>
-                                <input type="date" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                            </div>
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1 ">Fecha de valoración de odontología</label>
-                                <input type="date" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                            </div>
+                                <div class="flex flex-col text-xs">
+                                    <label for="fecNutricion" class="font-medium mb-1">Fecha de valoración de
+                                        nutrición</label>
+                                    <input type="date" id="fecNutricion"
+                                        [(ngModel)]="seguimientoComplementario.fec_nutricion"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                </div>
 
-                            <div class="flex flex-col text-xs ">
-                                <label for="" class="font-medium mb-1">Inasistencia</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase  ">
-                                    <option value="">Seleccione...</option>
-                                    <option value="">Si</option>
-                                    <option value="">No</option>
-                                </select>
-                            </div>
+                                <div class="flex flex-col text-xs">
+                                    <label for="fecGinecologia" class="font-medium mb-1">Fecha de valoración de
+                                        ginecología</label>
+                                    <input type="date" id="fecGinecologia"
+                                        [(ngModel)]="seguimientoComplementario.fec_ginecologia"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                </div>
 
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1 ">Causal de inasistencia</label>
-                                <input type="tel" id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                            </div>
+                                <div class="flex flex-col text-xs">
+                                    <label for="fecPsicologia" class="font-medium mb-1">Fecha de valoración de
+                                        psicología</label>
+                                    <input type="date" id="fecPsicologia"
+                                        [(ngModel)]="seguimientoComplementario.fec_psicologia"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                </div>
 
-                            <div class="flex flex-col text-xs ">
-                                <label for="" class="font-medium mb-1">N° de sesiones curso de preparación</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase  ">
-                                    <option value="">Seleccione...</option>
-                                </select>
-                            </div>
+                                <div class="flex flex-col text-xs">
+                                    <label for="fecOdontologia" class="font-medium mb-1">Fecha de valoración de
+                                        odontología</label>
+                                    <input type="date" id="fecOdontologia"
+                                        [(ngModel)]="seguimientoComplementario.fec_odontologia"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                </div>
 
+                                <div class="flex flex-col text-xs">
+                                    <label for="inaSeguimiento" class="font-medium mb-1">Inasistencia</label>
+                                    <select id="inaSeguimiento" [(ngModel)]="seguimientoComplementario.ina_seguimiento"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="causalInasistencia" class="font-medium mb-1">Causal de
+                                        inasistencia</label>
+                                    <input type="tel" id="causalInasistencia"
+                                        [(ngModel)]="seguimientoComplementario.cau_inasistencia"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="codSesiones" class="font-medium mb-1">N° de sesiones curso de
+                                        preparación</label>
+                                    <select id="codSesiones" [(ngModel)]="seguimientoComplementario.cod_sesiones"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                        <option value="">Seleccione...</option>
+                                        <option *ngFor="let sesiones of numSesiones" [value]="sesiones.cod_sesiones">
+                                            {{ sesiones.num_sesiones }}
+                                        </option>
+                                    </select>
+                                </div>                              
+                            </div>
+                            <div class="mt-8 flex justify-center">
+                                <button (click)="guardarSeguimientoComplementario()"
+                                    class="px-6 py-2 text-sm w-auto max-w-xs font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                                    Guardar
+                                </button>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Micronutrientes -->
-                    <div [ngClass]="{'hidden': openTab !== 4, 'block': openTab === 4}">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                           
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1">Ácido fólico</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                    <option valu-e="">Seleccione...</option>
-                                    <option value="">Si</option>
-                                    <option value="">No</option>
-                                </select>
+                        <!-- Micronutrientes -->
+                        <div [ngClass]="{'hidden': openTab !== 4, 'block': openTab === 4}">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="aciFolico" class="font-medium mb-1">Ácido fólico</label>
+                                    <select id="aciFolico" [(ngModel)]="micronutriente.aci_folico"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="sulFerroso" class="font-medium mb-1">Sulfato ferroso</label>
+                                    <select id="sulFerroso" [(ngModel)]="micronutriente.sul_ferroso"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="carCalcio" class="font-medium mb-1">Carbonato de calcio</label>
+                                    <select id="carCalcio" [(ngModel)]="micronutriente.car_calcio"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <div class="flex flex-col text-xs">
+                                    <label for="desparasitacion" class="font-medium mb-1">Desparacitación</label>
+                                    <select id="desparasitacion" [(ngModel)]="micronutriente.desparasitacion"
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>                   
                             </div>
-
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1">Sulfato ferroso</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                    <option valu-e="">Seleccione...</option>
-                                    <option value="">Si</option>
-                                    <option value="">No</option>
-                                </select>
+                            <div class="mt-8 flex justify-center">
+                                <button (click)="guardarMicronutriente()"
+                                    class="px-6 py-2 text-sm w-auto max-w-xs font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                                    Guardar
+                                </button>
                             </div>
-
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1">Carbonato de calcio</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                    <option valu-e="">Seleccione...</option>
-                                    <option value="">Si</option>
-                                    <option value="">No</option>
-                                </select>
-                            </div>
-
-                            <div class="flex flex-col text-xs">
-                                <label for="" class="font-medium mb-1">Desparacitación</label>
-                                <select id=""
-                                    class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                    <option valu-e="">Seleccione...</option>
-                                    <option value="">Si</option>
-                                    <option value="">No</option>
-                                </select>
-                            </div>
-
-                            
                         </div>
-                    </div>
-
-                    <div class="mt-8 flex justify-center">
-                        <button
-                            class="px-6 py-2 text-sm w-auto max-w-xs font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
-                            Guardar
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

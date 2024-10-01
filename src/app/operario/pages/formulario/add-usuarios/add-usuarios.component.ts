@@ -192,5 +192,9 @@ export class AddUsuariosComponent {
       }
     );
   }
+
+  volver() {
+    this.router.navigate(['/ruta-gestante']);
+  }
   
 }
