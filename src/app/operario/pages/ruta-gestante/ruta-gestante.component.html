@@ -11,7 +11,8 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mx-auto max-w-5xl ml-6">
 
         <!-- Ruta 1 -->
-        <div class="relative flex flex-col md:flex-row items-center bg-[#E2713E] rounded-xl shadow-lg overflow-visible h-auto md:h-[10rem] w-full md:w-[25rem]">
+        <div
+            class="relative flex flex-col md:flex-row items-center bg-[#E2713E] rounded-xl shadow-lg overflow-visible h-auto md:h-[10rem] w-full md:w-[25rem]">
 
             <!-- Contenido del número -->
             <div
@@ -36,13 +37,15 @@
             </div>
 
             <!-- Icono -->
-            <div class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
+            <div
+                class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
                 <i class="fas fa-id-card fa-2xl text-gray-400"></i>
             </div>
         </div>
 
         <!-- Ruta 2 -->
-        <div class="relative flex flex-col md:flex-row items-center bg-[#ea7c89] rounded-xl shadow-lg overflow-visible h-auto md:h-[10rem] w-full md:w-[25rem]">
+        <div
+            class="relative flex flex-col md:flex-row items-center bg-[#ea7c89] rounded-xl shadow-lg overflow-visible h-auto md:h-[10rem] w-full md:w-[25rem]">
 
             <!-- Contenido del número -->
             <div
@@ -61,7 +64,7 @@
                     <p class="text-gray-600 text-sm w-full md:w-[74%]">
                         Vacunación
                     </p>
-                    <button [routerLink]="['/ruta-2']"
+                    <button (click)="irAControlPrenatal()"
                         class="bg-[#ea7c89] hover:bg-[#ea6f7d] text-white text-[12px] py-1 px-2 rounded-[20px] font-semibold mt-2 z-20">
                         Ingresar
                     </button>
@@ -69,13 +72,15 @@
             </div>
 
             <!-- Icono -->
-            <div class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
+            <div
+                class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
                 <i class="fas fa-heartbeat fa-2xl text-gray-400"></i>
             </div>
         </div>
 
         <!-- Ruta 3 -->
-        <div class="relative flex flex-col md:flex-row items-center bg-[#53A04D] rounded-xl shadow-lg overflow-visible h-auto md:h-[10rem] w-full md:w-[25rem]">
+        <div
+            class="relative flex flex-col md:flex-row items-center bg-[#53A04D] rounded-xl shadow-lg overflow-visible h-auto md:h-[10rem] w-full md:w-[25rem]">
 
             <!-- Contenido del número -->
             <div
@@ -105,7 +110,8 @@
             </div>
 
             <!-- Icono -->
-            <div class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
+            <div
+                class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
                 <i class="fas fa-vial fa-2xl text-gray-400"></i>
             </div>
         </div>
@@ -136,7 +142,8 @@
             </div>
 
             <!-- Icono -->
-            <div class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
+            <div
+                class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
                 <i class="fas fa-calendar-check fa-2xl text-gray-400"></i>
             </div>
         </div>
@@ -167,11 +174,12 @@
             </div>
 
             <!-- Icono -->
-            <div class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
+            <div
+                class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
                 <i class="fas fa-briefcase-medical fa-2xl text-gray-400"></i>
             </div>
         </div>
-        
+
         <!-- Ruta 6 -->
         <div
             class="relative flex flex-col md:flex-row items-center bg-[#E5AE41] rounded-xl shadow-lg overflow-visible h-auto md:h-[10rem] w-full md:w-[25rem]">
@@ -187,7 +195,7 @@
                 <div class="p-6 bg-white bg-opacity-75 shadow-lg rounded-b-xl md:rounded-2xl relative">
                     <h3 class="text-lg font-semibold text-gray-800 font-serif">Posparto</h3>
                     <p class="text-gray-600 text-sm w-full md:w-[74%]">
-                        Datos del recien nacido. Tamización neonatal. 
+                        Datos del recien nacido. Tamización neonatal.
                         Estudio hipotiroidismo congenito. Ruta PYMS
                     </p>
                     <button [routerLink]="['/ruta-6']"
@@ -198,7 +206,8 @@
             </div>
 
             <!-- Icono -->
-            <div class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
+            <div
+                class="absolute top-2 right-2 md:top-auto md:right-auto md:ml-[79%] md:relative z-20 p-6 md:mt-[-15px]">
                 <i class="fas fa-baby-carriage fa-2xl text-gray-400"></i>
             </div>
         </div>
