@@ -30,4 +30,8 @@ export class VacunacionService {
 
     return this.http.post(this.apiUrl, vacunacion, { headers });
   }
+
+  getVacunacionById(id: number): Observable<{ estado: string; vacunacion: Vacunacion }> {
+    return this.http.get<{ estado: string; vacunacion: Vacunacion }>(`${this.apiUrl}/${id}`);
+  }
 }

@@ -9,7 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class RutaGestanteComponent {
   id: number | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -22,5 +25,40 @@ export class RutaGestanteComponent {
     if (this.id !== null) {
       this.router.navigate(['/ruta-2', this.id]); // Navegar a la ruta con el ID
     }
+  }
+
+  irAnalisisPrevencion() {
+    if (this.id !== null) {
+      this.router.navigate(['/ruta-3', this.id]); // Navegar a la ruta con el ID
+    };
+  }
+
+  irSaludIntegral(){
+    if (this.id !== null) {
+      this.router.navigate(['/ruta-4', this.id]); // Navegar a la ruta con el ID
+    };
+  }
+
+  
+  irPreparto(){
+    if (this.id !== null) {
+      this.router.navigate(['/ruta-5', this.id]); // Navegar a la ruta con el ID
+    };
+  }
+
+  irPosparto(){
+    if (this.id !== null) {
+      this.router.navigate(['/ruta-6', this.id]); // Navegar a la ruta con el ID
+    };
+  }
+
+  irUsuario(){
+    if (this.id !== null) {
+      this.router.navigate(['/add-usuarios', this.id]); // Navegar a la ruta con el ID
+    };
+  }
+
+  volver() {
+    this.router.navigate(['/list-usuarios']);
   }
 }

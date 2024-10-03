@@ -29,4 +29,10 @@ export class PrimeraConsultaService {
     });
   
     return this.http.post(this.apiUrl, consulta, { headers });
-  }}
+  }
+
+  getPrimeraConsulta(id: number): Observable<{ estado: string; consulta: PrimeraConsulta }> {
+    return this.http.get<{ estado: string; consulta: PrimeraConsulta }>(`${this.apiUrl}/${id}`);
+  }
+
+}

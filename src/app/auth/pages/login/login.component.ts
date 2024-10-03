@@ -88,12 +88,12 @@ export class LoginComponent {
     const password = this.loginForm.get('password')?.value ?? '';
 
     if (!documento) {
-        alert("El campo de usuario es requerido");
+        // alert("El campo de usuario es requerido");
         this.isSubmitting = false;
         return;
     }
     if (!password) {
-        alert("El campo de contraseña es requerido");
+        // alert("El campo de contraseña es requerido");
         this.isSubmitting = false;
         return;
     }
@@ -113,21 +113,25 @@ export class LoginComponent {
                 // Hacer visible el menú después del inicio de sesión
                 this.menuService.setMenuVisible(true);
 
-                alert('Ingreso exitoso!');
+                // Comentar la alerta de ingreso exitoso
+                // alert('Ingreso exitoso!');
                 this.router.navigate(['/landing']);
                 location.reload();
             } else {
-                alert('Documento o contraseña incorrecta');
+                // Comentar la alerta de documento o contraseña incorrecta
+                // alert('Documento o contraseña incorrecta');
             }
             this.isSubmitting = false;
         },
         error => {
             console.error('Login failed', error);
-            alert('Documento o contraseña incorrecta');
+            // Comentar la alerta de error
+            // alert('Documento o contraseña incorrecta');
             this.isSubmitting = false;
         }
     );
-}
+  }
+
 
 
   getRoleName(rol_id: number | undefined | null): string {

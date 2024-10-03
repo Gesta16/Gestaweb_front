@@ -1,9 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { UsuarioService } from '../../../servicios/usuario.service'; // Asegúrate de que el servicio esté creado
+import { MatDialog } from '@angular/material/dialog';
+import { UsuarioService } from '../../../servicios/usuario.service'; 
 import { Usuario } from '../../../modelos/usuario.model'; 
 import { TipoDocumentoService } from '../../../servicios/tipo-documento.service';
 import { TipoDocumento } from '../../../modelos/tipo-documento.model';
 import { Router } from '@angular/router';
+import { VerUsuarioComponent } from '../ver-usuario/ver-usuario.component';
 
 @Component({
   selector: 'app-list-usuarios',
@@ -24,7 +26,8 @@ export class ListUsuariosComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private tipoDocumentoService: TipoDocumentoService,
-    private router:Router
+    private router:Router,
+    private _matDialog: MatDialog 
   ) {}
 
   ngOnInit() {
@@ -58,6 +61,19 @@ export class ListUsuariosComponent implements OnInit {
   //     }
   //   });
   // }
+  abrirModalVer(usuario: Usuario): void {
+    const dialogRef = this._matDialog.open(VerUsuarioComponent, {
+      enterAnimationDuration: '0ms',
+      exitAnimationDuration: '0ms',
+      data: { usuario: usuario } // Pasar los datos del usuario seleccionado al modal
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadUsuarios(); // Opcional, puedes volver a cargar los usuarios si necesitas
+      }
+    });
+  }
 
   verUsuario(id: number): void {
     this.selectedUserId = id;

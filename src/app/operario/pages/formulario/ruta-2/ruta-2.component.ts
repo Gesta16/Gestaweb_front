@@ -90,14 +90,25 @@ export class Ruta2Component {
   }
 
   ngOnInit(): void {
-    this.cargarMetodosFracaso();
-    this.cargarRiesgos();
-    this.cargarTipoDm();
-    this.cargarBiologicos();
+
     this.route.paramMap.subscribe(params => {
       this.id = +params.get('id')!; // Obtiene el ID como número
       console.log('ID de la gestante:', this.id);
     });
+
+    if (this.id !== null && this.id > 0) { 
+      this.getControlPrenatal();
+      this.getPrimeraConsulta();
+      this.getVacunacion();
+    } else {
+      console.log('No se proporcionó un ID válido, se asume que se va a crear un Control Prenatal.');
+    }
+
+    this.cargarMetodosFracaso();
+    this.cargarRiesgos();
+    this.cargarTipoDm();
+    this.cargarBiologicos();
+    
   }
 
   cargarMetodosFracaso(): void {
@@ -162,6 +173,27 @@ export class Ruta2Component {
     });
   }
 
+  getControlPrenatal(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.controlPrenatalService.getControlById(this.id).subscribe(
+        (response) => {
+          this.controlPrenatal = response.Control;
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error al obtener el usuario:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'No se pudo encontrar el Control Prenatal. Verifica el ID.',
+            icon: 'error',
+          });
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a crear un nuevo usuario.');
+    }
+  }
+
   guardarPrimeraConsulta(): void {
     if (this.id !== null) {
       this.primeraConsulta.id_usuario = this.id; 
@@ -190,6 +222,27 @@ export class Ruta2Component {
     });
   }
 
+  getPrimeraConsulta(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.primeraConsultaService.getPrimeraConsulta(this.id).subscribe(
+        (response) => {
+          this.primeraConsulta = response.consulta;
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error al obtener el usuario:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'No se pudo encontrar La primera consulta. Verifica el ID.',
+            icon: 'error',
+          });
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a crear una nueva consulta.');
+    }
+  }
+
   guardarVacunacion(): void {
     if (this.id !== null) {
       this.vacunacion.id_usuario = this.id; 
@@ -215,6 +268,31 @@ export class Ruta2Component {
         });
       }
     });
+  }
+
+  getVacunacion(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.vacunacionService.getVacunacionById(this.id).subscribe(
+        (response) => {
+          this.vacunacion = response.vacunacion;
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error al obtener el usuario:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'No se pudo encontrar la informacion de vacunacion. Verifica el ID.',
+            icon: 'error',
+          });
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a ingresar nueva informacion de vacunacion.');
+    }
+  }
+
+  volver() {
+    this.router.navigate(['/ruta-gestante', this.id]); // Navegar a la ruta con el ID
   }
 
 }

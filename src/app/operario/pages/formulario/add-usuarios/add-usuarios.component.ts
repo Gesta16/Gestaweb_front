@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../../../../servicios/usuario.service';
-import { Usuario } from '../../../../modelos/usuario.model'; 
+import { Usuario } from '../../../../modelos/usuario.model';
 import Swal from 'sweetalert2';
 import { DepartamentoService } from '../../../../servicios/departamento.service';
-import { Departamento } from '../../../../modelos/departamento.model'; 
+import { Departamento } from '../../../../modelos/departamento.model';
 import { MunicipioService } from '../../../../servicios/municipio.service';
-import { Municipio } from '../../../../modelos/municipio.model'; 
+import { Municipio } from '../../../../modelos/municipio.model';
 import { IpsService } from '../../../../servicios/ips.service';
-import { Ips } from '../../../../modelos/ips.model'; 
+import { Ips } from '../../../../modelos/ips.model';
 import { TipoDocumentoService } from '../../../../servicios/tipo-documento.service';
-import { TipoDocumento } from '../../../../modelos/tipo-documento.model'; 
+import { TipoDocumento } from '../../../../modelos/tipo-documento.model';
 import { PoblacionDiferencialService } from '../../../../servicios/poblacion-diferencial.service';
-import { PoblacionDiferencial } from '../../../../modelos/poblacion-diferencial.model'; 
+import { PoblacionDiferencial } from '../../../../modelos/poblacion-diferencial.model';
 
 @Component({
   selector: 'app-add-usuarios',
@@ -46,31 +46,64 @@ export class AddUsuariosComponent {
   listIps: Ips[] = [];
   listTipoDocumentos: TipoDocumento[] = [];
   listPoblacionDiferencial: PoblacionDiferencial[] = [];
-  
+  id: number | null = null;
 
   constructor(
-    private usuarioService: UsuarioService, 
+    private usuarioService: UsuarioService,
     private router: Router,
     private departamentoService: DepartamentoService,
     private municipioService: MunicipioService,
     private ipsService: IpsService,
     private tipoDocumentoService: TipoDocumentoService,
     private poblacionDiferencialService: PoblacionDiferencialService,
-  
-  ) {}
+    private route: ActivatedRoute
+
+  ) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.id = +params.get('id')!; // Obtiene el ID como número
+      console.log('ID de la gestante:', this.id);
+  
+      if (this.id > 0) { 
+        this.getUsuario();
+      } else {
+        console.log('No se proporcionó un ID válido, se asume que se va a crear un nuevo usuario.');
+      }
+    });
     this.getDepartamentos();
-    this.getMunicipios();
     this.getIps();
     this.getTipoDocumentos();
     this.getPoblacionDiferencial();
+  }
+  
+  getUsuario(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.usuarioService.getUsuarioById(this.id).subscribe(
+        (response) => {
+          this.usuario = response.usuario;
+          console.log(response);
+          this.getMunicipios(this.usuario.cod_departamento); 
+        },
+        (error) => {
+          console.error('Error al obtener el usuario:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'No se pudo encontrar el usuario. Verifica el ID.',
+            icon: 'error',
+          });
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a crear un nuevo usuario.');
+    }
   }
 
   onDepartamentoChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const departamentoId = +target.value;
-    this.getMunicipios(departamentoId); // Llama al método para filtrar los municipios por departamento
+    this.usuario.cod_departamento = departamentoId; // Actualizar el departamento en el IPS
+    this.getMunicipios(departamentoId); // Actualizar la lista de municipios
   }
 
   toggleTabs(tabNumber: number) {
@@ -86,7 +119,7 @@ export class AddUsuariosComponent {
           text: 'Usuario creado con éxito',
           icon: 'success',
         }).then(() => {
-          this.router.navigate(['/ruta-gestante']); 
+          this.router.navigate(['/list-usuarios']);
         });
       },
       error: (error) => {
@@ -102,18 +135,18 @@ export class AddUsuariosComponent {
 
   calcularEdad(): void {
     if (this.usuario.fec_nacimiento) {
-        const hoy = new Date();
-        const fechaNacimiento = new Date(this.usuario.fec_nacimiento);
-        let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
-        const mes = hoy.getMonth() - fechaNacimiento.getMonth();
-        if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
-            edad--;
-        }
-        this.usuario.edad_usuario = edad.toString();
+      const hoy = new Date();
+      const fechaNacimiento = new Date(this.usuario.fec_nacimiento);
+      let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+      const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+      if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+        edad--;
+      }
+      this.usuario.edad_usuario = edad.toString();
     } else {
-        this.usuario.edad_usuario = '';
+      this.usuario.edad_usuario = '';
     }
-}
+  }
 
 
   getDepartamentos(): void {
@@ -132,7 +165,7 @@ export class AddUsuariosComponent {
   }
 
   getMunicipios(departamentoId?: number): void {
-    if (departamentoId) { 
+    if (departamentoId) {
       this.municipioService.getMunicipios(departamentoId).subscribe(
         (data: { estado: string; Municipios: Municipio[] }) => {
           if (data.estado === "Ok" && Array.isArray(data.Municipios)) {
@@ -145,7 +178,7 @@ export class AddUsuariosComponent {
           console.error('Error al obtener los datos de Municipios:', error);
         }
       );
-     }
+    }
   }
 
   getIps(): void {
@@ -192,5 +225,13 @@ export class AddUsuariosComponent {
       }
     );
   }
-  
+
+  volver() {
+    if (this.id == null || this.id == 0) {
+      this.router.navigate(['/list-usuarios']);
+    } else {
+      this.router.navigate(['/ruta-gestante', this.id]);
+    }
+  }
+
 }

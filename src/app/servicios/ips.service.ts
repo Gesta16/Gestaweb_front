@@ -11,12 +11,12 @@ export class IpsService {
 
   constructor(private http: HttpClient) { }
 
-  // Obtiene todos los registros de IPS
+  
   getIps(): Observable<{ estado: string; ips: Ips[] }> {
     return this.http.get<{ estado: string; ips: Ips[] }>(this.apiUrl);
   }
 
-  // Crea un nuevo registro de IPS
+  
   createIps(ips: Ips): Observable<Ips> {
     const token = sessionStorage.getItem('token'); 
     if (!token) {
