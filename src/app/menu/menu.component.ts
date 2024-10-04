@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
   isAuthenticated: boolean = false;
 
   allMenuItems = [
-    { name: 'Dashboard', route: 'dashboard', icon: 'fa-solid fa-chart-pie', roles: ['superadmin', 'admin', 'operador', 'user'] },
+    { name: 'Panel de control', route: 'dashboard', icon: 'fa-solid fa-chart-pie', roles: ['superadmin', 'admin', 'operador', 'user'] },
     { name: 'Superadmin', route: 'list-superadmin', icon: 'fa-solid fa-user-tie', roles: ['superadmin'] },
     { name: 'Administradores', route: 'list-admin', icon: 'fa-solid fa-users', roles: ['superadmin', 'admin'] },
     { name: 'Operadores', route: 'list-operadores', icon: 'fa-solid fa-stethoscope', roles: ['superadmin', 'admin'] },

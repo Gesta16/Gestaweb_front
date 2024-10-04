@@ -18,14 +18,14 @@
     <div class="w-[70%] justify-center mx-auto">
         <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer">
             <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
                     (click)="toggleTabs(1)"
                     [ngClass]="{'text-[#00acc9] bg-white': openTab !== 1, 'text-white bg-[#00acc9]': openTab === 1}">
                     Sección 1
                 </a>
             </li>
             <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
                     (click)="toggleTabs(2)"
                     [ngClass]="{'text-[#00acc9] bg-white': openTab !== 2, 'text-white bg-[#00acc9]': openTab === 2}">
                     Sección 2
@@ -33,7 +33,7 @@
             </li>
         </ul>
 
-        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded uppercase">
+        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded uppercase border border-gray-300">
             <div class="px-4 py-5 flex-auto">
                 <div class="tab-content tab-space">
 
@@ -162,15 +162,16 @@
                                     class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] w-full">
                             </div>
 
-                            <div class="mt-4 flex justify-center">
+                            
+
+                        </div>
+                        <div class="mt-4 flex justify-center">
                                 <button
                                     (click)="guardarUsuario()"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
                             </div>
-
-                        </div>
                     </div>
                 </div>
             </div>
