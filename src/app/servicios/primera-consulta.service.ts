@@ -35,4 +35,18 @@ export class PrimeraConsultaService {
     return this.http.get<{ estado: string; consulta: PrimeraConsulta }>(`${this.apiUrl}/${id}`);
   }
 
+  updatePrimeraConsulta(id:number, consulta: PrimeraConsulta): Observable<any> {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación.');
+    }
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  
+    return this.http.post(`${this.apiUrl}/${id}`, consulta, { headers });
+  }
+
 }

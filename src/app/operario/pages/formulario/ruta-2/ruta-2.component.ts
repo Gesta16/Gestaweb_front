@@ -26,8 +26,17 @@ export class Ruta2Component {
   openTab = 1;
   metodosFracaso: MetodoFracaso[] = [];
   riesgos: Riesgo[] = [];
-  biologicos: Biologico[]=[];
+  biologicos: Biologico[] = [];
   tiposDm: TipoDm[] = [];
+  id_control: number | null = null;
+  id_primeraConsulta: number | null = null;
+  id_vacunacion: number | null = null;
+  isReadOnly = false;
+  isReadOnlyPrimeraConsulta = false;
+  isReadOnlyVacunacion = false;
+
+
+
 
   selectedMetodoFracaso: number | null = null;
 
@@ -69,8 +78,8 @@ export class Ruta2Component {
     id_usuario: 0
   };
 
-  vacunacion: Vacunacion ={
-    id_usuario:0,
+  vacunacion: Vacunacion = {
+    id_usuario: 0,
     cod_biologico: 0,
     fec_unocovid: new Date(),
     fec_doscovid: new Date(),
@@ -82,7 +91,7 @@ export class Ruta2Component {
   }
 
 
-  constructor(private route: ActivatedRoute,private vacunacionService:VacunacionService , private biologicoService:BiologicoService, private primeraConsultaService:PrimeraConsultaService , private tipoDmService: TipoDmService, private metodoFracasoService: MetodoFracasoService, private riesgoService: RiesgoService, private router: Router, private controlPrenatalService: ControlPrenatalService) { }
+  constructor(private route: ActivatedRoute, private vacunacionService: VacunacionService, private biologicoService: BiologicoService, private primeraConsultaService: PrimeraConsultaService, private tipoDmService: TipoDmService, private metodoFracasoService: MetodoFracasoService, private riesgoService: RiesgoService, private router: Router, private controlPrenatalService: ControlPrenatalService) { }
   id: number | null = null;
 
   toggleTabs($tabNumber: number) {
@@ -96,19 +105,19 @@ export class Ruta2Component {
       console.log('ID de la gestante:', this.id);
     });
 
-    if (this.id !== null && this.id > 0) { 
+    if (this.id !== null && this.id > 0) {
       this.getControlPrenatal();
       this.getPrimeraConsulta();
       this.getVacunacion();
     } else {
-      console.log('No se proporcionó un ID válido, se asume que se va a crear un Control Prenatal.');
+      console.log('No se proporcionó un ID válido.');
     }
 
     this.cargarMetodosFracaso();
     this.cargarRiesgos();
     this.cargarTipoDm();
     this.cargarBiologicos();
-    
+
   }
 
   cargarMetodosFracaso(): void {
@@ -146,80 +155,149 @@ export class Ruta2Component {
     });
   }
 
-  guardarControlPrenatal(): void {
-    if (this.id !== null) {
-      this.controlPrenatal.id_usuario = this.id; // Asigna el ID al objeto controlPrenatal
-    }
+  toggleEdit() {
+    this.isReadOnly = false;
+  }
 
-    console.log(this.controlPrenatal);
-    this.controlPrenatalService.createControl(this.controlPrenatal).subscribe({
-      next: (response) => {
-        console.log('Control prenatal creado:', response);
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Control prenatal creado con éxito',
-          icon: 'success',
-        }).then(() => {
-        });
-      },
-      error: (error) => {
-        console.error('Error al crear el control prenatal:', error);
-        Swal.fire({
-          title: 'Error',
-          text: 'Ocurrió un error al crear el control prenatal',
-          icon: 'error',
-        });
+  toggleEditPrimeraConsulta() {
+    this.isReadOnlyPrimeraConsulta = false;
+  }
+
+  toggleEditVacunacion() {
+    this.isReadOnlyVacunacion = false;
+  }
+
+  guardarControlPrenatal(): void {
+
+    if (this.id_control) {
+      // Editar usuario existente
+      this.controlPrenatalService.updateControlPrenatal(this.id_control, this.controlPrenatal).subscribe({
+        next: (response) => {
+          console.log('Control Prenatal actualizado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Control Prenatal actualizado con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.isReadOnly = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el Control Prenatal:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar el Control Prenatal',
+            icon: 'error',
+          });
+        }
+      });
+    } else {
+
+      if (this.id !== null) {
+        this.controlPrenatal.id_usuario = this.id; // Asigna el ID al objeto controlPrenatal
       }
-    });
+
+      console.log(this.controlPrenatal);
+      this.controlPrenatalService.createControl(this.controlPrenatal).subscribe({
+        next: (response) => {
+          console.log('Control prenatal creado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Control prenatal creado con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.id_control=response.data.cod_control ?? null;
+            console.log(response)
+          });
+        },
+        error: (error) => {
+          console.error('Error al crear el control prenatal:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al crear el control prenatal',
+            icon: 'error',
+          });
+        }
+      });
+    }
   }
 
   getControlPrenatal(): void {
+
+
+
     if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
       this.controlPrenatalService.getControlById(this.id).subscribe(
         (response) => {
           this.controlPrenatal = response.Control;
           console.log(response);
+          this.id_control = response.Control.cod_control ?? null;
+          this.isReadOnly = true;
+
         },
         (error) => {
           console.error('Error al obtener el usuario:', error);
-          Swal.fire({
-            title: 'Error',
-            text: 'No se pudo encontrar el Control Prenatal. Verifica el ID.',
-            icon: 'error',
-          });
+
         }
       );
     } else {
-      console.log('No se proporcionó ID, se asume que se va a crear un nuevo usuario.');
+      console.log('No se proporcionó ID, se asume que se va a ingresar nueva informacion.');
     }
   }
 
   guardarPrimeraConsulta(): void {
-    if (this.id !== null) {
-      this.primeraConsulta.id_usuario = this.id; 
-    }
 
-    console.log(this.primeraConsulta);
-    this.primeraConsultaService.createConsulta(this.primeraConsulta).subscribe({
-      next: (response) => {
-        console.log('Primera Consulta creada:', response);
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Primera Consulta creada con éxito',
-          icon: 'success',
-        }).then(() => {
-          // Puedes redirigir o hacer otra acción aquí si es necesario
-        });
-      },
-      error: (error) => {
-        console.error('Error al crear la primera consulta:', error);
-        Swal.fire({
-          title: 'Error',
-          text: 'Ocurrió un error al crear la primera consulta',
-          icon: 'error',
-        });
+    if (this.id_primeraConsulta) {
+      // Editar usuario existente
+      this.primeraConsultaService.updatePrimeraConsulta(this.id_primeraConsulta, this.primeraConsulta).subscribe({
+        next: (response) => {
+          console.log('Primera Consulta actualizada:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Primera Consulta actualizada con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.isReadOnlyPrimeraConsulta = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar la primera consulta:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar la primera consulta',
+            icon: 'error',
+          });
+        }
+      });
+    } else {
+
+      if (this.id !== null) {
+        this.primeraConsulta.id_usuario = this.id;
       }
-    });
+
+      console.log(this.primeraConsulta);
+      this.primeraConsultaService.createConsulta(this.primeraConsulta).subscribe({
+        next: (response) => {
+          console.log('Primera Consulta creada:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Primera Consulta creada con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.id_primeraConsulta = response.consulta.cod_consulta ?? null;
+            console.log(response)
+          });
+        },
+        error: (error) => {
+          console.error('Error al crear la primera consulta:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al crear la primera consulta',
+            icon: 'error',
+          });
+        }
+      });
+    }
   }
 
   getPrimeraConsulta(): void {
@@ -228,14 +306,13 @@ export class Ruta2Component {
         (response) => {
           this.primeraConsulta = response.consulta;
           console.log(response);
+          this.isReadOnlyPrimeraConsulta = true;
+
+          this.id_primeraConsulta = response.consulta.cod_consulta ?? null;
         },
         (error) => {
-          console.error('Error al obtener el usuario:', error);
-          Swal.fire({
-            title: 'Error',
-            text: 'No se pudo encontrar La primera consulta. Verifica el ID.',
-            icon: 'error',
-          });
+          console.error('Error al obtener la informacion:', error);
+
         }
       );
     } else {
@@ -244,30 +321,54 @@ export class Ruta2Component {
   }
 
   guardarVacunacion(): void {
-    if (this.id !== null) {
-      this.vacunacion.id_usuario = this.id; 
-    }
 
-    console.log(this.vacunacion);
-    this.vacunacionService.createVacunacion(this.vacunacion).subscribe({
-      next: (response) => {
-        console.log('Vacunacion creada:', response);
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Vacunacion creada con éxito',
-          icon: 'success',
-        }).then(() => {
-        });
-      },
-      error: (error) => {
-        console.error('Error al crear la Vacunacion:', error);
-        Swal.fire({
-          title: 'Error',
-          text: 'Ocurrió un error al crear la Vacunacion',
-          icon: 'error',
-        });
+    if (this.id_vacunacion) {
+
+      this.vacunacionService.updateVacunacion(this.id_vacunacion, this.vacunacion).subscribe({
+        next: (response) => {
+          console.log('Vacunacion actualizada:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Vacunacion actualizada con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.isReadOnlyVacunacion = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar la vacunacion:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar la vacunacion',
+            icon: 'error',
+          });
+        }
+      });
+    } else {
+
+      if (this.id !== null) {
+        this.vacunacion.id_usuario = this.id;
       }
-    });
+
+      console.log(this.vacunacion);
+      this.vacunacionService.createVacunacion(this.vacunacion).subscribe({
+        next: (response) => {
+          console.log('Vacunacion creada:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Vacunacion creada con éxito',
+            icon: 'success',
+          }).then(() => { 
+            this.isReadOnlyVacunacion = true;
+            this.id_vacunacion = response.vacunacion.cod_vacunacion ?? null;
+          });
+        },
+        error: (error) => {
+          console.error('Error al crear la Vacunacion:', error);
+
+        }
+      });
+    }
   }
 
   getVacunacion(): void {
@@ -276,14 +377,13 @@ export class Ruta2Component {
         (response) => {
           this.vacunacion = response.vacunacion;
           console.log(response);
+          this.id_vacunacion = response.vacunacion.cod_vacunacion ?? null;
+          this.isReadOnlyVacunacion = true;
+
         },
         (error) => {
-          console.error('Error al obtener el usuario:', error);
-          Swal.fire({
-            title: 'Error',
-            text: 'No se pudo encontrar la informacion de vacunacion. Verifica el ID.',
-            icon: 'error',
-          });
+          console.error('Error al obtener la vacunacion:', error);
+
         }
       );
     } else {

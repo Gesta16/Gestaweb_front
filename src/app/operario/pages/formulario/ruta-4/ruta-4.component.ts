@@ -30,11 +30,14 @@ export class Ruta4Component {
   formaMedicion: FormaMedicion[] = [];
   diagnostico: DiagnosticoNutricional[] = [];
   numSesiones: NumSesionesCurso[] = [];
+  ReadonlySeguimientoConsulta = false;
 
   seguimientoConsulta: SeguimientoConsultaMensual;
   seguimientoComplementario: SeguimientoComplementario;
   micronutriente: Micronutriente;
   id: number | null = null;
+  id_SeguimientoConsulta: number | null = null;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -56,20 +59,34 @@ export class Ruta4Component {
   }
 
   ngOnInit() {
+
+    this.route.paramMap.subscribe(params => {
+      this.id = +params.get('id')!; // Obtiene el ID como número
+      console.log('ID de la gestante:', this.id);
+    });
+
+    if (this.id !== null && this.id > 0) {
+      this.getSeguimientoConsulta();
+      this.getSeguimientoComplementario();
+      this.getMicronutientes();
+    } else {
+      console.log('No se proporcionó un ID válido.');
+    }
+
     this.getNumerosControl();
     this.getRiesgos();
     this.getFormasMedicion();
     this.getDiagnosticosNutricionales();
     this.getNumSesionesCurso();
 
-    this.route.paramMap.subscribe(params => {
-      this.id = +params.get('id')!; // Obtiene el ID como número
-      console.log('ID de la gestante:', this.id);
-    });
   }
 
   toggleTabs($tabNumber: number) {
     this.openTab = $tabNumber;
+  }
+
+  toggleEditSeguimientoConsulta() {
+    this.ReadonlySeguimientoConsulta = false;
   }
 
   getNumerosControl() {
@@ -128,26 +145,75 @@ export class Ruta4Component {
   }
 
   guardarSeguimientoConsulta() {
-    if (this.id !== null) {
-      this.seguimientoConsulta.id_usuario = this.id;
-    }
 
-    this.seguimientoConsultaMensualService.crearSeguimientoConsulta(this.seguimientoConsulta).subscribe(response => {
+    if (this.id_SeguimientoConsulta) {
+      // Editar usuario existente
+      this.seguimientoConsultaMensualService.updateSeguimientoConsulta(this.id_SeguimientoConsulta, this.seguimientoConsulta).subscribe({
+        next: (response) => {
+          console.log('Seguimiento Consulta actualizado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Consulta de seguimiento mensual editada con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.ReadonlySeguimientoConsulta = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar la consulta de seguimiento mensual:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar la consulta de seguimiento mensual',
+            icon: 'error',
+          });
+        }
+      });
+    } else {
+
+      if (this.id !== null) {
+        this.seguimientoConsulta.id_usuario = this.id;
+      }
+
+      this.seguimientoConsultaMensualService.crearSeguimientoConsulta(this.seguimientoConsulta).subscribe(response => {
         Swal.fire({
           icon: 'success',
           title: 'Éxito',
           text: 'Seguimiento de consulta mensual guardado correctamente',
           timer: 2000,
           showConfirmButton: false
+        }).then(() => {
+          this.id_SeguimientoConsulta = response.cod_seguimiento ?? null;
+          this.ReadonlySeguimientoConsulta = true;
+          console.log(response);
+          console.log(this.id_SeguimientoConsulta)
+        });;
+
+      }, error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al guardar el seguimiento de consulta mensual',
         });
-      
-    }, error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error al guardar el seguimiento de consulta mensual',
       });
-    });
+    }
+  }
+
+  getSeguimientoConsulta(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.seguimientoConsultaMensualService.getSeguimientoConsultabyId(this.id).subscribe(
+        (response) => {
+          this.seguimientoConsulta = response.seguimiento;
+          console.log(response);
+          this.ReadonlySeguimientoConsulta = true;
+          this.id_SeguimientoConsulta = response.seguimiento.cod_seguimiento ?? null;
+        },
+        (error) => {
+          console.error('Error al obtener el Seguimiento de consulta mensual:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a crear un nuevo  Seguimiento de consulta mensual.');
+    }
   }
 
 
@@ -157,23 +223,38 @@ export class Ruta4Component {
     }
 
     this.seguimientoComplementarioService.crearSeguimientoComplementario(this.seguimientoComplementario).subscribe(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Seguimiento complementario guardado correctamente',
-          timer: 2000,
-          showConfirmButton: false
-        });
-      }
-    , error => {
       Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error al guardar el seguimiento complementario',
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Seguimiento complementario guardado correctamente',
+        timer: 2000,
+        showConfirmButton: false
       });
-    });
+    }
+      , error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al guardar el seguimiento complementario',
+        });
+      });
   }
 
+  getSeguimientoComplementario(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.seguimientoComplementarioService.getSeguimientoComplementariobyId(this.id).subscribe(
+        (response) => {
+          this.seguimientoComplementario = response.seguimiento;
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error al obtener el Seguimiento Complementario:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a crear un nuevo Seguimiento Complementario.');
+    }
+  }
 
   guardarMicronutriente() {
     if (this.id !== null) {
@@ -181,22 +262,40 @@ export class Ruta4Component {
     }
 
     this.micronutrientesService.crearMicronutriente(this.micronutriente).subscribe(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Micronutriente guardado correctamente',
-          timer: 2000,
-          showConfirmButton: false
-        });
-      }
-    , error => {
       Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error al guardar el micronutriente',
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Micronutriente guardado correctamente',
+        timer: 2000,
+        showConfirmButton: false
       });
-    });
+    }
+      , error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al guardar el micronutriente',
+        });
+      });
   }
+
+  getMicronutientes(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.micronutrientesService.getMicronutrientebyId(this.id).subscribe(
+        (response) => {
+          this.micronutriente = response.micronutriente;
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error al obtener el Seguimiento Complementario:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a crear un nuevo Seguimiento Complementario.');
+    }
+  }
+
+
 
 
   volver() {

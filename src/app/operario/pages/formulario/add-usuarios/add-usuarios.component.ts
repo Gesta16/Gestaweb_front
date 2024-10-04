@@ -41,6 +41,7 @@ export class AddUsuariosComponent {
     cod_poblacion: 0,
   };
 
+  isReadOnly = false;
   listDepartamentos: Departamento[] = [];
   listMunicipios: Municipio[] = [];
   listIps: Ips[] = [];
@@ -68,7 +69,7 @@ export class AddUsuariosComponent {
       if (this.id > 0) { 
         this.getUsuario();
       } else {
-        console.log('No se proporcionó un ID válido, se asume que se va a crear un nuevo usuario.');
+        console.log('No se proporcionó un ID válido.');
       }
     });
     this.getDepartamentos();
@@ -82,6 +83,7 @@ export class AddUsuariosComponent {
       this.usuarioService.getUsuarioById(this.id).subscribe(
         (response) => {
           this.usuario = response.usuario;
+          this.isReadOnly = true;
           console.log(response);
           this.getMunicipios(this.usuario.cod_departamento); 
         },
@@ -99,6 +101,10 @@ export class AddUsuariosComponent {
     }
   }
 
+  toggleEdit() {
+    this.isReadOnly = false;
+  }
+
   onDepartamentoChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     const departamentoId = +target.value;
@@ -111,27 +117,54 @@ export class AddUsuariosComponent {
   }
 
   guardarUsuario() {
-    this.usuarioService.createUsuario(this.usuario).subscribe({
-      next: (response) => {
-        console.log('Usuario creado:', response);
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Usuario creado con éxito',
-          icon: 'success',
-        }).then(() => {
-          this.router.navigate(['/list-usuarios']);
-        });
-      },
-      error: (error) => {
-        console.error('Error al crear el usuario:', error);
-        Swal.fire({
-          title: 'Error',
-          text: 'Ocurrió un error al crear el usuario',
-          icon: 'error',
-        });
-      }
-    });
+    // Verificar si estamos editando un usuario existente (si tiene un 'id')
+    if (this.id) {
+      // Editar usuario existente
+      this.usuarioService.updateUsuario(this.id, this.usuario).subscribe({
+        next: (response) => {
+          console.log('Usuario actualizado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Usuario actualizado con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.isReadOnly = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el usuario:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar el usuario',
+            icon: 'error',
+          });
+        }
+      });
+    } else {
+      // Crear nuevo usuario
+      this.usuarioService.createUsuario(this.usuario).subscribe({
+        next: (response) => {
+          console.log('Usuario creado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Usuario creado con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.router.navigate(['/list-usuarios']);
+          });
+        },
+        error: (error) => {
+          console.error('Error al crear el usuario:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al crear el usuario',
+            icon: 'error',
+          });
+        }
+      });
+    }
   }
+  
 
   calcularEdad(): void {
     if (this.usuario.fec_nacimiento) {

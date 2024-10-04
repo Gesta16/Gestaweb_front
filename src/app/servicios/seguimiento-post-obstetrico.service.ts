@@ -31,4 +31,8 @@ export class SeguimientoPostObstetricoService {
     return this.http.post(this.apiUrl, seguimiento, {headers});
   }
 
+  getSeguimientobyId(id: number): Observable<{ estado: string; seguimiento: SeguimientoPostObstetrico }> {
+    return this.http.get<{ estado: string; seguimiento: SeguimientoPostObstetrico }>(`${this.apiUrl}/${id}`);
+  }
+
 }

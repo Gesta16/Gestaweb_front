@@ -28,4 +28,8 @@ export class DatosRecienNacidoService {
     return this.http.post(this.apiUrl, datosRecienNacido, {headers});
   }
 
+  getDatosRecienNacidobyId(id: number): Observable<{ estado: string; data: DatosRecienNacido }> {
+    return this.http.get<{ estado: string; data: DatosRecienNacido }>(`${this.apiUrl}/${id}`);
+  }
+
 }

@@ -54,15 +54,27 @@ export class Ruta5Component implements OnInit {
   }
 
   ngOnInit() {
-    this.getTerminaciones();
-    this.getMetodosAnticonceptivos();
-    this.getPruebaVDRL();
-    this.getMortalidadPerinatal();
 
     this.route.paramMap.subscribe(params => {
       this.id = +params.get('id')!; // Obtiene el ID como número
       console.log('ID de la gestante:', this.id);
     });
+
+    if (this.id !== null && this.id > 0) { 
+
+      this.getFinalizacionGestacion();
+      this.getLaboratoriosIntraparto();
+      this.getSeguimiento();
+      this.getMortalidadPreparto();
+
+      } else {
+      console.log('No se proporcionó un ID válido.');
+    }
+
+    this.getTerminaciones();
+    this.getMetodosAnticonceptivos();
+    this.getPruebaVDRL();
+    this.getMortalidadPerinatal();
   }
 
   toggleTabs(tabNumber: number) {
@@ -134,6 +146,22 @@ export class Ruta5Component implements OnInit {
     });
   }
 
+  getFinalizacionGestacion(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.finalizacionGestacionServicio.getFinalizacionGestacionbyId(this.id).subscribe(
+        (response) => {
+          this.finalizacionGestacion = response.finalizacion;
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error al obtener los datos de la finalizacion de la gestacion:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos de la finalizacion de la gestacion.');
+    }
+  }
+
   guardarLaboratorioIntraparto() {
 
     if (this.id !== null) {
@@ -158,6 +186,23 @@ export class Ruta5Component implements OnInit {
       console.error('Error al guardar el registro de laboratorio intraparto', error.error);
     });
   }
+
+  getLaboratoriosIntraparto(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.laboratorioIntrapartoServicio.getLaboratoriobyId(this.id).subscribe(
+        (response) => {
+          this.laboratorioIntraparto = response.data;
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error al obtener los datos de los laboratorios de intraparto:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos.');
+    }
+  }
+  
 
   guardarSeguimiento() {
 
@@ -184,6 +229,22 @@ export class Ruta5Component implements OnInit {
     });
   }
 
+  getSeguimiento(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.seguimientoPostObstetricoServicio.getSeguimientobyId(this.id).subscribe(
+        (response) => {
+          this.seguimiento = response.seguimiento;
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error al obtener los datos:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos.');
+    }
+  }
+
   guardarMortalidadPreparto() {
 
     if (this.id !== null) {
@@ -207,6 +268,22 @@ export class Ruta5Component implements OnInit {
       });
       console.error('Error al guardar la mortalidad preparto', error.error);
     });
+  }
+
+  getMortalidadPreparto(): void {
+    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+      this.mortalidadPrepartoService.getMortalidadPrepartobyId(this.id).subscribe(
+        (response) => {
+          this.mortalidadPreparto = response.mortalidad;
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error al obtener los datos:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos.');
+    }
   }
 
 
