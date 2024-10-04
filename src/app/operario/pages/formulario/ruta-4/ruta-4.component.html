@@ -58,6 +58,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="fecConsulta" class="font-medium mb-1">Fecha de consulta</label>
                                     <input type="date" id="fecConsulta" [(ngModel)]="seguimientoConsulta.fec_consulta"
+                                        [readonly]="ReadonlySeguimientoConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
@@ -65,6 +66,7 @@
                                     <label for="codControles" class="font-medium mb-1">Número acumulado de controles
                                         prenatales</label>
                                     <select id="codControles" [(ngModel)]="seguimientoConsulta.cod_controles"
+                                        [disabled]="ReadonlySeguimientoConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option *ngFor="let numero of numerosControl" [value]="numero.cod_controles">
@@ -76,7 +78,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="edadGestacional" class="font-medium mb-1">Edad gestacional al momento de
                                         la consulta</label>
-                                    <input type="tel" id="edadGestacional"
+                                    <input type="tel" id="edadGestacional" [readonly]="ReadonlySeguimientoConsulta"
                                         [(ngModel)]="seguimientoConsulta.edad_gestacional"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
@@ -84,6 +86,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="altUterina" class="font-medium mb-1">Altura uterina (cms)</label>
                                     <input type="tel" id="altUterina" [(ngModel)]="seguimientoConsulta.alt_uterina"
+                                        [readonly]="ReadonlySeguimientoConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
@@ -91,6 +94,7 @@
                                     <label for="trimGestacional" class="font-medium mb-1">Trimestre gestacional
                                         actual</label>
                                     <select id="trimGestacional" [(ngModel)]="seguimientoConsulta.trim_gestacional"
+                                        [disabled]="ReadonlySeguimientoConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="1">Trimestre I: 1 a 13 sem</option>
@@ -103,6 +107,7 @@
                                     <label for="codRiesgo" class="font-medium mb-1">Clasificación del riesgo según
                                         escala</label>
                                     <select id="codRiesgo" [(ngModel)]="seguimientoConsulta.cod_riesgo"
+                                        [disabled]="ReadonlySeguimientoConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option *ngFor="let riesgo of riesgo" [value]="riesgo.cod_riesgo">
@@ -114,12 +119,14 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="peso" class="font-medium mb-1">Peso [KG]</label>
                                     <input type="tel" id="peso" [(ngModel)]="seguimientoConsulta.peso"
+                                        [readonly]="ReadonlySeguimientoConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="talla" class="font-medium mb-1">Talla metros</label>
                                     <input type="tel" id="talla" [(ngModel)]="seguimientoConsulta.talla"
+                                        [readonly]="ReadonlySeguimientoConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
                             </div>
@@ -132,6 +139,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="imc" class="font-medium mb-1">IMC</label>
                                     <input type="tel" id="imc" [(ngModel)]="seguimientoConsulta.imc"
+                                        [readonly]="ReadonlySeguimientoConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
@@ -139,6 +147,7 @@
                                     <label for="codDiagnostico" class="font-medium mb-1">Diagnóstico nutricional
                                         consulta del mes</label>
                                     <select id="codDiagnostico" [(ngModel)]="seguimientoConsulta.cod_diagnostico"
+                                        [disabled]="ReadonlySeguimientoConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option *ngFor="let diagnostico of diagnostico"
@@ -151,12 +160,14 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="tenArts" class="font-medium mb-1">Tensión arterial sistólica</label>
                                     <input type="tel" id="tenArts" [(ngModel)]="seguimientoConsulta.ten_arts"
+                                        [readonly]="ReadonlySeguimientoConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="tenArtd" class="font-medium mb-1">Tensión arterial diastólica</label>
                                     <input type="tel" id="tenArtd" [(ngModel)]="seguimientoConsulta.ten_artd"
+                                        [readonly]="ReadonlySeguimientoConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
@@ -164,6 +175,7 @@
                                     <label for="codMedicion" class="font-medium mb-1">Forma de medición de edad
                                         gestacional</label>
                                     <select id="codMedicion" [(ngModel)]="seguimientoConsulta.cod_medicion"
+                                        [disabled]="ReadonlySeguimientoConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option *ngFor="let forma of formaMedicion" [value]="forma.cod_medicion">
@@ -172,12 +184,21 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="mt-8 flex justify-center">
-                                <button (click)="guardarSeguimientoConsulta()"
-                                    class="px-6 py-2 text-sm w-auto max-w-xs font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                            
+
+                            <div class="mt-4 flex justify-center space-x-4">
+                                <button type="button" (click)="toggleEditSeguimientoConsulta()"
+                                    [disabled]="!ReadonlySeguimientoConsulta"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                                    Editar
+                                </button>
+
+                                <button (click)="guardarSeguimientoConsulta()" [disabled]="ReadonlySeguimientoConsulta"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
                             </div>
+
                         </div>
 
                         <!-- Seguimientos complementarios -->
@@ -244,7 +265,7 @@
                                             {{ sesiones.num_sesiones }}
                                         </option>
                                     </select>
-                                </div>                              
+                                </div>
                             </div>
                             <div class="mt-8 flex justify-center">
                                 <button (click)="guardarSeguimientoComplementario()"
@@ -252,6 +273,7 @@
                                     Guardar
                                 </button>
                             </div>
+
                         </div>
 
                         <!-- Micronutrientes -->
@@ -296,7 +318,7 @@
                                         <option value="Si">Si</option>
                                         <option value="No">No</option>
                                     </select>
-                                </div>                   
+                                </div>
                             </div>
                             <div class="mt-8 flex justify-center">
                                 <button (click)="guardarMicronutriente()"

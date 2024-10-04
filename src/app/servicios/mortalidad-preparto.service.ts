@@ -28,4 +28,7 @@ export class MortalidadPrepartoService {
     return this.http.post(this.apiUrl, mortalidadPreparto, {headers});
   }
 
+  getMortalidadPrepartobyId(id: number): Observable<{ estado: string; mortalidad: MortalidadPreparto }> {
+    return this.http.get<{ estado: string; mortalidad: MortalidadPreparto }>(`${this.apiUrl}/${id}`);
+  }
 }

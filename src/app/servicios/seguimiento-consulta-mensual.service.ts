@@ -26,8 +26,26 @@ export class SeguimientoConsultaMensualService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-
+ 
     return this.http.post(this.apiUrl, seguimiento,{headers});
+  }
+
+  getSeguimientoConsultabyId(id: number): Observable<{ estado: string; seguimiento: SeguimientoConsultaMensual }> {
+    return this.http.get<{ estado: string; seguimiento: SeguimientoConsultaMensual }>(`${this.apiUrl}/${id}`);
+  }
+
+  updateSeguimientoConsulta(id:number, data: SeguimientoConsultaMensual): Observable<any> {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación.');
+    }
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  
+    return this.http.post(`${this.apiUrl}/${id}`, data, { headers });
   }
 
 }

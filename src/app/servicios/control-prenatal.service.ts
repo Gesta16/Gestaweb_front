@@ -34,4 +34,18 @@ export class ControlPrenatalService {
   getControlById(id: number): Observable<{ estado: string; Control: ControlPrenatal }> {
     return this.http.get<{ estado: string; Control: ControlPrenatal }>(`${this.apiUrl}/${id}`);
   }
+
+  updateControlPrenatal(id:number ,control: ControlPrenatal): Observable<any> {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación.');
+    }
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  
+    return this.http.post(`${this.apiUrl}/${id}`, control, { headers });
+  }
 }  

@@ -35,6 +35,18 @@ export class Ruta3Component {
   id: number | null = null;
   Vdrl: PruebaVDRL[] = [];
   Rpr: PruebaRPR[] = [];
+  isReadOnlyLaboratorioI = false;
+  isReadOnlyLaboratorioII = false;
+  isReadOnlyLaboratorioIII = false;
+  isReadOnlyIts = false;
+
+
+  id_laboratorioI: number | null = null;
+  id_laboratorioII: number | null = null;
+  id_laboratorioIII: number | null = null;
+  id_its: number | null = null;
+
+
 
   laboratorioITrimestre: LaboratorioITrimestre = {
     cod_laboratorio: 0,
@@ -136,7 +148,7 @@ export class Ruta3Component {
 
 
 
-  constructor(private itsService:ItsService ,private vdrlService: PruebaVDRLService, private rprService: PruebaRprService, private laboratorioIIISemestreservice: LaboratorioiiisemestreService, private laboratorioIISemestreservice: LaboratorioiisemestreService, private laboratorioISemestreservice: LaboratorioisemestreService, private route: ActivatedRoute, private hemoclasificacionService: HemoclasificacionService, private antibiogramaService: AntibiogramaService, private router: Router,) { }
+  constructor(private itsService: ItsService, private vdrlService: PruebaVDRLService, private rprService: PruebaRprService, private laboratorioIIISemestreservice: LaboratorioiiisemestreService, private laboratorioIISemestreservice: LaboratorioiisemestreService, private laboratorioISemestreservice: LaboratorioisemestreService, private route: ActivatedRoute, private hemoclasificacionService: HemoclasificacionService, private antibiogramaService: AntibiogramaService, private router: Router,) { }
 
   ngOnInit(): void {
 
@@ -145,13 +157,13 @@ export class Ruta3Component {
       console.log('ID de la gestante:', this.id);
     });
 
-    if (this.id !== null && this.id > 0) { 
+    if (this.id !== null && this.id > 0) {
       this.getPrimerLaboratorio();
       this.getSegundoLaboratorio();
       this.getTercerLaboratorio();
       this.getIts();
     } else {
-      console.log('No se proporcionó un ID válido, se asume que se va a crear un Control Prenatal.');
+      console.log('No se proporcionó un ID válido.');
     }
 
     this.cargarHemoclasificacion();
@@ -159,8 +171,24 @@ export class Ruta3Component {
     this.cargarRPR();
     this.cargarVDRL();
 
-    
   }
+
+  toggleEditLaboratorioI() {
+    this.isReadOnlyLaboratorioI = false;
+  }
+
+  toggleEditLaboratorioII() {
+    this.isReadOnlyLaboratorioII = false;
+  }
+
+  toggleEditLaboratorioIII() {
+    this.isReadOnlyLaboratorioIII = false;
+  }
+
+  toggleEditIts() {
+    this.isReadOnlyIts = false;
+  }
+
   cargarHemoclasificacion(): void {
     this.hemoclasificacionService.getHemoclasificaciones().subscribe(response => {
       this.hemoclasificaciones = response.Hemoclasificacion;
@@ -205,30 +233,58 @@ export class Ruta3Component {
   }
 
   guardarPrimerLaboratorio(): void {
-    if (this.id !== null) {
-      this.laboratorioITrimestre.id_usuario = this.id;
-    }
 
-    console.log(this.laboratorioITrimestre);
-    this.laboratorioISemestreservice.createLaboratorioPrimerSemestre(this.laboratorioITrimestre).subscribe({
-      next: (response) => {
-        console.log('Laboratorio del primer semestre creado:', response);
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Laboratorio del primer semestre  creado con éxito',
-          icon: 'success',
-        }).then(() => {
-        });
-      },
-      error: (error) => {
-        console.error('Error al crear el Laboratorio del primer semestre :', error);
-        Swal.fire({
-          title: 'Error',
-          text: 'Ocurrió un error al crear el Laboratorio del primer semestre ',
-          icon: 'error',
-        });
+    if (this.id_laboratorioI) {
+      // Editar usuario existente
+      this.laboratorioISemestreservice.updateLaboratorioISemestre(this.id_laboratorioI, this.laboratorioITrimestre).subscribe({
+        next: (response) => {
+          console.log('Primer laboratorio trimestre actualizado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Primer laboratorio trimestre editado con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.isReadOnlyLaboratorioI = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el Primer laboratorio trimestre:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar el Primer laboratorio trimestre',
+            icon: 'error',
+          });
+        }
+      });
+    } else {
+
+      if (this.id !== null) {
+        this.laboratorioITrimestre.id_usuario = this.id;
       }
-    });
+
+      console.log(this.laboratorioITrimestre);
+      this.laboratorioISemestreservice.createLaboratorioPrimerSemestre(this.laboratorioITrimestre).subscribe({
+        next: (response) => {
+          console.log('Laboratorio del primer semestre creado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Laboratorio del primer semestre  creado con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.id_laboratorioI = response.data.cod_laboratorio ?? null;
+            this.isReadOnlyLaboratorioI = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al crear el Laboratorio del primer semestre :', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al crear el Laboratorio del primer semestre ',
+            icon: 'error',
+          });
+        }
+      });
+    }
   }
 
   getPrimerLaboratorio(): void {
@@ -237,6 +293,8 @@ export class Ruta3Component {
         (response) => {
           this.laboratorioITrimestre = response.data;
           console.log(response);
+          this.isReadOnlyLaboratorioI = true;
+          this.id_laboratorioI = this.laboratorioITrimestre.cod_laboratorio;
         },
         (error) => {
           console.error('Error al obtener el laboratorio del primer trimestre:', error);
@@ -248,30 +306,58 @@ export class Ruta3Component {
   }
 
   guardarSegundoLaboratorio(): void {
-    if (this.id !== null) {
-      this.laboratorioIITrimestre.id_usuario = this.id;
-    }
 
-    console.log(this.laboratorioIITrimestre);
-    this.laboratorioIISemestreservice.createLaboratorioSegundoSemestre(this.laboratorioIITrimestre).subscribe({
-      next: (response) => {
-        console.log('Laboratorio del segundo semestre creado:', response);
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Laboratorio del segundo semestre  creado con éxito',
-          icon: 'success',
-        }).then(() => {
-        });
-      },
-      error: (error) => {
-        console.error('Error al crear el Laboratorio del segundo semestre :', error);
-        Swal.fire({
-          title: 'Error',
-          text: 'Ocurrió un error al crear el Laboratorio del segundo semestre ',
-          icon: 'error',
-        });
+    if (this.id_laboratorioII) {
+      // Editar usuario existente
+      this.laboratorioIISemestreservice.updateLaboratorioIISemestre(this.id_laboratorioII, this.laboratorioIITrimestre).subscribe({
+        next: (response) => {
+          console.log('Segundo laboratorio trimestre actualizado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Segundo laboratorio trimestre editado con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.isReadOnlyLaboratorioII = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el Segundo laboratorio trimestre:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar el Segundo laboratorio trimestre',
+            icon: 'error',
+          });
+        }
+      });
+    } else {
+
+      if (this.id !== null) {
+        this.laboratorioIITrimestre.id_usuario = this.id;
       }
-    });
+
+      console.log(this.laboratorioIITrimestre);
+      this.laboratorioIISemestreservice.createLaboratorioSegundoSemestre(this.laboratorioIITrimestre).subscribe({
+        next: (response) => {
+          console.log('Laboratorio del segundo semestre creado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Laboratorio del segundo semestre  creado con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.id_laboratorioII = response.data.cod_doslaboratorio ?? null;
+            this.isReadOnlyLaboratorioII = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al crear el Laboratorio del segundo semestre :', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al crear el Laboratorio del segundo semestre ',
+            icon: 'error',
+          });
+        }
+      });
+    }
   }
 
   getSegundoLaboratorio(): void {
@@ -280,6 +366,8 @@ export class Ruta3Component {
         (response) => {
           this.laboratorioIITrimestre = response.data;
           console.log(response);
+          this.isReadOnlyLaboratorioII = true;
+          this.id_laboratorioII = this.laboratorioIITrimestre.cod_doslaboratorio;
         },
         (error) => {
           console.error('Error al obtener el laboratorio del segundo trimestre:', error);
@@ -291,30 +379,58 @@ export class Ruta3Component {
   }
 
   guardarTercerLaboratorio(): void {
-    if (this.id !== null) {
-      this.laboratorioIIITrimestre.id_usuario = this.id;
-    }
+    if (this.id_laboratorioIII) {
+      // Editar usuario existente
+      this.laboratorioIIISemestreservice.updateLaboratorioIIISemestre(this.id_laboratorioIII, this.laboratorioIIITrimestre).subscribe({
+        next: (response) => {
+          console.log('Tercer laboratorio trimestre actualizado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Tercer laboratorio trimestre editado con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.isReadOnlyLaboratorioIII = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el Tercer laboratorio trimestre:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar el Tercer laboratorio trimestre',
+            icon: 'error',
+          });
+        }
+      });
+    } else {
 
-    console.log(this.laboratorioIIITrimestre);
-    this.laboratorioIIISemestreservice.createLaboratorioTercerSemestre(this.laboratorioIIITrimestre).subscribe({
-      next: (response) => {
-        console.log('Laboratorio del tercer semestre creado:', response);
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Laboratorio del tercer semestre  creado con éxito',
-          icon: 'success',
-        }).then(() => {
-        });
-      },
-      error: (error) => {
-        console.error('Error al crear el Laboratorio del tercer semestre :', error);
-        Swal.fire({
-          title: 'Error',
-          text: 'Ocurrió un error al crear el Laboratorio del tercer semestre ',
-          icon: 'error',
-        });
+      if (this.id !== null) {
+        this.laboratorioIIITrimestre.id_usuario = this.id;
       }
-    });
+
+      
+      console.log(this.laboratorioIIITrimestre);
+      this.laboratorioIIISemestreservice.createLaboratorioTercerSemestre(this.laboratorioIIITrimestre).subscribe({
+        next: (response) => {
+          console.log('Laboratorio del tercer semestre creado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Laboratorio del tercer semestre  creado con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.id_laboratorioIII = response.data.cod_treslaboratorio ?? null;
+            this.isReadOnlyLaboratorioIII = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al crear el Laboratorio del tercer semestre :', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al crear el Laboratorio del tercer semestre ',
+            icon: 'error',
+          });
+        }
+      });
+    }
   }
 
   getTercerLaboratorio(): void {
@@ -323,6 +439,10 @@ export class Ruta3Component {
         (response) => {
           this.laboratorioIIITrimestre = response.data;
           console.log(response);
+          this.isReadOnlyLaboratorioIII = true;
+          this.id_laboratorioIII = this.laboratorioIIITrimestre.cod_treslaboratorio ?? null;
+
+
         },
         (error) => {
           console.error('Error al obtener el laboratorio del tercer trimestre:', error);
@@ -335,30 +455,58 @@ export class Ruta3Component {
 
 
   guardarIts(): void {
-    if (this.id !== null) {
-      this.its.id_usuario = this.id;
-    }
+    if (this.id_its) {
+      // Editar usuario existente
+      this.itsService.updateIts(this.id_its, this.its).subscribe({
+        next: (response) => {
+          console.log('Its actualizado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Its editado con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.isReadOnlyIts = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el Its:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar las Its',
+            icon: 'error',
+          });
+        }
+      });
+    } else {
 
-    console.log(this.its);
-    this.itsService.createIts(this.its).subscribe({
-      next: (response) => {
-        console.log('Its creada:', response);
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Its agregada con éxito',
-          icon: 'success',
-        }).then(() => {
-        });
-      },
-      error: (error) => {
-        console.error('Error al crear la its :', error);
-        Swal.fire({
-          title: 'Error',
-          text: 'Ocurrió un error al crear la its ',
-          icon: 'error',
-        });
+      if (this.id !== null) {
+        this.its.id_usuario = this.id;
       }
-    });
+
+      console.log(this.its);
+      this.itsService.createIts(this.its).subscribe({
+        next: (response) => {
+          console.log('Its creada:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Its agregada con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.id_its = response.data.cod_its ?? null;
+            this.isReadOnlyIts = true;
+            console.log(response);
+          });
+        },
+        error: (error) => {
+          console.error('Error al crear la its :', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al crear la its ',
+            icon: 'error',
+          });
+        }
+      });
+    }
   }
 
   getIts(): void {
@@ -367,6 +515,9 @@ export class Ruta3Component {
         (response) => {
           this.its = response.data;
           console.log(response);
+          this.id_its = this.its.cod_its ?? null;
+          this.isReadOnlyIts=true;
+
         },
         (error) => {
           console.error('Error al obtener its:', error);

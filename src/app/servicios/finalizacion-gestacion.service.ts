@@ -28,5 +28,9 @@ export class FinalizacionGestacionService {
     });
     return this.http.post(this.apiUrl, finalizacion, {headers});
   }
+
+  getFinalizacionGestacionbyId(id: number): Observable<{ estado: string; finalizacion: FinalizacionGestacion }> {
+    return this.http.get<{ estado: string; finalizacion: FinalizacionGestacion }>(`${this.apiUrl}/${id}`);
+  }
 }
 

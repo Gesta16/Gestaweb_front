@@ -28,4 +28,8 @@ export class EstudioHipotiroidismoService {
     return this.http.post(this.apiUrl, estudio, {headers});
   }
 
+  getEstudioHipotiroidismobyId(id: number): Observable<{ estado: string; data: EstudioHipotiroidismo }> {
+    return this.http.get<{ estado: string; data: EstudioHipotiroidismo }>(`${this.apiUrl}/${id}`);
+  }
+
 }

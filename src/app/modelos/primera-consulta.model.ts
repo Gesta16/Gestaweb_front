@@ -1,4 +1,5 @@
 export class PrimeraConsulta {
+    cod_consulta?: number;
     id_operador?: number;
     id_usuario?: number;
     cod_riesgo: number;

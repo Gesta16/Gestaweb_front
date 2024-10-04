@@ -17,7 +17,7 @@ export class LaboratorioisemestreService {
   }
   
 
-  createLaboratorioPrimerSemestre(consulta: LaboratorioITrimestre): Observable<any> {
+  createLaboratorioPrimerSemestre(laboratorio: LaboratorioITrimestre): Observable<any> {
     const token = sessionStorage.getItem('token');
     if (!token) {
       throw new Error('No se encontró el token de autenticación.');
@@ -28,11 +28,25 @@ export class LaboratorioisemestreService {
       'Content-Type': 'application/json'
     });
   
-    return this.http.post(this.apiUrl, consulta, { headers });
+    return this.http.post(this.apiUrl, laboratorio, { headers });
   }
 
   getLaboratorioISemestrebyId(id: number): Observable<{ estado: string; data: LaboratorioITrimestre }> {
     return this.http.get<{ estado: string; data: LaboratorioITrimestre }>(`${this.apiUrl}/${id}`);
+  }
+
+  updateLaboratorioISemestre(id:number ,laboratorio: LaboratorioITrimestre): Observable<any> {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación.');
+    }
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  
+    return this.http.post(`${this.apiUrl}/${id}`, laboratorio, { headers });
   }
 }
 

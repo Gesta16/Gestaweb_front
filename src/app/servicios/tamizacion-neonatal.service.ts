@@ -28,4 +28,8 @@ export class TamizacionNeonatalService {
 
     return this.http.post(this.apiUrl, tamizacion, {headers});
   }
+
+  getTamizacionbyId(id: number): Observable<{ estado: string; data: TamizacionNeonatal }> {
+    return this.http.get<{ estado: string; data: TamizacionNeonatal }>(`${this.apiUrl}/${id}`);
+  }
 }

@@ -28,4 +28,8 @@ export class RutaPYMSService {
     return this.http.post(this.apiUrl, ruta, {headers});
   }
 
+  getRutaPymsId(id: number): Observable<{ estado: string; data: RutaPYMS }> {
+    return this.http.get<{ estado: string; data: RutaPYMS }>(`${this.apiUrl}/${id}`);
+  }
+
 }

@@ -30,4 +30,8 @@ export class LaboratorioIntrapartoService {
     return this.http.post(this.apiUrl, laboratorio, {headers});
   }
 
+  getLaboratoriobyId(id: number): Observable<{ estado: string; data: LaboratorioIntraparto }> {
+    return this.http.get<{ estado: string; data: LaboratorioIntraparto }>(`${this.apiUrl}/${id}`);
+  }
+
 }
