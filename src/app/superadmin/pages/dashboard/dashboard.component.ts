@@ -3,7 +3,11 @@ import { MenuService } from '../../../servicios/menu.service';
 import { AuthService } from '../../../servicios/auth.service';
 import { Consulta, ConteoData, ConteoResponse, DashboardService } from '../../../servicios/dashboard.service';
 import { CalendarOptions } from '@fullcalendar/core';
+import { Chart,registerables } from 'chart.js';
 import dayGridPlugin from '@fullcalendar/daygrid';
+
+Chart.register(...registerables); 
+
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +16,11 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 
 })
 export class DashboardComponent {
+
+  public barChart: Chart | undefined;
+  public barChartData: number[] = [];
+  public barChartLabels: string[] = [];
+
   isVisible: boolean = true;
   currentRolName: string | null = null;
   consultas: Consulta[] = [];
@@ -67,6 +76,7 @@ export class DashboardComponent {
     this.menuService.setMenuVisible(this.isVisible);
     this.cargarConsultas();
     this.cargarConteo();
+    this.obtenerUsuariosPorIps();
 
   }
 
@@ -134,6 +144,43 @@ export class DashboardComponent {
       },
       error: (error) => {
         console.error('Error al obtener los datos de conteo:', error);
+      }
+    });
+  }
+
+  obtenerUsuariosPorIps(): void {
+    this.dashboardService.getUsuariosIps().subscribe(data => {
+      // Procesar los datos de la respuesta
+      this.barChartData = data.map(item => item.total); // Número de usuarios
+      this.barChartLabels = data.map(item => item.nom_ips); // Nombres de las IPs
+
+      // Crear el gráfico de barras
+      this.crearGraficoUsuariosIps();
+    });
+  }
+
+  crearGraficoUsuariosIps(): void {
+    this.barChart = new Chart('UsuariosIps', {
+      type: 'bar',
+      data: {
+        labels: this.barChartLabels,
+        datasets: [
+          {
+            label: 'Número de Usuarios',
+            data: this.barChartData,
+            backgroundColor: 'rgba(75, 192, 192, 0.6)', // Color de las barras
+            borderColor: 'rgba(75, 192, 192, 1)', // Color del borde
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true // Empezar el eje Y desde 0
+          }
+        }
       }
     });
   }

@@ -29,6 +29,11 @@ export interface ConteoResponse {
   total_usuarios: number;
 }
 
+export interface UsuarioIps {
+  cod_ips: number;
+  nom_ips: string;
+  total: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -65,8 +70,22 @@ export class DashboardService {
       'Content-Type': 'application/json'
     });
   
-    // Cambiar el tipo de retorno a <ConteoResponse>
     return this.http.get<ConteoResponse>(`${this.apiUrl}/conteo`, { headers });
+  }
+
+  getUsuariosIps(): Observable<UsuarioIps[]> {
+
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación.');
+    }
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  
+    return this.http.get<UsuarioIps[]>(`${this.apiUrl}/usuario-ips`, { headers });
   }
   
 
