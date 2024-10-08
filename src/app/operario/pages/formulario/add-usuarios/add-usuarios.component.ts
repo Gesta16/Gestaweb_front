@@ -42,6 +42,7 @@ export class AddUsuariosComponent {
   };
 
   isReadOnly = false;
+  isReadOnlyEdad = true;
   listDepartamentos: Departamento[] = [];
   listMunicipios: Municipio[] = [];
   listIps: Ips[] = [];
