@@ -14,28 +14,28 @@
         </div>
     </div>
 
-    <div class="flex flex-wrap mt-5">
-        <div class="w-[70%] justify-center mx-auto">
-            <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer">
-                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
-                        (click)="toggleTabs(1)"
-                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 1, 'text-white bg-[#00acc9]': openTab === 1}">
-                        Sección 1
-                    </a>
-                </li>
-                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
-                        (click)="toggleTabs(2)"
-                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 2, 'text-white bg-[#00acc9]': openTab === 2}">
-                        Sección 2
-                    </a>
-                </li>
-            </ul>
+<div class="flex flex-wrap mt-5">
+    <div class="w-[70%] justify-center mx-auto">
+        <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer">
+            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                    (click)="toggleTabs(1)"
+                    [ngClass]="{'text-[#00acc9] bg-white': openTab !== 1, 'text-white bg-[#00acc9]': openTab === 1}">
+                    Sección 1
+                </a>
+            </li>
+            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal"
+                    (click)="toggleTabs(2)"
+                    [ngClass]="{'text-[#00acc9] bg-white': openTab !== 2, 'text-white bg-[#00acc9]': openTab === 2}">
+                    Sección 2
+                </a>
+            </li>
+        </ul>
 
-            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded uppercase">
-                <div class="px-4 py-5 flex-auto">
-                    <div class="tab-content tab-space">
+        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded uppercase">
+            <div class="px-4 py-5 flex-auto">
+                <div class="tab-content tab-space">
 
                         <!-- Primer Tab -->
                         <div [ngClass]="{'hidden': openTab !== 1, 'block': openTab === 1}">
@@ -193,24 +193,15 @@
 
                             </div>
 
-                            <div class="mt-4 flex justify-center space-x-4">
-                                <button type="button" (click)="toggleEdit()"
-                                [disabled]="!isReadOnly"
-    
-                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
-                                    Editar
-                                </button>
-    
-                                <button (click)="guardarUsuario()"
-                                [disabled]="isReadOnly"
-    
+                            <div class="mt-4 flex justify-center">
+                                <button
+                                    (click)="guardarUsuario()"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
                             </div>
 
                         </div>
-                        
                     </div>
                 </div>
             </div>
