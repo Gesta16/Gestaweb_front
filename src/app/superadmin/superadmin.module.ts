@@ -21,6 +21,7 @@ import { AddOperadoresComponent } from './pages/add-operadores/add-operadores.co
 import { SuperAdminService } from '../servicios/super-admin.service';
 import { AdminService } from '../servicios/admin.service';
 import { EditIpsComponent } from './pages/edit-ips/edit-ips.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 
 
@@ -41,7 +42,9 @@ import { EditIpsComponent } from './pages/edit-ips/edit-ips.component';
   ],
   imports: [
     CommonModule,
+    FullCalendarModule,
     FormsModule,
+    
     RouterModule,
     SharedModule,
     SuperadminRoutingModule,

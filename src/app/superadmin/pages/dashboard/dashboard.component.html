@@ -2,66 +2,91 @@
 <app-header></app-header>
 
 <!-- Contenedor principal -->
-<div class="flex flex-col items-center mt-[6rem] w-full">
+<div class="flex flex-col items-center mt-[6rem] w-full" *ngIf="currentRolName !== '4'; else userContent">
 
     <!-- Diseño de las tarjetas -->
     <div style="height: 100%; width: 95%; margin-top: 30px;">
         <div class="flex items-center h-full">
-            <div class="m-3 flex-1 h-[140px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg flex justify-between items-center px-4">
+            <!-- Ips Registradas -->
+            <div *ngIf="currentRolName == '1'" class="m-3 flex-1 h-[140px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg flex justify-between items-center px-4">
                 <div>
                     <h2 class="font-bold text-xl">Ips Registradas</h2>
-                    <span class="font-bold">Total: 5</span>
+                    <span class="font-bold">Total: {{ conteoData.ipsRegistradas || 0 }}</span>
                 </div>
                 <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
                     <i class="fas fa-hospital text-white text-xl"></i>
                 </div>
             </div>
-    
+
+            <!-- Administradores -->
             <div class="m-3 flex-1 h-[140px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg flex justify-between items-center px-4">
                 <div>
                     <h2 class="font-bold text-xl">Administradores</h2>
-                    <span class="font-bold">Total: 10</span>
+                    <span class="font-bold">Total: {{ conteoData.administradores || 0 }}</span>
                 </div>
                 <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
                     <i class="fas fa-user-tie text-white text-xl"></i>
                 </div>
             </div>
-    
+
+            <!-- Operadores -->
             <div class="m-3 flex-1 h-[140px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg flex justify-between items-center px-4">
                 <div>
                     <h2 class="font-bold text-xl">Operadores</h2>
-                    <span class="font-bold">Total: 8</span>
+                    <span class="font-bold">Total: {{ conteoData.operadores || 0 }}</span>
                 </div>
                 <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center">
                     <i class="fas fa-user-cog text-white text-xl"></i>
                 </div>
             </div>
-    
+
+            <!-- Usuarios -->
             <div class="m-3 flex-1 h-[140px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg flex justify-between items-center px-4">
                 <div>
                     <h2 class="font-bold text-xl">Usuarios</h2>
-                    <span class="font-bold">Total: 50</span>
+                    <span class="font-bold">Total: {{ conteoData.usuarios || 0 }}</span>
                 </div>
                 <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center">
                     <i class="fas fa-users text-white text-xl"></i>
                 </div>
             </div>
         </div>
-    
+
         <!-- Nuevos divs debajo de las tarjetas -->
         <div class="flex items-center h-full">
             <div class="m-3 flex-[2] h-[400px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg p-4 overflow-auto">
-                <h2 class="font-bold text-xl mb-4 text-left">Graficas</h2>
-                <img src="https://cdn.exceltotal.com/wp-content/uploads/2013/03/grafico-de-barras-en-excel-2013-01.png" alt="Gráfica" class="w-full h-auto">
+                <canvas id="UsuariosIps"></canvas>
             </div>
 
             <div class="m-3 flex-1 h-[400px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg p-4 overflow-auto">
-                
                 <h2 class="font-bold text-xl mb-4 text-left">Ips por departamentos</h2>
                 <img src="https://tudashboard.com/wp-content/uploads/2022/02/gra%CC%81fica-circular-300x253.png" alt="Gráfica" class="w-full h-auto">
             </div>
         </div>
-
-        
     </div>
 </div>
+
+<ng-template #userContent>
+    <div class="flex flex-col items-center mt-[6rem] w-full h-[calc(100vh-6rem)] overflow-hidden">
+        <div class="flex w-11/12 h-full mt-6">
+            <div class="m-3 flex-[0_0_25%] h-[95%]">
+                <div class="border border-gray-300 bg-white shadow-md rounded-lg p-3 h-full overflow-hidden">
+                    <h2 class="font-bold text-xl mb-4 text-left">Otro Cuadrado</h2>
+                    <!-- Ajuste a tamaño fijo de 300px -->
+                    <div class="aspect-[1/1] h-[200px] bg-gray-200 flex items-center justify-center">
+                        <span class="text-lg font-semibold text-gray-500">Contenido</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="m-3 flex-[0_0_75%] h-[95%] full-calendar-container overflow-auto">
+                <div class="border border-gray-300 bg-white shadow-md rounded-lg p-3 h-full overflow-hidden">
+                    <br>
+                    <div class="calendar-container">
+                        <full-calendar [options]="calendarOptions" class="calendar"></full-calendar>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
