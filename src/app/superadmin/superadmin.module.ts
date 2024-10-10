@@ -17,6 +17,7 @@ import { AddAdminComponent } from './pages/add-admin/add-admin.component';
 import { AddIpsComponent } from './pages/add-ips/add-ips.component';
 import { ListOperadoresComponent } from './pages/list-operadores/list-operadores.component';
 import { AddOperadoresComponent } from './pages/add-operadores/add-operadores.component';
+import { ReporteComponent } from './pages/reporte/reporte.component';
 
 import { SuperAdminService } from '../servicios/super-admin.service';
 import { AdminService } from '../servicios/admin.service';
@@ -39,6 +40,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     ListOperadoresComponent,
     AddOperadoresComponent,
     EditIpsComponent,
+    ReporteComponent,
   ],
   imports: [
     CommonModule,

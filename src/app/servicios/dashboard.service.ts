@@ -1,6 +1,7 @@
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { catchError, Observable, throwError } from 'rxjs';
 
 // Define la estructura de los datos que esperas recibir
 export interface Consulta {
@@ -39,23 +40,35 @@ export interface UsuarioIps {
   providedIn: 'root'
 })
 export class DashboardService {
-  private apiUrl = 'http://127.0.0.1:8000/api'; 
+  private apiUrl = 'http://127.0.0.1:8000/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
 
   getCalendarioUsuario(): Observable<CalendarioResponse> {
+    if (isPlatformBrowser(this.platformId)) {
+      const token = sessionStorage.getItem('token');
+      if (!token) {
+        return throwError(new Error('No se encontró el token de autenticación.'));
+      }
 
-    const token = sessionStorage.getItem('token');
-    if (!token) {
-      throw new Error('No se encontró el token de autenticación.');
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      });
+
+      return this.http.get<CalendarioResponse>(`${this.apiUrl}/calendario-usuario`, { headers })
+        .pipe(
+          catchError(err => {
+            // Manejo de errores aquí
+            return throwError(err);
+          })
+        );
+    } else {
+      // Manejo del caso cuando no estás en el navegador
+      return throwError(new Error('No se puede acceder a sessionStorage en este entorno.'));
     }
-  
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.get<CalendarioResponse>(`${this.apiUrl}/calendario-usuario`, { headers });
   }
 
   getConteo(): Observable<ConteoResponse> {
@@ -64,12 +77,12 @@ export class DashboardService {
     if (!token) {
       throw new Error('No se encontró el token de autenticación.');
     }
-  
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-  
+
     return this.http.get<ConteoResponse>(`${this.apiUrl}/conteo`, { headers });
   }
 
@@ -79,14 +92,14 @@ export class DashboardService {
     if (!token) {
       throw new Error('No se encontró el token de autenticación.');
     }
-  
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-  
+
     return this.http.get<UsuarioIps[]>(`${this.apiUrl}/usuario-ips`, { headers });
   }
-  
+
 
 }

@@ -26,6 +26,7 @@ export class MenuComponent implements OnInit {
     { name: 'IPS', route: 'list-ips', icon: 'fa-solid fa-hospital', roles: ['superadmin', 'admin'] },
     { name: 'Usuarios', route: 'list-usuarios', icon: 'fa-solid fa-users', roles: ['superadmin', 'admin', 'operador'] },
     { name: 'Ruta seguimiento', route: 'ruta-seguimiento', icon: 'fa-solid fa-route', roles: ['user'] },
+    { name: 'Reportes', route: 'reporte', icon: 'fa-solid fa-clipboard-check', roles: ['superadmin'] },
     { name: 'Perfil', route: 'perfil-superadmin', icon: 'fa-solid fa-user', roles: ['superadmin', 'admin', 'operador', 'user'] },
   ];
 
