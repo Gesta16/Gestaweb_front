@@ -32,4 +32,18 @@ export class DatosRecienNacidoService {
     return this.http.get<{ estado: string; data: DatosRecienNacido }>(`${this.apiUrl}/${id}`);
   }
 
+  updateDatosRecienNacido(id: number, datosRecienNacido: DatosRecienNacido): Observable<any> {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+        throw new Error('No se encontró el token de autenticación.');
+    }
+
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    });
+
+    return this.http.post(`${this.apiUrl}/${id}`, datosRecienNacido, { headers });
+  }
+
 }

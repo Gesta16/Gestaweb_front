@@ -25,6 +25,15 @@ export class Ruta6Component {
   nuevaTamizacion: TamizacionNeonatal;
   hemoclasificacion: Hemoclasificacion[] = [];
   id: number | null = null;
+  ReadonlyDatosRecienNacido = false;
+  id_DatosRecienNacido: number | null = null;
+  ReadonlyEstudioHipotiroidismo = false;
+  id_EstudioHipotiroidismo: number | null = null;
+  ReadonlyTamizacionNeonatal = false;
+  id_TamizacionNeonatal: number | null = null;
+  ReadonlyRutaPYMS = false;
+  id_RutaPYMS: number | null = null;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -42,15 +51,44 @@ export class Ruta6Component {
   }
 
   ngOnInit() {
-    this.getHemoclasificaciones();
     this.route.paramMap.subscribe(params => {
       this.id = +params.get('id')!; // Obtiene el ID como número
       console.log('ID de la gestante:', this.id);
     });
+
+    if (this.id !== null && this.id > 0) {
+
+      this.getDatosRecienNacido();
+      this.getEstudioHipotiroidismo();
+      this.getTamizacionNeonatal();
+      this.getRutaPYMS();
+
+    } else {
+      console.log('No se proporcionó un ID válido.');
+    }
+
+    this.getHemoclasificaciones();
   }
+
 
   toggleTabs($tabNumber: number) {
     this.openTab = $tabNumber;
+  }
+
+  toggleEditDatosRecienNacido() {
+    this.ReadonlyDatosRecienNacido = false;
+  }
+
+  toggleEditEstudioHipotiroidismo() {
+    this.ReadonlyEstudioHipotiroidismo = false;
+  }
+
+  toggleEditTamizacionNeonatal() {
+    this.ReadonlyTamizacionNeonatal = false;
+  }
+
+  toggleEditRutaPYMS() {
+    this.ReadonlyRutaPYMS = false;
   }
 
   getHemoclasificaciones() {
@@ -64,104 +102,304 @@ export class Ruta6Component {
   }
 
   guardarDatosRecienNacido() {
-
-    if (this.id !== null) {
-      this.datosRecienNacido.id_usuario = this.id;
-    }
-
-    this.datosRecienNacidoService.crearDatosRecienNacido(this.datosRecienNacido).subscribe(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Registro de recién nacido guardado correctamente',
-          timer: 2000,
-          showConfirmButton: false
-        });
-      }
-    , error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error al guardar el registro de recién nacido',
+    if (this.id_DatosRecienNacido) {
+      // Editar registro existente
+      this.datosRecienNacidoService.updateDatosRecienNacido(this.id_DatosRecienNacido, this.datosRecienNacido).subscribe({
+        next: (response) => {
+          console.log('Datos del recién nacido actualizados:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Registro de recién nacido editado correctamente',
+            icon: 'success',
+          }).then(() => {
+            this.ReadonlyDatosRecienNacido = true; // Desactivar la edición
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el registro de recién nacido:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar el registro de recién nacido',
+            icon: 'error',
+          });
+        }
       });
-      console.error('Error al guardar el registro de recién nacido', error.error);
-    });
+    } else {
+      if (this.id !== null) {
+        this.datosRecienNacido.id_usuario = this.id; // Asignar el ID de usuario
+      }
+
+      // Crear nuevo registro de recién nacido
+      this.datosRecienNacidoService.crearDatosRecienNacido(this.datosRecienNacido).subscribe({
+        next: (response) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Registro de recién nacido guardado correctamente',
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            this.id_DatosRecienNacido = response.cod_recien ?? null;
+            this.ReadonlyDatosRecienNacido = true;
+            console.log(response);
+            console.log(this.id_DatosRecienNacido);
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error al guardar el registro de recién nacido',
+          });
+          console.error('Error al guardar el registro de recién nacido', error.error);
+        }
+      });
+    }
   }
+
+  getDatosRecienNacido(): void {
+    if (this.id !== null && this.id > 0) {
+      this.datosRecienNacidoService.getDatosRecienNacidobyId(this.id).subscribe(
+        (response) => {
+          this.datosRecienNacido = response.data;
+          console.log(response);
+          this.ReadonlyDatosRecienNacido = true;
+          this.id_DatosRecienNacido = response.data.cod_recien ?? null;
+        },
+        (error) => {
+          console.error('Error al obtener los datos del recién nacido:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos del recién nacido.');
+    }
+  }
+
 
   guardarEstudioHipotiroidismo() {
-
-    if (this.id !== null) {
-      this.estudioHipotiroidismo.id_usuario = this.id;
-    }
-
-    this.estudioHipotiroidismoService.crearEstudioHipotiroidismo(this.estudioHipotiroidismo).subscribe(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Registro de estudio de hipotiroidismo guardado correctamente',
-          timer: 2000,
-          showConfirmButton: false
-        });
-      }
-    , error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error al guardar el registro de estudio de hipotiroidismo',
+    if (this.id_EstudioHipotiroidismo) {
+      // Editar registro existente
+      this.estudioHipotiroidismoService.updateEstudioHipotiroidismo(this.id_EstudioHipotiroidismo, this.estudioHipotiroidismo).subscribe({
+        next: (response) => {
+          console.log('Estudio de hipotiroidismo actualizado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Registro de estudio de hipotiroidismo editado correctamente',
+            icon: 'success',
+          }).then(() => {
+            this.ReadonlyEstudioHipotiroidismo = true; // Desactivar la edición
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el registro de estudio de hipotiroidismo:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar el registro de estudio de hipotiroidismo',
+            icon: 'error',
+          });
+        }
       });
-      console.error('Error al guardar el registro de estudio de hipotiroidismo', error.error);
-    });
+    } else {
+      if (this.id !== null) {
+        this.estudioHipotiroidismo.id_usuario = this.id; // Asignar el ID de usuario
+      }
+
+      // Crear nuevo registro de estudio de hipotiroidismo
+      this.estudioHipotiroidismoService.crearEstudioHipotiroidismo(this.estudioHipotiroidismo).subscribe({
+        next: (response) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Registro de estudio de hipotiroidismo guardado correctamente',
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            this.id_EstudioHipotiroidismo = response.cod_estudio ?? null;
+            this.ReadonlyEstudioHipotiroidismo = true;
+            console.log(response);
+            console.log(this.id_EstudioHipotiroidismo);
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error al guardar el registro de estudio de hipotiroidismo',
+          });
+          console.error('Error al guardar el registro de estudio de hipotiroidismo', error.error);
+        }
+      });
+    }
   }
+
+  getEstudioHipotiroidismo(): void {
+    if (this.id !== null && this.id > 0) {
+      this.estudioHipotiroidismoService.getEstudioHipotiroidismobyId(this.id).subscribe(
+        (response) => {
+          this.estudioHipotiroidismo = response.data;
+          console.log(response);
+          this.ReadonlyEstudioHipotiroidismo = true;
+          this.id_EstudioHipotiroidismo = response.data.cod_estudio ?? null;
+        },
+        (error) => {
+          console.error('Error al obtener los datos del estudio de hipotiroidismo:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos del estudio de hipotiroidismo.');
+    }
+  }
+
+
 
   guardarRutaPYMS() {
-
-    if (this.id !== null) {
-      this.nuevaRuta.id_usuario = this.id;
-    }
-
-    this.rutaPYMSService.crearRuta(this.nuevaRuta).subscribe(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Registro de ruta guardado correctamente',
-          timer: 2000,
-          showConfirmButton: false
-        });
-      }
-    , error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error al guardar el registro de ruta',
+    if (this.id_RutaPYMS) {
+      // Editar registro existente
+      this.rutaPYMSService.updateRuta(this.id_RutaPYMS, this.nuevaRuta).subscribe({
+        next: (response) => {
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Registro de ruta editado correctamente',
+            icon: 'success',
+          }).then(() => {
+            this.ReadonlyRutaPYMS = true; // Desactivar la edición
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el registro de ruta:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar el registro de ruta',
+            icon: 'error',
+          });
+        }
       });
-      console.error('Error al guardar el registro de ruta', error.error);
-    });
+    } else {
+      if (this.id !== null) {
+        this.nuevaRuta.id_usuario = this.id; // Asignar el ID de usuario
+      }
+
+      // Crear nuevo registro de ruta
+      this.rutaPYMSService.crearRuta(this.nuevaRuta).subscribe({
+        next: (response) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Registro de ruta guardado correctamente',
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            this.id_RutaPYMS = response.cod_ruta ?? null;
+            this.ReadonlyRutaPYMS = true;
+            console.log(response);
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error al guardar el registro de ruta',
+          });
+          console.error('Error al guardar el registro de ruta', error.error);
+        }
+      });
+    }
   }
+
+  getRutaPYMS(): void {
+    if (this.id !== null && this.id > 0) {
+      this.rutaPYMSService.getRutaPymsId(this.id).subscribe(
+        (response) => {
+          this.nuevaRuta = response.data;
+          console.log(response);
+          this.ReadonlyRutaPYMS = true;
+          this.id_RutaPYMS = response.data.cod_ruta ?? null;
+        },
+        (error) => {
+          console.error('Error al obtener los datos de la ruta PYMS:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos de la ruta PYMS.');
+    }
+  }
+
+
 
   guardarTamizacionNeonatal() {
-
-    if (this.id !== null) {
-      this.nuevaTamizacion.id_usuario = this.id;
-    }
-
-    this.tamizacionNeonatalService.crearTamizacion(this.nuevaTamizacion).subscribe(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Registro de tamización neonatal guardado correctamente',
-          timer: 2000,
-          showConfirmButton: false
-        });
-      }
-    , error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error al guardar el registro de tamización neonatal',
+    if (this.id_TamizacionNeonatal) {
+      // Editar registro existente
+      this.tamizacionNeonatalService.updateTamizacion(this.id_TamizacionNeonatal, this.nuevaTamizacion).subscribe({
+        next: (response) => {
+          console.log('Tamización neonatal actualizada:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Registro de tamización neonatal editado correctamente',
+            icon: 'success',
+          }).then(() => {
+            this.ReadonlyTamizacionNeonatal = true; // Desactivar la edición
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el registro de tamización neonatal:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar el registro de tamización neonatal',
+            icon: 'error',
+          });
+        }
       });
-      console.error('Error al guardar el registro de tamización neonatal', error.error);
-    });
+    } else {
+      if (this.id !== null) {
+        this.nuevaTamizacion.id_usuario = this.id; // Asignar el ID de usuario
+      }
+
+      // Crear nuevo registro de tamización neonatal
+      this.tamizacionNeonatalService.crearTamizacion(this.nuevaTamizacion).subscribe({
+        next: (response) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Registro de tamización neonatal guardado correctamente',
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            this.id_TamizacionNeonatal = response.cod_tamizacion ?? null;
+            this.ReadonlyTamizacionNeonatal = true;
+            console.log(response);
+            console.log(this.id_TamizacionNeonatal);
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error al guardar el registro de tamización neonatal',
+          });
+          console.error('Error al guardar el registro de tamización neonatal', error.error);
+        }
+      });
+    }
   }
+
+  getTamizacionNeonatal(): void {
+    if (this.id !== null && this.id > 0) {
+      this.tamizacionNeonatalService.getTamizacionbyId(this.id).subscribe(
+        (response) => {
+          this.nuevaTamizacion = response.data;
+          console.log(response);
+          this.ReadonlyTamizacionNeonatal = true;
+          this.id_TamizacionNeonatal = response.data.cod_tamizacion ?? null;
+        },
+        (error) => {
+          console.error('Error al obtener los datos de la tamización neonatal:', error);
+        }
+      );
+    } else {
+      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos de tamización neonatal.');
+    }
+  }
+
 
 
   volver() {

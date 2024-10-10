@@ -31,4 +31,18 @@ export class MortalidadPrepartoService {
   getMortalidadPrepartobyId(id: number): Observable<{ estado: string; mortalidad: MortalidadPreparto }> {
     return this.http.get<{ estado: string; mortalidad: MortalidadPreparto }>(`${this.apiUrl}/${id}`);
   }
+
+  updateMortalidadPreparto(id: number, mortalidad: MortalidadPreparto): Observable<any> {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación.');
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post(`${this.apiUrl}/${id}`, mortalidad, { headers });
+  }
 }

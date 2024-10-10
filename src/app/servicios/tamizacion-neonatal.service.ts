@@ -32,4 +32,19 @@ export class TamizacionNeonatalService {
   getTamizacionbyId(id: number): Observable<{ estado: string; data: TamizacionNeonatal }> {
     return this.http.get<{ estado: string; data: TamizacionNeonatal }>(`${this.apiUrl}/${id}`);
   }
+
+  updateTamizacion(id: number, tamizacion: TamizacionNeonatal): Observable<any> {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      throw new Error('No se encontró el token de autenticación.');
+    }
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  
+    return this.http.post(`${this.apiUrl}/${id}`, tamizacion, { headers });
+  }
+  
 }

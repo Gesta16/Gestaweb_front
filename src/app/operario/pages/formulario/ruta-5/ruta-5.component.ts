@@ -34,6 +34,16 @@ export class Ruta5Component implements OnInit {
   seguimiento: SeguimientoPostObstetrico;
   mortalidadPreparto: MortalidadPreparto;
   id: number | null = null;
+  ReadonlyFinalizacionGestacion = false;
+  id_FinalizacionGestacion: number | null = null;
+  ReadonlyLaboratorioIntraparto = false;
+  id_LaboratorioIntraparto: number | null = null;
+  ReadonlySeguimiento = false;
+  id_Seguimiento: number | null = null;
+  ReadonlyMortalidadPreparto = false;
+  id_MortalidadPreparto: number | null = null;
+
+
 
   constructor(
     private route: ActivatedRoute,
@@ -60,14 +70,14 @@ export class Ruta5Component implements OnInit {
       console.log('ID de la gestante:', this.id);
     });
 
-    if (this.id !== null && this.id > 0) { 
+    if (this.id !== null && this.id > 0) {
 
       this.getFinalizacionGestacion();
       this.getLaboratoriosIntraparto();
       this.getSeguimiento();
       this.getMortalidadPreparto();
 
-      } else {
+    } else {
       console.log('No se proporcionó un ID válido.');
     }
 
@@ -80,6 +90,23 @@ export class Ruta5Component implements OnInit {
   toggleTabs(tabNumber: number) {
     this.openTab = tabNumber;
   }
+
+  toggleEditFinalizacionGestacion() {
+    this.ReadonlyFinalizacionGestacion = false;
+  }
+
+  toggleEditLaboratorioIntraparto() {
+    this.ReadonlyLaboratorioIntraparto = false;
+  }
+
+  toggleEditSeguimiento() {
+    this.ReadonlySeguimiento = false;
+  }
+
+  toggleEditMortalidadPreparto() {
+    this.ReadonlyMortalidadPreparto = false;
+  }
+
 
   getTerminaciones() {
     this.terminacionGestacionService.getTerminacionGestacion().subscribe(response => {
@@ -123,171 +150,315 @@ export class Ruta5Component implements OnInit {
 
   guardarFinalizacionGestacion() {
 
-    if (this.id !== null) {
-      this.finalizacionGestacion.id_usuario = this.id;
-    }
-
-    this.finalizacionGestacionServicio.crearFinalizacionGestacion(this.finalizacionGestacion).subscribe(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Finalización de gestación guardada correctamente',
-          timer: 2000,
-          showConfirmButton: false
-        });
-      }
-    , error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error al guardar la finalización de gestación',
+    if (this.id_FinalizacionGestacion) {
+      // Editar finalización de gestación existente
+      this.finalizacionGestacionServicio.updateFinalizacionGestacion(this.id_FinalizacionGestacion, this.finalizacionGestacion).subscribe({
+        next: (response) => {
+          console.log('Finalización de gestación actualizada:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Finalización de gestación editada correctamente',
+            icon: 'success',
+          }).then(() => {
+            this.ReadonlyFinalizacionGestacion = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar la finalización de gestación:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar la finalización de gestación',
+            icon: 'error',
+          });
+        }
       });
-      console.error('Error al guardar la finalización de gestación', error.error);
-    });
+    } else {
+      if (this.id !== null) {
+        this.finalizacionGestacion.id_usuario = this.id;
+      }
+
+      // Crear nueva finalización de gestación
+      this.finalizacionGestacionServicio.crearFinalizacionGestacion(this.finalizacionGestacion).subscribe({
+        next: (response) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Finalización de gestación guardada correctamente',
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            this.id_FinalizacionGestacion = response.cod_finalizacion ?? null;
+            this.ReadonlyFinalizacionGestacion = true;
+            console.log(response);
+            console.log(this.id_FinalizacionGestacion)
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error al guardar la finalización de gestación',
+          });
+          console.error('Error al guardar la finalización de gestación', error.error);
+        }
+      });
+    }
   }
 
+
+
+
   getFinalizacionGestacion(): void {
-    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+    if (this.id !== null && this.id > 0) {
       this.finalizacionGestacionServicio.getFinalizacionGestacionbyId(this.id).subscribe(
         (response) => {
           this.finalizacionGestacion = response.finalizacion;
           console.log(response);
+          this.ReadonlyFinalizacionGestacion = true;
+          this.id_FinalizacionGestacion = response.finalizacion.cod_finalizacion ?? null;
         },
         (error) => {
-          console.error('Error al obtener los datos de la finalizacion de la gestacion:', error);
+          console.error('Error al obtener los datos de la finalización de la gestación:', error);
         }
       );
     } else {
-      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos de la finalizacion de la gestacion.');
+      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos de la finalización de la gestación.');
     }
   }
+
 
   guardarLaboratorioIntraparto() {
-
-    if (this.id !== null) {
-      this.laboratorioIntraparto.id_usuario = this.id;
-    }
-
-    this.laboratorioIntrapartoServicio.crearLaboratorio(this.laboratorioIntraparto).subscribe(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Registro de laboratorio intraparto guardado correctamente',
-          timer: 2000,
-          showConfirmButton: false
-        });
-      }
-    , error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error al guardar el registro de laboratorio intraparto',
+    if (this.id_LaboratorioIntraparto) {
+      // Editar laboratorio intraparto existente
+      this.laboratorioIntrapartoServicio.updateLaboratorioIntraparto(this.id_LaboratorioIntraparto, this.laboratorioIntraparto).subscribe({
+        next: (response) => {
+          console.log('Laboratorio intraparto actualizado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Laboratorio intraparto editado correctamente',
+            icon: 'success',
+          }).then(() => {
+            this.ReadonlyLaboratorioIntraparto = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el laboratorio intraparto:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar el laboratorio intraparto',
+            icon: 'error',
+          });
+        }
       });
-      console.error('Error al guardar el registro de laboratorio intraparto', error.error);
-    });
+    } else {
+      if (this.id !== null) {
+        this.laboratorioIntraparto.id_usuario = this.id;
+      }
+
+      // Crear nuevo laboratorio intraparto
+      this.laboratorioIntrapartoServicio.crearLaboratorio(this.laboratorioIntraparto).subscribe({
+        next: (response) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Registro de laboratorio intraparto guardado correctamente',
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            this.id_LaboratorioIntraparto = response.cod_intraparto ?? null;
+            this.ReadonlyLaboratorioIntraparto = true;
+            console.log(response);
+            console.log(this.id_LaboratorioIntraparto);
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error al guardar el registro de laboratorio intraparto',
+          });
+          console.error('Error al guardar el registro de laboratorio intraparto', error.error);
+        }
+      });
+    }
   }
 
+
+
   getLaboratoriosIntraparto(): void {
-    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+    if (this.id !== null && this.id > 0) {
       this.laboratorioIntrapartoServicio.getLaboratoriobyId(this.id).subscribe(
         (response) => {
           this.laboratorioIntraparto = response.data;
           console.log(response);
+          this.ReadonlyLaboratorioIntraparto = true;
+          this.id_LaboratorioIntraparto = response.data.cod_intraparto ?? null;
         },
         (error) => {
-          console.error('Error al obtener los datos de los laboratorios de intraparto:', error);
+          console.error('Error al obtener los datos del laboratorio intraparto:', error);
         }
       );
     } else {
-      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos.');
+      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos del laboratorio intraparto.');
     }
   }
-  
+
+
 
   guardarSeguimiento() {
-
-    if (this.id !== null) {
-      this.seguimiento.id_usuario = this.id;
-    }
-
-    this.seguimientoPostObstetricoServicio.crearSeguimiento(this.seguimiento).subscribe(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Seguimiento guardado correctamente',
-          timer: 2000,
-          showConfirmButton: false
-        });
-      }
-    , error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error al guardar el seguimiento',
+    if (this.id_Seguimiento) {
+      // Editar seguimiento existente
+      this.seguimientoPostObstetricoServicio.updateSeguimientoPostObstetrico(this.id_Seguimiento, this.seguimiento).subscribe({
+        next: (response) => {
+          console.log('Seguimiento actualizado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Seguimiento editado correctamente',
+            icon: 'success',
+          }).then(() => {
+            this.ReadonlySeguimiento = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el seguimiento:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar el seguimiento',
+            icon: 'error',
+          });
+        }
       });
-      console.error('Error al guardar el seguimiento', error.error);
-    });
+    } else {
+      if (this.id !== null) {
+        this.seguimiento.id_usuario = this.id;
+      }
+
+      // Crear nuevo seguimiento
+      this.seguimientoPostObstetricoServicio.crearSeguimiento(this.seguimiento).subscribe({
+        next: (response) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Seguimiento guardado correctamente',
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            this.id_Seguimiento = response.cod_evento ?? null;
+            this.ReadonlySeguimiento = true;
+            console.log(response);
+            console.log(this.id_Seguimiento);
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error al guardar el seguimiento',
+          });
+          console.error('Error al guardar el seguimiento', error.error);
+        }
+      });
+    }
   }
 
+
   getSeguimiento(): void {
-    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+    if (this.id !== null && this.id > 0) {
       this.seguimientoPostObstetricoServicio.getSeguimientobyId(this.id).subscribe(
         (response) => {
           this.seguimiento = response.seguimiento;
           console.log(response);
+          this.ReadonlySeguimiento = true;
+          this.id_Seguimiento = response.seguimiento.cod_evento ?? null;
         },
         (error) => {
-          console.error('Error al obtener los datos:', error);
+          console.error('Error al obtener los datos del seguimiento:', error);
         }
       );
     } else {
-      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos.');
+      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos del seguimiento.');
     }
   }
+
 
   guardarMortalidadPreparto() {
-
-    if (this.id !== null) {
-      this.mortalidadPreparto.id_usuario = this.id;
-    }
-
-    this.mortalidadPrepartoService.crearMortalidadPreparto(this.mortalidadPreparto).subscribe(response => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
-          text: 'Mortalidad preparto guardada correctamente',
-          timer: 2000,
-          showConfirmButton: false
-        });
-      }
-    , error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error al guardar la mortalidad preparto',
+    if (this.id_MortalidadPreparto) {
+      // Editar mortalidad preparto existente
+      this.mortalidadPrepartoService.updateMortalidadPreparto(this.id_MortalidadPreparto, this.mortalidadPreparto).subscribe({
+        next: (response) => {
+          console.log('Mortalidad preparto actualizada:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Mortalidad preparto editada correctamente',
+            icon: 'success',
+          }).then(() => {
+            this.ReadonlyMortalidadPreparto = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar la mortalidad preparto:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar la mortalidad preparto',
+            icon: 'error',
+          });
+        }
       });
-      console.error('Error al guardar la mortalidad preparto', error.error);
-    });
+    } else {
+      if (this.id !== null) {
+        this.mortalidadPreparto.id_usuario = this.id;
+      }
+
+      // Crear nuevo registro de mortalidad preparto
+      this.mortalidadPrepartoService.crearMortalidadPreparto(this.mortalidadPreparto).subscribe({
+        next: (response) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Registro de mortalidad preparto guardado correctamente',
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            this.id_MortalidadPreparto = response.cod_mortalpreparto ?? null;
+            this.ReadonlyMortalidadPreparto = true;
+            console.log(response);
+            console.log(this.id_MortalidadPreparto);
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error al guardar el registro de mortalidad preparto',
+          });
+          console.error('Error al guardar el registro de mortalidad preparto', error.error);
+        }
+      });
+    }
   }
 
+
   getMortalidadPreparto(): void {
-    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+    if (this.id !== null && this.id > 0) {
       this.mortalidadPrepartoService.getMortalidadPrepartobyId(this.id).subscribe(
         (response) => {
           this.mortalidadPreparto = response.mortalidad;
           console.log(response);
+          this.ReadonlyMortalidadPreparto = true;
+          this.id_MortalidadPreparto = response.mortalidad.cod_mortalpreparto ?? null;
         },
         (error) => {
-          console.error('Error al obtener los datos:', error);
+          console.error('Error al obtener los datos de mortalidad preparto:', error);
         }
       );
     } else {
-      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos.');
+      console.log('No se proporcionó ID, se asume que se va a ingresar nuevos datos de mortalidad preparto.');
     }
   }
 
 
+
   volver() {
-    this.router.navigate(['/ruta-gestante', this.id]); // Navegar a la ruta con el ID
+    this.router.navigate(['/ruta-gestante', this.id]);
   }
 }

@@ -31,12 +31,16 @@ export class Ruta4Component {
   diagnostico: DiagnosticoNutricional[] = [];
   numSesiones: NumSesionesCurso[] = [];
   ReadonlySeguimientoConsulta = false;
+  ReadonlySeguimientoComplementario = false;
+  ReadonlyMicronutriente = false;
 
   seguimientoConsulta: SeguimientoConsultaMensual;
   seguimientoComplementario: SeguimientoComplementario;
   micronutriente: Micronutriente;
   id: number | null = null;
   id_SeguimientoConsulta: number | null = null;
+  id_SeguimientoComplementario: number | null = null;
+  id_Micronutriente: number | null = null;
 
 
   constructor(
@@ -87,6 +91,14 @@ export class Ruta4Component {
 
   toggleEditSeguimientoConsulta() {
     this.ReadonlySeguimientoConsulta = false;
+  }
+
+  toggleEditSeguimientoComplementario() {
+    this.ReadonlySeguimientoComplementario = false;
+  }
+
+  toggleEditMicronutriente() {
+    this.ReadonlyMicronutriente = false;
   }
 
   getNumerosControl() {
@@ -218,34 +230,66 @@ export class Ruta4Component {
 
 
   guardarSeguimientoComplementario() {
-    if (this.id !== null) {
-      this.seguimientoComplementario.id_usuario = this.id;
-    }
-
-    this.seguimientoComplementarioService.crearSeguimientoComplementario(this.seguimientoComplementario).subscribe(response => {
-      Swal.fire({
-        icon: 'success',
-        title: 'Éxito',
-        text: 'Seguimiento complementario guardado correctamente',
-        timer: 2000,
-        showConfirmButton: false
+    if (this.id_SeguimientoComplementario) {
+      // Editar seguimiento complementario existente
+      this.seguimientoComplementarioService.updateSeguimientoComplementario(this.id_SeguimientoComplementario, this.seguimientoComplementario).subscribe({
+        next: (response) => {
+          console.log('Seguimiento complementario actualizado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Seguimiento complementario editado con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.ReadonlySeguimientoComplementario = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el seguimiento complementario:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar el seguimiento complementario',
+            icon: 'error',
+          });
+        }
       });
-    }
-      , error => {
+    } else {
+      // Crear nuevo seguimiento complementario
+      if (this.id !== null) {
+        this.seguimientoComplementario.id_usuario = this.id;
+      }
+
+      this.seguimientoComplementarioService.crearSeguimientoComplementario(this.seguimientoComplementario).subscribe(response => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Seguimiento complementario guardado correctamente',
+          timer: 2000,
+          showConfirmButton: false
+        }).then(() => {
+          this.id_SeguimientoComplementario = response.cod_segcomplementario ?? null;
+          this.ReadonlySeguimientoComplementario = true;
+          console.log(response);
+          console.log(this.id_SeguimientoComplementario);
+        });
+      }, error => {
         Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Error al guardar el seguimiento complementario',
         });
       });
+    }
   }
 
+
   getSeguimientoComplementario(): void {
-    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+    if (this.id !== null && this.id > 0) { 
       this.seguimientoComplementarioService.getSeguimientoComplementariobyId(this.id).subscribe(
         (response) => {
           this.seguimientoComplementario = response.seguimiento;
           console.log(response);
+          this.ReadonlySeguimientoComplementario = true;
+          this.id_SeguimientoComplementario = response.seguimiento.cod_segcomplementario ?? null;
         },
         (error) => {
           console.error('Error al obtener el Seguimiento Complementario:', error);
@@ -257,34 +301,66 @@ export class Ruta4Component {
   }
 
   guardarMicronutriente() {
-    if (this.id !== null) {
-      this.micronutriente.id_usuario = this.id;
-    }
-
-    this.micronutrientesService.crearMicronutriente(this.micronutriente).subscribe(response => {
-      Swal.fire({
-        icon: 'success',
-        title: 'Éxito',
-        text: 'Micronutriente guardado correctamente',
-        timer: 2000,
-        showConfirmButton: false
+    if (this.id_Micronutriente) {
+      // Editar micronutriente existente
+      this.micronutrientesService.updateMicronutriente(this.id_Micronutriente, this.micronutriente).subscribe({
+        next: (response) => {
+          console.log('Micronutriente actualizado:', response);
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Micronutriente editado con éxito',
+            icon: 'success',
+          }).then(() => {
+            this.ReadonlyMicronutriente = true;
+          });
+        },
+        error: (error) => {
+          console.error('Error al actualizar el micronutriente:', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al actualizar el micronutriente',
+            icon: 'error',
+          });
+        }
       });
-    }
-      , error => {
+    } else {
+      // Crear nuevo micronutriente
+      if (this.id !== null) {
+        this.micronutriente.id_usuario = this.id;
+      }
+
+      this.micronutrientesService.crearMicronutriente(this.micronutriente).subscribe(response => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Micronutriente guardado correctamente',
+          timer: 2000,
+          showConfirmButton: false
+        }).then(() => {
+          this.id_Micronutriente = response.cod_micronutriente ?? null; 
+          this.ReadonlyMicronutriente = true; 
+          console.log(response);
+          console.log(this.id_Micronutriente);
+        });
+      }, error => {
         Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Error al guardar el micronutriente',
         });
       });
+    }
   }
 
+
   getMicronutientes(): void {
-    if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
+    if (this.id !== null && this.id > 0) { 
       this.micronutrientesService.getMicronutrientebyId(this.id).subscribe(
         (response) => {
           this.micronutriente = response.micronutriente;
           console.log(response);
+          this.ReadonlyMicronutriente = true;
+          this.id_Micronutriente = response.micronutriente.cod_micronutriente ?? null;
         },
         (error) => {
           console.error('Error al obtener el Seguimiento Complementario:', error);

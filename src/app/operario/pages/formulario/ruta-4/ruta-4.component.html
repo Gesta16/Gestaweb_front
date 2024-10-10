@@ -210,6 +210,7 @@
                                         nutrición</label>
                                     <input type="date" id="fecNutricion"
                                         [(ngModel)]="seguimientoComplementario.fec_nutricion"
+                                        [readonly]="ReadonlySeguimientoComplementario"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
@@ -218,6 +219,7 @@
                                         ginecología</label>
                                     <input type="date" id="fecGinecologia"
                                         [(ngModel)]="seguimientoComplementario.fec_ginecologia"
+                                        [readonly]="ReadonlySeguimientoComplementario"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
@@ -226,6 +228,7 @@
                                         psicología</label>
                                     <input type="date" id="fecPsicologia"
                                         [(ngModel)]="seguimientoComplementario.fec_psicologia"
+                                        [readonly]="ReadonlySeguimientoComplementario"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
@@ -234,12 +237,14 @@
                                         odontología</label>
                                     <input type="date" id="fecOdontologia"
                                         [(ngModel)]="seguimientoComplementario.fec_odontologia"
+                                        [readonly]="ReadonlySeguimientoComplementario"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="inaSeguimiento" class="font-medium mb-1">Inasistencia</label>
                                     <select id="inaSeguimiento" [(ngModel)]="seguimientoComplementario.ina_seguimiento"
+                                    [disabled]="ReadonlySeguimientoComplementario"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="Si">Si</option>
@@ -252,6 +257,7 @@
                                         inasistencia</label>
                                     <input type="tel" id="causalInasistencia"
                                         [(ngModel)]="seguimientoComplementario.cau_inasistencia"
+                                        [readonly]="ReadonlySeguimientoComplementario"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
@@ -259,6 +265,7 @@
                                     <label for="codSesiones" class="font-medium mb-1">N° de sesiones curso de
                                         preparación</label>
                                     <select id="codSesiones" [(ngModel)]="seguimientoComplementario.cod_sesiones"
+                                    [disabled]="ReadonlySeguimientoComplementario"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option *ngFor="let sesiones of numSesiones" [value]="sesiones.cod_sesiones">
@@ -267,9 +274,15 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="mt-8 flex justify-center">
-                                <button (click)="guardarSeguimientoComplementario()"
-                                    class="px-6 py-2 text-sm w-auto max-w-xs font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                            <div class="mt-4 flex justify-center space-x-4">
+                                <button type="button" (click)="toggleEditSeguimientoComplementario()"
+                                    [disabled]="!ReadonlySeguimientoComplementario"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                                    Editar
+                                </button>
+                        
+                                <button (click)="guardarSeguimientoComplementario()" [disabled]="ReadonlySeguimientoComplementario"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
                             </div>
@@ -283,6 +296,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="aciFolico" class="font-medium mb-1">Ácido fólico</label>
                                     <select id="aciFolico" [(ngModel)]="micronutriente.aci_folico"
+                                    [disabled]="ReadonlyMicronutriente"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="Si">Si</option>
@@ -293,6 +307,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="sulFerroso" class="font-medium mb-1">Sulfato ferroso</label>
                                     <select id="sulFerroso" [(ngModel)]="micronutriente.sul_ferroso"
+                                    [disabled]="ReadonlyMicronutriente"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="Si">Si</option>
@@ -303,6 +318,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="carCalcio" class="font-medium mb-1">Carbonato de calcio</label>
                                     <select id="carCalcio" [(ngModel)]="micronutriente.car_calcio"
+                                    [disabled]="ReadonlyMicronutriente"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="Si">Si</option>
@@ -313,6 +329,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="desparasitacion" class="font-medium mb-1">Desparacitación</label>
                                     <select id="desparasitacion" [(ngModel)]="micronutriente.desparasitacion"
+                                    [disabled]="ReadonlyMicronutriente"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="Si">Si</option>
@@ -320,9 +337,15 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="mt-8 flex justify-center">
-                                <button (click)="guardarMicronutriente()"
-                                    class="px-6 py-2 text-sm w-auto max-w-xs font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                            <div class="mt-4 flex justify-center space-x-4">
+                                <button type="button" (click)="toggleEditMicronutriente()"
+                                    [disabled]="!ReadonlyMicronutriente"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                                    Editar
+                                </button>
+                        
+                                <button (click)="guardarMicronutriente()" [disabled]="ReadonlyMicronutriente"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
                             </div>

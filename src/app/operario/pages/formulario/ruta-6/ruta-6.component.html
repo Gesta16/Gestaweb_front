@@ -49,7 +49,8 @@
             </ul>
 
 
-            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded border border-gray-300">
+            <div
+                class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded border border-gray-300">
                 <div class="px-4 py-5 flex-auto">
                     <div class="tab-content tab-space">
                         <!-- Datos recién nacido -->
@@ -58,6 +59,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Tipo de embarazo</label>
                                     <select [(ngModel)]="datosRecienNacido.tip_embarazo"
+                                        [disabled]="ReadonlyDatosRecienNacido"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="Único">Único</option>
@@ -68,12 +70,13 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">N° recién nacido</label>
                                     <input type="number" [(ngModel)]="datosRecienNacido.num_nacido"
+                                        [readonly]="ReadonlyDatosRecienNacido"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Sexo</label>
-                                    <select [(ngModel)]="datosRecienNacido.sexo"
+                                    <select [(ngModel)]="datosRecienNacido.sexo" [disabled]="ReadonlyDatosRecienNacido"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="Masculino">Masculino</option>
@@ -84,18 +87,21 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Peso al nacer</label>
                                     <input type="number" [(ngModel)]="datosRecienNacido.peso"
+                                        [readonly]="ReadonlyDatosRecienNacido"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Talla al nacer en cm</label>
                                     <input type="number" [(ngModel)]="datosRecienNacido.talla"
+                                        [readonly]="ReadonlyDatosRecienNacido"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">¿Está en plan canguro?</label>
                                     <select [(ngModel)]="datosRecienNacido.pla_canguro"
+                                        [disabled]="ReadonlyDatosRecienNacido"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="Sí">Sí</option>
@@ -106,12 +112,19 @@
                                 <div class="flex flex-col text-xs" *ngIf="datosRecienNacido.pla_canguro === 'Sí'">
                                     <label for="" class="font-medium mb-1">IPS atención plan canguro</label>
                                     <input type="text" [(ngModel)]="datosRecienNacido.ips_canguro"
+                                        [readonly]="ReadonlyDatosRecienNacido"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
                             </div>
-                            <div class="mt-8 flex justify-center">
-                                <button (click)="guardarDatosRecienNacido()"
-                                    class="px-6 py-2 text-sm w-auto max-w-xs font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                            <div class="mt-8 flex justify-center space-x-4">
+                                <button type="button" (click)="toggleEditDatosRecienNacido()"
+                                    [disabled]="!ReadonlyDatosRecienNacido"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                                    Editar
+                                </button>
+
+                                <button (click)="guardarDatosRecienNacido()" [disabled]="ReadonlyDatosRecienNacido"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
                             </div>
@@ -124,6 +137,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Hemoclasificación (grupo / Rh)</label>
                                     <select [(ngModel)]="nuevaTamizacion.cod_hemoclasifi"
+                                        [disabled]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option *ngFor="let hemocla of hemoclasificacion"
@@ -136,18 +150,21 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Fecha TSH</label>
                                     <input type="date" [(ngModel)]="nuevaTamizacion.fec_tsh"
+                                        [readonly]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Resultado TSH</label>
                                     <input type="tel" [(ngModel)]="nuevaTamizacion.resul_tsh"
+                                        [readonly]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Prueba no treponémica recién nacido</label>
                                     <select [(ngModel)]="nuevaTamizacion.pruetreponemica"
+                                        [disabled]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="Positivo">Positivo</option>
@@ -159,12 +176,14 @@
                                     <label for="" class="font-medium mb-1">Fecha prueba no treponémica recién
                                         nacido</label>
                                     <input type="date" [(ngModel)]="nuevaTamizacion.fec_pruetrepo"
+                                        [readonly]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Tamizaje auditivo</label>
                                     <select [(ngModel)]="nuevaTamizacion.tamiza_aud"
+                                        [disabled]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="Positivo">Positivo</option>
@@ -175,6 +194,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Tamizaje cardiopatías congénitas</label>
                                     <select [(ngModel)]="nuevaTamizacion.tamiza_cardi"
+                                        [disabled]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="Positivo">Positivo</option>
@@ -185,6 +205,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Tamizaje visual</label>
                                     <select [(ngModel)]="nuevaTamizacion.tamiza_visual"
+                                        [disabled]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="Positivo">Positivo</option>
@@ -193,12 +214,20 @@
                                 </div>
                             </div>
 
-                            <div class="mt-8 flex justify-center">
-                                <button (click)="guardarTamizacionNeonatal()"
-                                    class="px-6 py-2 text-sm w-auto max-w-xs font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                            <div class="mt-4 flex justify-center space-x-4">
+                                <button type="button" (click)="toggleEditTamizacionNeonatal()"
+                                    [disabled]="!ReadonlyTamizacionNeonatal"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                                    Editar
+                                </button>
+
+                                <button (click)="guardarTamizacionNeonatal()" [disabled]="ReadonlyTamizacionNeonatal"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
                             </div>
+
+
                         </div>
 
 
@@ -208,30 +237,35 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">TSH de seguimiento</label>
                                     <input type="tel" [(ngModel)]="estudioHipotiroidismo.tsh"
+                                        [readonly]="ReadonlyEstudioHipotiroidismo"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Fecha resultado TSH de seguimiento</label>
                                     <input type="date" [(ngModel)]="estudioHipotiroidismo.fec_resultado"
+                                        [readonly]="ReadonlyEstudioHipotiroidismo"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">T4 libre</label>
                                     <input type="text" [(ngModel)]="estudioHipotiroidismo.t4_libre"
+                                        [readonly]="ReadonlyEstudioHipotiroidismo"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Fecha resultado T4 libre</label>
                                     <input type="date" [(ngModel)]="estudioHipotiroidismo.fec_resultadot4"
+                                        [readonly]="ReadonlyEstudioHipotiroidismo"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Evento confirmado</label>
                                     <select [(ngModel)]="estudioHipotiroidismo.eve_confirmado"
+                                        [disabled]="ReadonlyEstudioHipotiroidismo"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                         <option value="">Seleccione...</option>
                                         <option value="Sí">Sí</option>
@@ -242,12 +276,20 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Fecha primera consulta pediatría</label>
                                     <input type="date" [(ngModel)]="estudioHipotiroidismo.fec_primera"
+                                        [readonly]="ReadonlyEstudioHipotiroidismo"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
                             </div>
-                            <div class="mt-8 flex justify-center">
+                            <div class="mt-4 flex justify-center space-x-4">
+                                <button type="button" (click)="toggleEditEstudioHipotiroidismo()"
+                                    [disabled]="!ReadonlyEstudioHipotiroidismo"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                                    Editar
+                                </button>
+
                                 <button (click)="guardarEstudioHipotiroidismo()"
-                                    class="px-6 py-2 text-sm w-auto max-w-xs font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                                    [disabled]="ReadonlyEstudioHipotiroidismo"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
                             </div>
@@ -260,7 +302,7 @@
                                     <label for="fec_bcg" class="font-medium mb-1">Fecha vacunación BCG</label>
                                     <input type="date" id="fec_bcg"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
-                                        [(ngModel)]="nuevaRuta.fec_bcg" required>
+                                        [(ngModel)]="nuevaRuta.fec_bcg" [readonly]="ReadonlyRutaPYMS" required>
                                 </div>
 
                                 <div class="flex flex-col text-xs">
@@ -268,7 +310,7 @@
                                         hepatitis</label>
                                     <input type="date" id="fec_hepatitis"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
-                                        [(ngModel)]="nuevaRuta.fec_hepatitis" required>
+                                        [(ngModel)]="nuevaRuta.fec_hepatitis" [readonly]="ReadonlyRutaPYMS" required>
                                 </div>
 
                                 <div class="flex flex-col text-xs">
@@ -276,22 +318,28 @@
                                         seguimiento a recién nacido</label>
                                     <input type="date" id="fec_seguimiento"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
-                                        [(ngModel)]="nuevaRuta.fec_seguimiento" required>
+                                        [(ngModel)]="nuevaRuta.fec_seguimiento" [readonly]="ReadonlyRutaPYMS" required>
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="fec_entrega" class="font-medium mb-1">Fecha de entrega de carnet</label>
                                     <input type="date" id="fec_entrega"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
-                                        [(ngModel)]="nuevaRuta.fec_entrega" required>
+                                        [(ngModel)]="nuevaRuta.fec_entrega" [readonly]="ReadonlyRutaPYMS" required>
                                 </div>
                             </div>
-                            <div class="mt-8 flex justify-center">
-                                <button (click)="guardarRutaPYMS()"
-                                    class="px-6 py-2 text-sm w-auto max-w-xs font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                            <div class="mt-8 flex justify-center space-x-4">
+                                <button type="button" (click)="toggleEditRutaPYMS()" [disabled]="!ReadonlyRutaPYMS"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
+                                    Editar
+                                </button>
+
+                                <button (click)="guardarRutaPYMS()" [disabled]="ReadonlyRutaPYMS"
+                                    class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
                             </div>
+
                         </div>
 
                     </div>
