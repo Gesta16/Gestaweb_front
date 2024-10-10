@@ -10,7 +10,7 @@ export class Usuario {
     fec_nacimiento: string;
     edad_usuario: string;
     cod_documento: number;
-    documento_usuario: number;
+    documento_usuario: string;
     fec_diag_usuario: string;
     fec_ingreso: string;
     cod_departamento: number;
@@ -29,7 +29,7 @@ export class Usuario {
         fec_nacimiento: string,
         edad_usuario: string,
         cod_documento: number,
-        documento_usuario: number,
+        documento_usuario: string,
         fec_diag_usuario: string,
         fec_ingreso: string,
         cod_departamento: number,

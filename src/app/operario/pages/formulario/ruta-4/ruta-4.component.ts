@@ -42,6 +42,7 @@ export class Ruta4Component {
   id_SeguimientoComplementario: number | null = null;
   id_Micronutriente: number | null = null;
 
+  isEditing = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,7 +56,7 @@ export class Ruta4Component {
     private seguimientoComplementarioService: SeguimientoComplementarioService,
     private micronutrientesService: MicronutrientesService
   ) {
-    this.seguimientoConsulta = new SeguimientoConsultaMensual(0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, 0, 0, 0);
+    this.seguimientoConsulta = new SeguimientoConsultaMensual(0, 0, 0, 0, 0, 0, '', '', '', 0, '', '', '', '', '');
 
     this.seguimientoComplementario = new SeguimientoComplementario(0, 0, 0, '', '', '', '', '', '');
 
@@ -85,20 +86,40 @@ export class Ruta4Component {
 
   }
 
-  toggleTabs($tabNumber: number) {
-    this.openTab = $tabNumber;
+  toggleTabs(tabNumber: number) {
+    // Permitir cambio entre las pestañas 1 y 2 en modo edición
+    if (this.isEditing) {
+      if (tabNumber === 1 || tabNumber === 2) {
+        this.openTab = tabNumber;
+      } else {
+        Swal.fire({
+          title: 'Advertencia',
+          text: 'Por favor, guarda los cambios antes de cambiar de pestaña.',
+          icon: 'warning',
+          confirmButtonText: 'OK'
+        });
+      }
+      return;
+    }
+    this.openTab = tabNumber;
   }
 
   toggleEditSeguimientoConsulta() {
+    if (!this.ReadonlySeguimientoConsulta) return;
     this.ReadonlySeguimientoConsulta = false;
+    this.isEditing = true;
   }
 
   toggleEditSeguimientoComplementario() {
+    if (!this.ReadonlySeguimientoComplementario) return;
     this.ReadonlySeguimientoComplementario = false;
+    this.isEditing = true;
   }
 
   toggleEditMicronutriente() {
+    if (!this.ReadonlyMicronutriente) return;
     this.ReadonlyMicronutriente = false;
+    this.isEditing = true;
   }
 
   getNumerosControl() {
@@ -169,6 +190,7 @@ export class Ruta4Component {
             icon: 'success',
           }).then(() => {
             this.ReadonlySeguimientoConsulta = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -196,9 +218,10 @@ export class Ruta4Component {
         }).then(() => {
           this.id_SeguimientoConsulta = response.cod_seguimiento ?? null;
           this.ReadonlySeguimientoConsulta = true;
+          this.isEditing = false;
           console.log(response);
           console.log(this.id_SeguimientoConsulta)
-        });;
+        });
 
       }, error => {
         Swal.fire({
@@ -241,6 +264,7 @@ export class Ruta4Component {
             icon: 'success',
           }).then(() => {
             this.ReadonlySeguimientoComplementario = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -268,6 +292,7 @@ export class Ruta4Component {
         }).then(() => {
           this.id_SeguimientoComplementario = response.cod_segcomplementario ?? null;
           this.ReadonlySeguimientoComplementario = true;
+          this.isEditing = false;
           console.log(response);
           console.log(this.id_SeguimientoComplementario);
         });
@@ -283,7 +308,7 @@ export class Ruta4Component {
 
 
   getSeguimientoComplementario(): void {
-    if (this.id !== null && this.id > 0) { 
+    if (this.id !== null && this.id > 0) {
       this.seguimientoComplementarioService.getSeguimientoComplementariobyId(this.id).subscribe(
         (response) => {
           this.seguimientoComplementario = response.seguimiento;
@@ -312,6 +337,7 @@ export class Ruta4Component {
             icon: 'success',
           }).then(() => {
             this.ReadonlyMicronutriente = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -337,8 +363,9 @@ export class Ruta4Component {
           timer: 2000,
           showConfirmButton: false
         }).then(() => {
-          this.id_Micronutriente = response.cod_micronutriente ?? null; 
-          this.ReadonlyMicronutriente = true; 
+          this.id_Micronutriente = response.cod_micronutriente ?? null;
+          this.ReadonlyMicronutriente = true;
+          this.isEditing = false;
           console.log(response);
           console.log(this.id_Micronutriente);
         });
@@ -354,7 +381,7 @@ export class Ruta4Component {
 
 
   getMicronutientes(): void {
-    if (this.id !== null && this.id > 0) { 
+    if (this.id !== null && this.id > 0) {
       this.micronutrientesService.getMicronutrientebyId(this.id).subscribe(
         (response) => {
           this.micronutriente = response.micronutriente;

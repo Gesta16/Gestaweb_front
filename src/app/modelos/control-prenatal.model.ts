@@ -3,7 +3,7 @@ export class ControlPrenatal {
     id_operador?: number;
     id_usuario?: number;
     cod_fracaso: number;
-    edad_gestacional: number;
+    edad_gestacional: string;
     trim_ingreso: string;
     fec_mestruacion: Date;
     fec_parto: Date;
@@ -22,7 +22,7 @@ export class ControlPrenatal {
       id_operador: number,
       id_usuario: number,
       cod_fracaso: number,
-      edad_gestacional: number,
+      edad_gestacional: string,
       trim_ingreso: string,
       fec_mestruacion: Date,
       fec_parto: Date,

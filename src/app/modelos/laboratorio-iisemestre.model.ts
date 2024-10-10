@@ -23,7 +23,7 @@ export class LaboratorioIITrimestre {
     coo_cualitativo: string;
     fec_coombs: string;
     fec_ecografia: string;
-    eda_gestacional: number;
+    eda_gestacional: string;
     rie_biopsicosocial: string;
 
     constructor(
@@ -51,7 +51,7 @@ export class LaboratorioIITrimestre {
         coo_cualitativo: string,
         fec_coombs: string,
         fec_ecografia: string,
-        eda_gestacional: number,
+        eda_gestacional: string,
         rie_biopsicosocial: string
     ) {
         this.cod_doslaboratorio = cod_doslaboratorio;

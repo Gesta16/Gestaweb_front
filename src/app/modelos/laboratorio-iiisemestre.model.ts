@@ -13,7 +13,7 @@ export class LaboratorioIIITrimestre {
     cul_rectal: string;
     fec_rectal: string;
     fec_biofisico: string;
-    edad_gestacional: number;
+    edad_gestacional: string;
     rie_biopsicosocial: string;
 
     constructor(
@@ -31,7 +31,7 @@ export class LaboratorioIIITrimestre {
         cul_rectal: string,
         fec_rectal: string,
         fec_biofisico: string,
-        edad_gestacional: number,
+        edad_gestacional: string,
         rie_biopsicosocial: string
     ) {
         this.cod_treslaboratorio = cod_treslaboratorio;

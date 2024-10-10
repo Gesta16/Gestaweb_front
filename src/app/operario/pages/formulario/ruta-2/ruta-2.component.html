@@ -14,50 +14,51 @@
         </div>
     </div>
 
-<!-- Diseño del formulario -->
-<div class="flex flex-wrap mt-5 uppercase">
-    <div class="w-[70%] justify-center mx-auto">
-        <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer uppercase">
-            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
-                    (click)="toggleTabs(1)"
-                    [ngClass]="{'text-[#00acc9] bg-white': openTab !== 1, 'text-white bg-[#00acc9]': openTab === 1}">
-                    Control prenatal
-                </a>
-            </li>
-            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
-                    (click)="toggleTabs(2)"
-                    [ngClass]="{'text-[#00acc9] bg-white': openTab !== 2, 'text-white bg-[#00acc9]': openTab === 2}">
-                    Sección 2
-                </a>
-            </li>
-            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
-                    (click)="toggleTabs(3)"
-                    [ngClass]="{'text-[#00acc9] bg-white': openTab !== 3, 'text-white bg-[#00acc9]': openTab === 3}">
-                    Primera consulta
-                </a>
-            </li>
-            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
-                    (click)="toggleTabs(4)"
-                    [ngClass]="{'text-[#00acc9] bg-white': openTab !== 4, 'text-white bg-[#00acc9]': openTab === 4}">
-                    Sección 2
-                </a>
-            </li>
-            <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
-                    (click)="toggleTabs(5)"
-                    [ngClass]="{'text-[#00acc9] bg-white': openTab !== 5, 'text-white bg-[#00acc9]': openTab === 5}">
-                    Vacunación
-                </a>
-            </li>
-        </ul>
+    <!-- Diseño del formulario -->
+    <div class="flex flex-wrap mt-5 uppercase">
+        <div class="w-[70%] justify-center mx-auto">
+            <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer uppercase">
+                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
+                        (click)="toggleTabs(1)"
+                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 1, 'text-white bg-[#00acc9]': openTab === 1}">
+                        Control prenatal
+                    </a>
+                </li>
+                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
+                        (click)="toggleTabs(2)"
+                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 2, 'text-white bg-[#00acc9]': openTab === 2}">
+                        Sección 2
+                    </a>
+                </li>
+                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
+                        (click)="toggleTabs(3)"
+                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 3, 'text-white bg-[#00acc9]': openTab === 3}">
+                        Primera consulta
+                    </a>
+                </li>
+                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
+                        (click)="toggleTabs(4)"
+                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 4, 'text-white bg-[#00acc9]': openTab === 4}">
+                        Sección 2
+                    </a>
+                </li>
+                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
+                        (click)="toggleTabs(5)"
+                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 5, 'text-white bg-[#00acc9]': openTab === 5}">
+                        Vacunación
+                    </a>
+                </li>
+            </ul>
 
-        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded border border-gray-300">
-            <div class="px-4 py-5 flex-auto">
-                <div class="tab-content tab-space">
+            <div
+                class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded border border-gray-300">
+                <div class="px-4 py-5 flex-auto">
+                    <div class="tab-content tab-space">
 
                         <!-- Control prenatal -->
                         <div [ngClass]="{'hidden': openTab !== 1, 'block': openTab === 1}">
@@ -66,7 +67,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Edad gestacional de inicio del control
                                         prenatal</label>
-                                    <input type="tel" id="edad_gestacional" [readonly]="isReadOnly"
+                                    <input type="text" id="edad_gestacional" [readonly]="isReadOnly"
                                         [(ngModel)]="controlPrenatal.edad_gestacional"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
@@ -76,8 +77,7 @@
                                         prenatal</label>
                                     <select id="trim_ingreso" [disabled]="isReadOnly"
                                         [(ngModel)]="controlPrenatal.trim_ingreso"
-                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="" selected>Seleccione...</option>
+                                        class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">                           
                                         <option value="1">Trimestre I: 1 a 13 sem</option>
                                         <option value="2">Trimestre II: 14 a 27 sem</option>
                                         <option value="3">Trimestre III: 28 a 42 sem</option>
@@ -104,7 +104,6 @@
                                     <select id="emb_planeado" [disabled]="isReadOnly"
                                         [(ngModel)]="controlPrenatal.emb_planeado"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="" selected>Seleccione...</option>
                                         <option value=1>Sí</option>
                                         <option value=0>No</option>
                                     </select>
@@ -115,7 +114,6 @@
                                     <select id="fec_anticonceptivo" [disabled]="isReadOnly"
                                         [(ngModel)]="controlPrenatal.fec_anticonceptivo"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="" selected>Seleccione...</option>
                                         <option value=1>Sí</option>
                                         <option value=0>No</option>
                                     </select>
@@ -157,7 +155,6 @@
                                     <select id="" [(ngModel)]="controlPrenatal.ries_reproductivo"
                                         [disabled]="isReadOnly"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="alto">Alto</option>
                                         <option value="bajo">Bajo</option>
                                     </select>
@@ -175,7 +172,6 @@
                                     <select id="usuario-solicito" [(ngModel)]="controlPrenatal.usu_solicito"
                                         [disabled]="isReadOnly"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value=1>Sí</option>
                                         <option value=0>No</option>
                                     </select>
@@ -193,7 +189,6 @@
                                     <select id="per_intergenesico" [(ngModel)]="controlPrenatal.per_intergenesico"
                                         [disabled]="isReadOnly"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value=1>Sí</option>
                                         <option value=0>No</option>
                                     </select>
@@ -206,7 +201,7 @@
                                     Editar
                                 </button>
 
-                                <button (click)="guardarControlPrenatal()" [disabled]="isReadOnly"
+                                <button (click)="guardarControlPrenatal()" [disabled]="isReadOnly && !isEditing"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
@@ -220,7 +215,7 @@
 
                                 <div class="flex flex-col text-xs">
                                     <label for="peso_previo" class="font-medium mb-1">Peso previo (kg)</label>
-                                    <input type="tel" id="peso_previo" [(ngModel)]="primeraConsulta.peso_previo"
+                                    <input type="text" id="peso_previo" [(ngModel)]="primeraConsulta.peso_previo"
                                         [readonly]="isReadOnlyPrimeraConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
                                         required>
@@ -228,7 +223,7 @@
 
                                 <div class="flex flex-col text-xs">
                                     <label for="tal_consulta" class="font-medium mb-1">Talla (metros)</label>
-                                    <input type="tel" id="tal_consulta" [(ngModel)]="primeraConsulta.tal_consulta"
+                                    <input type="text" id="tal_consulta" [(ngModel)]="primeraConsulta.tal_consulta"
                                         [readonly]="isReadOnlyPrimeraConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
                                         required>
@@ -236,7 +231,7 @@
 
                                 <div class="flex flex-col text-xs">
                                     <label for="imc_consulta" class="font-medium mb-1">I.M.C</label>
-                                    <input type="tel" id="imc_consulta" [(ngModel)]="primeraConsulta.imc_consulta"
+                                    <input type="text" id="imc_consulta" [(ngModel)]="primeraConsulta.imc_consulta"
                                         [readonly]="isReadOnlyPrimeraConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
                                         required>
@@ -258,7 +253,6 @@
                                         [disabled]="isReadOnlyPrimeraConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
                                         required>
-                                        <option value="">Seleccione...</option>
                                         <option value="0">No</option>
                                         <option value="1">Si</option>
                                     </select>
@@ -270,7 +264,6 @@
                                         [disabled]="isReadOnlyPrimeraConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
                                         required>
-                                        <option value="">Seleccione...</option>
                                         <option value="0">No</option>
                                         <option value="1">Si</option>
                                     </select>
@@ -301,7 +294,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="fact_riesgo" class="font-medium mb-1">Factor de riesgo
                                         identificado</label>
-                                    <input type="tel" id="fact_riesgo" [(ngModel)]="primeraConsulta.fact_riesgo"
+                                    <input type="text" id="fact_riesgo" [(ngModel)]="primeraConsulta.fact_riesgo"
                                         [readonly]="isReadOnlyPrimeraConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
                                         required>
@@ -313,7 +306,6 @@
                                     <select id="expo_violencia" [(ngModel)]="primeraConsulta.expo_violencia"
                                         [disabled]="isReadOnlyPrimeraConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="1">Si</option>
                                         <option value="0">No</option>
                                     </select>
@@ -332,7 +324,6 @@
                                     <select id="ries_depresion" [(ngModel)]="primeraConsulta.ries_depresion"
                                         [disabled]="isReadOnlyPrimeraConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="1">Si</option>
                                         <option value="0">No</option>
                                     </select>
@@ -341,7 +332,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="for_gestacion" class="font-medium mb-1">Fórmula obstétrica
                                         gestaciones</label>
-                                    <input type="tel" id="for_gestacion" [(ngModel)]="primeraConsulta.for_gestacion"
+                                    <input type="text" id="for_gestacion" [(ngModel)]="primeraConsulta.for_gestacion"
                                         [readonly]="isReadOnlyPrimeraConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
                                         required>
@@ -350,7 +341,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="for_parto" class="font-medium mb-1">Fórmula obstétrica partos
                                         vaginales</label>
-                                    <input type="tel" id="for_parto" [(ngModel)]="primeraConsulta.for_parto"
+                                    <input type="text" id="for_parto" [(ngModel)]="primeraConsulta.for_parto"
                                         [readonly]="isReadOnlyPrimeraConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
                                         required>
@@ -359,7 +350,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="for_cesarea" class="font-medium mb-1">Fórmula obstétrica
                                         cesáreas</label>
-                                    <input type="tel" id="for_cesarea" [(ngModel)]="primeraConsulta.for_cesarea"
+                                    <input type="text" id="for_cesarea" [(ngModel)]="primeraConsulta.for_cesarea"
                                         [readonly]="isReadOnlyPrimeraConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
                                         required>
@@ -367,7 +358,7 @@
 
                                 <div class="flex flex-col text-xs">
                                     <label for="for_aborto" class="font-medium mb-1">Fórmula obstétrica abortos</label>
-                                    <input type="tel" id="for_aborto" [(ngModel)]="primeraConsulta.for_aborto"
+                                    <input type="text" id="for_aborto" [(ngModel)]="primeraConsulta.for_aborto"
                                         [readonly]="isReadOnlyPrimeraConsulta"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
                                         required>
@@ -399,7 +390,8 @@
                                     Editar
                                 </button>
 
-                                <button (click)="guardarPrimeraConsulta()" [disabled]="isReadOnlyPrimeraConsulta"
+                                <button (click)="guardarPrimeraConsulta()"
+                                    [disabled]="isReadOnlyPrimeraConsulta && !isEditing"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
@@ -480,7 +472,7 @@
                                     Editar
                                 </button>
 
-                                <button (click)="guardarVacunacion()" [disabled]="isReadOnlyVacunacion"
+                                <button (click)="guardarVacunacion()" [disabled]="isReadOnlyVacunacion && !isEditing"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>

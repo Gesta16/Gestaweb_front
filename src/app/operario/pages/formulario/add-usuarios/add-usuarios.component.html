@@ -162,14 +162,14 @@
 
                                 <div class="flex flex-col text-xs">
                                     <label for="telefono" class="font-medium mb-1">Teléfono</label>
-                                    <input type="tel" id="telefono" [readonly]="isReadOnly"
+                                    <input type="text" id="telefono" [readonly]="isReadOnly"
                                         [(ngModel)]="usuario.tel_usuario"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] w-full">
                                 </div>
 
                                 <div class="flex flex-col text-xs">
                                     <label for="celular" class="font-medium mb-1">Celular</label>
-                                    <input type="tel" id="celular" [readonly]="isReadOnly"
+                                    <input type="text" id="celular" [readonly]="isReadOnly"
                                         [(ngModel)]="usuario.cel_usuario"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] w-full">
                                 </div>

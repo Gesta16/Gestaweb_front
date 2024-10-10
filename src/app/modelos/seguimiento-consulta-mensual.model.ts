@@ -6,14 +6,14 @@ export class SeguimientoConsultaMensual {
     cod_diagnostico: number;
     cod_medicion: number;
     fec_consulta: string;
-    edad_gestacional: number;
-    alt_uterina: number;
+    edad_gestacional: string;
+    alt_uterina: string;
     trim_gestacional: number;
-    peso: number;
-    talla: number;
-    imc: number;
-    ten_arts: number;
-    ten_artd: number;
+    peso: string;
+    talla: string;
+    imc: string;
+    ten_arts: string;
+    ten_artd: string;
 
     constructor(
         cod_seguimiento: number,
@@ -23,14 +23,14 @@ export class SeguimientoConsultaMensual {
         cod_diagnostico: number,
         cod_medicion: number,
         fec_consulta: string,
-        edad_gestacional: number,
-        alt_uterina: number,
+        edad_gestacional: string,
+        alt_uterina: string,
         trim_gestacional: number,
-        peso: number,
-        talla: number,
-        imc: number,
-        ten_arts: number,
-        ten_artd: number
+        peso: string,
+        talla: string,
+        imc: string,
+        ten_arts: string,
+        ten_artd: string
     ) {
         this.cod_seguimiento = cod_seguimiento;
         this.id_usuario = id_usuario;

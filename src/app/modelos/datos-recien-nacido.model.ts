@@ -2,10 +2,10 @@ export class DatosRecienNacido {
     cod_recien: number;
     id_usuario:number;
     tip_embarazo: string;
-    num_nacido: number;
+    num_nacido: string;
     sexo: string;
-    peso: number;
-    talla: number;
+    peso: string;
+    talla: string;
     pla_canguro: string;
     ips_canguro: string;
 
@@ -13,10 +13,10 @@ export class DatosRecienNacido {
         cod_recien: number,
         id_usuario:number,
         tip_embarazo: string,
-        num_nacido: number,
+        num_nacido: string,
         sexo: string,
-        peso: number,
-        talla: number,
+        peso: string,
+        talla: string,
         pla_canguro: string,
         ips_canguro: string,
     ){

@@ -35,14 +35,14 @@ export class Ruta2Component {
   isReadOnlyPrimeraConsulta = false;
   isReadOnlyVacunacion = false;
 
-
+  isEditing = false;
 
 
   selectedMetodoFracaso: number | null = null;
 
   controlPrenatal: ControlPrenatal = {
     cod_fracaso: 0,
-    edad_gestacional: 0,
+    edad_gestacional: '',
     trim_ingreso: '',
     fec_mestruacion: new Date(),
     fec_parto: new Date(),
@@ -60,19 +60,19 @@ export class Ruta2Component {
   primeraConsulta: PrimeraConsulta = {
     cod_riesgo: 0,
     cod_dm: 0,
-    peso_previo: 0,
-    tal_consulta: 0,
-    imc_consulta: 0,
+    peso_previo: '',
+    tal_consulta: '',
+    imc_consulta: '',
     diag_nutricional: '',
-    hta: 0,
-    dm: 0,
+    hta: '',
+    dm: '',
     fact_riesgo: '',
     expo_violencia: false,
     ries_depresion: false,
-    for_gestacion: 0,
-    for_parto: 0,
-    for_cesarea: 0,
-    for_aborto: 0,
+    for_gestacion: '',
+    for_parto: '',
+    for_cesarea: '',
+    for_aborto: '',
     fec_lactancia: new Date(),
     fec_consejeria: new Date(),
     id_usuario: 0
@@ -93,10 +93,6 @@ export class Ruta2Component {
 
   constructor(private route: ActivatedRoute, private vacunacionService: VacunacionService, private biologicoService: BiologicoService, private primeraConsultaService: PrimeraConsultaService, private tipoDmService: TipoDmService, private metodoFracasoService: MetodoFracasoService, private riesgoService: RiesgoService, private router: Router, private controlPrenatalService: ControlPrenatalService) { }
   id: number | null = null;
-
-  toggleTabs($tabNumber: number) {
-    this.openTab = $tabNumber;
-  }
 
   ngOnInit(): void {
 
@@ -155,16 +151,72 @@ export class Ruta2Component {
     });
   }
 
+  toggleTabs(tabNumber: number) {
+    // Definimos los grupos de tabs permitidos para el cambio
+    const grupo1 = [1, 2];
+    const grupo2 = [3, 4];
+    const grupo3 = [5];
+
+
+    if (this.isEditing) {
+
+      if (grupo1.includes(this.openTab)) {
+        if (!grupo1.includes(tabNumber)) {
+          Swal.fire({
+            title: 'Advertencia',
+            text: 'Por favor, guarda los cambios antes de cambiar de pestaña.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+          });
+          return;
+        }
+      }
+
+      else if (grupo2.includes(this.openTab)) {
+        if (!grupo2.includes(tabNumber)) {
+          Swal.fire({
+            title: 'Advertencia',
+            text: 'Por favor, guarda los cambios antes de cambiar de pestaña.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+          });
+          return;
+        }
+      }
+
+      else if (grupo3.includes(this.openTab)) {
+        if (!grupo3.includes(tabNumber)) {
+          Swal.fire({
+            title: 'Advertencia',
+            text: 'Por favor, guarda los cambios antes de cambiar de pestaña.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+          });
+          return;
+        }
+      }
+    }
+
+    this.openTab = tabNumber;
+  }
+
+
   toggleEdit() {
+    if (!this.isReadOnly) return;
     this.isReadOnly = false;
+    this.isEditing = true;
   }
 
   toggleEditPrimeraConsulta() {
+    if (!this.isReadOnlyPrimeraConsulta) return;
     this.isReadOnlyPrimeraConsulta = false;
+    this.isEditing = true;
   }
 
   toggleEditVacunacion() {
+    if (!this.isReadOnlyVacunacion) return;
     this.isReadOnlyVacunacion = false;
+    this.isEditing = true;
   }
 
   guardarControlPrenatal(): void {
@@ -180,6 +232,7 @@ export class Ruta2Component {
             icon: 'success',
           }).then(() => {
             this.isReadOnly = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -206,7 +259,9 @@ export class Ruta2Component {
             text: 'Control prenatal creado con éxito',
             icon: 'success',
           }).then(() => {
-            this.id_control=response.data.cod_control ?? null;
+            this.id_control = response.data.cod_control ?? null;
+
+            this.isEditing = false;
             console.log(response)
           });
         },
@@ -258,6 +313,7 @@ export class Ruta2Component {
             icon: 'success',
           }).then(() => {
             this.isReadOnlyPrimeraConsulta = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -285,6 +341,8 @@ export class Ruta2Component {
             icon: 'success',
           }).then(() => {
             this.id_primeraConsulta = response.consulta.cod_consulta ?? null;
+
+            this.isEditing = false;
             console.log(response)
           });
         },
@@ -333,6 +391,7 @@ export class Ruta2Component {
             icon: 'success',
           }).then(() => {
             this.isReadOnlyVacunacion = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -358,9 +417,11 @@ export class Ruta2Component {
             title: 'Éxito',
             text: 'Vacunacion creada con éxito',
             icon: 'success',
-          }).then(() => { 
+          }).then(() => {
             this.isReadOnlyVacunacion = true;
             this.id_vacunacion = response.vacunacion.cod_vacunacion ?? null;
+
+            this.isEditing = false;
           });
         },
         error: (error) => {
