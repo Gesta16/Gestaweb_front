@@ -55,6 +55,16 @@ export class ReporteComponent {
           options: ['Nacimiento vivo', 'Nacimiento muerto', 'Prematuro']
         }
       ]
+    },
+    {
+      title: 'Otros Factores',
+      isOpen: false,
+      filters: [
+        {
+          label: 'Fecha',
+          options: ['Nacimiento vivo', 'Nacimiento muerto', 'Prematuro']
+        }
+      ]
     }
   ];
 }
