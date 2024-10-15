@@ -1,27 +1,32 @@
 <!-- Encabezado -->
 <app-header></app-header>
 
-<div class="pt-20 px-4">
+<div class="pt-20 px-4 transition-all duration-300" 
+    [ngClass]="{ 'ml-56': isExpanded && isVisible, 
+    'ml-20': !isExpanded && isVisible, 'ml-0': !isVisible}">
     <div class="max-w-[94rem] mx-auto mt-12">
         <!-- Estilo del contenedor del título -->
         <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4 p-4">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4 px-4">
                 <h1 class="font-bold text-2xl md:text-3xl">Reportes</h1>
-                
+
                 <div class="w-full md:w-auto flex flex-col sm:flex-row items-center gap-x-10 gap-y-4">
                     <!-- Input de buscar -->
                     <div class="relative w-full sm:w-64 md:w-auto md:flex-grow lg:max-w-xs">
-                        <input type="text" class="w-full h-10 pl-4 pr-10 rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#00ACC9]">
+                        <input type="text"
+                            class="w-full h-10 pl-4 pr-10 rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#00ACC9]">
                         <span class="absolute right-4 top-1/2 transform -translate-y-1/2">
                             <i class="fa-solid fa-magnifying-glass text-[#00ACC9]"></i>
                         </span>
                     </div>
-                    
+
                     <div class="flex gap-x-6">
-                        <button class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none focus:ring-2 focus:ring-[#80BA27]">
+                        <button
+                            class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none focus:ring-2 focus:ring-[#80BA27]">
                             PDF
                         </button>
-                        <button class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none focus:ring-2 focus:ring-[#80BA27]">
+                        <button
+                            class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none focus:ring-2 focus:ring-[#80BA27]">
                             Excel
                         </button>
                     </div>
@@ -31,7 +36,8 @@
 
         <div class="flex flex-col lg:flex-row">
             <!------------------------ Estilos del contenedor de filtros ------------------------>
-            <div class="w-full lg:w-[28rem] bg-white p-4 rounded-md shadow border border-gray-300 flex-shrink-0 mb-4 lg:mb-0">
+            <div
+                class="w-full lg:w-[28rem] bg-white p-4 rounded-md shadow border border-gray-300 flex-shrink-0 mb-4 lg:mb-0">
                 <div class="flex items-center mb-2 px-4">
                     <i class="fa-solid fa-sliders-h mr-2"></i>
                     <h2 class="font-bold text-lg">Filtros</h2>
@@ -70,7 +76,8 @@
                     <div class="overflow-hidden">
                         <table class="min-w-full text-sm text-center text-gray-700">
                             <!-- Estilo del contenedor del encabezado de la tabla -->
-                            <thead class="text-xs text-gray-700 uppercase bg-white rounded-lg shadow border border-gray-300">
+                            <thead
+                                class="text-xs text-gray-700 uppercase bg-white rounded-lg shadow border border-gray-300">
                                 <tr>
                                     <th scope="col" class="px-5 py-3 ">Nombre</th>
                                     <th scope="col" class="px-5 py-3 ">Apellido</th>

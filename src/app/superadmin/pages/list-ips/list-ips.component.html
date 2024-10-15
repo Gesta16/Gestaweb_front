@@ -6,29 +6,30 @@
 <app-header></app-header>
 
 <!-- Contenedor principal -->
-<div class="container mx-auto px-4 mt-[8rem]" style="width: 95%;">
+<div class="mx-auto px-4 mt-[8rem] max-w-[95%] transition-all duration-300" [ngClass]="{ 'ml-56': isExpanded && isVisible, 
+    'ml-20': !isExpanded && isVisible, 'ml-0': !isVisible}">
     <!-- Título -->
-    <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4" style="height: 80px;">
-        <div class="flex justify-between items-center h-full p-4">
-            <h1 class="font-bold text-3xl" style="margin-left: 30px;">Listado de IPS</h1>
+    <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4 h-auto">
+        <div class="flex flex-col sm:flex-row justify-between items-center h-full p-4">
+            <h1 class="font-bold text-2xl sm:text-3xl ml-2">Listado de IPS</h1>
             <button (click)="abrirModal()"
-                class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none" style="margin-right: 30px;">
+                class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none mt-4 sm:mt-0 mr-[30px]">
                 Crear
             </button>
         </div>
     </div>
 
     <!-- Estilo de la tabla -->
-    <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4 espacio">
-        <table class="w-full text-sm text-center text-gray-700 rounded-lg overflow-hidden">
+    <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4 overflow-x-auto mt-[50px]">
+        <table class="w-full text-sm text-center text-gray-700">
             <thead class="text-xs text-gray-700 uppercase bg-[#44BDD4]">
                 <tr>
-                    <th scope="col" class="px-6 py-3">Nombre IPS</th>
-                    <th scope="col" class="px-6 py-3">Departamento</th>
-                    <th scope="col" class="px-6 py-3">Dirección</th>
-                    <th scope="col" class="px-6 py-3">Teléfono</th>
-                    <th scope="col" class="px-6 py-3">Editar</th>
-                    <th scope="col" class="px-6 py-3">Desactivar</th>
+                    <th scope="col" class="px-5 py-3">Nombre IPS</th>
+                    <th scope="col" class="px-5 py-3">Departamento</th>
+                    <th scope="col" class="px-5 py-3">Dirección</th>
+                    <th scope="col" class="px-5 py-3">Teléfono</th>
+                    <th scope="col" class="px-5 py-3">Editar</th>
+                    <th scope="col" class="px-5 py-3">Desactivar</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,7 +40,7 @@
                     <td>{{ ips.tel_ips }}</td>
                     <td class="px-7 py-4">
                         <button (click)="abrirModalEdit(ips)"
-                                class="flex items-center ml-[25%] h-10 bg-transparent text-black font-bold py-2 px-4 rounded-xl hover:bg-gray-100 focus:outline-none">
+                            class="flex items-center ml-[25%] h-10 bg-transparent text-black font-bold py-2 px-4 rounded-xl hover:bg-gray-100 focus:outline-none">
                             <i class="fa-solid fa-pencil fa-lg text-black"></i>
                         </button>
                     </td>

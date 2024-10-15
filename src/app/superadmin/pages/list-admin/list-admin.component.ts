@@ -5,6 +5,8 @@ import { AddAdminComponent } from '../add-admin/add-admin.component';
 import { TipoDocumentoService } from '../../../servicios/tipo-documento.service';
 import { TipoDocumento } from '../../../modelos/tipo-documento.model';
 
+import { MenuService } from '../../../servicios/menu.service';
+
 @Component({
   selector: 'app-list-admin',
   templateUrl: './list-admin.component.html',
@@ -20,16 +22,26 @@ export class ListAdminComponent implements OnInit {
   itemsPerPage: number = 15;
   totalPages: number = 1;
 
+  isExpanded = true;
+  isVisible = true;
+
   constructor(
     private adminService: AdminService,
     private tipoDocumentoService: TipoDocumentoService,
-    private _matDialog: MatDialog
+    private _matDialog: MatDialog,
+    private menuService: MenuService
   ) {}
 
   ngOnInit() {
     this.checkScreenSize();
     this.loadAdmins();
     this.loadTiposDocumento();
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
   }
 
   private checkScreenSize() {

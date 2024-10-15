@@ -2,14 +2,13 @@
 <app-header></app-header>
 
 <!-- Título -->
-<div class="container mx-auto px-4 mt-[8rem]" style="width: 95%;">
-
-    <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4" style="height: 80px;">
-        <div class="flex justify-between items-center h-full p-4">
-            <h1 class="font-bold text-3xl" style="margin-left: 30px;">Información Personal</h1>
+<div class="mx-auto px-4 mt-[8rem] max-w-[95%] transition-all duration-300" [ngClass]="{ 'ml-56': isExpanded && isVisible, 
+    'ml-20': !isExpanded && isVisible, 'ml-0': !isVisible}">
+    <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4 h-auto">
+        <div class="flex flex-col sm:flex-row justify-between items-center h-full p-4">
+            <h1 class="font-bold text-2xl sm:text-3xl ml-2">Información Personal</h1>
             <button (click)="toggleEdit()"
-            class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none"
-            style="margin-right: 30px;">
+                class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none mt-4 sm:mt-0">
                 Editar
             </button>
         </div>
@@ -18,15 +17,16 @@
     <!-- Contenedor principal -->
     <div class="w-full max-w-[80rem] mx-auto p-4 mt-8 flex flex-col lg:flex-row items-start justify-center">
         <!-- Contenedor con imagen y nombre -->
-        <div class="bg-white rounded-l-lg w-full lg:w-[25%] h-auto sm:h-[26rem] p-4 border shadow-lg flex flex-col items-center"
-        style="background-image: url('https://kinsta.com/es/wp-content/uploads/sites/8/2021/12/about-us-page.png'); background-size: cover; background-position: center;">
-   </div>
+        <div class="bg-white rounded-lg w-full lg:w-[30%] h-auto sm:h-[26rem] p-4 border shadow-lg flex flex-col items-center"
+            style="background-image: url('https://kinsta.com/es/wp-content/uploads/sites/8/2021/12/about-us-page.png'); background-size: cover; background-position: center;">
+            <!-- Aquí puedes agregar contenido, como un nombre o una imagen -->
+        </div>
 
         <!-- Diseño de Información personal -->
-        <div class="bg-white rounded-r-lg w-full lg:w-[35%] h-auto sm:h-[26rem] p-4 border shadow-lg flex flex-col justify-center">
-            <h2 class="text-xl font-bold mb-11 text-center">Perfil</h2>
+        <div
+            class="bg-white rounded-lg w-full lg:w-[65%] h-auto sm:h-[26rem] p-4 border shadow-lg flex flex-col justify-center mt-4 lg:mt-0">
+            <h2 class="text-xl font-bold mb-4 text-center">Perfil</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-
                 <!-- Tipo de documento -->
                 <div class="mb-1" *ngIf="user?.userable">
                     <label for="tipoDocumento" class="text-sm font-medium text-gray-700">Tipo de documento</label>
@@ -116,6 +116,7 @@
 
         <!-- Botón de Editar -->
         <ng-template #editButton>
-            
+
         </ng-template>
     </div>
+</div>

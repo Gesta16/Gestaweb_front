@@ -1,11 +1,27 @@
 import { Component } from '@angular/core';
 
+import { MenuService } from '../../../servicios/menu.service';
+
 @Component({
   selector: 'app-reporte',
   templateUrl: './reporte.component.html',
   styleUrl: './reporte.component.css'
 })
 export class ReporteComponent {
+
+  isExpanded = true;
+  isVisible = true;
+  constructor(private menuService: MenuService) {}
+
+  ngOnInit() {
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
+  }
+
   // Información que va en el contenedor de filtros
   sections = [
     {

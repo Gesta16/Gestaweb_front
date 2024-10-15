@@ -1,11 +1,10 @@
 .sidebar {
     margin-top: 20px; /* Añadir margen superior para alejar el menú del borde superior */
+    height: 100vh;
+    /* position: sticky; */
 }
 
 .group {
     margin-top: 1rem; /* Espacio entre los elementos del menú */
 }
 
-.toggle {
-    margin-top: 1rem; /* Espacio entre el botón de colapso y el borde superior */
-}

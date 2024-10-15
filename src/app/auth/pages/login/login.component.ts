@@ -115,7 +115,6 @@ export class LoginComponent {
 
                 // Comentar la alerta de ingreso exitoso
                 // alert('Ingreso exitoso!');
-                this.router.navigate(['/landing']);
                 location.reload();
             } else {
                 // Comentar la alerta de documento o contraseña incorrecta

@@ -17,6 +17,7 @@ export class MenuComponent implements OnInit {
   currentRolId: string | null = "";
   user: User | null = null;
   isAuthenticated: boolean = false;
+  logueado = false;
 
   allMenuItems = [
     { name: 'Panel de control', route: 'dashboard', icon: 'fa-solid fa-chart-pie', roles: ['superadmin', 'admin', 'operador', 'user'] },
@@ -42,16 +43,22 @@ export class MenuComponent implements OnInit {
 
   toggleSidebar() {
     this.isExpanded = !this.isExpanded;
-    this.menuService.setMenuVisible(true);
+    this.menuService.toggleExpansion();
+  }
+
+  toggleVisibility() {
+    this.isVisible = !this.isVisible;
+    this.menuService.setMenuVisible(this.isVisible);
   }
 
   ngOnInit() {
     this.checkIfMobile();
     this.validateToken();
+    this.isAuthenticated = this.authService.isAuthenticated();
+    this.logueado = this.token !== null;
     
     this.menuItems = this.filterMenuItemsByRole(this.allMenuItems);
-    
-    this.menuService.menuVisible$.subscribe(visible => {
+    this.menuService.isExpanded$.subscribe(visible => {
       this.isVisible = visible;
     });
   }

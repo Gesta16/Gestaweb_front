@@ -14,6 +14,7 @@ export class HeaderComponent {
   logout() {
     this.authService.logout();
     this.menuService.setMenuVisible(false); // Oculta el menú
-    this.router.navigate(['/login']);
-  }
+    this.router.navigate(['/login'])
+}
+
 }
