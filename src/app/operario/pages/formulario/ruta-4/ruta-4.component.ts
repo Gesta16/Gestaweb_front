@@ -18,6 +18,8 @@ import { MicronutrientesService } from '../../../../servicios/micronutrientes.se
 import { Micronutriente } from '../../../../modelos/micronutrientes.model';
 import Swal from 'sweetalert2';
 
+import { MenuService } from '../../../../servicios/menu.service';
+
 @Component({
   selector: 'app-ruta-4',
   templateUrl: './ruta-4.component.html',
@@ -37,7 +39,9 @@ export class Ruta4Component {
   micronutriente: Micronutriente;
   id: number | null = null;
   id_SeguimientoConsulta: number | null = null;
-
+  
+  isExpanded = true;
+  isVisible = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,7 +53,8 @@ export class Ruta4Component {
     private numSesionesCursoService: NumSesionesCursoService,
     private seguimientoConsultaMensualService: SeguimientoConsultaMensualService,
     private seguimientoComplementarioService: SeguimientoComplementarioService,
-    private micronutrientesService: MicronutrientesService
+    private micronutrientesService: MicronutrientesService,
+    private menuService: MenuService
   ) {
     this.seguimientoConsulta = new SeguimientoConsultaMensual(0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, 0, 0, 0);
 
@@ -78,7 +83,12 @@ export class Ruta4Component {
     this.getFormasMedicion();
     this.getDiagnosticosNutricionales();
     this.getNumSesionesCurso();
-
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
   }
 
   toggleTabs($tabNumber: number) {

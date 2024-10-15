@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { MenuService } from '../../../servicios/menu.service';
+
 @Component({
   selector: 'app-ruta-gestante',
   templateUrl: './ruta-gestante.component.html',
@@ -8,16 +10,25 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class RutaGestanteComponent {
   id: number | null = null;
+  isExpanded = true;
+  isVisible = true;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private menuService: MenuService
   ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.id = +params.get('id')!; // Obtiene el ID como número
       console.log('ID de la gestante:', this.id);
+    });
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
     });
   }
 

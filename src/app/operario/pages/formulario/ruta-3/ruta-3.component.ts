@@ -18,6 +18,7 @@ import { PruebaRPR } from '../../../../modelos/prueba-rpr.model';
 import { Its } from '../../../../modelos/its.model';
 import { ItsService } from '../../../../servicios/its.service';
 import { Router } from '@angular/router';
+import { MenuService } from '../../../../servicios/menu.service';
 
 @Component({
   selector: 'app-ruta-3',
@@ -46,7 +47,8 @@ export class Ruta3Component {
   id_laboratorioIII: number | null = null;
   id_its: number | null = null;
 
-
+  isExpanded = true;
+  isVisible = true;
 
   laboratorioITrimestre: LaboratorioITrimestre = {
     cod_laboratorio: 0,
@@ -148,7 +150,15 @@ export class Ruta3Component {
 
 
 
-  constructor(private itsService: ItsService, private vdrlService: PruebaVDRLService, private rprService: PruebaRprService, private laboratorioIIISemestreservice: LaboratorioiiisemestreService, private laboratorioIISemestreservice: LaboratorioiisemestreService, private laboratorioISemestreservice: LaboratorioisemestreService, private route: ActivatedRoute, private hemoclasificacionService: HemoclasificacionService, private antibiogramaService: AntibiogramaService, private router: Router,) { }
+  constructor(private itsService: ItsService, 
+    private vdrlService: PruebaVDRLService, 
+    private rprService: PruebaRprService, 
+    private laboratorioIIISemestreservice: LaboratorioiiisemestreService, 
+    private laboratorioIISemestreservice: LaboratorioiisemestreService, 
+    private laboratorioISemestreservice: LaboratorioisemestreService, 
+    private route: ActivatedRoute, private hemoclasificacionService: HemoclasificacionService, 
+    private antibiogramaService: AntibiogramaService, private router: Router,
+    private menuService: MenuService) { }
 
   ngOnInit(): void {
 
@@ -170,7 +180,12 @@ export class Ruta3Component {
     this.cargarAntibiograma();
     this.cargarRPR();
     this.cargarVDRL();
-
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
   }
 
   toggleEditLaboratorioI() {

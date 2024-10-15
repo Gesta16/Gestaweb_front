@@ -16,6 +16,7 @@ import { Biologico } from '../../../../modelos/biologico.model';
 import { Vacunacion } from '../../../../modelos/vacunacion.model';
 import { VacunacionService } from '../../../../servicios/vacunacion.service';
 
+import { MenuService } from '../../../../servicios/menu.service';
 @Component({
   selector: 'app-ruta-2',
   templateUrl: './ruta-2.component.html',
@@ -34,9 +35,8 @@ export class Ruta2Component {
   isReadOnly = false;
   isReadOnlyPrimeraConsulta = false;
   isReadOnlyVacunacion = false;
-
-
-
+  isExpanded = true;
+  isVisible = true;
 
   selectedMetodoFracaso: number | null = null;
 
@@ -91,7 +91,16 @@ export class Ruta2Component {
   }
 
 
-  constructor(private route: ActivatedRoute, private vacunacionService: VacunacionService, private biologicoService: BiologicoService, private primeraConsultaService: PrimeraConsultaService, private tipoDmService: TipoDmService, private metodoFracasoService: MetodoFracasoService, private riesgoService: RiesgoService, private router: Router, private controlPrenatalService: ControlPrenatalService) { }
+  constructor(private route: ActivatedRoute, 
+    private vacunacionService: VacunacionService, 
+    private biologicoService: BiologicoService, 
+    private primeraConsultaService: PrimeraConsultaService,
+    private tipoDmService: TipoDmService, 
+    private metodoFracasoService: MetodoFracasoService, 
+    private riesgoService: RiesgoService, 
+    private router: Router, 
+    private controlPrenatalService: ControlPrenatalService,
+    private menuService: MenuService) { }
   id: number | null = null;
 
   toggleTabs($tabNumber: number) {
@@ -117,7 +126,12 @@ export class Ruta2Component {
     this.cargarRiesgos();
     this.cargarTipoDm();
     this.cargarBiologicos();
-
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
   }
 
   cargarMetodosFracaso(): void {

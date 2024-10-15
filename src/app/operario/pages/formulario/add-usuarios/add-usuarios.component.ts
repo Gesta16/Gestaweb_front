@@ -14,6 +14,7 @@ import { TipoDocumento } from '../../../../modelos/tipo-documento.model';
 import { PoblacionDiferencialService } from '../../../../servicios/poblacion-diferencial.service';
 import { PoblacionDiferencial } from '../../../../modelos/poblacion-diferencial.model';
 
+import { MenuService } from '../../../../servicios/menu.service';
 @Component({
   selector: 'app-add-usuarios',
   templateUrl: './add-usuarios.component.html',
@@ -49,6 +50,8 @@ export class AddUsuariosComponent {
   listTipoDocumentos: TipoDocumento[] = [];
   listPoblacionDiferencial: PoblacionDiferencial[] = [];
   id: number | null = null;
+  isExpanded = true;
+  isVisible = true;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -58,7 +61,8 @@ export class AddUsuariosComponent {
     private ipsService: IpsService,
     private tipoDocumentoService: TipoDocumentoService,
     private poblacionDiferencialService: PoblacionDiferencialService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private menuService: MenuService
 
   ) { }
 
@@ -77,6 +81,12 @@ export class AddUsuariosComponent {
     this.getIps();
     this.getTipoDocumentos();
     this.getPoblacionDiferencial();
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
   }
   
   getUsuario(): void {
