@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { User } from '../modelos/user.model';
 import { AuthService } from '../servicios/auth.service';
 import { MenuService } from '../servicios/menu.service';
@@ -33,7 +33,8 @@ export class MenuComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   @HostListener('window:resize', ['$event'])
@@ -58,8 +59,9 @@ export class MenuComponent implements OnInit {
     this.logueado = this.token !== null;
     
     this.menuItems = this.filterMenuItemsByRole(this.allMenuItems);
-    this.menuService.isExpanded$.subscribe(visible => {
+    this.menuService.menuVisible$.subscribe(visible => {
       this.isVisible = visible;
+      this.cdr.detectChanges(); // Forzar detección de cambios si es necesario
     });
   }
 

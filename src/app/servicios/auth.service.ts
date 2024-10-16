@@ -3,6 +3,8 @@ import { environment } from '../../environment/env';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginRequest, LoginResponse } from '../modelos/login';
 import { Observable } from 'rxjs';
+import { MenuService } from './menu.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class AuthService {
 
   isMenuExpanded: boolean = false; 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private menuService: MenuService, private router: Router) { }
 
   url = environment.apiUrl + 'auth';
 
@@ -37,8 +39,12 @@ export class AuthService {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('identity');
     sessionStorage.removeItem('currentRolName');
-    this.isMenuExpanded = false;  // Cerrar el menú durante el logout
+    
+    // Establecer el estado del menú como no visible
+    this.menuService.setMenuVisible(false); // Oculta el menú
+    this.router.navigate(['/login']); // Redirige al login
   }
+  
 
   toggleMenu(): void {
     this.isMenuExpanded = !this.isMenuExpanded;
