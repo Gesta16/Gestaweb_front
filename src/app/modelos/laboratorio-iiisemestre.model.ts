@@ -13,7 +13,7 @@ export class LaboratorioIIITrimestre {
     cul_rectal: string;
     fec_rectal: string;
     fec_biofisico: string;
-    edad_gestacional: number;
+    edad_gestacional: string;
     rie_biopsicosocial: string;
     num_proceso: number;
 
@@ -33,7 +33,7 @@ export class LaboratorioIIITrimestre {
         cul_rectal: string,
         fec_rectal: string,
         fec_biofisico: string,
-        edad_gestacional: number,
+        edad_gestacional: string,
         rie_biopsicosocial: string,
         num_proceso: number
     ) {

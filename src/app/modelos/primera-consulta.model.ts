@@ -4,19 +4,19 @@ export class PrimeraConsulta {
     id_usuario?: number;
     cod_riesgo: number;
     cod_dm: number;
-    peso_previo: number;
-    tal_consulta: number;
-    imc_consulta: number;
+    peso_previo: string;
+    tal_consulta: string;
+    imc_consulta: string;
     diag_nutricional: string;
-    hta: number;
-    dm: number;
+    hta: string;
+    dm: string;
     fact_riesgo: string;
     expo_violencia: boolean;
     ries_depresion: boolean;
-    for_gestacion: number;
-    for_parto: number;
-    for_cesarea: number;
-    for_aborto: number;
+    for_gestacion: string;
+    for_parto: string;
+    for_cesarea: string;
+    for_aborto: string;
     fec_lactancia: Date;
     fec_consejeria: Date;
     num_proceso: number;
@@ -26,19 +26,19 @@ export class PrimeraConsulta {
         id_usuario: number,
         cod_riesgo: number,
         cod_dm: number,
-        peso_previo: number,
-        tal_consulta: number,
-        imc_consulta: number,
+        peso_previo: string,
+        tal_consulta: string,
+        imc_consulta: string,
         diag_nutricional: string,
-        hta: number,
-        dm: number,
+        hta: string,
+        dm: string,
         fact_riesgo: string,
         expo_violencia: boolean,
         ries_depresion: boolean,
-        for_gestacion: number,
-        for_parto: number,
-        for_cesarea: number,
-        for_aborto: number,
+        for_gestacion: string,
+        for_parto: string,
+        for_cesarea: string,
+        for_aborto: string,
         fec_lactancia: Date,
         fec_consejeria: Date,
         num_proceso: number

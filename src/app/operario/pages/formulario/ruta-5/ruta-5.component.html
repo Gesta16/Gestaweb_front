@@ -63,7 +63,6 @@
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase"
                                         [(ngModel)]="finalizacionGestacion.cod_terminacion"
                                         [disabled]="ReadonlyFinalizacionGestacion">
-                                        <option value="">Seleccione...</option>
                                         <option *ngFor="let terminacion of terminaciones"
                                             [value]="terminacion.cod_terminacion">
                                             {{ terminacion.nom_terminacion }}
@@ -89,7 +88,7 @@
                                 </button>
 
                                 <button (click)="guardarFinalizacionGestacion()"
-                                    [disabled]="ReadonlyFinalizacionGestacion"
+                                    [disabled]="ReadonlyFinalizacionGestacion && !isEditing"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
@@ -107,7 +106,6 @@
                                     <select id="pru_sifilis" [(ngModel)]="laboratorioIntraparto.pru_sifilis"
                                         [disabled]="ReadonlyLaboratorioIntraparto"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="Positivo">Positivo</option>
                                         <option value="Negativo">Negativo</option>
                                     </select>
@@ -129,7 +127,6 @@
                                     <select id="pruebaVDRL" [(ngModel)]="laboratorioIntraparto.cod_vdrl"
                                         [disabled]="ReadonlyLaboratorioIntraparto"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option *ngFor="let prueba of pruebaVDRL" [value]="prueba.cod_vdrl">
                                             {{ prueba.num_vdrl }} <!-- Aquí muestra el valor directamente -->
                                         </option>
@@ -151,7 +148,6 @@
                                     <select id="rec_sifilis" [(ngModel)]="laboratorioIntraparto.rec_sifilis"
                                         [disabled]="ReadonlyLaboratorioIntraparto"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="Si">Si</option>
                                         <option value="No">No</option>
                                     </select>
@@ -171,7 +167,6 @@
                                     <select id="pru_vih" [(ngModel)]="laboratorioIntraparto.pru_vih"
                                         [disabled]="ReadonlyLaboratorioIntraparto"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="Positivo">Positivo</option>
                                         <option value="Negativo">Negativo</option>
                                     </select>
@@ -193,7 +188,7 @@
                                 </button>
 
                                 <button (click)="guardarLaboratorioIntraparto()"
-                                    [disabled]="ReadonlyLaboratorioIntraparto"
+                                    [disabled]="ReadonlyLaboratorioIntraparto && !isEditing"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
@@ -212,7 +207,6 @@
                                     <select id="condicionEgreso" [(ngModel)]="seguimiento.con_egreso"
                                         [disabled]="ReadonlySeguimiento"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="Vivo">Vivo</option>
                                         <option value="Muerto">Muerto</option>
                                     </select>
@@ -222,8 +216,7 @@
                                     <label for="fechaFallecimiento" class="font-medium mb-1 ">Fecha del
                                         fallecimiento</label>
                                     <input type="date" id="fechaFallecimiento"
-                                        [(ngModel)]="seguimiento.fec_fallecimiento"
-                                        [readonly]="ReadonlySeguimiento"
+                                        [(ngModel)]="seguimiento.fec_fallecimiento" [readonly]="ReadonlySeguimiento"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
@@ -231,8 +224,7 @@
                                     <label for="fechaPlanificacion" class="font-medium mb-1 ">Fecha de atención
                                         planificación familiar posparto</label>
                                     <input type="date" id="fechaPlanificacion"
-                                        [(ngModel)]="seguimiento.fec_planificacion"
-                                        [readonly]="ReadonlySeguimiento"
+                                        [(ngModel)]="seguimiento.fec_planificacion" [readonly]="ReadonlySeguimiento"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
@@ -244,7 +236,6 @@
                                     <select id="metodoAnticonceptivo" [(ngModel)]="seguimiento.cod_metodo"
                                         [disabled]="ReadonlySeguimiento"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option *ngFor="let metodo of metodos" [value]="metodo.cod_metodo">
                                             {{ metodo.nom_metodo }}
                                         </option>
@@ -259,7 +250,7 @@
                                     Editar
                                 </button>
 
-                                <button (click)="guardarSeguimiento()" [disabled]="ReadonlySeguimiento"
+                                <button (click)="guardarSeguimiento()" [disabled]="ReadonlySeguimiento && !isEditing"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
@@ -276,7 +267,7 @@
                                 <div class="flex flex-col text-xs">
                                     <label for="fec_defuncion" class="font-medium mb-1">Fecha de defunción</label>
                                     <input type="date" id="fec_defuncion" [(ngModel)]="mortalidadPreparto.fec_defuncion"
-                                    [readonly]="ReadonlyMortalidadPreparto"
+                                        [readonly]="ReadonlyMortalidadPreparto"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
 
@@ -286,7 +277,6 @@
                                     <select id="cod_mortalidad" [(ngModel)]="mortalidadPreparto.cod_mortalidad"
                                         [disabled]="ReadonlyMortalidadPreparto"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option *ngFor="let mortalidad of mortalidadPerinatal"
                                             [value]="mortalidad.cod_mortalidad">
                                             {{ mortalidad.cla_muerte }}
@@ -301,9 +291,9 @@
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Editar
                                 </button>
-                        
+
                                 <button (click)="guardarMortalidadPreparto()"
-                                    [disabled]="ReadonlyMortalidadPreparto"
+                                    [disabled]="ReadonlyMortalidadPreparto && !isEditing"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>

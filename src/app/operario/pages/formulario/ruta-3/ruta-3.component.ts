@@ -26,9 +26,6 @@ import { Router } from '@angular/router';
 })
 export class Ruta3Component {
   openTab = 1;
-  toggleTabs($tabNumber: number) {
-    this.openTab = $tabNumber;
-  }
 
   hemoclasificaciones: Hemoclasificacion[] = [];
   antibiogramas: Antibiograma[] = [];
@@ -48,7 +45,7 @@ export class Ruta3Component {
   id_laboratorioIII: number | null = null;
   id_its: number | null = null;
 
-
+  isEditing = false;
 
   laboratorioITrimestre: LaboratorioITrimestre = {
     cod_laboratorio: 0,
@@ -59,7 +56,7 @@ export class Ruta3Component {
     fec_hemoclasificacion: '',
     hem_laboratorio: '',
     fec_hemograma: '',
-    gli_laboratorio: 0,
+    gli_laboratorio: '',
     fec_glicemia: '',
     ant_laboratorio: '',
     fec_antigeno: '',
@@ -83,7 +80,7 @@ export class Ruta3Component {
     coo_cuantitativo: '',
     fec_coombs: '',
     fec_ecografia: '',
-    eda_gestacional: 0,
+    eda_gestacional: '',
     rie_biopsicosocial: '',
     num_proceso: 0
   };
@@ -113,7 +110,7 @@ export class Ruta3Component {
     coo_cualitativo: '',
     fec_coombs: '',
     fec_ecografia: '',
-    eda_gestacional: 0,
+    eda_gestacional: '',
     rie_biopsicosocial: '',
     num_proceso: 0
 
@@ -133,7 +130,7 @@ export class Ruta3Component {
     cul_rectal: '',
     fec_rectal: '',
     fec_biofisico: '',
-    edad_gestacional: 0,
+    edad_gestacional: '',
     rie_biopsicosocial: '',
     num_proceso: 0
 
@@ -187,20 +184,92 @@ export class Ruta3Component {
 
   }
 
+  toggleTabs(tabNumber: number) {
+    // Definimos los grupos de tabs permitidos para cada formulario
+    const grupo1 = [1, 2, 3, 4];
+    const grupo2 = [5, 6, 7];
+    const grupo3 = [8, 9];
+    const grupo4 = [10];
+
+
+    if (this.isEditing) {
+
+      if (grupo1.includes(this.openTab)) {
+        if (!grupo1.includes(tabNumber)) {
+          Swal.fire({
+            title: 'Advertencia',
+            text: 'Por favor, guarda los cambios antes de cambiar de pestaña.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+          });
+          return;
+        }
+      }
+
+      else if (grupo2.includes(this.openTab)) {
+        if (!grupo2.includes(tabNumber)) {
+          Swal.fire({
+            title: 'Advertencia',
+            text: 'Por favor, guarda los cambios antes de cambiar de pestaña.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+          });
+          return;
+        }
+      }
+
+      else if (grupo3.includes(this.openTab)) {
+        if (!grupo3.includes(tabNumber)) {
+          Swal.fire({
+            title: 'Advertencia',
+            text: 'Por favor, guarda los cambios antes de cambiar de pestaña.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+          });
+          return;
+        }
+      }
+      
+      else if (grupo4.includes(this.openTab)) {
+        if (!grupo4.includes(tabNumber)) {
+          Swal.fire({
+            title: 'Advertencia',
+            text: 'Por favor, guarda los cambios antes de cambiar de pestaña.',
+            icon: 'warning',
+            confirmButtonText: 'OK'
+          });
+          return;
+        }
+      }
+    }
+
+
+    this.openTab = tabNumber;
+  }
+
+
   toggleEditLaboratorioI() {
+    if (!this.isReadOnlyLaboratorioI) return;
     this.isReadOnlyLaboratorioI = false;
+    this.isEditing = true;
   }
 
   toggleEditLaboratorioII() {
+    if (!this.isReadOnlyLaboratorioII) return;
     this.isReadOnlyLaboratorioII = false;
+    this.isEditing = true;
   }
 
   toggleEditLaboratorioIII() {
+    if (!this.isReadOnlyLaboratorioIII) return;
     this.isReadOnlyLaboratorioIII = false;
+    this.isEditing = true;
   }
 
   toggleEditIts() {
+    if (!this.isReadOnlyIts) return;
     this.isReadOnlyIts = false;
+    this.isEditing = true;
   }
 
   cargarHemoclasificacion(): void {
@@ -259,6 +328,7 @@ export class Ruta3Component {
             icon: 'success',
           }).then(() => {
             this.isReadOnlyLaboratorioI = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -288,6 +358,7 @@ export class Ruta3Component {
           }).then(() => {
             this.id_laboratorioI = response.data.cod_laboratorio ?? null;
             this.isReadOnlyLaboratorioI = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -333,6 +404,7 @@ export class Ruta3Component {
             icon: 'success',
           }).then(() => {
             this.isReadOnlyLaboratorioII = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -363,6 +435,7 @@ export class Ruta3Component {
           }).then(() => {
             this.id_laboratorioII = response.data.cod_doslaboratorio ?? null;
             this.isReadOnlyLaboratorioII = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -407,6 +480,7 @@ export class Ruta3Component {
             icon: 'success',
           }).then(() => {
             this.isReadOnlyLaboratorioIII = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -426,7 +500,7 @@ export class Ruta3Component {
 
       this.laboratorioIIITrimestre.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
 
-      
+
       console.log(this.laboratorioIIITrimestre);
       this.laboratorioIIISemestreservice.createLaboratorioTercerSemestre(this.laboratorioIIITrimestre).subscribe({
         next: (response) => {
@@ -438,6 +512,7 @@ export class Ruta3Component {
           }).then(() => {
             this.id_laboratorioIII = response.data.cod_treslaboratorio ?? null;
             this.isReadOnlyLaboratorioIII = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -485,6 +560,7 @@ export class Ruta3Component {
             icon: 'success',
           }).then(() => {
             this.isReadOnlyIts = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -516,6 +592,7 @@ export class Ruta3Component {
           }).then(() => {
             this.id_its = response.data.cod_its ?? null;
             this.isReadOnlyIts = true;
+            this.isEditing = false;
             console.log(response);
           });
         },
@@ -538,7 +615,7 @@ export class Ruta3Component {
           this.its = response.data;
           console.log(response);
           this.id_its = this.its.cod_its ?? null;
-          this.isReadOnlyIts=true;
+          this.isReadOnlyIts = true;
 
         },
         (error) => {

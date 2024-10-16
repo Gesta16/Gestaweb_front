@@ -7,7 +7,7 @@ export class LaboratorioITrimestre {
     fec_hemoclasificacion: string;
     hem_laboratorio: string;
     fec_hemograma: string;
-    gli_laboratorio: number;
+    gli_laboratorio: string;
     fec_glicemia: string;
     ant_laboratorio: string;
     fec_antigeno: string;
@@ -31,7 +31,7 @@ export class LaboratorioITrimestre {
     coo_cuantitativo: string;
     fec_coombs: string;
     fec_ecografia: string;
-    eda_gestacional: number;
+    eda_gestacional: string;
     rie_biopsicosocial: string;
     num_proceso: number;
 
@@ -45,7 +45,7 @@ export class LaboratorioITrimestre {
         fec_hemoclasificacion: string,
         hem_laboratorio: string,
         fec_hemograma: string,
-        gli_laboratorio: number,
+        gli_laboratorio: string,
         fec_glicemia: string,
         ant_laboratorio: string,
         fec_antigeno: string,
@@ -69,9 +69,10 @@ export class LaboratorioITrimestre {
         coo_cuantitativo: string,
         fec_coombs: string,
         fec_ecografia: string,
-        eda_gestacional: number,
+        eda_gestacional: string,
         rie_biopsicosocial: string,
         num_proceso: number
+        
     ) {
         this.cod_laboratorio = cod_laboratorio;
         this.id_operador = id_operador;

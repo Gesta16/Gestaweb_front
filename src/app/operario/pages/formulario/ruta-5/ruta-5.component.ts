@@ -45,7 +45,7 @@ export class Ruta5Component implements OnInit {
   ReadonlyMortalidadPreparto = false;
   id_MortalidadPreparto: number | null = null;
 
-
+  isEditing = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -95,23 +95,40 @@ export class Ruta5Component implements OnInit {
   }
 
   toggleTabs(tabNumber: number) {
+    if (this.isEditing) {
+      Swal.fire({
+        title: 'Advertencia',
+        text: 'Por favor, guarda los cambios antes de cambiar de pestaña.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
     this.openTab = tabNumber;
   }
 
   toggleEditFinalizacionGestacion() {
+    if (!this.ReadonlyFinalizacionGestacion) return;
     this.ReadonlyFinalizacionGestacion = false;
+    this.isEditing = true;
   }
 
   toggleEditLaboratorioIntraparto() {
+    if (!this.ReadonlyLaboratorioIntraparto) return;
     this.ReadonlyLaboratorioIntraparto = false;
+    this.isEditing = true;
   }
 
   toggleEditSeguimiento() {
+    if (!this.ReadonlySeguimiento) return;
     this.ReadonlySeguimiento = false;
+    this.isEditing = true;
   }
 
   toggleEditMortalidadPreparto() {
+    if (!this.ReadonlyMortalidadPreparto) return;
     this.ReadonlyMortalidadPreparto = false;
+    this.isEditing = true;
   }
 
 
@@ -168,6 +185,7 @@ export class Ruta5Component implements OnInit {
             icon: 'success',
           }).then(() => {
             this.ReadonlyFinalizacionGestacion = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -196,6 +214,7 @@ export class Ruta5Component implements OnInit {
           }).then(() => {
             this.id_FinalizacionGestacion = response.cod_finalizacion ?? null;
             this.ReadonlyFinalizacionGestacion = true;
+            this.isEditing = false;
             console.log(response);
             console.log(this.id_FinalizacionGestacion)
           });
@@ -246,6 +265,7 @@ export class Ruta5Component implements OnInit {
             icon: 'success',
           }).then(() => {
             this.ReadonlyLaboratorioIntraparto = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -276,6 +296,7 @@ export class Ruta5Component implements OnInit {
           }).then(() => {
             this.id_LaboratorioIntraparto = response.cod_intraparto ?? null;
             this.ReadonlyLaboratorioIntraparto = true;
+            this.isEditing = false;
             console.log(response);
             console.log(this.id_LaboratorioIntraparto);
           });
@@ -326,6 +347,7 @@ export class Ruta5Component implements OnInit {
             icon: 'success',
           }).then(() => {
             this.ReadonlySeguimiento = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -355,6 +377,7 @@ export class Ruta5Component implements OnInit {
           }).then(() => {
             this.id_Seguimiento = response.cod_evento ?? null;
             this.ReadonlySeguimiento = true;
+            this.isEditing = false;
             console.log(response);
             console.log(this.id_Seguimiento);
           });
@@ -403,6 +426,7 @@ export class Ruta5Component implements OnInit {
             icon: 'success',
           }).then(() => {
             this.ReadonlyMortalidadPreparto = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -431,6 +455,7 @@ export class Ruta5Component implements OnInit {
           }).then(() => {
             this.id_MortalidadPreparto = response.cod_mortalpreparto ?? null;
             this.ReadonlyMortalidadPreparto = true;
+            this.isEditing = false;
             console.log(response);
             console.log(this.id_MortalidadPreparto);
           });

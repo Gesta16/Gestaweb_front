@@ -36,6 +36,7 @@ export class Ruta6Component {
   ReadonlyRutaPYMS = false;
   id_RutaPYMS: number | null = null;
 
+  isEditing = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +47,7 @@ export class Ruta6Component {
     private tamizacionNeonatalService: TamizacionNeonatalService,
     private router: Router,
   ) {
-    this.datosRecienNacido = new DatosRecienNacido(0, 0, '', 0, '', 0, 0, '', '',0);
+    this.datosRecienNacido = new DatosRecienNacido(0, 0, '', '', '', '', '', '', '',0);
     this.estudioHipotiroidismo = new EstudioHipotiroidismo(0, 0, '', '', '', '', '', '',0);
     this.nuevaRuta = new RutaPYMS(0, 0, '', '', '', '',0);
     this.nuevaTamizacion = new TamizacionNeonatal(0, 0, 0, '', '', '', '', '', '', '',0);
@@ -78,24 +79,42 @@ export class Ruta6Component {
   }
 
 
-  toggleTabs($tabNumber: number) {
-    this.openTab = $tabNumber;
+  toggleTabs(tabNumber: number) {
+    if (this.isEditing) {
+      Swal.fire({
+        title: 'Advertencia',
+        text: 'Por favor, guarda los cambios antes de cambiar de pestaña.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+    this.openTab = tabNumber;
   }
 
+
   toggleEditDatosRecienNacido() {
+    if (!this.ReadonlyDatosRecienNacido) return;
     this.ReadonlyDatosRecienNacido = false;
+    this.isEditing = true;
   }
 
   toggleEditEstudioHipotiroidismo() {
+    if (!this.ReadonlyEstudioHipotiroidismo) return;
     this.ReadonlyEstudioHipotiroidismo = false;
+    this.isEditing = true;
   }
 
   toggleEditTamizacionNeonatal() {
+    if (!this.ReadonlyTamizacionNeonatal) return;
     this.ReadonlyTamizacionNeonatal = false;
+    this.isEditing = true;
   }
 
   toggleEditRutaPYMS() {
+    if (!this.ReadonlyRutaPYMS) return;
     this.ReadonlyRutaPYMS = false;
+    this.isEditing = true;
   }
 
   getHemoclasificaciones() {
@@ -119,7 +138,8 @@ export class Ruta6Component {
             text: 'Registro de recién nacido editado correctamente',
             icon: 'success',
           }).then(() => {
-            this.ReadonlyDatosRecienNacido = true; // Desactivar la edición
+            this.ReadonlyDatosRecienNacido = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -133,7 +153,7 @@ export class Ruta6Component {
       });
     } else {
       if (this.id !== null) {
-        this.datosRecienNacido.id_usuario = this.id; // Asignar el ID de usuario
+        this.datosRecienNacido.id_usuario = this.id;
       }
       this.datosRecienNacido.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
 
@@ -150,6 +170,7 @@ export class Ruta6Component {
           }).then(() => {
             this.id_DatosRecienNacido = response.cod_recien ?? null;
             this.ReadonlyDatosRecienNacido = true;
+            this.isEditing = false;
             console.log(response);
             console.log(this.id_DatosRecienNacido);
           });
@@ -196,7 +217,8 @@ export class Ruta6Component {
             text: 'Registro de estudio de hipotiroidismo editado correctamente',
             icon: 'success',
           }).then(() => {
-            this.ReadonlyEstudioHipotiroidismo = true; // Desactivar la edición
+            this.ReadonlyEstudioHipotiroidismo = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -210,7 +232,7 @@ export class Ruta6Component {
       });
     } else {
       if (this.id !== null) {
-        this.estudioHipotiroidismo.id_usuario = this.id; // Asignar el ID de usuario
+        this.estudioHipotiroidismo.id_usuario = this.id;
       }
       this.estudioHipotiroidismo.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
 
@@ -227,6 +249,7 @@ export class Ruta6Component {
           }).then(() => {
             this.id_EstudioHipotiroidismo = response.cod_estudio ?? null;
             this.ReadonlyEstudioHipotiroidismo = true;
+            this.isEditing = false;
             console.log(response);
             console.log(this.id_EstudioHipotiroidismo);
           });
@@ -273,7 +296,8 @@ export class Ruta6Component {
             text: 'Registro de ruta editado correctamente',
             icon: 'success',
           }).then(() => {
-            this.ReadonlyRutaPYMS = true; // Desactivar la edición
+            this.ReadonlyRutaPYMS = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -287,7 +311,7 @@ export class Ruta6Component {
       });
     } else {
       if (this.id !== null) {
-        this.nuevaRuta.id_usuario = this.id; // Asignar el ID de usuario
+        this.nuevaRuta.id_usuario = this.id;
       }
       this.nuevaRuta.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
 
@@ -304,6 +328,7 @@ export class Ruta6Component {
           }).then(() => {
             this.id_RutaPYMS = response.cod_ruta ?? null;
             this.ReadonlyRutaPYMS = true;
+            this.isEditing = false;
             console.log(response);
           });
         },
@@ -350,7 +375,8 @@ export class Ruta6Component {
             text: 'Registro de tamización neonatal editado correctamente',
             icon: 'success',
           }).then(() => {
-            this.ReadonlyTamizacionNeonatal = true; // Desactivar la edición
+            this.ReadonlyTamizacionNeonatal = true;
+            this.isEditing = false;
           });
         },
         error: (error) => {
@@ -364,7 +390,7 @@ export class Ruta6Component {
       });
     } else {
       if (this.id !== null) {
-        this.nuevaTamizacion.id_usuario = this.id; // Asignar el ID de usuario
+        this.nuevaTamizacion.id_usuario = this.id;
       }
 
       this.nuevaTamizacion.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
@@ -382,6 +408,7 @@ export class Ruta6Component {
           }).then(() => {
             this.id_TamizacionNeonatal = response.cod_tamizacion ?? null;
             this.ReadonlyTamizacionNeonatal = true;
+            this.isEditing = false;
             console.log(response);
             console.log(this.id_TamizacionNeonatal);
           });
@@ -419,7 +446,7 @@ export class Ruta6Component {
 
 
   volver() {
-    this.router.navigate(['/ruta-gestante', this.id]); // Navegar a la ruta con el ID
+    this.router.navigate(['/ruta-gestante', this.id]);
   }
 
 }

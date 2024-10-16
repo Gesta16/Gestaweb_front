@@ -33,7 +33,7 @@ export class AddUsuariosComponent {
     fec_nacimiento: '',
     edad_usuario: '',
     cod_documento: 0,
-    documento_usuario: 0,
+    documento_usuario: '',
     fec_diag_usuario: '',
     fec_ingreso: '',
     cod_departamento: 0,

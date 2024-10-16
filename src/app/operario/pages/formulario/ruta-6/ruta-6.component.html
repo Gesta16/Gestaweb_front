@@ -61,7 +61,6 @@
                                     <select [(ngModel)]="datosRecienNacido.tip_embarazo"
                                         [disabled]="ReadonlyDatosRecienNacido"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="Único">Único</option>
                                         <option value="Múltiple">Múltiple</option>
                                     </select>
@@ -78,7 +77,6 @@
                                     <label for="" class="font-medium mb-1">Sexo</label>
                                     <select [(ngModel)]="datosRecienNacido.sexo" [disabled]="ReadonlyDatosRecienNacido"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="Masculino">Masculino</option>
                                         <option value="Femenino">Femenino</option>
                                     </select>
@@ -103,7 +101,6 @@
                                     <select [(ngModel)]="datosRecienNacido.pla_canguro"
                                         [disabled]="ReadonlyDatosRecienNacido"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="Sí">Sí</option>
                                         <option value="No">No</option>
                                     </select>
@@ -123,7 +120,8 @@
                                     Editar
                                 </button>
 
-                                <button (click)="guardarDatosRecienNacido()" [disabled]="ReadonlyDatosRecienNacido"
+                                <button (click)="guardarDatosRecienNacido()"
+                                    [disabled]="ReadonlyDatosRecienNacido && !isEditing"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
@@ -139,7 +137,6 @@
                                     <select [(ngModel)]="nuevaTamizacion.cod_hemoclasifi"
                                         [disabled]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option *ngFor="let hemocla of hemoclasificacion"
                                             [value]="hemocla.cod_hemoclasifi">
                                             {{ hemocla.tip_hemoclasificacion }}
@@ -156,7 +153,7 @@
 
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">Resultado TSH</label>
-                                    <input type="tel" [(ngModel)]="nuevaTamizacion.resul_tsh"
+                                    <input type="text" [(ngModel)]="nuevaTamizacion.resul_tsh"
                                         [readonly]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
@@ -166,7 +163,6 @@
                                     <select [(ngModel)]="nuevaTamizacion.pruetreponemica"
                                         [disabled]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="Positivo">Positivo</option>
                                         <option value="Negativo">Negativo</option>
                                     </select>
@@ -185,7 +181,6 @@
                                     <select [(ngModel)]="nuevaTamizacion.tamiza_aud"
                                         [disabled]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="Positivo">Positivo</option>
                                         <option value="Negativo">Negativo</option>
                                     </select>
@@ -196,7 +191,6 @@
                                     <select [(ngModel)]="nuevaTamizacion.tamiza_cardi"
                                         [disabled]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="Positivo">Positivo</option>
                                         <option value="Negativo">Negativo</option>
                                     </select>
@@ -207,7 +201,6 @@
                                     <select [(ngModel)]="nuevaTamizacion.tamiza_visual"
                                         [disabled]="ReadonlyTamizacionNeonatal"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="Positivo">Positivo</option>
                                         <option value="Negativo">Negativo</option>
                                     </select>
@@ -221,7 +214,8 @@
                                     Editar
                                 </button>
 
-                                <button (click)="guardarTamizacionNeonatal()" [disabled]="ReadonlyTamizacionNeonatal"
+                                <button (click)="guardarTamizacionNeonatal()"
+                                    [disabled]="ReadonlyTamizacionNeonatal && !isEditing"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
@@ -236,7 +230,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div class="flex flex-col text-xs">
                                     <label for="" class="font-medium mb-1">TSH de seguimiento</label>
-                                    <input type="tel" [(ngModel)]="estudioHipotiroidismo.tsh"
+                                    <input type="text" [(ngModel)]="estudioHipotiroidismo.tsh"
                                         [readonly]="ReadonlyEstudioHipotiroidismo"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
                                 </div>
@@ -267,7 +261,6 @@
                                     <select [(ngModel)]="estudioHipotiroidismo.eve_confirmado"
                                         [disabled]="ReadonlyEstudioHipotiroidismo"
                                         class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#00acc9] uppercase">
-                                        <option value="">Seleccione...</option>
                                         <option value="Sí">Sí</option>
                                         <option value="No">No</option>
                                     </select>
@@ -288,7 +281,7 @@
                                 </button>
 
                                 <button (click)="guardarEstudioHipotiroidismo()"
-                                    [disabled]="ReadonlyEstudioHipotiroidismo"
+                                    [disabled]="ReadonlyEstudioHipotiroidismo && !isEditing"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
@@ -334,7 +327,7 @@
                                     Editar
                                 </button>
 
-                                <button (click)="guardarRutaPYMS()" [disabled]="ReadonlyRutaPYMS"
+                                <button (click)="guardarRutaPYMS()" [disabled]="ReadonlyRutaPYMS && !isEditing"
                                     class="px-6 py-1 text-sm font-medium rounded-md bg-[#00acc9] text-white hover:bg-[#009DCC] transition-colors duration-300 uppercase">
                                     Guardar
                                 </button>
