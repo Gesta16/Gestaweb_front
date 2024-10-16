@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DatosRecienNacido } from '../modelos/datos-recien-nacido.model'; 
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatosRecienNacidoService {
-  private apiUrl = 'http://127.0.0.1:8000/api/datos-recien-nacido'; 
+  private apiUrl = environment.apiUrl +'datos-recien-nacido'; 
 
   constructor(private http: HttpClient) { }
 
@@ -28,8 +29,8 @@ export class DatosRecienNacidoService {
     return this.http.post(this.apiUrl, datosRecienNacido, {headers});
   }
 
-  getDatosRecienNacidobyId(id: number): Observable<{ estado: string; data: DatosRecienNacido }> {
-    return this.http.get<{ estado: string; data: DatosRecienNacido }>(`${this.apiUrl}/${id}`);
+  getDatosRecienNacidobyId(id: number,num_proceso: number): Observable<{ estado: string; data: DatosRecienNacido }> {
+    return this.http.get<{ estado: string; data: DatosRecienNacido }>(`${this.apiUrl}/${id}/${num_proceso}`);
   }
 
   updateDatosRecienNacido(id: number, datosRecienNacido: DatosRecienNacido): Observable<any> {

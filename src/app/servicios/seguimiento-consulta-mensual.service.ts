@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SeguimientoConsultaMensual } from '../modelos/seguimiento-consulta-mensual.model'; 
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SeguimientoConsultaMensualService {
-  private apiUrl = 'http://127.0.0.1:8000/api/seguimiento-consulta-mensual'; 
+  private apiUrl = environment.apiUrl +'seguimiento-consulta-mensual'; 
 
   constructor(private http: HttpClient) { }
 
@@ -30,9 +31,9 @@ export class SeguimientoConsultaMensualService {
     return this.http.post(this.apiUrl, seguimiento,{headers});
   }
 
-  getSeguimientoConsultabyId(id: number): Observable<{ estado: string; seguimiento: SeguimientoConsultaMensual }> {
-    return this.http.get<{ estado: string; seguimiento: SeguimientoConsultaMensual }>(`${this.apiUrl}/${id}`);
-  }
+  getSeguimientoConsultabyId(id: number,num_proceso:number): Observable<{ estado: string; seguimiento: SeguimientoConsultaMensual }> {
+    return this.http.get<{ estado: string; seguimiento: SeguimientoConsultaMensual }>(`${this.apiUrl}/${id}/${num_proceso}`);
+  }    
 
   updateSeguimientoConsulta(id:number, data: SeguimientoConsultaMensual): Observable<any> {
     const token = sessionStorage.getItem('token');

@@ -5,6 +5,8 @@ export class SeguimientoPostObstetrico {
     con_egreso: string;
     fec_fallecimiento: string;
     fec_planificacion: string;
+    num_proceso: number;
+
 
     constructor(
         cod_evento: number,
@@ -13,6 +15,7 @@ export class SeguimientoPostObstetrico {
         con_egreso: string,
         fec_fallecimiento: string,
         fec_planificacion: string,
+        num_proceso: number
     ){
         this.cod_evento = cod_evento;
         this.id_usuario = id_usuario;
@@ -20,5 +23,6 @@ export class SeguimientoPostObstetrico {
         this.con_egreso = con_egreso;
         this.fec_fallecimiento = fec_fallecimiento;
         this.fec_planificacion = fec_planificacion;
+        this.num_proceso=num_proceso;
     }
 }

@@ -7,6 +7,10 @@ export class EstudioHipotiroidismo {
     fec_resultadot4: string;
     eve_confirmado: string;
     fec_primera: string;
+    proceso_gestativo_id?: number;
+    num_proceso: number;
+
+
 
     constructor(
         cod_estudio: number,
@@ -17,6 +21,7 @@ export class EstudioHipotiroidismo {
         fec_resultadot4: string,
         eve_confirmado: string,
         fec_primera: string,
+        num_proceso: number
     ){
         this.cod_estudio = cod_estudio;
         this.id_usuario = id_usuario;
@@ -26,6 +31,7 @@ export class EstudioHipotiroidismo {
         this.fec_resultadot4 = fec_resultadot4;
         this.eve_confirmado = eve_confirmado;
         this.fec_primera = fec_primera;
+        this.num_proceso = num_proceso;
     }
 }
 

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environment/env';
 
 // Define la estructura de los datos que esperas recibir
 export interface Consulta {
@@ -39,7 +40,7 @@ export interface UsuarioIps {
   providedIn: 'root'
 })
 export class DashboardService {
-  private apiUrl = 'http://127.0.0.1:8000/api'; 
+  private apiUrl = environment.apiUrl; 
 
   constructor(private http: HttpClient) {}
 
@@ -55,7 +56,7 @@ export class DashboardService {
       'Content-Type': 'application/json'
     });
 
-    return this.http.get<CalendarioResponse>(`${this.apiUrl}/calendario-usuario`, { headers });
+    return this.http.get<CalendarioResponse>(`${this.apiUrl}calendario-usuario`, { headers });
   }
 
   getConteo(): Observable<ConteoResponse> {
@@ -70,7 +71,7 @@ export class DashboardService {
       'Content-Type': 'application/json'
     });
   
-    return this.http.get<ConteoResponse>(`${this.apiUrl}/conteo`, { headers });
+    return this.http.get<ConteoResponse>(`${this.apiUrl}conteo`, { headers });
   }
 
   getUsuariosIps(): Observable<UsuarioIps[]> {
@@ -85,7 +86,7 @@ export class DashboardService {
       'Content-Type': 'application/json'
     });
   
-    return this.http.get<UsuarioIps[]>(`${this.apiUrl}/usuario-ips`, { headers });
+    return this.http.get<UsuarioIps[]>(`${this.apiUrl}usuario-ips`, { headers });
   }
   
 

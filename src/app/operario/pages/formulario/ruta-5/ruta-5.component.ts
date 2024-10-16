@@ -34,6 +34,8 @@ export class Ruta5Component implements OnInit {
   seguimiento: SeguimientoPostObstetrico;
   mortalidadPreparto: MortalidadPreparto;
   id: number | null = null;
+  num_proceso: number | null = null;
+
   ReadonlyFinalizacionGestacion = false;
   id_FinalizacionGestacion: number | null = null;
   ReadonlyLaboratorioIntraparto = false;
@@ -57,10 +59,10 @@ export class Ruta5Component implements OnInit {
     private mortalidadPrepartoService: MortalidadPrepartoService,
     private router: Router,
   ) {
-    this.finalizacionGestacion = new FinalizacionGestacion(0, 0, 0, '');
-    this.laboratorioIntraparto = new LaboratorioIntraparto(0, 0, 0, '', '', '', '', '', '', '');
-    this.seguimiento = new SeguimientoPostObstetrico(0, 0, 0, '', '', '');
-    this.mortalidadPreparto = new MortalidadPreparto(0, 0, 0, '');
+    this.finalizacionGestacion = new FinalizacionGestacion(0, 0, 0, '',0);   
+    this.laboratorioIntraparto = new LaboratorioIntraparto(0, 0, 0, '', '', '', '', '', '', '',0);
+    this.seguimiento = new SeguimientoPostObstetrico(0, 0, 0, '', '', '',0);
+    this.mortalidadPreparto = new MortalidadPreparto(0, 0, 0, '',0);
   }
 
   ngOnInit() {
@@ -68,6 +70,11 @@ export class Ruta5Component implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.id = +params.get('id')!; // Obtiene el ID como número
       console.log('ID de la gestante:', this.id);
+    });
+
+    this.route.paramMap.subscribe(params => {
+      this.num_proceso = +params.get('num_proceso')!; // Obtiene el ID como número
+      console.log('num_proceso:', this.num_proceso);
     });
 
     if (this.id !== null && this.id > 0) {
@@ -151,7 +158,7 @@ export class Ruta5Component implements OnInit {
   guardarFinalizacionGestacion() {
 
     if (this.id_FinalizacionGestacion) {
-      // Editar finalización de gestación existente
+
       this.finalizacionGestacionServicio.updateFinalizacionGestacion(this.id_FinalizacionGestacion, this.finalizacionGestacion).subscribe({
         next: (response) => {
           console.log('Finalización de gestación actualizada:', response);
@@ -177,7 +184,7 @@ export class Ruta5Component implements OnInit {
         this.finalizacionGestacion.id_usuario = this.id;
       }
 
-      // Crear nueva finalización de gestación
+      this.finalizacionGestacion.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
       this.finalizacionGestacionServicio.crearFinalizacionGestacion(this.finalizacionGestacion).subscribe({
         next: (response) => {
           Swal.fire({
@@ -210,7 +217,7 @@ export class Ruta5Component implements OnInit {
 
   getFinalizacionGestacion(): void {
     if (this.id !== null && this.id > 0) {
-      this.finalizacionGestacionServicio.getFinalizacionGestacionbyId(this.id).subscribe(
+      this.finalizacionGestacionServicio.getFinalizacionGestacionbyId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.finalizacionGestacion = response.finalizacion;
           console.log(response);
@@ -255,6 +262,8 @@ export class Ruta5Component implements OnInit {
         this.laboratorioIntraparto.id_usuario = this.id;
       }
 
+      this.laboratorioIntraparto.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
+
       // Crear nuevo laboratorio intraparto
       this.laboratorioIntrapartoServicio.crearLaboratorio(this.laboratorioIntraparto).subscribe({
         next: (response) => {
@@ -287,7 +296,7 @@ export class Ruta5Component implements OnInit {
 
   getLaboratoriosIntraparto(): void {
     if (this.id !== null && this.id > 0) {
-      this.laboratorioIntrapartoServicio.getLaboratoriobyId(this.id).subscribe(
+      this.laboratorioIntrapartoServicio.getLaboratoriobyId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.laboratorioIntraparto = response.data;
           console.log(response);
@@ -332,6 +341,7 @@ export class Ruta5Component implements OnInit {
       if (this.id !== null) {
         this.seguimiento.id_usuario = this.id;
       }
+      this.seguimiento.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
 
       // Crear nuevo seguimiento
       this.seguimientoPostObstetricoServicio.crearSeguimiento(this.seguimiento).subscribe({
@@ -364,7 +374,7 @@ export class Ruta5Component implements OnInit {
 
   getSeguimiento(): void {
     if (this.id !== null && this.id > 0) {
-      this.seguimientoPostObstetricoServicio.getSeguimientobyId(this.id).subscribe(
+      this.seguimientoPostObstetricoServicio.getSeguimientobyId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.seguimiento = response.seguimiento;
           console.log(response);
@@ -408,7 +418,7 @@ export class Ruta5Component implements OnInit {
       if (this.id !== null) {
         this.mortalidadPreparto.id_usuario = this.id;
       }
-
+      this.mortalidadPreparto.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
       // Crear nuevo registro de mortalidad preparto
       this.mortalidadPrepartoService.crearMortalidadPreparto(this.mortalidadPreparto).subscribe({
         next: (response) => {
@@ -440,7 +450,7 @@ export class Ruta5Component implements OnInit {
 
   getMortalidadPreparto(): void {
     if (this.id !== null && this.id > 0) {
-      this.mortalidadPrepartoService.getMortalidadPrepartobyId(this.id).subscribe(
+      this.mortalidadPrepartoService.getMortalidadPrepartobyId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.mortalidadPreparto = response.mortalidad;
           console.log(response);

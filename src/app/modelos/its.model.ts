@@ -10,6 +10,8 @@ export class Its {
     fec_rpr: Date;
     rec_tratamiento: string;
     rec_pareja: string;
+    num_proceso: number;
+
 
     constructor(
         cod_its: number,
@@ -22,7 +24,8 @@ export class Its {
         fec_vdrl: Date,
         fec_rpr: Date,
         rec_tratamiento: string,
-        rec_pareja: string
+        rec_pareja: string,
+        num_proceso: number
     ) {
         this.cod_its = cod_its;
         this.id_operador = id_operador;
@@ -35,5 +38,6 @@ export class Its {
         this.fec_rpr = fec_rpr;
         this.rec_tratamiento = rec_tratamiento;
         this.rec_pareja = rec_pareja;
+        this.num_proceso = num_proceso;
     }
 }

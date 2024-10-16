@@ -9,6 +9,8 @@ export class LaboratorioIntraparto {
     fec_tratamiento: string;
     pru_vih: string;
     fec_vih: string;
+    num_proceso: number;
+
 
     constructor(
         cod_intraparto: number,
@@ -21,6 +23,7 @@ export class LaboratorioIntraparto {
         fec_tratamiento: string,
         pru_vih: string,
         fec_vih: string,
+        num_proceso: number
     ){
         this.cod_intraparto = cod_intraparto;
         this.id_usuario = id_usuario;
@@ -32,5 +35,6 @@ export class LaboratorioIntraparto {
         this.fec_tratamiento = fec_tratamiento;
         this.pru_vih = pru_vih;
         this.fec_vih = fec_vih;
+        this.num_proceso = num_proceso;
     }
 }

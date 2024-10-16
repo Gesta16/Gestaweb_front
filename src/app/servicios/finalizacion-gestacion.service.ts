@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FinalizacionGestacion } from '../modelos/finalizacion-gestacion.model'; // Ajusta la ruta si es necesario
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FinalizacionGestacionService {
-  private apiUrl = 'http://127.0.0.1:8000/api/finalizacion-gestacion'; // URL de tu API Laravel para Tipo de Documento
+  private apiUrl = environment.apiUrl +'finalizacion-gestacion'; // URL de tu API Laravel para Tipo de Documento
 
   constructor(private http: HttpClient) { }
 
@@ -29,8 +30,8 @@ export class FinalizacionGestacionService {
     return this.http.post(this.apiUrl, finalizacion, {headers});
   }
 
-  getFinalizacionGestacionbyId(id: number): Observable<{ estado: string; finalizacion: FinalizacionGestacion }> {
-    return this.http.get<{ estado: string; finalizacion: FinalizacionGestacion }>(`${this.apiUrl}/${id}`);
+  getFinalizacionGestacionbyId(id: number,num_proceso:number): Observable<{ estado: string; finalizacion: FinalizacionGestacion }> {
+    return this.http.get<{ estado: string; finalizacion: FinalizacionGestacion }>(`${this.apiUrl}/${id}/${num_proceso}`);
   }
 
   updateFinalizacionGestacion(id: number, finalizacion: FinalizacionGestacion): Observable<any> {

@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LaboratorioIIITrimestre } from '../modelos/laboratorio-iiisemestre.model';
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LaboratorioiiisemestreService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/laboratorio-tercer-semestre'; 
+  private apiUrl = environment.apiUrl +'laboratorio-tercer-semestre'; 
 
   constructor(private http: HttpClient) { }
 
@@ -31,8 +32,8 @@ export class LaboratorioiiisemestreService {
     return this.http.post(this.apiUrl, consulta, { headers });
   }
 
-  getLaboratorioIIISemestrebyId(id: number): Observable<{ estado: string; data: LaboratorioIIITrimestre }> {
-    return this.http.get<{ estado: string; data: LaboratorioIIITrimestre }>(`${this.apiUrl}/${id}`);
+  getLaboratorioIIISemestrebyId(id: number,num_proceso:number): Observable<{ estado: string; data: LaboratorioIIITrimestre }> {
+    return this.http.get<{ estado: string; data: LaboratorioIIITrimestre }>(`${this.apiUrl}/${id}/${num_proceso}`);
   }
 
   updateLaboratorioIIISemestre(id:number ,laboratorio: LaboratorioIIITrimestre): Observable<any> {

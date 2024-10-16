@@ -25,6 +25,8 @@ export class LaboratorioIITrimestre {
     fec_ecografia: string;
     eda_gestacional: number;
     rie_biopsicosocial: string;
+    num_proceso: number;
+
 
     constructor(
         cod_doslaboratorio: number,
@@ -52,7 +54,8 @@ export class LaboratorioIITrimestre {
         fec_coombs: string,
         fec_ecografia: string,
         eda_gestacional: number,
-        rie_biopsicosocial: string
+        rie_biopsicosocial: string,
+        num_proceso: number
     ) {
         this.cod_doslaboratorio = cod_doslaboratorio;
         this.id_operador = id_operador;
@@ -80,5 +83,6 @@ export class LaboratorioIITrimestre {
         this.fec_ecografia = fec_ecografia;
         this.eda_gestacional = eda_gestacional;
         this.rie_biopsicosocial = rie_biopsicosocial;
+        this.num_proceso=num_proceso
     }
 }

@@ -44,15 +44,25 @@
                     <td class="px-6 py-4">{{ usuario.tel_usuario }}</td>
                     <td class="px-8 py-4">{{ usuario.email_usuario }}</td>
                     <td class="px-7 py-4 flex justify-center space-x-2">
+                        <!-- Botón para abrir el modal de ver usuario -->
                         <button (click)="abrirModalVer(usuario)"
                             class="flex items-center h-10 bg-transparent text-black font-bold py-2 px-4 rounded-xl hover:bg-gray-100 focus:outline-none">
                             <span class="iconify fa-lg" data-icon="fluent:form-24-filled"></span>
                         </button>
-                        <button (click)="verUsuario(usuario.id_usuario)"
+
+                        <!-- Botón para crear proceso si no hay ninguno -->
+                        <button (click)="crearProceso(usuario.id_usuario)" *ngIf="(usuario.procesosCount ?? 0) == 0"
                             class="flex items-center h-10 bg-transparent text-black font-bold py-2 px-4 rounded-xl hover:bg-gray-100 focus:outline-none">
-                            <span class="iconify fa-lg" data-icon="game-icons:baby-bottle"></span>
+                            <span class="iconify fa-lg" data-icon="mingcute:add-line"></span>
                         </button>
-                    </td>                    
+
+                        <!-- Botón para ver usuario si hay exactamente un proceso -->
+                        <button *ngIf="usuario.procesosCount != 0" (click)="verUsuario(usuario.id_usuario)"
+                                class="flex items-center h-10 bg-transparent text-black font-bold py-2 px-4 rounded-xl hover:bg-gray-100 focus:outline-none">
+                            <span class="iconify fa-lg" data-icon="fa-solid:baby"></span>
+                        </button>
+                    </td>
+
                 </tr>
             </tbody>
         </table>

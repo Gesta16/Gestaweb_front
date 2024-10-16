@@ -14,6 +14,8 @@ export class SeguimientoConsultaMensual {
     imc: number;
     ten_arts: number;
     ten_artd: number;
+    num_proceso: number;
+
 
     constructor(
         cod_seguimiento: number,
@@ -30,7 +32,9 @@ export class SeguimientoConsultaMensual {
         talla: number,
         imc: number,
         ten_arts: number,
-        ten_artd: number
+        ten_artd: number,
+        num_proceso: number
+
     ) {
         this.cod_seguimiento = cod_seguimiento;
         this.id_usuario = id_usuario;
@@ -47,5 +51,6 @@ export class SeguimientoConsultaMensual {
         this.imc = imc;
         this.ten_arts = ten_arts;
         this.ten_artd = ten_artd;
+        this.num_proceso = num_proceso;
     }
 }

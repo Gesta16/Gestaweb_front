@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SuperAdminService {
-  private apiUrl = 'http://127.0.0.1:8000/api/superadmin'; // URL de tu API Laravel
+  private apiUrl = environment.apiUrl +'superadmin'; // URL de tu API Laravel
 
   constructor(private http: HttpClient) { }
 

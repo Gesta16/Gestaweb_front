@@ -16,6 +16,7 @@ export class ControlPrenatal {
     usu_solicito: boolean;
     fec_terminacion: Date;
     per_intergenesico: boolean;
+    num_proceso: number;
   
     constructor(
       cod_control: number,
@@ -34,7 +35,8 @@ export class ControlPrenatal {
       fac_asesoria: Date,
       usu_solicito: boolean,
       fec_terminacion: Date,
-      per_intergenesico: boolean
+      per_intergenesico: boolean,
+      num_proceso: number
     ) {
       this.cod_control = cod_control;
       this.id_operador = id_operador;
@@ -53,6 +55,7 @@ export class ControlPrenatal {
       this.usu_solicito = usu_solicito;
       this.fec_terminacion = fec_terminacion;
       this.per_intergenesico = per_intergenesico;
+      this.num_proceso = num_proceso;
     }
   }
   

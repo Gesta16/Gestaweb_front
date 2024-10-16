@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EstudioHipotiroidismo } from '../modelos/estudio-hipotiroidismo.model'; 
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstudioHipotiroidismoService {
-  private apiUrl = 'http://127.0.0.1:8000/api/estudios-hipotiroidismo'; 
+  private apiUrl = environment.apiUrl +'estudios-hipotiroidismo'; 
 
   constructor(private http: HttpClient) { }
 
@@ -28,8 +29,8 @@ export class EstudioHipotiroidismoService {
     return this.http.post(this.apiUrl, estudio, {headers});
   }
 
-  getEstudioHipotiroidismobyId(id: number): Observable<{ estado: string; data: EstudioHipotiroidismo }> {
-    return this.http.get<{ estado: string; data: EstudioHipotiroidismo }>(`${this.apiUrl}/${id}`);
+  getEstudioHipotiroidismobyId(id: number,num_proceso:number): Observable<{ estado: string; data: EstudioHipotiroidismo }> {
+    return this.http.get<{ estado: string; data: EstudioHipotiroidismo }>(`${this.apiUrl}/${id}/${num_proceso}`);
   }
 
   updateEstudioHipotiroidismo(id: number, estudio: EstudioHipotiroidismo): Observable<any> {

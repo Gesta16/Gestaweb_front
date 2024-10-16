@@ -18,6 +18,7 @@ export class Usuario {
     cod_ips: number;
     cod_poblacion: number;
     dir_usuario: string;
+    procesosCount?: number; 
 
     constructor(
         id_usuario: number,

@@ -5,6 +5,8 @@ export class RutaPYMS {
     fec_hepatitis: string;
     fec_seguimiento: string;
     fec_entrega: string;
+    num_proceso: number;
+
 
     constructor(
         cod_ruta: number,
@@ -13,6 +15,7 @@ export class RutaPYMS {
         fec_hepatitis: string,
         fec_seguimiento: string,
         fec_entrega: string,
+        num_proceso: number
     ){
         this.cod_ruta = cod_ruta;
         this.id_usuario = id_usuario;
@@ -20,6 +23,7 @@ export class RutaPYMS {
         this.fec_hepatitis = fec_hepatitis;
         this.fec_seguimiento = fec_seguimiento;
         this.fec_entrega = fec_entrega;
+        this.num_proceso = num_proceso;
     }
 }
 

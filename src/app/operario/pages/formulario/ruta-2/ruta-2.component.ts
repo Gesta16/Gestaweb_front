@@ -54,7 +54,8 @@ export class Ruta2Component {
     fac_asesoria: new Date(),
     usu_solicito: false,
     fec_terminacion: new Date(),
-    per_intergenesico: false
+    per_intergenesico: false,
+    num_proceso:0
   };
 
   primeraConsulta: PrimeraConsulta = {
@@ -75,7 +76,8 @@ export class Ruta2Component {
     for_aborto: 0,
     fec_lactancia: new Date(),
     fec_consejeria: new Date(),
-    id_usuario: 0
+    id_usuario: 0,
+    num_proceso:0
   };
 
   vacunacion: Vacunacion = {
@@ -93,6 +95,8 @@ export class Ruta2Component {
 
   constructor(private route: ActivatedRoute, private vacunacionService: VacunacionService, private biologicoService: BiologicoService, private primeraConsultaService: PrimeraConsultaService, private tipoDmService: TipoDmService, private metodoFracasoService: MetodoFracasoService, private riesgoService: RiesgoService, private router: Router, private controlPrenatalService: ControlPrenatalService) { }
   id: number | null = null;
+  num_proceso: number | null = null;
+
 
   toggleTabs($tabNumber: number) {
     this.openTab = $tabNumber;
@@ -103,6 +107,11 @@ export class Ruta2Component {
     this.route.paramMap.subscribe(params => {
       this.id = +params.get('id')!; // Obtiene el ID como número
       console.log('ID de la gestante:', this.id);
+    });
+
+    this.route.paramMap.subscribe(params => {
+      this.num_proceso = +params.get('num_proceso')!; // Obtiene el ID como número
+      console.log('num_proceso:', this.num_proceso);
     });
 
     if (this.id !== null && this.id > 0) {
@@ -196,6 +205,7 @@ export class Ruta2Component {
       if (this.id !== null) {
         this.controlPrenatal.id_usuario = this.id; // Asigna el ID al objeto controlPrenatal
       }
+      this.controlPrenatal.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
 
       console.log(this.controlPrenatal);
       this.controlPrenatalService.createControl(this.controlPrenatal).subscribe({
@@ -227,7 +237,7 @@ export class Ruta2Component {
 
 
     if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
-      this.controlPrenatalService.getControlById(this.id).subscribe(
+      this.controlPrenatalService.getControlById(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.controlPrenatal = response.Control;
           console.log(response);
@@ -274,7 +284,7 @@ export class Ruta2Component {
       if (this.id !== null) {
         this.primeraConsulta.id_usuario = this.id;
       }
-
+      this.primeraConsulta.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
       console.log(this.primeraConsulta);
       this.primeraConsultaService.createConsulta(this.primeraConsulta).subscribe({
         next: (response) => {
@@ -302,7 +312,7 @@ export class Ruta2Component {
 
   getPrimeraConsulta(): void {
     if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
-      this.primeraConsultaService.getPrimeraConsulta(this.id).subscribe(
+      this.primeraConsultaService.getPrimeraConsulta(this.id,this.num_proceso??0).subscribe(
         (response) => {
           this.primeraConsulta = response.consulta;
           console.log(response);

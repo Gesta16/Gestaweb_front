@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MetodoFracaso } from '../modelos/metodo-fracaso.model';
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MetodoFracasoService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/metodo-fracaso'; 
+  private apiUrl = environment.apiUrl +'metodo-fracaso'; 
 
   constructor(private http: HttpClient) { }
 

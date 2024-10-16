@@ -33,6 +33,8 @@ export class Ruta3Component {
   hemoclasificaciones: Hemoclasificacion[] = [];
   antibiogramas: Antibiograma[] = [];
   id: number | null = null;
+  num_proceso: number | null = null;
+
   Vdrl: PruebaVDRL[] = [];
   Rpr: PruebaRPR[] = [];
   isReadOnlyLaboratorioI = false;
@@ -82,7 +84,8 @@ export class Ruta3Component {
     fec_coombs: '',
     fec_ecografia: '',
     eda_gestacional: 0,
-    rie_biopsicosocial: ''
+    rie_biopsicosocial: '',
+    num_proceso: 0
   };
 
   laboratorioIITrimestre: LaboratorioIITrimestre = {
@@ -111,7 +114,9 @@ export class Ruta3Component {
     fec_coombs: '',
     fec_ecografia: '',
     eda_gestacional: 0,
-    rie_biopsicosocial: ''
+    rie_biopsicosocial: '',
+    num_proceso: 0
+
   };
 
   laboratorioIIITrimestre: LaboratorioIIITrimestre = {
@@ -129,7 +134,9 @@ export class Ruta3Component {
     fec_rectal: '',
     fec_biofisico: '',
     edad_gestacional: 0,
-    rie_biopsicosocial: ''
+    rie_biopsicosocial: '',
+    num_proceso: 0
+
   };
 
   its: Its = {
@@ -143,7 +150,9 @@ export class Ruta3Component {
     fec_vdrl: new Date(),
     fec_rpr: new Date(),
     rec_tratamiento: '',
-    rec_pareja: ''
+    rec_pareja: '',
+    num_proceso: 0
+
   };
 
 
@@ -155,6 +164,11 @@ export class Ruta3Component {
     this.route.paramMap.subscribe(params => {
       this.id = +params.get('id')!; // Obtiene el ID como número
       console.log('ID de la gestante:', this.id);
+    });
+
+    this.route.paramMap.subscribe(params => {
+      this.num_proceso = +params.get('num_proceso')!; // Obtiene el ID como número
+      console.log('num_proceso:', this.num_proceso);
     });
 
     if (this.id !== null && this.id > 0) {
@@ -261,6 +275,7 @@ export class Ruta3Component {
       if (this.id !== null) {
         this.laboratorioITrimestre.id_usuario = this.id;
       }
+      this.laboratorioITrimestre.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
 
       console.log(this.laboratorioITrimestre);
       this.laboratorioISemestreservice.createLaboratorioPrimerSemestre(this.laboratorioITrimestre).subscribe({
@@ -289,7 +304,7 @@ export class Ruta3Component {
 
   getPrimerLaboratorio(): void {
     if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
-      this.laboratorioISemestreservice.getLaboratorioISemestrebyId(this.id).subscribe(
+      this.laboratorioISemestreservice.getLaboratorioISemestrebyId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.laboratorioITrimestre = response.data;
           console.log(response);
@@ -334,6 +349,8 @@ export class Ruta3Component {
       if (this.id !== null) {
         this.laboratorioIITrimestre.id_usuario = this.id;
       }
+      this.laboratorioIITrimestre.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
+
 
       console.log(this.laboratorioIITrimestre);
       this.laboratorioIISemestreservice.createLaboratorioSegundoSemestre(this.laboratorioIITrimestre).subscribe({
@@ -362,7 +379,7 @@ export class Ruta3Component {
 
   getSegundoLaboratorio(): void {
     if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
-      this.laboratorioIISemestreservice.getLaboratorioIISemestrebyId(this.id).subscribe(
+      this.laboratorioIISemestreservice.getLaboratorioIISemestrebyId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.laboratorioIITrimestre = response.data;
           console.log(response);
@@ -407,6 +424,8 @@ export class Ruta3Component {
         this.laboratorioIIITrimestre.id_usuario = this.id;
       }
 
+      this.laboratorioIIITrimestre.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
+
       
       console.log(this.laboratorioIIITrimestre);
       this.laboratorioIIISemestreservice.createLaboratorioTercerSemestre(this.laboratorioIIITrimestre).subscribe({
@@ -435,7 +454,7 @@ export class Ruta3Component {
 
   getTercerLaboratorio(): void {
     if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
-      this.laboratorioIIISemestreservice.getLaboratorioIIISemestrebyId(this.id).subscribe(
+      this.laboratorioIIISemestreservice.getLaboratorioIIISemestrebyId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.laboratorioIIITrimestre = response.data;
           console.log(response);
@@ -483,6 +502,9 @@ export class Ruta3Component {
         this.its.id_usuario = this.id;
       }
 
+      this.its.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
+
+
       console.log(this.its);
       this.itsService.createIts(this.its).subscribe({
         next: (response) => {
@@ -511,7 +533,7 @@ export class Ruta3Component {
 
   getIts(): void {
     if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
-      this.itsService.getItsId(this.id).subscribe(
+      this.itsService.getItsId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.its = response.data;
           console.log(response);

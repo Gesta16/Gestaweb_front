@@ -8,6 +8,8 @@ export class SeguimientoComplementario {
     fec_odontologia: string; 
     ina_seguimiento: string;
     cau_inasistencia: string;
+    num_proceso: number;
+
 
     constructor(
         cod_segcomplementario: number,
@@ -18,7 +20,8 @@ export class SeguimientoComplementario {
         fec_psicologia: string,
         fec_odontologia: string,
         ina_seguimiento: string,
-        cau_inasistencia: string
+        cau_inasistencia: string,
+        num_proceso: number
     ) {
         this.cod_segcomplementario = cod_segcomplementario;
         this.id_usuario = id_usuario
@@ -29,5 +32,6 @@ export class SeguimientoComplementario {
         this.fec_odontologia = fec_odontologia;
         this.ina_seguimiento = ina_seguimiento;
         this.cau_inasistencia = cau_inasistencia;
+        this.num_proceso = num_proceso;
     }
 }

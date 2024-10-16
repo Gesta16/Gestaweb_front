@@ -19,6 +19,7 @@ export class PrimeraConsulta {
     for_aborto: number;
     fec_lactancia: Date;
     fec_consejeria: Date;
+    num_proceso: number;
 
     constructor(
         id_operador: number,
@@ -39,7 +40,8 @@ export class PrimeraConsulta {
         for_cesarea: number,
         for_aborto: number,
         fec_lactancia: Date,
-        fec_consejeria: Date
+        fec_consejeria: Date,
+        num_proceso: number
     ) {
         this.id_operador = id_operador;
         this.id_usuario = id_usuario;
@@ -60,5 +62,6 @@ export class PrimeraConsulta {
         this.for_aborto = for_aborto;
         this.fec_lactancia = fec_lactancia;
         this.fec_consejeria = fec_consejeria;
+        this.num_proceso = num_proceso;
     }
 }

@@ -38,6 +38,8 @@ export class Ruta4Component {
   seguimientoComplementario: SeguimientoComplementario;
   micronutriente: Micronutriente;
   id: number | null = null;
+  num_proceso: number | null = null;
+
   id_SeguimientoConsulta: number | null = null;
   id_SeguimientoComplementario: number | null = null;
   id_Micronutriente: number | null = null;
@@ -55,11 +57,11 @@ export class Ruta4Component {
     private seguimientoComplementarioService: SeguimientoComplementarioService,
     private micronutrientesService: MicronutrientesService
   ) {
-    this.seguimientoConsulta = new SeguimientoConsultaMensual(0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, 0, 0, 0);
+    this.seguimientoConsulta = new SeguimientoConsultaMensual(0, 0, 0, 0, 0, 0, '', 0, 0, 0, 0, 0, 0, 0, 0,0);
 
-    this.seguimientoComplementario = new SeguimientoComplementario(0, 0, 0, '', '', '', '', '', '');
+    this.seguimientoComplementario = new SeguimientoComplementario(0, 0, 0, '', '', '', '', '', '',0);
 
-    this.micronutriente = new Micronutriente(0, 0, '', '', '', '');
+    this.micronutriente = new Micronutriente(0, 0, '', '', '', '',0);
   }
 
   ngOnInit() {
@@ -67,6 +69,11 @@ export class Ruta4Component {
     this.route.paramMap.subscribe(params => {
       this.id = +params.get('id')!; // Obtiene el ID como número
       console.log('ID de la gestante:', this.id);
+    });
+
+    this.route.paramMap.subscribe(params => {
+      this.num_proceso = +params.get('num_proceso')!; // Obtiene el ID como número
+      console.log('num_proceso:', this.num_proceso);
     });
 
     if (this.id !== null && this.id > 0) {
@@ -185,6 +192,8 @@ export class Ruta4Component {
       if (this.id !== null) {
         this.seguimientoConsulta.id_usuario = this.id;
       }
+      this.seguimientoConsulta.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
+
 
       this.seguimientoConsultaMensualService.crearSeguimientoConsulta(this.seguimientoConsulta).subscribe(response => {
         Swal.fire({
@@ -212,7 +221,7 @@ export class Ruta4Component {
 
   getSeguimientoConsulta(): void {
     if (this.id !== null && this.id > 0) { // Verificar que el ID sea válido
-      this.seguimientoConsultaMensualService.getSeguimientoConsultabyId(this.id).subscribe(
+      this.seguimientoConsultaMensualService.getSeguimientoConsultabyId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.seguimientoConsulta = response.seguimiento;
           console.log(response);
@@ -257,6 +266,8 @@ export class Ruta4Component {
       if (this.id !== null) {
         this.seguimientoComplementario.id_usuario = this.id;
       }
+      this.seguimientoComplementario.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
+
 
       this.seguimientoComplementarioService.crearSeguimientoComplementario(this.seguimientoComplementario).subscribe(response => {
         Swal.fire({
@@ -284,7 +295,7 @@ export class Ruta4Component {
 
   getSeguimientoComplementario(): void {
     if (this.id !== null && this.id > 0) { 
-      this.seguimientoComplementarioService.getSeguimientoComplementariobyId(this.id).subscribe(
+      this.seguimientoComplementarioService.getSeguimientoComplementariobyId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.seguimientoComplementario = response.seguimiento;
           console.log(response);
@@ -324,10 +335,12 @@ export class Ruta4Component {
         }
       });
     } else {
-      // Crear nuevo micronutriente
       if (this.id !== null) {
         this.micronutriente.id_usuario = this.id;
       }
+
+      this.micronutriente.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
+
 
       this.micronutrientesService.crearMicronutriente(this.micronutriente).subscribe(response => {
         Swal.fire({
@@ -355,7 +368,7 @@ export class Ruta4Component {
 
   getMicronutientes(): void {
     if (this.id !== null && this.id > 0) { 
-      this.micronutrientesService.getMicronutrientebyId(this.id).subscribe(
+      this.micronutrientesService.getMicronutrientebyId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.micronutriente = response.micronutriente;
           console.log(response);

@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PrimeraConsulta } from '../modelos/primera-consulta.model';
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PrimeraConsultaService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/primera-consulta'; 
+  private apiUrl = environment.apiUrl +'primera-consulta'; 
 
   constructor(private http: HttpClient) { }
 
@@ -31,8 +32,8 @@ export class PrimeraConsultaService {
     return this.http.post(this.apiUrl, consulta, { headers });
   }
 
-  getPrimeraConsulta(id: number): Observable<{ estado: string; consulta: PrimeraConsulta }> {
-    return this.http.get<{ estado: string; consulta: PrimeraConsulta }>(`${this.apiUrl}/${id}`);
+  getPrimeraConsulta(id: number,num_proceso: number): Observable<{ estado: string; consulta: PrimeraConsulta }> {
+    return this.http.get<{ estado: string; consulta: PrimeraConsulta }>(`${this.apiUrl}/${id}/${num_proceso}`);
   }
 
   updatePrimeraConsulta(id:number, consulta: PrimeraConsulta): Observable<any> {

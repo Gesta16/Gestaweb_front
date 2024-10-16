@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Micronutriente } from '../modelos/micronutrientes.model'; 
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MicronutrientesService {
-  private apiUrl = 'http://127.0.0.1:8000/api/micronutrientes'; 
+  private apiUrl = environment.apiUrl +'micronutrientes'; 
 
   constructor(private http: HttpClient) { }
 
@@ -28,8 +29,8 @@ export class MicronutrientesService {
     return this.http.post(this.apiUrl, micronutriente, {headers});
   }
 
-  getMicronutrientebyId(id: number): Observable<{ estado: string; micronutriente: Micronutriente }> {
-    return this.http.get<{ estado: string; micronutriente: Micronutriente }>(`${this.apiUrl}/${id}`);
+  getMicronutrientebyId(id: number,num_proceso:number): Observable<{ estado: string; micronutriente: Micronutriente }> {
+    return this.http.get<{ estado: string; micronutriente: Micronutriente }>(`${this.apiUrl}/${id}/${num_proceso}`);
   }
 
   updateMicronutriente(id:number, data: Micronutriente): Observable<any> {

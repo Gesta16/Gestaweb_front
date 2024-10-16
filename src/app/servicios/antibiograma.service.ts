@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Antibiograma } from '../modelos/antibiograma.model';
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AntibiogramaService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/antibiograma';
+  private apiUrl = environment.apiUrl +'antibiograma';
 
   constructor(private http: HttpClient) { }
 

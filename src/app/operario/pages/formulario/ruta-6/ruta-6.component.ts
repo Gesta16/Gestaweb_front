@@ -25,6 +25,8 @@ export class Ruta6Component {
   nuevaTamizacion: TamizacionNeonatal;
   hemoclasificacion: Hemoclasificacion[] = [];
   id: number | null = null;
+  num_proceso: number | null = null;
+
   ReadonlyDatosRecienNacido = false;
   id_DatosRecienNacido: number | null = null;
   ReadonlyEstudioHipotiroidismo = false;
@@ -44,16 +46,21 @@ export class Ruta6Component {
     private tamizacionNeonatalService: TamizacionNeonatalService,
     private router: Router,
   ) {
-    this.datosRecienNacido = new DatosRecienNacido(0, 0, '', 0, '', 0, 0, '', '');
-    this.estudioHipotiroidismo = new EstudioHipotiroidismo(0, 0, '', '', '', '', '', '');
-    this.nuevaRuta = new RutaPYMS(0, 0, '', '', '', '');
-    this.nuevaTamizacion = new TamizacionNeonatal(0, 0, 0, '', '', '', '', '', '', '');
+    this.datosRecienNacido = new DatosRecienNacido(0, 0, '', 0, '', 0, 0, '', '',0);
+    this.estudioHipotiroidismo = new EstudioHipotiroidismo(0, 0, '', '', '', '', '', '',0);
+    this.nuevaRuta = new RutaPYMS(0, 0, '', '', '', '',0);
+    this.nuevaTamizacion = new TamizacionNeonatal(0, 0, 0, '', '', '', '', '', '', '',0);
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.id = +params.get('id')!; // Obtiene el ID como número
       console.log('ID de la gestante:', this.id);
+    });
+
+    this.route.paramMap.subscribe(params => {
+      this.num_proceso = +params.get('num_proceso')!; // Obtiene el ID como número
+      console.log('num_proceso:', this.num_proceso);
     });
 
     if (this.id !== null && this.id > 0) {
@@ -128,6 +135,8 @@ export class Ruta6Component {
       if (this.id !== null) {
         this.datosRecienNacido.id_usuario = this.id; // Asignar el ID de usuario
       }
+      this.datosRecienNacido.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
+
 
       // Crear nuevo registro de recién nacido
       this.datosRecienNacidoService.crearDatosRecienNacido(this.datosRecienNacido).subscribe({
@@ -159,7 +168,7 @@ export class Ruta6Component {
 
   getDatosRecienNacido(): void {
     if (this.id !== null && this.id > 0) {
-      this.datosRecienNacidoService.getDatosRecienNacidobyId(this.id).subscribe(
+      this.datosRecienNacidoService.getDatosRecienNacidobyId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.datosRecienNacido = response.data;
           console.log(response);
@@ -203,6 +212,8 @@ export class Ruta6Component {
       if (this.id !== null) {
         this.estudioHipotiroidismo.id_usuario = this.id; // Asignar el ID de usuario
       }
+      this.estudioHipotiroidismo.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
+
 
       // Crear nuevo registro de estudio de hipotiroidismo
       this.estudioHipotiroidismoService.crearEstudioHipotiroidismo(this.estudioHipotiroidismo).subscribe({
@@ -234,7 +245,7 @@ export class Ruta6Component {
 
   getEstudioHipotiroidismo(): void {
     if (this.id !== null && this.id > 0) {
-      this.estudioHipotiroidismoService.getEstudioHipotiroidismobyId(this.id).subscribe(
+      this.estudioHipotiroidismoService.getEstudioHipotiroidismobyId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.estudioHipotiroidismo = response.data;
           console.log(response);
@@ -278,6 +289,8 @@ export class Ruta6Component {
       if (this.id !== null) {
         this.nuevaRuta.id_usuario = this.id; // Asignar el ID de usuario
       }
+      this.nuevaRuta.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
+
 
       // Crear nuevo registro de ruta
       this.rutaPYMSService.crearRuta(this.nuevaRuta).subscribe({
@@ -308,7 +321,7 @@ export class Ruta6Component {
 
   getRutaPYMS(): void {
     if (this.id !== null && this.id > 0) {
-      this.rutaPYMSService.getRutaPymsId(this.id).subscribe(
+      this.rutaPYMSService.getRutaPymsId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.nuevaRuta = response.data;
           console.log(response);
@@ -354,6 +367,9 @@ export class Ruta6Component {
         this.nuevaTamizacion.id_usuario = this.id; // Asignar el ID de usuario
       }
 
+      this.nuevaTamizacion.num_proceso = this.num_proceso !== null ? this.num_proceso : 0; 
+
+
       // Crear nuevo registro de tamización neonatal
       this.tamizacionNeonatalService.crearTamizacion(this.nuevaTamizacion).subscribe({
         next: (response) => {
@@ -384,7 +400,7 @@ export class Ruta6Component {
 
   getTamizacionNeonatal(): void {
     if (this.id !== null && this.id > 0) {
-      this.tamizacionNeonatalService.getTamizacionbyId(this.id).subscribe(
+      this.tamizacionNeonatalService.getTamizacionbyId(this.id,this.num_proceso ??0).subscribe(
         (response) => {
           this.nuevaTamizacion = response.data;
           console.log(response);

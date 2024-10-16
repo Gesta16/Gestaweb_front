@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Its } from '../modelos/its.model';
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItsService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/its'; 
+  private apiUrl = environment.apiUrl +'its'; 
 
   constructor(private http: HttpClient) { }
 
@@ -30,8 +31,8 @@ export class ItsService {
     return this.http.post(this.apiUrl, its, { headers });
   }
 
-  getItsId(id: number): Observable<{ estado: string; data: Its }> {
-    return this.http.get<{ estado: string; data: Its }>(`${this.apiUrl}/${id}`);
+  getItsId(id: number,num_proceso:number): Observable<{ estado: string; data: Its }> {
+    return this.http.get<{ estado: string; data: Its }>(`${this.apiUrl}/${id}/${num_proceso}`);
   }
 
   updateIts(id:number, its: Its): Observable<any> {

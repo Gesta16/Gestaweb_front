@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RutaPYMS } from '../modelos/ruta-pyms.model'; 
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RutaPYMSService {
-  private apiUrl = 'http://127.0.0.1:8000/api/rutas-pyms'; 
+  private apiUrl = environment.apiUrl +'rutas-pyms'; 
 
   constructor(private http: HttpClient) { }
 
@@ -28,8 +29,8 @@ export class RutaPYMSService {
     return this.http.post(this.apiUrl, ruta, {headers});
   }
 
-  getRutaPymsId(id: number): Observable<{ estado: string; data: RutaPYMS }> {
-    return this.http.get<{ estado: string; data: RutaPYMS }>(`${this.apiUrl}/${id}`);
+  getRutaPymsId(id: number,num_proceso:number): Observable<{ estado: string; data: RutaPYMS }> {
+    return this.http.get<{ estado: string; data: RutaPYMS }>(`${this.apiUrl}/${id}/${num_proceso}`);
   }
 
   updateRuta(id: number, ruta: RutaPYMS): Observable<any> {

@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PruebaVDRL } from '../modelos/prueba-vdrl.model'; // Ajusta la ruta si es necesario
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PruebaVDRLService {
-  private apiUrl = 'http://127.0.0.1:8000/api/prueba-no-treponemica-VDRL'; // URL de tu API Laravel para Tipo de Documento
+  private apiUrl = environment.apiUrl +'prueba-no-treponemica-VDRL'; // URL de tu API Laravel para Tipo de Documento
 
   constructor(private http: HttpClient) { }
 

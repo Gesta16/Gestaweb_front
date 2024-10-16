@@ -9,6 +9,8 @@ export class TamizacionNeonatal {
     tamiza_aud: string;
     tamiza_cardi: string;
     tamiza_visual: string;
+    num_proceso: number;
+
 
     constructor(
         cod_tamizacion: number,
@@ -21,6 +23,7 @@ export class TamizacionNeonatal {
         tamiza_aud: string,
         tamiza_cardi: string,
         tamiza_visual: string,
+        num_proceso: number
     ){
         this.cod_tamizacion = cod_tamizacion;
         this.id_usuario = id_usuario;
@@ -32,6 +35,7 @@ export class TamizacionNeonatal {
         this.tamiza_aud = tamiza_aud;
         this.tamiza_cardi = tamiza_cardi;
         this.tamiza_visual = tamiza_visual;
+        this.num_proceso = num_proceso
     }
 }
 

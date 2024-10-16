@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SeguimientoComplementario } from '../modelos/seguimiento-complementario.model'; 
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SeguimientoComplementarioService {
-  private apiUrl = 'http://127.0.0.1:8000/api/seguimientos-complementarios'; 
+  private apiUrl = environment.apiUrl +'seguimientos-complementarios'; 
 
   constructor(private http: HttpClient) { }
 
@@ -28,14 +29,14 @@ export class SeguimientoComplementarioService {
     return this.http.post(this.apiUrl, seguimiento, {headers});
   }
 
-  getSeguimientoComplementariobyId(id: number): Observable<{ estado: string; seguimiento: SeguimientoComplementario }> {
-    return this.http.get<{ estado: string; seguimiento: SeguimientoComplementario }>(`${this.apiUrl}/${id}`);
+  getSeguimientoComplementariobyId(id: number,num_proceso:number): Observable<{ estado: string; seguimiento: SeguimientoComplementario }> {
+    return this.http.get<{ estado: string; seguimiento: SeguimientoComplementario }>(`${this.apiUrl}/${id}/${num_proceso}`);
   }
 
   updateSeguimientoComplementario(id:number, data: SeguimientoComplementario): Observable<any> {
     const token = sessionStorage.getItem('token');
     if (!token) {
-      throw new Error('No se encontró el token de autenticación.');
+      throw new Error('No se encontró el token de autenticación.'); 
     }
   
     const headers = new HttpHeaders({

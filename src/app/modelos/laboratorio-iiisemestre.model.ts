@@ -15,6 +15,8 @@ export class LaboratorioIIITrimestre {
     fec_biofisico: string;
     edad_gestacional: number;
     rie_biopsicosocial: string;
+    num_proceso: number;
+
 
     constructor(
         cod_treslaboratorio: number,
@@ -32,7 +34,8 @@ export class LaboratorioIIITrimestre {
         fec_rectal: string,
         fec_biofisico: string,
         edad_gestacional: number,
-        rie_biopsicosocial: string
+        rie_biopsicosocial: string,
+        num_proceso: number
     ) {
         this.cod_treslaboratorio = cod_treslaboratorio;
         this.id_operador = id_operador;
@@ -50,5 +53,6 @@ export class LaboratorioIIITrimestre {
         this.fec_biofisico = fec_biofisico;
         this.edad_gestacional = edad_gestacional;
         this.rie_biopsicosocial = rie_biopsicosocial;
+        this.num_proceso = num_proceso
     }
 }

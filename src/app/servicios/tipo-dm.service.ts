@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TipoDm } from '../modelos/tipo-dm.model';
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TipoDmService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/tipo-dm'; 
+  private apiUrl = environment.apiUrl +'tipo-dm'; 
 
   constructor(private http: HttpClient) { }
 

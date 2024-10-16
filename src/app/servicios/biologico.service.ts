@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Biologico } from '../modelos/biologico.model';
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BiologicoService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/biologico'; 
+  private apiUrl = environment.apiUrl +'biologico'; 
 
   constructor(private http: HttpClient) { }
 

@@ -39,6 +39,14 @@
     position: relative;
 }
 
+.btn-custom {
+    height: 40px; /* Ajusta la altura según sea necesario */
+    padding: 0 16px; /* Establece padding horizontal fijo */
+    display: flex; /* Alinea el contenido del botón */
+    align-items: center; /* Centra verticalmente el contenido */
+    justify-content: center; /* Centra horizontalmente */
+}
+
 .custom-triangle3::after {
     content: "";
     position: absolute;
@@ -56,6 +64,27 @@
 .custom-triangle4 {
     position: relative;
 }
+
+.select-custom {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    height: 40px;
+    text-align: center;
+    appearance: none;
+    position: relative;
+}
+
+.select-custom option {
+    background-color: white;
+    color: black;
+}
+
+
 
 .custom-triangle4::after {
     content: "";

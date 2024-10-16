@@ -7,6 +7,7 @@ import { TipoDocumento } from '../../../modelos/tipo-documento.model';
 import { Router } from '@angular/router';
 import { VerUsuarioComponent } from '../ver-usuario/ver-usuario.component';
 
+
 @Component({
   selector: 'app-list-usuarios',
   templateUrl: './list-usuarios.component.html',
@@ -75,6 +76,33 @@ export class ListUsuariosComponent implements OnInit {
     });
   }
 
+
+  contarProcesos(usuarioId: number) {
+    this.usuarioService.contarProcesosGestativos(usuarioId).subscribe(response => {
+      const usuario = this.usuarios.find(u => u.id_usuario === usuarioId); // Busca el usuario por id
+      if (usuario) {
+        usuario.procesosCount = response.numero_de_procesos_gestativos; // Almacena el conteo en el objeto usuario
+        console.log(`Número de procesos gestativos para ${usuarioId}: ${response.numero_de_procesos_gestativos}`);
+      }
+    }, error => {
+      console.error('Error al contar los procesos gestativos:', error);
+    });
+  }
+
+  crearProceso(usuarioId: number) {
+    this.usuarioService.crearProcesoGestativo(usuarioId).subscribe(response => {
+      console.log(response.message);
+      this.loadUsuarios();
+    }, error => {
+      console.error('Error al crear el proceso gestativo:', error);
+    });
+  }
+
+  generarRango(cantidad: number): number[] {
+    return Array.from({ length: cantidad }, (_, i) => i + 1);
+  }
+  
+
   verUsuario(id: number): void {
     this.selectedUserId = id;
     console.log('ID del usuario seleccionado:', this.selectedUserId);
@@ -85,7 +113,14 @@ export class ListUsuariosComponent implements OnInit {
   private loadUsuarios(): void {
     this.usuarioService.getUsuarios().subscribe(
       (response: any) => {
-        this.usuarios = response.usuarios; 
+        this.usuarios = response.usuarios;
+        
+        // Contar los procesos gestativos para cada usuario
+        this.usuarios.forEach(usuario => {
+          this.contarProcesos(usuario.id_usuario);
+        });
+        console.log(response)
+        
         this.updatePagination();
       },
       (error: any) => {

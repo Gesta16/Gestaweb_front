@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Hemoclasificacion } from '../modelos/hemoclasificacion.model';
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HemoclasificacionService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/hemoclasificacion';
+  private apiUrl = environment.apiUrl +'hemoclasificacion';
 
   constructor(private http: HttpClient) { }
 

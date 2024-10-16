@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NumeroControl } from '../modelos/numero-control.model'; 
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NumeroControlService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/numero-controles';
+  private apiUrl = environment.apiUrl +'numero-controles';
 
   constructor(private http: HttpClient) { }
 

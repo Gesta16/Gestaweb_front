@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormaMedicion } from '../modelos/forma-medicion.model';
+import { environment } from '../../environment/env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormaMedicionService {
-  private apiUrl = 'http://127.0.0.1:8000/api/forma-medicion-edad-gestacional'; 
+  private apiUrl = environment.apiUrl +'forma-medicion-edad-gestacional'; 
 
   constructor(private http: HttpClient) { }
 
