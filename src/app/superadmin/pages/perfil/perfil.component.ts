@@ -3,6 +3,8 @@ import { AuthService } from '../../../servicios/auth.service';
 import { TipoDocumentoService } from '../../../servicios/tipo-documento.service';
 import { TipoDocumento } from '../../../modelos/tipo-documento.model'; 
 
+import { MenuService } from '../../../servicios/menu.service';
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -13,14 +15,24 @@ export class PerfilComponent implements OnInit {
   user: any;
   tiposDocumento: TipoDocumento[] = [];
 
+  isExpanded = true;
+  isVisible = true;
+
   constructor(
     private authService: AuthService,
     private tipoDocumentoService: TipoDocumentoService,
+    private menuService: MenuService
   ) {}
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
     this.loadTiposDocumento();
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
   }
 
   toggleEdit() {

@@ -21,6 +21,7 @@ export class DashboardComponent {
   public barChartData: number[] = [];
   public barChartLabels: string[] = [];
 
+  isExpanded = true;
   isVisible: boolean = true;
   currentRolName: string | null = null;
   consultas: Consulta[] = [];
@@ -77,7 +78,13 @@ export class DashboardComponent {
     this.cargarConsultas();
     this.cargarConteo();
     this.obtenerUsuariosPorIps();
-
+    
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
   }
 
 

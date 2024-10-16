@@ -5,6 +5,8 @@ import { TipoDocumentoService } from '../../../servicios/tipo-documento.service'
 import { TipoDocumento } from '../../../modelos/tipo-documento.model';
 import { AddSuperAdminComponent } from '../add-super-admin/add-super-admin.component';
 
+import { MenuService } from '../../../servicios/menu.service';
+
 @Component({
   selector: 'app-list-superadmin',
   templateUrl: './list-superadmin.component.html',
@@ -18,15 +20,25 @@ export class ListSuperadminComponent implements OnInit {
   itemsPerPage: number = 15;
   totalPages: number = 1;
 
+  isExpanded = true;
+  isVisible = true;
+
   constructor(
     private superAdminService: SuperAdminService,
     private tipoDocumentoService: TipoDocumentoService,
-    private _matDialog: MatDialog
+    private _matDialog: MatDialog,
+    private menuService: MenuService
   ) {}
 
   ngOnInit(): void {
     this.loadSuperAdmins();
     this.loadTiposDocumento();
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
   }
 
   abrirModal(): void {

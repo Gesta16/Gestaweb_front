@@ -1,52 +1,52 @@
 <!-- Llamado del encabezado -->
 <app-header></app-header>
 
-<div class="container mx-auto px-4 mt-[8rem]" style="width: 95%;">
-
-    <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4" style="height: 80px;">
-        <div class="flex justify-between items-center h-full p-4">
-            <h1 class="font-bold text-3xl" style="margin-left: 30px;">Posparto</h1>
-            <button (click)="volver()"
-                class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none"
-                style="margin-right: 30px;">
-                Volver
-            </button>
+<div class="mx-auto px-4 mt-[8rem] max-w-[95%] transition-all duration-300" [ngClass]="{ 'ml-56': isExpanded && isVisible, 
+    'ml-20': !isExpanded && isVisible, 'ml-0': !isVisible}">
+    <div class="max-w-[94rem] mx-auto mt-12">
+        <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4 h-auto">
+            <div class="flex flex-col sm:flex-row justify-between items-center h-full p-4">
+                <h1 class="font-bold text-2xl sm:text-3xl ml-2">Posparto</h1>
+                <button (click)="volver()"
+                    class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none mt-4 sm:mt-0 mr-[30px]">
+                    Volver
+                </button>
+            </div>
         </div>
-    </div>
 
-    <!-- Diseño del formulario -->
-    <div class="flex flex-wrap mt-5 uppercase">
-        <div class="w-[70%] justify-center mx-auto">
-            <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer">
-                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
-                        (click)="toggleTabs(1)"
-                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 1, 'text-white bg-[#00acc9]': openTab === 1}">
-                        Datos recién nacido
-                    </a>
-                </li>
-                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
-                        (click)="toggleTabs(2)"
-                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 2, 'text-white bg-[#00acc9]': openTab === 2}">
-                        Tamización neonatal
-                    </a>
-                </li>
-                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
-                        (click)="toggleTabs(3)"
-                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 3, 'text-white bg-[#00acc9]': openTab === 3}">
-                        Estudio de hipotiroidismo
-                    </a>
-                </li>
-                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
-                        (click)="toggleTabs(4)"
-                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 4, 'text-white bg-[#00acc9]': openTab === 4}">
-                        Ruta PYMS
-                    </a>
-                </li>
-            </ul>
+        <!-- Diseño del formulario -->
+        <div class="flex flex-wrap mt-5 uppercase">
+            <div class="w-[70%] justify-center mx-auto">
+                <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer">
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
+                            (click)="toggleTabs(1)"
+                            [ngClass]="{'text-[#00acc9] bg-white': openTab !== 1, 'text-white bg-[#00acc9]': openTab === 1}">
+                            Datos recién nacido
+                        </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
+                            (click)="toggleTabs(2)"
+                            [ngClass]="{'text-[#00acc9] bg-white': openTab !== 2, 'text-white bg-[#00acc9]': openTab === 2}">
+                            Tamización neonatal
+                        </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
+                            (click)="toggleTabs(3)"
+                            [ngClass]="{'text-[#00acc9] bg-white': openTab !== 3, 'text-white bg-[#00acc9]': openTab === 3}">
+                            Estudio de hipotiroidismo
+                        </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
+                            (click)="toggleTabs(4)"
+                            [ngClass]="{'text-[#00acc9] bg-white': openTab !== 4, 'text-white bg-[#00acc9]': openTab === 4}">
+                            Ruta PYMS
+                        </a>
+                    </li>
+                </ul>
 
 
             <div
@@ -335,8 +335,10 @@
 
                         </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

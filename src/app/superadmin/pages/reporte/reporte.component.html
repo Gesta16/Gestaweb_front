@@ -1,0 +1,117 @@
+<!-- Encabezado -->
+<app-header></app-header>
+
+<div class="pt-20 px-4 transition-all duration-300" 
+    [ngClass]="{ 'ml-56': isExpanded && isVisible, 
+    'ml-20': !isExpanded && isVisible, 'ml-0': !isVisible}">
+    <div class="max-w-[94rem] mx-auto mt-12">
+        <!-- Estilo del contenedor del título -->
+        <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4 p-4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 px-4">
+                <h1 class="font-bold text-2xl md:text-3xl">Reportes</h1>
+
+                <div class="w-full md:w-auto flex flex-col sm:flex-row items-center gap-x-10 gap-y-4">
+                    <!-- Input de buscar -->
+                    <div class="relative w-full sm:w-64 md:w-auto md:flex-grow lg:max-w-xs">
+                        <input type="text"
+                            class="w-full h-10 pl-4 pr-10 rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#00ACC9]">
+                        <span class="absolute right-4 top-1/2 transform -translate-y-1/2">
+                            <i class="fa-solid fa-magnifying-glass text-[#00ACC9]"></i>
+                        </span>
+                    </div>
+
+                    <div class="flex gap-x-6">
+                        <button
+                            class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none focus:ring-2 focus:ring-[#80BA27]">
+                            PDF
+                        </button>
+                        <button
+                            class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none focus:ring-2 focus:ring-[#80BA27]">
+                            Excel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row">
+            <!------------------------ Estilos del contenedor de filtros ------------------------>
+            <div
+                class="w-full lg:w-[28rem] bg-white p-4 rounded-md shadow border border-gray-300 flex-shrink-0 mb-4 lg:mb-0">
+                <div class="flex items-center mb-2 px-4">
+                    <i class="fa-solid fa-sliders-h mr-2"></i>
+                    <h2 class="font-bold text-lg">Filtros</h2>
+                </div>
+                <div class="border border-gray-150"></div>
+
+                <div *ngFor="let section of sections" class="mt-4 shadow rounded-md px-6 py-2">
+                    <h2 class="font-bold text-lg cursor-pointer" (click)="section.isOpen = !section.isOpen">
+                        {{ section.title }}
+                        <i class="fa ml-4 text-gray-600"
+                            [ngClass]="{'fa-chevron-down': !section.isOpen, 'fa-chevron-up': section.isOpen}"></i>
+                    </h2>
+                    <div [ngClass]="{'hidden': !section.isOpen, 'block': section.isOpen}">
+                        <div *ngFor="let filter of section.filters" class="mt-2 shadow rounded-md px-6 py-2">
+                            <h2 class="font-bold text-md">{{ filter.label }}</h2>
+                            <div class="grid grid-cols-2 gap-2 mt-2">
+                                <label class="flex items-center" *ngFor="let option of filter.options">
+                                    <input type="checkbox" class="mr-2">
+                                    {{ option }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="justify-end flex mt-6">
+                    <button
+                        class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none">
+                        Generar
+                    </button>
+                </div>
+            </div>
+
+            <!------------------------ Estilo de los contenedores de las tablas ------------------------>
+            <div class="flex-grow lg:ml-8 overflow-x-auto">
+                <div class="inline-block min-w-full align-middle">
+                    <div class="overflow-hidden">
+                        <table class="min-w-full text-sm text-center text-gray-700">
+                            <!-- Estilo del contenedor del encabezado de la tabla -->
+                            <thead
+                                class="text-xs text-gray-700 uppercase bg-white rounded-lg shadow border border-gray-300">
+                                <tr>
+                                    <th scope="col" class="px-5 py-3 ">Nombre</th>
+                                    <th scope="col" class="px-5 py-3 ">Apellido</th>
+                                    <th scope="col" class="px-5 py-3 ">Edad</th>
+                                    <th scope="col" class="px-5 py-3 ">Estrato social</th>
+                                    <th scope="col" class="px-5 py-3 ">Régimen</th>
+                                    <th scope="col" class="px-5 py-3 ">Población diferencial</th>
+                                    <th scope="col" class="px-5 py-3 ">Departamento</th>
+                                    <th scope="col" class="px-5 py-3 ">Municipio</th>
+                                    <th scope="col" class="px-5 py-3 ">Factores embarazo</th>
+                                    <th scope="col" class="px-5 py-3 ">Factores posparto</th>
+                                </tr>
+                            </thead>
+
+                            <!-- Estilo de la información de la tabla -->
+                            <tbody>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-5">Lila</td>
+                                    <td>León Mendez</td>
+                                    <td>22</td>
+                                    <td>2</td>
+                                    <td>Contributivo</td>
+                                    <td>Ninguna</td>
+                                    <td>Santander</td>
+                                    <td>Bucaramanga</td>
+                                    <td>Planeado</td>
+                                    <td>Vivo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

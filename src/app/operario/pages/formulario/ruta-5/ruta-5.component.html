@@ -1,52 +1,52 @@
 <!-- Llamado del encabezado -->
 <app-header></app-header>
 
-<div class="container mx-auto px-4 mt-[8rem]" style="width: 95%;">
-
-    <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4" style="height: 80px;">
-        <div class="flex justify-between items-center h-full p-4">
-            <h1 class="font-bold text-3xl" style="margin-left: 30px;">Preparto</h1>
-            <button (click)="volver()"
-                class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none"
-                style="margin-right: 30px;">
-                Volver
-            </button>
+<div class="mx-auto px-4 mt-[8rem] max-w-[95%] transition-all duration-300" [ngClass]="{ 'ml-56': isExpanded && isVisible, 
+    'ml-20': !isExpanded && isVisible, 'ml-0': !isVisible}">
+    <div class="max-w-[94rem] mx-auto mt-12">
+        <div class="rounded-lg border border-gray-300 bg-white shadow-md mb-4 h-auto">
+            <div class="flex flex-col sm:flex-row justify-between items-center h-full p-4">
+                <h1 class="font-bold text-2xl sm:text-3xl ml-2">Preparto</h1>
+                <button (click)="volver()"
+                    class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none mt-4 sm:mt-0 mr-[30px]">
+                    Volver
+                </button>
+            </div>
         </div>
-    </div>
 
-    <!-- Diseño del formulario -->
-    <div class="flex flex-wrap mt-5 uppercase ">
-        <div class="w-[70%] justify-center mx-auto">
-            <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer">
-                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
-                        (click)="toggleTabs(1)"
-                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 1, 'text-white bg-[#00acc9]': openTab === 1}">
-                        Final de gestación
-                    </a>
-                </li>
-                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
-                        (click)="toggleTabs(2)"
-                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 2, 'text-white bg-[#00acc9]': openTab === 2}">
-                        Laboratorio intraparto
-                    </a>
-                </li>
-                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
-                        (click)="toggleTabs(3)"
-                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 3, 'text-white bg-[#00acc9]': openTab === 3}">
-                        Seguimientos post obstétrico
-                    </a>
-                </li>
-                <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
-                    <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
-                        (click)="toggleTabs(4)"
-                        [ngClass]="{'text-[#00acc9] bg-white': openTab !== 4, 'text-white bg-[#00acc9]': openTab === 4}">
-                        Mortalidad perinatal
-                    </a>
-                </li>
-            </ul>
+        <!-- Diseño del formulario -->
+        <div class="flex flex-wrap mt-5 uppercase ">
+            <div class="w-[70%] justify-center mx-auto">
+                <ul class="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row cursor-pointer">
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
+                            (click)="toggleTabs(1)"
+                            [ngClass]="{'text-[#00acc9] bg-white': openTab !== 1, 'text-white bg-[#00acc9]': openTab === 1}">
+                            Final de gestación
+                        </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
+                            (click)="toggleTabs(2)"
+                            [ngClass]="{'text-[#00acc9] bg-white': openTab !== 2, 'text-white bg-[#00acc9]': openTab === 2}">
+                            Laboratorio intraparto
+                        </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
+                            (click)="toggleTabs(3)"
+                            [ngClass]="{'text-[#00acc9] bg-white': openTab !== 3, 'text-white bg-[#00acc9]': openTab === 3}">
+                            Seguimientos post obstétrico
+                        </a>
+                    </li>
+                    <li class="-mb-px mr-2 last:mr-0 flex-auto text-center">
+                        <a class="text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal border border-gray-300"
+                            (click)="toggleTabs(4)"
+                            [ngClass]="{'text-[#00acc9] bg-white': openTab !== 4, 'text-white bg-[#00acc9]': openTab === 4}">
+                            Mortalidad perinatal
+                        </a>
+                    </li>
+                </ul>
 
             <div
                 class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded border border-gray-300">
@@ -95,9 +95,9 @@
                             </div>
                         </div>
 
-                        <!-- Laboratorio intraparto -->
-                        <div [ngClass]="{'hidden': openTab !== 2, 'block': openTab === 2}">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Laboratorio intraparto -->
+                            <div [ngClass]="{'hidden': openTab !== 2, 'block': openTab === 2}">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                                 <div class="flex flex-col text-xs">
                                     <label for="pru_sifilis" class="font-medium mb-1">Prueba treponémica rápida para
@@ -196,9 +196,9 @@
                         </div>
 
 
-                        <!-- Seguimientos post obstétrico -->
-                        <div [ngClass]="{'hidden': openTab !== 3, 'block': openTab === 3}">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Seguimientos post obstétrico -->
+                            <div [ngClass]="{'hidden': openTab !== 3, 'block': openTab === 3}">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                                 <div class="flex flex-col text-xs ">
                                     <label for="condicionEgreso" class="font-medium mb-1">Condición al egreso tras el
@@ -260,9 +260,9 @@
 
 
 
-                        <!-- Mortalidad preparto -->
-                        <div [ngClass]="{'hidden': openTab !== 4, 'block': openTab === 4}">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Mortalidad preparto -->
+                            <div [ngClass]="{'hidden': openTab !== 4, 'block': openTab === 4}">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                                 <div class="flex flex-col text-xs">
                                     <label for="fec_defuncion" class="font-medium mb-1">Fecha de defunción</label>
@@ -301,6 +301,7 @@
                         </div>
 
 
+                        </div>
                     </div>
                 </div>
             </div>

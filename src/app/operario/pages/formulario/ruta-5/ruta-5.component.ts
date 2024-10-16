@@ -18,6 +18,7 @@ import { MortalidadPreparto } from '../../../../modelos/mortalidad-preparto.mode
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
+import { MenuService } from '../../../../servicios/menu.service';
 @Component({
   selector: 'app-ruta-5',
   templateUrl: './ruta-5.component.html',
@@ -47,6 +48,9 @@ export class Ruta5Component implements OnInit {
 
   isEditing = false;
 
+  isExpanded = true;
+  isVisible = true;
+
   constructor(
     private route: ActivatedRoute,
     private terminacionGestacionService: TerminacionGestacionService,
@@ -58,6 +62,7 @@ export class Ruta5Component implements OnInit {
     private mortalidadPerinatalService: MortalidadPerinatalService,
     private mortalidadPrepartoService: MortalidadPrepartoService,
     private router: Router,
+    private menuService: MenuService
   ) {
     this.finalizacionGestacion = new FinalizacionGestacion(0, 0, 0, '',0);   
     this.laboratorioIntraparto = new LaboratorioIntraparto(0, 0, 0, '', '', '', '', '', '', '',0);
@@ -92,6 +97,12 @@ export class Ruta5Component implements OnInit {
     this.getMetodosAnticonceptivos();
     this.getPruebaVDRL();
     this.getMortalidadPerinatal();
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
   }
 
   toggleTabs(tabNumber: number) {

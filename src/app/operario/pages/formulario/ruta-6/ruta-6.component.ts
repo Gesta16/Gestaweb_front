@@ -12,6 +12,7 @@ import { TamizacionNeonatal } from '../../../../modelos/tamizacion-neonatal.mode
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
+import { MenuService } from '../../../../servicios/menu.service';
 @Component({
   selector: 'app-ruta-6',
   templateUrl: './ruta-6.component.html',
@@ -38,6 +39,9 @@ export class Ruta6Component {
 
   isEditing = false;
 
+  isExpanded = true;
+  isVisible = true;
+
   constructor(
     private route: ActivatedRoute,
     private datosRecienNacidoService: DatosRecienNacidoService,
@@ -46,6 +50,7 @@ export class Ruta6Component {
     private hemoclasificacionService: HemoclasificacionService,
     private tamizacionNeonatalService: TamizacionNeonatalService,
     private router: Router,
+    private menuService: MenuService
   ) {
     this.datosRecienNacido = new DatosRecienNacido(0, 0, '', '', '', '', '', '', '',0);
     this.estudioHipotiroidismo = new EstudioHipotiroidismo(0, 0, '', '', '', '', '', '',0);
@@ -62,7 +67,13 @@ export class Ruta6Component {
     this.route.paramMap.subscribe(params => {
       this.num_proceso = +params.get('num_proceso')!; // Obtiene el ID como número
       console.log('num_proceso:', this.num_proceso);
+      this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
     });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
+  });
 
     if (this.id !== null && this.id > 0) {
 

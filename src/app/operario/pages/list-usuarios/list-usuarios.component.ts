@@ -7,6 +7,7 @@ import { TipoDocumento } from '../../../modelos/tipo-documento.model';
 import { Router } from '@angular/router';
 import { VerUsuarioComponent } from '../ver-usuario/ver-usuario.component';
 
+import { MenuService } from '../../../servicios/menu.service';
 
 @Component({
   selector: 'app-list-usuarios',
@@ -24,17 +25,27 @@ export class ListUsuariosComponent implements OnInit {
   itemsPerPage: number = 15;
   totalPages: number = 1;
 
+  isExpanded = true;
+  isVisible = true;
+
   constructor(
     private usuarioService: UsuarioService,
     private tipoDocumentoService: TipoDocumentoService,
     private router:Router,
-    private _matDialog: MatDialog 
+    private _matDialog: MatDialog,
+    private menuService: MenuService
   ) {}
 
   ngOnInit() {
     this.checkScreenSize();
     this.loadUsuarios();
     this.loadTiposDocumento();
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
   }
 
   private checkScreenSize() {

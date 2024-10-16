@@ -5,6 +5,7 @@ import { AddOperadoresComponent } from '../add-operadores/add-operadores.compone
 import { TipoDocumentoService } from '../../../servicios/tipo-documento.service';
 import { TipoDocumento } from '../../../modelos/tipo-documento.model';
 
+import { MenuService } from '../../../servicios/menu.service';
 @Component({
   selector: 'app-list-operadores',
   templateUrl: './list-operadores.component.html',
@@ -20,16 +21,26 @@ export class ListOperadoresComponent implements OnInit {
   itemsPerPage: number = 4;
   totalPages: number = 1;
 
+  isExpanded = true;
+  isVisible = true;
+
   constructor(
     private operadorService: OperadorService,
     private tipoDocumentoService: TipoDocumentoService,
-    private _matDialog: MatDialog
+    private _matDialog: MatDialog,
+    private menuService: MenuService
   ) {}
 
   ngOnInit() {
     this.checkScreenSize();
     this.loadOperadores();
     this.loadTiposDocumento();
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
   }
 
   private checkScreenSize() {

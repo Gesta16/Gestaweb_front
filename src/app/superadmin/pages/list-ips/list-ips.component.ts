@@ -7,6 +7,8 @@ import { EditIpsComponent } from '../edit-ips/edit-ips.component';
 import { DepartamentoService } from '../../../servicios/departamento.service';
 import { Departamento } from '../../../modelos/departamento.model';
 
+import { MenuService } from '../../../servicios/menu.service';
+
 @Component({
   selector: 'app-list-ips',
   templateUrl: './list-ips.component.html',
@@ -22,16 +24,26 @@ export class ListIpsComponent implements OnInit {
   itemsPerPage: number = 15;
   totalPages: number = 1;
 
+  isExpanded = true;
+  isVisible = true;
+
   constructor(
     private ipsService: IpsService,
     private departamentoService: DepartamentoService,
-    private _matDialog: MatDialog
+    private _matDialog: MatDialog,
+    private menuService: MenuService
   ) {}
 
   ngOnInit() {
     this.checkScreenSize();
     this.loadIps();
     this.loadDepartamentos();
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
+    });
   }
 
   private checkScreenSize() {

@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../../../servicios/usuario.service';
 import Swal from 'sweetalert2';
 
+import { MenuService } from '../../../servicios/menu.service';
+
 @Component({
   selector: 'app-ruta-gestante',
   templateUrl: './ruta-gestante.component.html',
@@ -14,11 +16,14 @@ export class RutaGestanteComponent {
   selectedOption: number | null = null;
 
 
+  isExpanded = true;
+  isVisible = true;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private menuService: MenuService
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +33,13 @@ export class RutaGestanteComponent {
       if (this.id !== null) {
         this.contarProcesos(this.id);
       }
+      
+    });
+    this.menuService.isExpanded$.subscribe(isExpanded => {
+      this.isExpanded = isExpanded;
+    });
+    this.menuService.menuVisible$.subscribe(isVisible => {
+      this.isVisible = isVisible;
     });
   }
 

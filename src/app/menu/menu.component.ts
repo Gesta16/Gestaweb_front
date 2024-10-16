@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { User } from '../modelos/user.model';
 import { AuthService } from '../servicios/auth.service';
 import { MenuService } from '../servicios/menu.service';
@@ -17,6 +17,7 @@ export class MenuComponent implements OnInit {
   currentRolId: string | null = "";
   user: User | null = null;
   isAuthenticated: boolean = false;
+  logueado = false;
 
   allMenuItems = [
     { name: 'Panel de control', route: 'dashboard', icon: 'fa-solid fa-chart-pie', roles: ['superadmin', 'admin', 'operador', 'user'] },
@@ -26,12 +27,14 @@ export class MenuComponent implements OnInit {
     { name: 'IPS', route: 'list-ips', icon: 'fa-solid fa-hospital', roles: ['superadmin', 'admin'] },
     { name: 'Usuarios', route: 'list-usuarios', icon: 'fa-solid fa-users', roles: ['superadmin', 'admin', 'operador'] },
     { name: 'Ruta seguimiento', route: 'ruta-seguimiento', icon: 'fa-solid fa-route', roles: ['user'] },
+    { name: 'Reportes', route: 'reporte', icon: 'fa-solid fa-clipboard-check', roles: ['superadmin'] },
     { name: 'Perfil', route: 'perfil-superadmin', icon: 'fa-solid fa-user', roles: ['superadmin', 'admin', 'operador', 'user'] },
   ];
 
   constructor(
     public authService: AuthService,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private cdr: ChangeDetectorRef
   ) { }
 
   @HostListener('window:resize', ['$event'])
@@ -41,17 +44,24 @@ export class MenuComponent implements OnInit {
 
   toggleSidebar() {
     this.isExpanded = !this.isExpanded;
-    this.menuService.setMenuVisible(true);
+    this.menuService.toggleExpansion();
+  }
+
+  toggleVisibility() {
+    this.isVisible = !this.isVisible;
+    this.menuService.setMenuVisible(this.isVisible);
   }
 
   ngOnInit() {
     this.checkIfMobile();
     this.validateToken();
+    this.isAuthenticated = this.authService.isAuthenticated();
+    this.logueado = this.token !== null;
     
     this.menuItems = this.filterMenuItemsByRole(this.allMenuItems);
-    
     this.menuService.menuVisible$.subscribe(visible => {
       this.isVisible = visible;
+      this.cdr.detectChanges(); // Forzar detección de cambios si es necesario
     });
   }
 
