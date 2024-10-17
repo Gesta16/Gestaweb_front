@@ -8,10 +8,9 @@
 
     <!-- Diseño de las tarjetas -->
     <div style="height: 100%; width: 95%; margin-top: 30px;">
-        <div class="flex flex-wrap justify-between">
+        <div class="flex items-center h-full">
             <!-- Ips Registradas -->
-            <div *ngIf="currentRolName == '1'"
-                class="m-3 flex-1 min-w-[250px] max-w-[300px] h-[140px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg flex justify-between items-center px-4">
+            <div *ngIf="currentRolName == '1'" class="m-3 flex-1 h-[140px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg flex justify-between items-center px-4">
                 <div>
                     <h2 class="font-bold text-xl">Ips Registradas</h2>
                     <span class="font-bold">Total: {{ conteoData.ipsRegistradas || 0 }}</span>
@@ -22,8 +21,7 @@
             </div>
 
             <!-- Administradores -->
-            <div
-                class="m-3 flex-1 min-w-[250px] max-w-[300px] h-[140px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg flex justify-between items-center px-4">
+            <div class="m-3 flex-1 h-[140px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg flex justify-between items-center px-4">
                 <div>
                     <h2 class="font-bold text-xl">Administradores</h2>
                     <span class="font-bold">Total: {{ conteoData.administradores || 0 }}</span>
@@ -34,8 +32,7 @@
             </div>
 
             <!-- Operadores -->
-            <div
-                class="m-3 flex-1 min-w-[250px] max-w-[300px] h-[140px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg flex justify-between items-center px-4">
+            <div class="m-3 flex-1 h-[140px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg flex justify-between items-center px-4">
                 <div>
                     <h2 class="font-bold text-xl">Operadores</h2>
                     <span class="font-bold">Total: {{ conteoData.operadores || 0 }}</span>
@@ -46,8 +43,7 @@
             </div>
 
             <!-- Usuarios -->
-            <div
-                class="m-3 flex-1 min-w-[250px] max-w-[300px] h-[140px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg flex justify-between items-center px-4">
+            <div class="m-3 flex-1 h-[140px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg flex justify-between items-center px-4">
                 <div>
                     <h2 class="font-bold text-xl">Usuarios</h2>
                     <span class="font-bold">Total: {{ conteoData.usuarios || 0 }}</span>
@@ -59,28 +55,26 @@
         </div>
 
         <!-- Nuevos divs debajo de las tarjetas -->
-        <div class="flex flex-col md:flex-row justify-between">
-            <div
-                class="m-3 flex-[2] h-[400px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg p-4 overflow-auto">
+        <div class="flex items-center h-full">
+            <div class="m-3 flex-[2] h-[400px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg p-4 overflow-auto">
                 <canvas id="UsuariosIps"></canvas>
             </div>
 
-            <div
-                class="m-3 flex-1 h-[400px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg p-4 overflow-auto">
+            <div class="m-3 flex-1 h-[400px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg p-4 overflow-auto">
                 <h2 class="font-bold text-xl mb-4 text-left">Ips por departamentos</h2>
-                <img src="https://tudashboard.com/wp-content/uploads/2022/02/gra%CC%81fica-circular-300x253.png"
-                    alt="Gráfica" class="w-full h-auto">
+                <img src="https://tudashboard.com/wp-content/uploads/2022/02/gra%CC%81fica-circular-300x253.png" alt="Gráfica" class="w-full h-auto">
             </div>
         </div>
     </div>
 </div>
 
 <ng-template #userContent>
-    <div class="ml-[235px] flex flex-col items-center mt-[6rem] w-full h-[calc(100vh-6rem)] overflow-hidden">
-        <div class="flex w-11/12 h-full mt-6 flex-col md:flex-row">
+    <div class="flex flex-col items-center mt-[6rem] w-full h-[calc(100vh-6rem)] overflow-hidden">
+        <div class="flex w-11/12 h-full mt-6">
             <div class="m-3 flex-[0_0_25%] h-[95%]">
                 <div class="border border-gray-300 bg-white shadow-md rounded-lg p-3 h-full overflow-hidden">
                     <h2 class="font-bold text-xl mb-4 text-left">Otro Cuadrado</h2>
+                    <!-- Ajuste a tamaño fijo de 300px -->
                     <div class="aspect-[1/1] h-[200px] bg-gray-200 flex items-center justify-center">
                         <span class="text-lg font-semibold text-gray-500">Contenido</span>
                     </div>
