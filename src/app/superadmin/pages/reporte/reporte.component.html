@@ -1,8 +1,7 @@
 <!-- Encabezado -->
 <app-header></app-header>
 
-<div class="pt-20 px-4 transition-all duration-300" 
-    [ngClass]="{ 'ml-56': isExpanded && isVisible, 
+<div class="pt-20 px-4 transition-all duration-300" [ngClass]="{ 'ml-56': isExpanded && isVisible,
     'ml-20': !isExpanded && isVisible, 'ml-0': !isVisible}">
     <div class="max-w-[94rem] mx-auto mt-12">
         <!-- Estilo del contenedor del título -->
@@ -36,39 +35,239 @@
 
         <div class="flex flex-col lg:flex-row">
             <!------------------------ Estilos del contenedor de filtros ------------------------>
-            <div
-                class="w-full lg:w-[28rem] bg-white p-4 rounded-md shadow border border-gray-300 flex-shrink-0 mb-4 lg:mb-0">
-                <div class="flex items-center mb-2 px-4">
-                    <i class="fa-solid fa-sliders-h mr-2"></i>
-                    <h2 class="font-bold text-lg">Filtros</h2>
-                </div>
-                <div class="border border-gray-150"></div>
+            <form [formGroup]="dataForm">
+                <div
+                    class="w-full lg:w-[28rem] bg-white p-4 rounded-md shadow border border-gray-300 flex-shrink-0 mb-4 lg:mb-0">
+                    <div class="flex items-center mb-2 px-4">
+                        <i class="fa-solid fa-sliders-h mr-2"></i>
+                        <h2 class="font-bold text-lg">Filtros</h2>
+                    </div>
+                    <div class="border border-gray-150"></div>
 
-                <div *ngFor="let section of sections" class="mt-4 shadow rounded-md px-6 py-2">
-                    <h2 class="font-bold text-lg cursor-pointer" (click)="section.isOpen = !section.isOpen">
-                        {{ section.title }}
-                        <i class="fa ml-4 text-gray-600"
-                            [ngClass]="{'fa-chevron-down': !section.isOpen, 'fa-chevron-up': section.isOpen}"></i>
-                    </h2>
-                    <div [ngClass]="{'hidden': !section.isOpen, 'block': section.isOpen}">
-                        <div *ngFor="let filter of section.filters" class="mt-2 shadow rounded-md px-6 py-2">
-                            <h2 class="font-bold text-md">{{ filter.label }}</h2>
-                            <div class="grid grid-cols-2 gap-2 mt-2">
-                                <label class="flex items-center" *ngFor="let option of filter.options">
-                                    <input type="checkbox" class="mr-2">
-                                    {{ option }}
+                    <!-- Panel Persona -->
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between cursor-pointer" (click)="togglePanel('persona')">
+                            <h2 class="font-bold text-lg">Persona</h2>
+                            <i class="fa"
+                                [ngClass]="{'fa-chevron-down': !accordionState['persona'], 'fa-chevron-up': accordionState['persona']}"></i>
+                        </div>
+                        <div [ngClass]="{'hidden': !accordionState['persona'], 'block': accordionState['persona']}">
+                            <div class="mt-2 shadow rounded-md px-6 py-2">
+                                <h2 class="font-bold text-md">Edad</h2>
+                                <div class="grid grid-cols-2 gap-2 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2" value="Menor a 18"
+                                            (change)="onCheckboxChange($event, 'edad')">
+                                        Menor a 18
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2" value="18 a 28"
+                                            (change)="onCheckboxChange($event, 'edad')">
+                                        18 a 28
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2" value="28 a 38"
+                                            (change)="onCheckboxChange($event, 'edad')">
+                                        28 a 38
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2" value="Mayor a 38"
+                                            (change)="onCheckboxChange($event, 'edad')">
+                                        Mayor a 38
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mt-2 shadow rounded-md px-6 py-2">
+                                <h2 class="font-bold text-md">Estrato Social</h2>
+                                <div class="grid grid-cols-2 gap-2 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2" value="1"
+                                            (change)="onCheckboxChange($event, 'estrato')">
+                                        1
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2" value="2"
+                                            (change)="onCheckboxChange($event, 'estrato')">
+                                        2
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2" value="3"
+                                            (change)="onCheckboxChange($event, 'estrato')">
+                                        3
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2" value="Mayor de 4"
+                                            (change)="onCheckboxChange($event, 'estrato')">
+                                        Mayor de 4
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mt-2 shadow rounded-md px-6 py-2">
+                                <h2 class="font-bold text-md">Régimen</h2>
+                                <div class="grid grid-cols-2 gap-2 mt-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2" value="Contributivo"
+                                            (change)="onCheckboxChange($event, 'regimen')">
+                                        Contributivo
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="mr-2" value="Subsidiado"
+                                            (change)="onCheckboxChange($event, 'regimen')">
+                                        Subsidiado
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Estilos de los filtros población, departamento y municipio -->
+                            <div class="mt-2 shadow rounded-md px-6 py-2 ">
+                                <div class="mb-4">
+                                    <label for="" class="font-bold text-md">Población diferencial</label>
+                                    <select id="" name=""
+                                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                        required>
+                                        <option>
+                                            Seleccione una población
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="" class="font-bold text-md">Departamento</label>
+                                    <select id="" name=""
+                                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                        required>
+                                        <option>
+                                            Seleccione un Departamento
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="cod_municipio" class="font-bold text-md">Municipio</label>
+                                    <select id="cod_municipio" name="cod_municipio"
+                                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                        required>
+                                        <option>
+                                            Seleccione un Municipio
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel Factores de Embarazo -->
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between cursor-pointer"
+                            (click)="togglePanel('factoresEmbarazo')">
+                            <h2 class="font-bold text-lg">Factores de embarazo</h2>
+                            <i class="fa"
+                                [ngClass]="{'fa-chevron-down': !accordionState['factoresEmbarazo'], 'fa-chevron-up': accordionState['factoresEmbarazo']}"></i>
+                        </div>
+                        <div
+                            [ngClass]="{'hidden': !accordionState['factoresEmbarazo'], 'block': accordionState['factoresEmbarazo']}">
+                            <div class="mt-2 shadow rounded-md px-6 py-2 grid grid-cols-2 gap-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Planeado"
+                                        (change)="onCheckboxChange($event, 'factoresEmbarazo')">
+                                    Planeado
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="No planeado"
+                                        (change)="onCheckboxChange($event, 'factoresEmbarazo')">
+                                    No planeado
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Fracaso anticonceptivo"
+                                        (change)="onCheckboxChange($event, 'factoresEmbarazo')">
+                                    Fracaso anticonceptivo
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Método del fracaso"
+                                        (change)="onCheckboxChange($event, 'factoresEmbarazo')">
+                                    Método del fracaso
                                 </label>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Panel Nivel de Riesgo -->
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between cursor-pointer"
+                            (click)="togglePanel('nivelRiesgo')">
+                            <h2 class="font-bold text-lg">Nivel de riesgo</h2>
+                            <i class="fa"
+                                [ngClass]="{'fa-chevron-down': !accordionState['nivelRiesgo'], 'fa-chevron-up': accordionState['nivelRiesgo']}"></i>
+                        </div>
+                        <div
+                            [ngClass]="{'hidden': !accordionState['nivelRiesgo'], 'block': accordionState['nivelRiesgo']}">
+                            <div class="mt-2 shadow rounded-md px-6 py-2 grid grid-cols-2 gap-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Muy alto riesgo"
+                                        (change)="onCheckboxChange($event, 'nivelRiesgo')">
+                                    Muy alto riesgo
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Alto riesgo"
+                                        (change)="onCheckboxChange($event, 'nivelRiesgo')">
+                                    Alto riesgo
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Moderado riesgo"
+                                        (change)="onCheckboxChange($event, 'nivelRiesgo')">
+                                    Moderado riesgo
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Bajo riesgo"
+                                        (change)="onCheckboxChange($event, 'nivelRiesgo')">
+                                    Bajo riesgo
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel Factores Posparto -->
+                    <div class="mt-4">
+                        <div class="flex items-center justify-between cursor-pointer"
+                            (click)="togglePanel('factoresPosparto')">
+                            <h2 class="font-bold text-lg">Factores Posparto</h2>
+                            <i class="fa"
+                                [ngClass]="{'fa-chevron-down': !accordionState['factoresPosparto'], 'fa-chevron-up': accordionState['factoresPosparto']}"></i>
+                        </div>
+                        <div
+                            [ngClass]="{'hidden': !accordionState['factoresPosparto'], 'block': accordionState['factoresPosparto']}">
+                            <div class="mt-2 shadow rounded-md px-6 py-2 grid grid-cols-2 gap-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Nacimiento vivo"
+                                        (change)="onCheckboxChange($event, 'factoresPosparto')">
+                                    Nacimiento vivo
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Nacimiento muerto"
+                                        (change)="onCheckboxChange($event, 'factoresPosparto')">
+                                    Nacimiento muerto
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2" value="Prematuro"
+                                        (change)="onCheckboxChange($event, 'factoresPosparto')">
+                                    Prematuro
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botón Generar -->
+                    <div class="justify-end flex mt-6">
+                        <button type="submit"
+                            class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none">
+                            Generar
+                        </button>
+                    </div>
                 </div>
-                <div class="justify-end flex mt-6">
-                    <button
-                        class="bg-[#80BA27] text-white font-bold py-2 px-4 rounded-xl hover:bg-[#66a800] focus:outline-none">
-                        Generar
-                    </button>
-                </div>
-            </div>
+            </form>
+
 
             <!------------------------ Estilo de los contenedores de las tablas ------------------------>
             <div class="flex-grow lg:ml-8 overflow-x-auto">
@@ -112,6 +311,6 @@
                 </div>
             </div>
         </div>
-
     </div>
+
 </div>

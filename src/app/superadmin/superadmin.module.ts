@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 
@@ -46,7 +46,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     CommonModule,
     FullCalendarModule,
     FormsModule,
-    
+    ReactiveFormsModule,
     RouterModule,
     SharedModule,
     SuperadminRoutingModule,
