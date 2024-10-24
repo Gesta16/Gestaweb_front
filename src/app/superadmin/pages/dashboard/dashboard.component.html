@@ -2,7 +2,7 @@
 <app-header></app-header>
 
 <!-- Contenedor principal -->
-<div class="flex flex-col items-center mt-[6rem] w-full transition-all duration-200"
+<div class="flex flex-col items-center mt-[6rem] transition-all duration-200"
     *ngIf="currentRolName !== '4'; else userContent" [ngClass]="{ 'ml-56': isExpanded && isVisible, 
     'ml-20': !isExpanded && isVisible, 'ml-0': !isVisible}">
 
@@ -55,12 +55,14 @@
         </div>
 
         <!-- Nuevos divs debajo de las tarjetas -->
-        <div class="flex items-center h-full">
-            <div class="m-3 flex-[2] h-[400px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg p-4 overflow-auto">
+        <div class="flex items-center">
+            <!-- Estilos del diagrama de barras -->
+            <div class="m-3 flex-auto w-64 h-[400px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg p-4 overflow-auto">
                 <canvas id="UsuariosIps"></canvas>
             </div>
 
-            <div class="m-3 flex-1 h-[400px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg p-4 overflow-auto">
+            <!-- Estilos de la gráfica circular -->
+            <div class="m-3 flex-auto w-64 h-[400px] border border-gray-300 bg-white shadow-md mb-4 rounded-lg p-4 overflow-auto">
                 <h2 class="font-bold text-xl mb-4 text-left">Ips por departamentos</h2>
                 <img src="https://tudashboard.com/wp-content/uploads/2022/02/gra%CC%81fica-circular-300x253.png" alt="Gráfica" class="w-full h-auto">
             </div>
@@ -68,8 +70,10 @@
     </div>
 </div>
 
-<ng-template #userContent>
-    <div class="flex flex-col items-center mt-[6rem] w-full h-[calc(100vh-6rem)] overflow-hidden">
+<!-- Estilos del calendario que ve la gestante -->
+<ng-template #userContent >
+    <div class="flex flex-col items-center mt-[6rem] h-[calc(100vh-6rem)] overflow-hidden" [ngClass]="{ 'ml-56': isExpanded && isVisible, 
+    'ml-20': !isExpanded && isVisible, 'ml-0': !isVisible}">
         <div class="flex w-11/12 h-full mt-6">
             <div class="m-3 flex-[0_0_25%] h-[95%]">
                 <div class="border border-gray-300 bg-white shadow-md rounded-lg p-3 h-full overflow-hidden">
