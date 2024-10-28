@@ -17,7 +17,7 @@ export class ReporteComponent {
 
   // Controla el estado abierto/cerrado de los paneles del acordeón
   accordionState: Record<string, boolean> = {
-    persona: true,
+    persona: false,
     factoresEmbarazo: false,
     nivelRiesgo: false,
     factoresPosparto: false

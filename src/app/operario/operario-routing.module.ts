@@ -19,7 +19,7 @@ const routes:Routes = [
       {path: 'add-usuarios', component:AddUsuariosComponent, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'add-usuarios/:id', component:AddUsuariosComponent, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'ruta-2', component:Ruta2Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
-      { path: 'ruta-2/:id/:num_proceso', component: Ruta2Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
+      {path: 'ruta-2/:id/:num_proceso', component: Ruta2Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'ruta-3', component:Ruta3Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'ruta-3/:id/:num_proceso', component:Ruta3Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},
       {path: 'ruta-4', component:Ruta4Component, data: { title: 'Dashboard', icon: 'fa-solid fa-chart-pie', showInMenu: true }},

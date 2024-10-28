@@ -22,12 +22,13 @@ export class MenuComponent implements OnInit {
   allMenuItems = [
     { name: 'Panel de control', route: 'dashboard', icon: 'fa-solid fa-chart-pie', roles: ['superadmin', 'admin', 'operador', 'user'] },
     { name: 'Superadmin', route: 'list-superadmin', icon: 'fa-solid fa-user-tie', roles: ['superadmin'] },
+    { name: 'IPS', route: 'list-ips', icon: 'fa-solid fa-hospital', roles: ['superadmin', 'admin'] },
     { name: 'Administradores', route: 'list-admin', icon: 'fa-solid fa-users', roles: ['superadmin', 'admin'] },
     { name: 'Operadores', route: 'list-operadores', icon: 'fa-solid fa-stethoscope', roles: ['superadmin', 'admin'] },
-    { name: 'IPS', route: 'list-ips', icon: 'fa-solid fa-hospital', roles: ['superadmin', 'admin'] },
     { name: 'Usuarios', route: 'list-usuarios', icon: 'fa-solid fa-users', roles: ['superadmin', 'admin', 'operador'] },
-    { name: 'Ruta seguimiento', route: 'ruta-seguimiento', icon: 'fa-solid fa-route', roles: ['user'] },
+    // { name: 'Ruta seguimiento', route: 'ruta-seguimiento', icon: 'fa-solid fa-route', roles: ['user'] },
     { name: 'Reportes', route: 'reporte', icon: 'fa-solid fa-clipboard-check', roles: ['superadmin'] },
+    {name: 'Ruta', route:'ruta-gestante/:id', icon:'fa-solid fa-route', roles:['user']},
     { name: 'Perfil', route: 'perfil-superadmin', icon: 'fa-solid fa-user', roles: ['superadmin', 'admin', 'operador', 'user'] },
   ];
 
@@ -89,7 +90,7 @@ export class MenuComponent implements OnInit {
       case '1': // Superadmin
         return menuItems.filter(item => 
           item.route !== 'list-usuarios' && 
-          item.route !== 'ruta-seguimiento'
+          item.route !== 'ruta-gestante/:id'
         ); // Muestra todo menos Usuarios y Ruta seguimiento
       case '2': // Admin
         return menuItems.filter(item => 
@@ -108,7 +109,7 @@ export class MenuComponent implements OnInit {
       case '4': // Usuario
         return menuItems.filter(item => 
           item.route === 'dashboard' || 
-          item.route === 'ruta-seguimiento' || 
+          item.route === 'ruta-gestante/:id' || 
           item.route === 'perfil-superadmin'
         );
       default:
