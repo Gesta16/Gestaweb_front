@@ -29,7 +29,7 @@ export class MenuComponent implements OnInit {
     // { name: 'Ruta seguimiento', route: 'ruta-seguimiento', icon: 'fa-solid fa-route', roles: ['user'] },
     { name: 'Reportes', route: 'reporte', icon: 'fa-solid fa-clipboard-check', roles: ['superadmin'] },
     {name: 'Ruta', route:'ruta-gestante/:id', icon:'fa-solid fa-route', roles:['user']},
-    { name: 'Perfil', route: 'perfil-superadmin', icon: 'fa-solid fa-user', roles: ['superadmin', 'admin', 'operador', 'user'] },
+    // { name: 'Perfil', route: 'perfil-superadmin', icon: 'fa-solid fa-user', roles: ['superadmin', 'admin', 'operador', 'user'] },
   ];
 
   constructor(
@@ -97,14 +97,12 @@ export class MenuComponent implements OnInit {
           item.route === 'dashboard' || 
           item.route === 'list-admin' || 
           item.route === 'list-operadores' || 
-          item.route === 'list-usuarios' || 
-          item.route === 'perfil-superadmin'
+          item.route === 'list-usuarios' 
         );
       case '3': // Operador
         return menuItems.filter(item => 
           item.route === 'dashboard' || 
-          item.route === 'list-usuarios' || 
-          item.route === 'perfil-superadmin'
+          item.route === 'list-usuarios'
         );
       case '4': // Usuario
         return menuItems.filter(item => 
