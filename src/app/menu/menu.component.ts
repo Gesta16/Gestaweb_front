@@ -64,6 +64,10 @@ export class MenuComponent implements OnInit {
       this.isVisible = visible;
       this.cdr.detectChanges(); // Forzar detección de cambios si es necesario
     });
+    
+    this.menuService.isExpanded$.subscribe(expanded => {
+      this.isExpanded = expanded; // Escuchar cambios de expansión
+    });
   }
 
   validateToken(): void {

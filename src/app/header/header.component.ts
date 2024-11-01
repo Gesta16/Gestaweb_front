@@ -15,7 +15,7 @@ export class HeaderComponent {
   isExpanded = true;
 
   ngOnInit(): void {
-    // rol desde el sessionStorage
+    // Permite cargar el rol desde el sessionStorage
     this.roleName = sessionStorage.getItem('currentRolName') || 'Usuario';
   }
 
